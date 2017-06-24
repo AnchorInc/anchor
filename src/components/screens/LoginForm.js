@@ -32,7 +32,7 @@ class LoginForm extends Component {
             <TouchableOpacity>
               <View>
                 <Text style={registerTextStyle}>
-                  {"Don't have an Account? Click here"}
+                  {"Don't have an Account? Click here."}
                 </Text>
               </View>
             </TouchableOpacity>
