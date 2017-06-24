@@ -1,6 +1,14 @@
 import {
+<<<<<<< HEAD
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
+=======
+  EMAIL_CHANGED,
+  PASSWORD_CHANGED,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAIL,
+  LOGIN_USER,
+>>>>>>> c15d23b828db3439d889efa237add9190378540c
 } from '../actions/types';
 
 const INITIAL_STATE = {

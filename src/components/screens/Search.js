@@ -14,7 +14,7 @@ class Search extends Component {
   render() {
     return (
 			<View style={{ justifyContent: 'center', alignContent: 'center' }}>
-      <Input icon="search" label="Search" />
+        <Input icon="search" label="Search" />
 			</View>
 		);
   }
