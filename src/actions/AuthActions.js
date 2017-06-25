@@ -11,7 +11,7 @@ const { LoginManager, AccessToken } = FBSDK;
 export const loginUserWithFB = () => {
   return (dispatch) => {
     LoginManager.logInWithReadPermissions(['public_profile', 'email'])
-    .then(result => {
+    .then((result) => {
       if (result.isCancelled) {
         console.log('user canceled');
         return;
