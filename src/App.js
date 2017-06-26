@@ -16,7 +16,7 @@ setCustomText(customTextProps);
 class App extends Component {
   render() {
     return (
-      <LoginForm />
+      <MainScreen />
     );
   }
 }

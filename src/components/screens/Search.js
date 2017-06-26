@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Button } from 'react-native';
+import { AppRegistry, StyleSheet, View, Button, Dimensions } from 'react-native';
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Input from '../common/Input';
+
+const { width, height } = Dimensions.get('window');
 
 class Search extends Component {
   static navigationOptions = {
@@ -13,11 +15,12 @@ class Search extends Component {
 
   render() {
     return (
-			<View style={{ justifyContent: 'center', alignContent: 'center' }}>
+			<View style={{ width: width, height: height, alignItems: 'center' }}>
         <Input icon="search" label="Search" />
+
 			</View>
 		);
-  }
+  };
 }
 
 export default Search;
