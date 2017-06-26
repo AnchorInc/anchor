@@ -8,7 +8,7 @@ const LoginButton = (props) => {
   const { containerStyle, textStyle, iconStyle } = styles;
 
   return (
-    <TouchableOpacity style={containerStyle} onPress={() => props.onPress}>
+    <TouchableOpacity style={containerStyle} onPress={props.onPress}>
       <View style={{ flex: 1, justifyContent: 'center' }}>
         <Icon name={props.iconName} style={iconStyle} />
       </View>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, StatusBar, TouchableOpacity, Text, Image, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
+import { loginUserWithFB } from '../../actions';
 import LoginButton from '../common/LoginButton';
 
 const loginHeader = require('../../resources/images/loginHeader.png');
@@ -7,6 +9,10 @@ const loginHeader = require('../../resources/images/loginHeader.png');
 const { width, height } = Dimensions.get('window');
 
 class LoginForm extends Component {
+  onFBSignIn() {
+    this.props.loginUserWithFB();
+  }
+
   render() {
     const {
       loginContainerStyle,
@@ -27,7 +33,7 @@ class LoginForm extends Component {
 
         <View style={{ backgroundColor: '#fff', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
-            <LoginButton title='Sign in with Google' iconName='google' />
+            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.onFBSignIn.bind(this)} />
             <LoginButton title='Sign in with Email' iconName='email-outline' />
             <TouchableOpacity>
               <View>
@@ -69,4 +75,4 @@ const styles = {
   },
 };
 
-export default LoginForm;
+export default connect(null, { loginUserWithFB })(LoginForm);
