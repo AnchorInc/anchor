@@ -11,6 +11,11 @@ const { LoginManager, AccessToken } = FBSDK;
 
 const googleProvider = firebase.auth.GoogleAuthProvider;
 
+GoogleSignin.configure({
+  webClientId: '489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com',
+  androidClientId: '489771714033-1np3nf80pmeqrb09qkrd8c7kagutb90b.apps.googleusercontent.com',
+});
+
 export const loginUserWithFB = () => {
   return (dispatch) => {
     LoginManager.logInWithReadPermissions(['public_profile', 'email'])
@@ -28,10 +33,6 @@ export const loginUserWithFB = () => {
       .then((loginData) => {
         console.log(loginData);
         console.log('login successful!');
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log('login unsuccessful!');
       });
     })
     .catch((error) => {
@@ -45,16 +46,17 @@ export const loginUserWithGoogle = () => {
   return (dispatch) => {
     GoogleSignin.signIn()
     .then((user) => {
-      const credential = googleProvider.credential(user.accessToken);
-      return firebase.auth().signInWithCredential(credential)
-      .then((loginData) => {
-        console.log(loginData);
-        console.log('login successful!');
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log('login unsuccessful!');
-      });
+      const credential = googleProvider.credential(user.idToken);
+      console.log(`Credential: ${JSON.stringify(credential, undefined, undefined)}`);
+      return firebase.auth().signInWithCredential(credential);
+    })
+    .then((loginData) => {
+      console.log('login successful');
+      console.log(loginData);
+    })
+    .catch((error) => {
+      console.log(error);
+      console.log('login unsuccessful');
     });
   };
 };
