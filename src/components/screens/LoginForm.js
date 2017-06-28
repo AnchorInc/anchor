@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, StatusBar, TouchableOpacity, Text, Image, Dimensions } from 'react-native';
+import { View, StatusBar, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-import { loginUserWithFB } from '../../actions';
+import { loginUserWithFB, loginUserWithGoogle } from '../../actions';
 import LoginButton from '../common/LoginButton';
 
 const loginHeader = require('../../resources/images/loginHeader.png');
@@ -20,7 +20,6 @@ class LoginForm extends Component {
   render() {
     const {
       loginContainerStyle,
-      registerTextStyle,
       containerStyle,
       logoStyle,
     } = styles;
@@ -67,9 +66,6 @@ const styles = {
       },
     ],
   },
-  registerTextStyle: {
-    color: '#bf3b3b',
-  },
 };
 
-export default connect(null, { loginUserWithFB })(LoginForm);
+export default connect(null, { loginUserWithFB, loginUserWithGoogle })(LoginForm);

@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import FBSDK from 'react-native-fbsdk';
+import { GoogleSignin } from 'react-native-google-signin';
 import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
@@ -7,6 +8,8 @@ import {
 
 const provider = firebase.auth.FacebookAuthProvider;
 const { LoginManager, AccessToken } = FBSDK;
+
+const googleProvider = firebase.auth.GoogleAuthProvider;
 
 export const loginUserWithFB = () => {
   return (dispatch) => {
@@ -25,7 +28,28 @@ export const loginUserWithFB = () => {
       .then((loginData) => {
         console.log(loginData);
         console.log('login successful!');
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log('login unsuccessful!');
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      console.log('login unsuccessful');
+    });
+  };
+};
 
+export const loginUserWithGoogle = () => {
+  return (dispatch) => {
+    GoogleSignin.signIn()
+    .then((user) => {
+      const credential = googleProvider.credential(user.accessToken);
+      return firebase.auth().signInWithCredential(credential)
+      .then((loginData) => {
+        console.log(loginData);
+        console.log('login successful!');
       })
       .catch((error) => {
         console.log(error);
