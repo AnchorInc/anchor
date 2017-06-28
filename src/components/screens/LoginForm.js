@@ -68,4 +68,11 @@ const styles = {
   },
 };
 
-export default connect(null, { loginUserWithFB, loginUserWithGoogle })(LoginForm);
+const mapStateToProps = (state) => {
+  return {
+    error: state.auth.error,
+    loading: state.auth.loading,
+  };
+};
+
+export default connect(mapStateToProps, { loginUserWithFB, loginUserWithGoogle })(LoginForm);

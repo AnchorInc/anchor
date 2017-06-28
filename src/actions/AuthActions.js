@@ -61,5 +61,5 @@ const loginUserFail = (dispatch) => {
 };
 
 const loginUserSuccess = (dispatch, result) => {
-  dispatch({ type: LOGIN_USER_SUCCESS, payload: { user: result, loading: true } });
+  dispatch({ type: LOGIN_USER_SUCCESS, payload: result });
 };
