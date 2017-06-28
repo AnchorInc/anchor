@@ -40,6 +40,8 @@ class LoginForm extends Component {
             <LoginButton title='Sign in with Google' iconName='google' onPress={this.onGoogleSignIn.bind(this)} />
           </View>
         </View>
+
+        {console.log(this.props.error)}
       </View>
     );
   }
