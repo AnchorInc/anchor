@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
+import { GoogleSignin } from 'react-native-google-signin';
 import { setCustomText } from 'react-native-global-props';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -29,6 +30,11 @@ class App extends Component {
     messagingSenderId: '489771714033',
   };
   firebase.initializeApp(config);
+
+  GoogleSignin.configure({
+    webClientId: '489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com',
+    androidClientId: '489771714033-1np3nf80pmeqrb09qkrd8c7kagutb90b.apps.googleusercontent.com',
+  });
   }
   render() {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));

@@ -11,11 +11,6 @@ const { LoginManager, AccessToken } = FBSDK;
 
 const googleProvider = firebase.auth.GoogleAuthProvider;
 
-GoogleSignin.configure({
-  webClientId: '489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com',
-  androidClientId: '489771714033-1np3nf80pmeqrb09qkrd8c7kagutb90b.apps.googleusercontent.com',
-});
-
 export const loginUserWithFB = () => {
   return (dispatch) => {
     LoginManager.logInWithReadPermissions(['public_profile', 'email'])
