@@ -20,5 +20,6 @@ module.exports = {
         "import/prefer-default-export": 0,
         "react/jsx-no-bind": 0,
         "no-console": 0,
+        "max-len": 0,
     }
 };
