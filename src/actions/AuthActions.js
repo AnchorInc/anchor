@@ -27,12 +27,12 @@ export const loginUserWithFB = () => {
       })
       .then((loginData) => {
         console.log(loginData);
-        console.log('login successful!');
+        loginUserSuccess(dispatch, loginData);
       });
     })
     .catch((error) => {
       console.log(error);
-      console.log('login unsuccessful');
+      loginUserFail(dispatch);
     });
   };
 };
