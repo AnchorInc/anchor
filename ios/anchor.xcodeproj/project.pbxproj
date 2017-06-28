@@ -541,7 +541,11 @@
 				00E356EF1AD99517003FC87E /* anchorTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				B8CA3AE20098474AA79E10E8 /* Resources */,
+<<<<<<< HEAD
 				AC0C07698FF041F587104542 /* Frameworks */,
+=======
+				8DF89F4EA81640D8B19ECFD0 /* Frameworks */,
+>>>>>>> f8aab131f584ea63d646e4867b874a8993b0ac8e
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -583,6 +587,7 @@
 			sourceTree = "<group>";
 			path = "";
 		};
+<<<<<<< HEAD
 		AC0C07698FF041F587104542 /* Frameworks */ = {
 			isa = "PBXGroup";
 			children = (
@@ -590,6 +595,11 @@
 				66561CA23DA54BA699F87227 /* SafariServices.framework */,
 				19A66828ED744882B65D498B /* SystemConfiguration.framework */,
 				A16ADC48AFB24447B1BEC32A /* AddressBook.framework */,
+=======
+		8DF89F4EA81640D8B19ECFD0 /* Frameworks */ = {
+			isa = "PBXGroup";
+			children = (
+>>>>>>> f8aab131f584ea63d646e4867b874a8993b0ac8e
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1103,8 +1113,11 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/anchor.app/anchor";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> f8aab131f584ea63d646e4867b874a8993b0ac8e
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1133,8 +1146,11 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/anchor.app/anchor";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> f8aab131f584ea63d646e4867b874a8993b0ac8e
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1223,8 +1239,11 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> f8aab131f584ea63d646e4867b874a8993b0ac8e
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1262,8 +1281,11 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> f8aab131f584ea63d646e4867b874a8993b0ac8e
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1296,8 +1318,11 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> f8aab131f584ea63d646e4867b874a8993b0ac8e
 				);
 			};
 			name = Debug;
@@ -1322,8 +1347,11 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> f8aab131f584ea63d646e4867b874a8993b0ac8e
 				);
 			};
 			name = Release;
