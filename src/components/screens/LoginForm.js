@@ -13,6 +13,10 @@ class LoginForm extends Component {
     this.props.loginUserWithFB();
   }
 
+  onGoogleSignIn() {
+    this.props.loginUserWithGoogle();
+  }
+
   render() {
     const {
       loginContainerStyle,
@@ -34,14 +38,7 @@ class LoginForm extends Component {
         <View style={{ backgroundColor: '#fff', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
             <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.onFBSignIn.bind(this)} />
-            <LoginButton title='Sign in with Email' iconName='email-outline' />
-            <TouchableOpacity>
-              <View>
-                <Text style={registerTextStyle}>
-                  {"Don't have an Account? Click here."}
-                </Text>
-              </View>
-            </TouchableOpacity>
+            <LoginButton title='Sign in with Google' iconName='google' onPress={this.onGoogleSignIn.bind(this)} />
           </View>
         </View>
       </View>

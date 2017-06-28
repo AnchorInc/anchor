@@ -25,6 +25,7 @@ export const loginUserWithFB = () => {
       .then((loginData) => {
         console.log(loginData);
         console.log('login successful!');
+
       })
       .catch((error) => {
         console.log(error);
