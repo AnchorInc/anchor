@@ -42,16 +42,16 @@ export const loginUserWithGoogle = () => {
     GoogleSignin.signIn()
     .then((user) => {
       const credential = googleProvider.credential(user.idToken);
-      console.log(`Credential: ${JSON.stringify(credential, undefined, undefined)}`);
+      console.log(`Credential: ${JSON.stringify(credential, undefined, 2)}`);
       return firebase.auth().signInWithCredential(credential);
     })
     .then((loginData) => {
-      console.log('login successful');
-      console.log(loginData);
+      console.log(`Login successful: ${JSON.stringify(loginData, undefined, 2)}`);
+      loginUserSuccess(dispatch, loginData);
     })
     .catch((error) => {
-      console.log(error);
-      console.log('login unsuccessful');
+      console.log(`Login unsuccessful: ${JSON.stringify(error, undefined, 2)}`);
+      loginUserFail(dispatch);
     });
   };
 };
@@ -61,5 +61,5 @@ const loginUserFail = (dispatch) => {
 };
 
 const loginUserSuccess = (dispatch, result) => {
-  dispatch({ type: LOGIN_USER_SUCCESS, payload: { user: result.user, token: result.credential.token } });
+  dispatch({ type: LOGIN_USER_SUCCESS, payload: { user: result, loading: true } });
 };
