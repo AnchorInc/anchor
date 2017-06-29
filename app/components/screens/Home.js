@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, ScrollView, Button, Rect, Dimensions, Image, View } from 'react-native';
-import { NavigationComponent } from 'react-native-material-bottom-navigation';
-import { TabNavigator } from 'react-navigation';
+import { Text, ScrollView, Dimensions, Image, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Card from '../common/Card';
 import CardSection from '../common/CardSection';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class Home extends Component {
-  static navigationOptions = {
-    tabBarLabel: "Home",
-    tabBarIcon: () => <Icon size={24} name="home" color="#01152d" />,
-  }
-
   render() {
     return (
-			<ScrollView>
+      <ScrollView>
         <Card>
           <CardSection>
             <Text style={{ fontSize: 25, fontFamily: 'avenir_heavy', color: '#000' }}>Westin Cooking Class</Text>
           </CardSection>
           <CardSection>
-            <Image style={{ width: 0.93 * width, height: 0.7*width, borderRadius: 4, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }} source={{ uri: 'https://img2.goodfon.com/wallpaper/big/6/19/android-5-0-lollipop-material-3638.jpg' }}> 
+            <Image style={{ width: 0.93 * width, height: 0.7 * width, borderRadius: 4, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }} source={{ uri: 'https://img2.goodfon.com/wallpaper/big/6/19/android-5-0-lollipop-material-3638.jpg' }}>
               <Icon name='silverware-fork' size={50} color='#fff' padding={10} />
               <Icon name='silverware-spoon' size={50} color='#fff' padding={10} />
             </Image>
@@ -34,7 +27,7 @@ class Home extends Component {
 
         <Card style={{ flex: 1, flexDirection: 'row' }}>
           <CardSection>
-            <Text style={{ fontSize: 25, fontFamily: 'avenir_medium', color: '#000'}}>Guitar Teacher in Gachibowli</Text>
+            <Text style={{ fontSize: 25, fontFamily: 'avenir_medium', color: '#000' }}>Guitar Teacher in Gachibowli</Text>
           </CardSection>
           <CardSection>
             <Image style={styles.headerStyle} source={{ uri: 'http://orig00.deviantart.net/d43e/f/2016/196/2/8/material_design_wallpaper_red_034_by_charlie_henson-daa22ts.png' }} />
@@ -50,8 +43,8 @@ class Home extends Component {
             </View>
           </CardSection>
         </Card>
-			</ScrollView>
-		);
+      </ScrollView>
+    );
   }
 }
 
@@ -98,4 +91,4 @@ const styles = {
   },
 };
 
-export default Home;
+export { Home };

@@ -12,7 +12,7 @@ const CardSection = ({ children }) => {
 const styles = {
   sectionStyle: {
     padding: 5,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     justifyContent: 'flex-start',
     flexDirection: 'column',
     position: 'relative',

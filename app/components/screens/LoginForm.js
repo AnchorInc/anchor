@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StatusBar, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
+import * as colors from '../../config/data';
 import { loginUserWithFB, loginUserWithGoogle } from '../../actions';
 import LoginButton from '../common/LoginButton';
 
@@ -17,6 +18,12 @@ class LoginForm extends Component {
     this.props.loginUserWithGoogle();
   }
 
+  onSignedIn() {
+    if (this.props.signedIn) {
+      this.props.navigation.navigate('Main');
+    }
+  }
+
   render() {
     const {
       loginContainerStyle,
@@ -27,21 +34,22 @@ class LoginForm extends Component {
     return (
       <View style={{ flexDirection: 'column', flex: 1 }}>
         <StatusBar
-          backgroundColor={'#011023'}
+          backgroundColor={colors.STATUS_BAR}
         />
 
         <View reacstyle={containerStyle}>
           <Image source={loginHeader} style={logoStyle} />
         </View>
 
-        <View style={{ backgroundColor: '#fff', flex: 1.5, justifyContent: 'space-around' }}>
+        <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
             <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.onFBSignIn.bind(this)} />
             <LoginButton title='Sign in with Google' iconName='google' onPress={this.onGoogleSignIn.bind(this)} />
           </View>
         </View>
 
-        {console.log(this.props.error)}
+        {console.log(this.props.signedIn)}
+        {this.onSignedIn()}
       </View>
     );
   }
@@ -74,6 +82,7 @@ const mapStateToProps = (state) => {
   return {
     error: state.auth.error,
     loading: state.auth.loading,
+    signedIn: state.auth.signedIn,
   };
 };
 

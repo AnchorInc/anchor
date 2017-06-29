@@ -6,8 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
-import LoginForm from './components/screens/LoginForm';
-import MainScreen from './components/screens/MainScreen';
+import { LoginStack } from './navigation/Router';
 
 console.disableYellowBox = true;
 
@@ -41,7 +40,7 @@ class App extends Component {
 
     return (
       <Provider store={store} >
-        <LoginForm />
+        <LoginStack />
       </Provider>
     );
   }
