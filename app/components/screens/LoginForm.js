@@ -12,21 +12,6 @@ const loginHeader = require('../../resources/images/loginHeader.png');
 const { width, height } = Dimensions.get('window');
 
 class LoginForm extends Component {
-  constructor() {
-    super();
-    this.state = { userLoggedIn: undefined };
-  }
-
-  componentWillMount() {
-    AsyncStorage.getItem('user_data')
-    .then(() => {
-      this.setState({ userLoggedIn: true });
-    })
-    .catch(() => {
-      this.setState({ userLoggedIn: false });
-    });
-  }
-
   onFBSignIn() {
     this.props.loginUserWithFB();
   }
@@ -48,12 +33,6 @@ class LoginForm extends Component {
       containerStyle,
       logoStyle,
     } = styles;
-    if (this.state.userLoggedIn === undefined) {
-      return null;
-    } else if (this.state.userLoggedIn) {
-      this.props.navigation.navigate('Main');
-      return null;
-    }
     return (
       <View style={{ flexDirection: 'column', flex: 1 }}>
         <StatusBar
@@ -72,7 +51,6 @@ class LoginForm extends Component {
         </View>
 
         <LoadingSpinner visible={this.props.loading} title='Authenticating...' />
-<<<<<<< HEAD
         <ErrorMessage
           visible={this.props.isError}
           error={JSON.stringify(this.props.errorMessage)}
@@ -80,10 +58,7 @@ class LoginForm extends Component {
           button2Text='Cancel'
         />
         {console.log(this.props.signedIn)}
-        {this.onSignedIn()}
-=======
         {this.onSignIn()}
->>>>>>> 4d192c9c18e067b06a894130cc411d4e6a7bd2af
       </View>
     );
   }
@@ -116,11 +91,8 @@ const mapStateToProps = (state) => {
   return {
     errorMessage: state.auth.errorMessage,
     loading: state.auth.loading,
-<<<<<<< HEAD
     user: state.auth.user,
     isError: state.auth.isError,
-=======
->>>>>>> 4d192c9c18e067b06a894130cc411d4e6a7bd2af
   };
 };
 
