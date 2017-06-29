@@ -6,18 +6,19 @@ import {
 
 const INITIAL_STATE = {
   user: null,
-  error: false,
+  errorMessage: null,
   loading: false,
+  isError: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOGIN_USER_SUCCESS:
-      return { ...state, user: action.payload, error: false, loading: false };
+      return { ...state, user: action.payload, errorMessage: null, loading: false, isError: false };
     case LOGIN_USER_FAIL:
-      return { ...state, error: true, loading: false };
+      return { ...state, errorMessage: action.payload, loading: false, isError: true };
     case START_AUTH:
-      return { ...state, error: false, loading: true };
+      return { ...state, errorMessage: null, loading: true, isError: false };
     default:
       return state;
   }
