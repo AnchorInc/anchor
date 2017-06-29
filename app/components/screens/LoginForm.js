@@ -12,6 +12,22 @@ const loginHeader = require('../../resources/images/loginHeader.png');
 const { width, height } = Dimensions.get('window');
 
 class LoginForm extends Component {
+  constructor() {
+    super();
+    this.state = { userLoggedIn: undefined };
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem('user_data')
+    .then((userData) => {
+      if (JSON.parse(userData) != null) {
+        this.setState({ userLoggedIn: true });
+      } else {
+        this.setState({ userLoggedIn: false });
+      }
+    });
+  }
+
   onFBSignIn() {
     this.props.loginUserWithFB();
   }
@@ -35,6 +51,12 @@ class LoginForm extends Component {
       containerStyle,
       logoStyle,
     } = styles;
+    if (this.state.userLoggedIn === undefined) {
+      return <StatusBar backgroundColor={colors.STATUS_BAR} />;
+    } else if (this.state.userLoggedIn) {
+      this.props.navigation.navigate('Main');
+      return null;
+    }
     return (
       <View style={{ flexDirection: 'column', flex: 1 }}>
         <StatusBar
