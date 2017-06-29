@@ -53,6 +53,7 @@ class LoginForm extends Component {
     } = styles;
     if (this.state.userLoggedIn === undefined) {
       return <StatusBar backgroundColor={colors.STATUS_BAR} />;
+      // TODO: add a Splash screen
     } else if (this.state.userLoggedIn) {
       this.props.navigation.navigate('Main');
       return null;
