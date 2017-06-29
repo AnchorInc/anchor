@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as colors from '../../config/data';
 import { loginUserWithFB, loginUserWithGoogle } from '../../actions';
 import LoginButton from '../common/LoginButton';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 const loginHeader = require('../../resources/images/loginHeader.png');
 
@@ -19,7 +20,7 @@ class LoginForm extends Component {
   }
 
   onSignedIn() {
-    if (this.props.signedIn) {
+    if (this.props.user !== null && !this.props.loading) {
       this.props.navigation.navigate('Main');
     }
   }
@@ -48,6 +49,7 @@ class LoginForm extends Component {
           </View>
         </View>
 
+        <LoadingSpinner visible={this.props.loading} title='Authenticating...' />
         {console.log(this.props.signedIn)}
         {this.onSignedIn()}
       </View>
@@ -82,7 +84,7 @@ const mapStateToProps = (state) => {
   return {
     error: state.auth.error,
     loading: state.auth.loading,
-    signedIn: state.auth.signedIn,
+    user: state.auth.user,
   };
 };
 

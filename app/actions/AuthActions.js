@@ -4,6 +4,7 @@ import { GoogleSignin } from 'react-native-google-signin';
 import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
+  START_AUTH,
 } from './types';
 
 const provider = firebase.auth.FacebookAuthProvider;
@@ -19,6 +20,8 @@ export const loginUserWithFB = () => {
         console.log('user canceled');
         return;
       }
+
+      startAuth(dispatch);
 
       AccessToken.getCurrentAccessToken()
       .then((data) => {
@@ -41,6 +44,8 @@ export const loginUserWithGoogle = () => {
   return (dispatch) => {
     GoogleSignin.signIn()
     .then((user) => {
+      startAuth(dispatch);
+
       const credential = googleProvider.credential(user.idToken);
       console.log(`Credential: ${JSON.stringify(credential, undefined, 2)}`);
       return firebase.auth().signInWithCredential(credential);
@@ -62,4 +67,8 @@ const loginUserFail = (dispatch) => {
 
 const loginUserSuccess = (dispatch, result) => {
   dispatch({ type: LOGIN_USER_SUCCESS, payload: result });
+};
+
+const startAuth = (dispatch) => {
+  dispatch({ type: START_AUTH });
 };
