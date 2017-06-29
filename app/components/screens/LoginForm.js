@@ -47,7 +47,9 @@ class LoginForm extends Component {
       containerStyle,
       logoStyle,
     } = styles;
-    if (this.state.userLoggedIn) {
+    if (this.state.userLoggedIn === undefined) {
+      return null;
+    } else if (this.state.userLoggedIn) {
       this.props.navigation.navigate('Main');
       return null;
     }
