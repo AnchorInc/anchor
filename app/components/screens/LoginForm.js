@@ -22,8 +22,10 @@ class LoginForm extends Component {
 
   onSignIn() {
     AsyncStorage.getItem('user_data')
-    .then(() => {
-      this.props.navigation.navigate('Main');
+    .then((userData) => {
+      if (JSON.parse(userData) != null) {
+        this.props.navigation.navigate('Main');
+      }
     });
   }
 
@@ -57,7 +59,6 @@ class LoginForm extends Component {
           button1Text='Try Again'
           button2Text='Cancel'
         />
-        {console.log(this.props.signedIn)}
         {this.onSignIn()}
       </View>
     );
