@@ -7,7 +7,10 @@ import {
 const INITIAL_STATE = {
   user: null,
   errorMessage: null,
+<<<<<<< HEAD
   error: false,
+=======
+>>>>>>> 9210077db5f83d944e1773c50f021b7f18026714
   loading: false,
   isError: false,
 };
