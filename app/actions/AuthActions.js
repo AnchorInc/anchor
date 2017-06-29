@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import FBSDK from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
+import { AsyncStorage } from 'react-native';
 import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
@@ -28,9 +29,9 @@ export const loginUserWithFB = () => {
         const credential = provider.credential(data.accessToken);
         return firebase.auth().signInWithCredential(credential);
       })
-      .then((loginData) => {
-        console.log(loginData);
-        loginUserSuccess(dispatch, loginData);
+      .then((userData) => {
+        console.log(userData);
+        loginUserSuccess(dispatch, userData);
       });
     })
     .catch((error) => {
@@ -50,9 +51,9 @@ export const loginUserWithGoogle = () => {
       console.log(`Credential: ${JSON.stringify(credential, undefined, 2)}`);
       return firebase.auth().signInWithCredential(credential);
     })
-    .then((loginData) => {
-      console.log(`Login successful: ${JSON.stringify(loginData, undefined, 2)}`);
-      loginUserSuccess(dispatch, loginData);
+    .then((userData) => {
+      console.log(`Login successful: ${JSON.stringify(userData, undefined, 2)}`);
+      loginUserSuccess(dispatch, userData);
     })
     .catch((error) => {
       console.log(`Login unsuccessful: ${JSON.stringify(error, undefined, 2)}`);
@@ -65,8 +66,9 @@ const loginUserFail = (dispatch, error) => {
   dispatch({ type: LOGIN_USER_FAIL, payload: error });
 };
 
-const loginUserSuccess = (dispatch, result) => {
-  dispatch({ type: LOGIN_USER_SUCCESS, payload: result });
+const loginUserSuccess = (dispatch, userData) => {
+  AsyncStorage.setItem('user_data', JSON.stringify(userData));
+  dispatch({ type: LOGIN_USER_SUCCESS });
 };
 
 const startAuth = (dispatch) => {
