@@ -36,7 +36,7 @@ export const loginUserWithFB = () => {
     })
     .catch((error) => {
       console.log(error);
-      loginUserFail(dispatch);
+      loginUserFail(dispatch, error.message);
     });
   };
 };
@@ -57,13 +57,13 @@ export const loginUserWithGoogle = () => {
     })
     .catch((error) => {
       console.log(`Login unsuccessful: ${JSON.stringify(error, undefined, 2)}`);
-      loginUserFail(dispatch);
+      loginUserFail(dispatch, error.message);
     });
   };
 };
 
-const loginUserFail = (dispatch) => {
-  dispatch({ type: LOGIN_USER_FAIL });
+const loginUserFail = (dispatch, error) => {
+  dispatch({ type: LOGIN_USER_FAIL, payload: error });
 };
 
 const loginUserSuccess = (dispatch, userData) => {
