@@ -9,7 +9,7 @@ const ErrorMessage = (props) => {
     <Modal
       visible={props.visible}
       transparent
-      animationType='slide'
+      animationType='fade'
     >
       <View style={styles.modalStyle}>
         <View style={styles.containerStyle}>

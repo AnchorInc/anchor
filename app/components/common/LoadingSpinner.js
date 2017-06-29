@@ -6,7 +6,7 @@ const { width, height } = Dimensions.get('window');
 
 const LoadingSpinner = (props) => {
   return (
-    <Modal visible={props.visible} transparent animationType='slide'>
+    <Modal visible={props.visible} transparent animationType='fade'>
       <View style={styles.modalStyle}>
         <View style={styles.containerStyle}>
           <ActivityIndicator color='white' size={35} />
