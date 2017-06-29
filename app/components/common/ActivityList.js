@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import axios from 'axios';
 import ActivityDetail from './ActivityDetail';
 
