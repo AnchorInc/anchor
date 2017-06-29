@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Image, Dimensions } from 'react-native';
+import { View, StatusBar, Image, Dimensions, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import * as colors from '../../config/data';
 import { loginUserWithFB, loginUserWithGoogle } from '../../actions';
@@ -11,6 +11,21 @@ const loginHeader = require('../../resources/images/loginHeader.png');
 const { width, height } = Dimensions.get('window');
 
 class LoginForm extends Component {
+  constructor() {
+    super();
+    this.state = { userLoggedIn: undefined };
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem('user_data')
+    .then(() => {
+      this.setState({ userLoggedIn: true });
+    })
+    .catch(() => {
+      this.setState({ userLoggedIn: false });
+    });
+  }
+
   onFBSignIn() {
     this.props.loginUserWithFB();
   }
@@ -19,10 +34,11 @@ class LoginForm extends Component {
     this.props.loginUserWithGoogle();
   }
 
-  onSignedIn() {
-    if (this.props.user !== null && !this.props.loading) {
+  onSignIn() {
+    AsyncStorage.getItem('user_data')
+    .then(() => {
       this.props.navigation.navigate('Main');
-    }
+    });
   }
 
   render() {
@@ -32,6 +48,12 @@ class LoginForm extends Component {
       logoStyle,
     } = styles;
 
+    if (this.state.userLoggedIn === undefined) {
+      return <LoadingSpinner visible title='Loading...' />;
+    } else if (this.state.userLoggedIn) {
+      this.props.navigation.navigate('Main');
+      return null;
+    }
     return (
       <View style={{ flexDirection: 'column', flex: 1 }}>
         <StatusBar
@@ -50,8 +72,7 @@ class LoginForm extends Component {
         </View>
 
         <LoadingSpinner visible={this.props.loading} title='Authenticating...' />
-        {console.log(this.props.signedIn)}
-        {this.onSignedIn()}
+        {this.onSignIn()}
       </View>
     );
   }
@@ -84,7 +105,6 @@ const mapStateToProps = (state) => {
   return {
     error: state.auth.error,
     loading: state.auth.loading,
-    user: state.auth.user,
   };
 };
 
