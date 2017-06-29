@@ -70,7 +70,6 @@ class LoginForm extends Component {
         </View>
 
         <LoadingSpinner visible={this.props.loading} title='Authenticating...' />
-<<<<<<< HEAD
         <ErrorMessage
           visible={this.props.isError}
           error={JSON.stringify(this.props.errorMessage)}
@@ -78,10 +77,7 @@ class LoginForm extends Component {
           button2Text='Cancel'
         />
         {console.log(this.props.signedIn)}
-        {this.onSignedIn()}
-=======
         {this.onSignIn()}
->>>>>>> 4d192c9c18e067b06a894130cc411d4e6a7bd2af
       </View>
     );
   }
@@ -114,11 +110,8 @@ const mapStateToProps = (state) => {
   return {
     errorMessage: state.auth.errorMessage,
     loading: state.auth.loading,
-<<<<<<< HEAD
     user: state.auth.user,
     isError: state.auth.isError,
-=======
->>>>>>> 4d192c9c18e067b06a894130cc411d4e6a7bd2af
   };
 };
 
