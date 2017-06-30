@@ -6,7 +6,7 @@ const { width, height } = Dimensions.get('window');
 
 const LoginSpinner = (props) => {
   return (
-    <Modal visible={props.visible} transparent animationType='fade'>
+    <Modal visible={props.visible} transparent animationType='fade' onRequestClose={() => {}}>
       <View style={styles.modalStyle}>
         <View style={styles.containerStyle}>
           <ActivityIndicator color='white' size={35} />

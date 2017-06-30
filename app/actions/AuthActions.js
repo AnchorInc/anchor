@@ -1,7 +1,7 @@
 import firebase from 'firebase';
+import { AsyncStorage } from 'react-native';
 import FBSDK from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
-import { AsyncStorage } from 'react-native';
 import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
@@ -10,7 +10,6 @@ import {
 
 const provider = firebase.auth.FacebookAuthProvider;
 const { LoginManager, AccessToken } = FBSDK;
-
 const googleProvider = firebase.auth.GoogleAuthProvider;
 
 export const loginUserWithFB = () => {
@@ -18,7 +17,6 @@ export const loginUserWithFB = () => {
     LoginManager.logInWithReadPermissions(['public_profile', 'email'])
     .then((result) => {
       if (result.isCancelled) {
-        console.log('user canceled');
         return;
       }
 
@@ -27,19 +25,12 @@ export const loginUserWithFB = () => {
       AccessToken.getCurrentAccessToken()
       .then((data) => {
         const credential = provider.credential(data.accessToken);
+        AsyncStorage.setItem('user_credential', JSON.stringify(data.accessToken, undefined, undefined));
         return firebase.auth().signInWithCredential(credential);
       })
       .then((userData) => {
         console.log(userData);
-        const { currentUser } = firebase.auth();
-
-        firebase.database().ref(`/users/students/${currentUser.uid}/`)
-        .on('value', (snapshot) => {
-          if (!snapshot.exists()) {
-            registerUser(userData);
-          }
-        });
-        loginUserSuccess(dispatch, userData);
+        loginUserSuccess(dispatch);
       });
     })
     .catch((error) => {
@@ -56,15 +47,18 @@ export const loginUserWithGoogle = () => {
       startAuth(dispatch);
 
       const credential = googleProvider.credential(user.idToken);
-      console.log(`Credential: ${JSON.stringify(credential, undefined, 2)}`);
+      // console.log(`Credential: ${JSON.stringify(credential, undefined, 2)}`);
+      AsyncStorage.setItem('user_credential', JSON.stringify(user, undefined, undefined))
+      .catch(() => {
+        console.log('could not set item');
+      });
       return firebase.auth().signInWithCredential(credential);
     })
     .then((userData) => {
       console.log(`Login successful: ${JSON.stringify(userData, undefined, 2)}`);
-      loginUserSuccess(dispatch, userData);
+      loginUserSuccess(dispatch);
     })
     .catch((error) => {
-      console.log(`Login unsuccessful: ${JSON.stringify(error, undefined, 2)}`);
       loginUserFail(dispatch, error.message);
     });
   };
@@ -74,15 +68,10 @@ const loginUserFail = (dispatch, error) => {
   dispatch({ type: LOGIN_USER_FAIL, payload: error });
 };
 
-const loginUserSuccess = (dispatch, userData) => {
-  AsyncStorage.setItem('user_data', JSON.stringify(userData));
+const loginUserSuccess = (dispatch) => {
   dispatch({ type: LOGIN_USER_SUCCESS });
 };
 
 const startAuth = (dispatch) => {
   dispatch({ type: START_AUTH });
-};
-
-const registerUser = (userData) => {
-  console.log('registering user');
 };

@@ -5,7 +5,7 @@ import * as colors from '../../config/data';
 
 const { width, height } = Dimensions.get('window');
 
-const Header = ({ title }) => {
+const Header = ({ title, onPress }) => {
   return (
     <View style={styles.containerStyle}>
       <StatusBar
@@ -15,7 +15,7 @@ const Header = ({ title }) => {
         {title}
       </Text>
       <View style={styles.buttonContainerStyle}>
-        <HeaderProfileButton />
+        <HeaderProfileButton onPress={onPress} />
       </View>
     </View>
   );

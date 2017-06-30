@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Image, Dimensions, AsyncStorage } from 'react-native';
+import firebase from 'firebase';
+import { View, StatusBar, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import * as colors from '../../config/data';
 import { loginUserWithFB, loginUserWithGoogle } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
-import { SplashScreen } from '../screens';
 
 const loginHeader = require('../../resources/images/loginHeader.png');
 
@@ -16,17 +16,6 @@ class LoginForm extends Component {
     this.state = { userLoggedIn: undefined };
   }
 
-  componentWillMount() {
-    AsyncStorage.getItem('user_data')
-    .then((userData) => {
-      if (JSON.parse(userData) != null) {
-        this.setState({ userLoggedIn: true });
-      } else {
-        this.setState({ userLoggedIn: false });
-      }
-    });
-  }
-
   onFBSignIn() {
     this.props.loginUserWithFB();
   }
@@ -36,12 +25,9 @@ class LoginForm extends Component {
   }
 
   onSignIn() {
-    AsyncStorage.getItem('user_data')
-    .then((userData) => {
-      if (JSON.parse(userData) != null) {
-        this.setState({ userLoggedIn: true });
-      }
-    });
+    if (firebase.auth().currentUser !== null) {
+      this.props.navigation.navigate('Main');
+    }
   }
 
   render() {
@@ -50,17 +36,6 @@ class LoginForm extends Component {
       containerStyle,
       logoStyle,
     } = styles;
-    if (this.state.userLoggedIn === undefined) {
-      return (
-        <View style={{ flex: 1 }}>
-          <StatusBar backgroundColor={colors.STATUS_BAR} />
-          <SplashScreen />
-        </View>
-      );
-    } else if (this.state.userLoggedIn) {
-      this.props.navigation.navigate('Main');
-      return null;
-    }
     return (
       <View style={{ flexDirection: 'column', flex: 1 }}>
         <StatusBar

@@ -3,11 +3,17 @@ import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigatio
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as colors from '../config/data';
-import { Home, Activities, Settings, Search } from '../components/screens';
+import { Home, Activities, Settings, Search, SplashScreen } from '../components/screens';
 import LoginForm from '../components/screens/LoginForm';
 import Main from '../Main';
 
 export const LoginStack = StackNavigator({
+  SplashScreen: {
+    screen: SplashScreen,
+    navigationOptions: {
+      header: null,
+    },
+  },
   Login: {
     screen: LoginForm,
     navigationOptions: {

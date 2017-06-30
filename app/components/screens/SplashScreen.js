@@ -1,26 +1,46 @@
-import React from 'react';
-import { View, Text, Image, Dimensions } from 'react-native';
+import React, { Component } from 'react';
+import firebase from 'firebase';
+import { View, Text, Image, Dimensions, AsyncStorage } from 'react-native';
 import * as colors from '../../config/data';
 
 const logo = require('../../resources/images/splashScreenLogo.png');
 
 const { width } = Dimensions.get('window');
 
-const SplashScreen = () => {
-  return (
-    <View style={styles.viewStyle}>
-      <Image source={logo} style={styles.logoStyle} />
-      <Text style={styles.textStyle}>Start Learning With Anchor</Text>
-    </View>
-  );
-};
+class SplashScreen extends Component {
+  checkForUserFB() {
+    AsyncStorage.getItem('user_credential')
+    .then((token) => {
+      const facebookToken = JSON.parse(token);
+      if (facebookToken === null) {
+        this.props.navigation.navigate('Login');
+      } else {
+        const credential = firebase.auth.FacebookAuthProvider.credential(facebookToken);
+        firebase.auth().signInWithCredential(credential)
+        .then(() => {
+          this.props.navigation.navigate('Main');
+        });
+      }
+    });
+  }
+
+  render() {
+    return (
+      <View style={styles.viewStyle}>
+        <Image source={logo} style={styles.logoStyle} />
+        <Text style={styles.textStyle}>Start Learning With Anchor</Text>
+        {this.checkForUserFB()}
+      </View>
+    );
+  }
+}
 
 const styles = {
   viewStyle: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'space-around',
+    alignItems: 'center',
   },
   logoStyle: {
     flex: 1,

@@ -10,6 +10,7 @@ const ErrorMessage = (props) => {
       visible={props.visible}
       transparent
       animationType='fade'
+      onRequestClose={() => {}}
     >
       <View style={styles.modalStyle}>
         <View style={styles.containerStyle}>
