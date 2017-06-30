@@ -7,16 +7,18 @@ const { width, height } = Dimensions.get('window');
 
 const Header = ({ title, onPress }) => {
   return (
-    <View style={styles.containerStyle}>
+    <View>
       <StatusBar
         backgroundColor={colors.STATUS_BAR}
       />
+      <View style={styles.containerStyle}>
       <Text style={styles.headerStyle}>
         {title}
       </Text>
       <View style={styles.buttonContainerStyle}>
         <HeaderProfileButton onPress={onPress} />
       </View>
+    </View>
     </View>
   );
 };
