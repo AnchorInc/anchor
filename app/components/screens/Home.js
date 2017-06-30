@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, Dimensions, Image, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Card from '../common/Card';
-import CardSection from '../common/CardSection';
+import { Card, CardSection } from '../common';
 
 const { width } = Dimensions.get('window');
 

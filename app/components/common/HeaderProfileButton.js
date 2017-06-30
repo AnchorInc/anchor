@@ -35,4 +35,4 @@ const styles1 = {
   },
 };
 
-export default HeaderProfileButton;
+export { HeaderProfileButton };

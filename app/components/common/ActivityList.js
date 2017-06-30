@@ -29,4 +29,4 @@ class ActivityList extends Component {
   }
 }
 
-export default ActivityList;
+export { ActivityList };

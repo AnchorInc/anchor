@@ -68,4 +68,4 @@ const styles = {
   },
 };
 
-export default ActivityDetail;
+export { ActivityDetail };

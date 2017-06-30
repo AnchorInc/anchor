@@ -4,7 +4,7 @@ import * as colors from '../../config/data';
 
 const { width, height } = Dimensions.get('window');
 
-const LoadingSpinner = (props) => {
+const LoginSpinner = (props) => {
   return (
     <Modal visible={props.visible} transparent animationType='fade'>
       <View style={styles.modalStyle}>
@@ -42,4 +42,4 @@ const styles = {
   },
 };
 
-export default LoadingSpinner;
+export { LoginSpinner };

@@ -3,9 +3,7 @@ import { View, StatusBar, Image, Dimensions, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import * as colors from '../../config/data';
 import { loginUserWithFB, loginUserWithGoogle } from '../../actions';
-import LoginButton from '../common/LoginButton';
-import LoadingSpinner from '../common/LoadingSpinner';
-import ErrorMessage from '../common/ErrorMessage';
+import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
 const loginHeader = require('../../resources/images/loginHeader.png');
 
@@ -75,7 +73,7 @@ class LoginForm extends Component {
           </View>
         </View>
 
-        <LoadingSpinner visible={this.props.loading} title='Authenticating...' />
+        <LoginSpinner visible={this.props.loading} title='Authenticating...' />
         <ErrorMessage
           visible={this.props.isError}
           error={JSON.stringify(this.props.errorMessage)}
