@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Dimensions, Platform, StatusBar } from 'react-native';
-import HeaderProfileButton from './HeaderProfileButton';
+import { HeaderProfileButton } from './';
 import * as colors from '../../config/data';
 
 const { width, height } = Dimensions.get('window');

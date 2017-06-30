@@ -39,7 +39,7 @@ class LoginForm extends Component {
     AsyncStorage.getItem('user_data')
     .then((userData) => {
       if (JSON.parse(userData) != null) {
-        this.props.navigation.navigate('Main');
+        this.setState({ userLoggedIn: true });
       }
     });
   }
