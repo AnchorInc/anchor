@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { View, StatusBar, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-import * as colors from '../../config/data';
+import { STATUS_BAR_COLOR } from '../../config';
 import { loginUserWithFB, loginUserWithGoogle } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
@@ -39,7 +39,7 @@ class LoginForm extends Component {
     return (
       <View style={{ flexDirection: 'column', flex: 1 }}>
         <StatusBar
-          backgroundColor={colors.STATUS_BAR}
+          backgroundColor={STATUS_BAR_COLOR}
         />
 
         <View reacstyle={containerStyle}>

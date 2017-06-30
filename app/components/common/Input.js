@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInput, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import * as colors from '../../config/data';
+import { LIGHT_GRAY } from '../../config';
 
 const { width } = Dimensions.get('window');
 
@@ -18,7 +18,7 @@ const styles = {
   containerStyle: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    backgroundColor: colors.LIGHT_GRAY,
+    backgroundColor: LIGHT_GRAY,
     width: 0.9 * width,
     height: 0.1 * width,
     borderRadius: 5,

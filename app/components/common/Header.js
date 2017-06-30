@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Dimensions, Platform, StatusBar } from 'react-native';
 import { HeaderProfileButton } from './';
-import * as colors from '../../config/data';
+import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config/';
 
 const { width, height } = Dimensions.get('window');
 
@@ -9,7 +9,7 @@ const Header = ({ title, onPress }) => {
   return (
     <View>
       <StatusBar
-        backgroundColor={colors.STATUS_BAR}
+        backgroundColor={STATUS_BAR_COLOR}
       />
       <View style={styles.containerStyle}>
       <Text style={styles.headerStyle}>
@@ -25,7 +25,7 @@ const Header = ({ title, onPress }) => {
 
 const styles = {
   containerStyle: {
-    backgroundColor: colors.MAIN,
+    backgroundColor: MAIN_COLOR,
     justifyContent: 'space-between',
     alignContent: 'center',
     height: 0.08 * height,
