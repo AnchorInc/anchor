@@ -52,7 +52,7 @@ class LoginForm extends Component {
     } = styles;
     if (this.state.userLoggedIn === undefined) {
       return (
-        <View>
+        <View style={{ flex: 1 }}>
           <StatusBar backgroundColor={colors.STATUS_BAR} />
           <SplashScreen />
         </View>
