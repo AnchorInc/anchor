@@ -31,6 +31,14 @@ export const loginUserWithFB = () => {
       })
       .then((userData) => {
         console.log(userData);
+        const { currentUser } = firebase.auth();
+
+        firebase.database().ref(`/users/students/${currentUser.uid}/`)
+        .on('value', (snapshot) => {
+          if (!snapshot.exists()) {
+            registerUser(userData);
+          }
+        });
         loginUserSuccess(dispatch, userData);
       });
     })
@@ -73,4 +81,8 @@ const loginUserSuccess = (dispatch, userData) => {
 
 const startAuth = (dispatch) => {
   dispatch({ type: START_AUTH });
+};
+
+const registerUser = (userData) => {
+  console.log('registering user');
 };
