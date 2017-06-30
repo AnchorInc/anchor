@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Dimensions, Image, View } from 'react-native';
-import * as colors from '../../config/data';
+import { LIGHT_GRAY } from '../../config';
 
 const { width } = Dimensions.get('window');
 
@@ -27,7 +27,7 @@ const styles1 = {
     width: 0.07 * width,
     height: 0.07 * width,
     borderRadius: (0.08 * width) / 2,
-    backgroundColor: colors.LIGHT_GRAY,
+    backgroundColor: LIGHT_GRAY,
     paddingLeft: 5,
     paddingRight: 5,
     justifyContent: 'center',

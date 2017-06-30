@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { View, Text, Image, Dimensions, AsyncStorage } from 'react-native';
-import * as colors from '../../config/data';
+import { MAIN_COLOR } from '../../config';
 
 const logo = require('../../resources/images/splashScreenLogo.png');
 
 const { width } = Dimensions.get('window');
 
 class SplashScreen extends Component {
-  checkForUserFB() {
+  getCredential() {
+  }
+
+  checkForUser() {
     AsyncStorage.getItem('user_credential')
     .then((token) => {
       const facebookToken = JSON.parse(token);
@@ -29,7 +32,7 @@ class SplashScreen extends Component {
       <View style={styles.viewStyle}>
         <Image source={logo} style={styles.logoStyle} />
         <Text style={styles.textStyle}>Start Learning With Anchor</Text>
-        {this.checkForUserFB()}
+        {this.checkForUser()}
       </View>
     );
   }
@@ -57,7 +60,7 @@ const styles = {
   },
   textStyle: {
     fontSize: 35,
-    color: colors.MAIN,
+    color: MAIN_COLOR,
     textAlign: 'center',
     fontFamily: 'avenir_medium',
     padding: 20,

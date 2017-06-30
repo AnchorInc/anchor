@@ -7,6 +7,7 @@ import {
   LOGIN_USER_FAIL,
   START_AUTH,
 } from './types';
+import { PROVIDER_FB, PROVIDER_GOOGLE } from '../config';
 
 const provider = firebase.auth.FacebookAuthProvider;
 const { LoginManager, AccessToken } = FBSDK;
@@ -28,8 +29,9 @@ export const loginUserWithFB = () => {
         AsyncStorage.setItem('user_credential', JSON.stringify(data.accessToken, undefined, undefined));
         return firebase.auth().signInWithCredential(credential);
       })
-      .then((userData) => {
-        console.log(userData);
+      .then(() => {
+        // console.log(userData);
+        AsyncStorage.setItem('provider_type', PROVIDER_FB);
         loginUserSuccess(dispatch);
       });
     })
@@ -45,17 +47,12 @@ export const loginUserWithGoogle = () => {
     GoogleSignin.signIn()
     .then((user) => {
       startAuth(dispatch);
-
       const credential = googleProvider.credential(user.idToken);
-      // console.log(`Credential: ${JSON.stringify(credential, undefined, 2)}`);
-      AsyncStorage.setItem('user_credential', JSON.stringify(user, undefined, undefined))
-      .catch(() => {
-        console.log('could not set item');
-      });
       return firebase.auth().signInWithCredential(credential);
     })
-    .then((userData) => {
-      console.log(`Login successful: ${JSON.stringify(userData, undefined, 2)}`);
+    .then(() => {
+      // console.log(`Login successful: ${JSON.stringify(userData, undefined, 2)}`);
+      AsyncStorage.setItem('provider_type', PROVIDER_GOOGLE);
       loginUserSuccess(dispatch);
     })
     .catch((error) => {

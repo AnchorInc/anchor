@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Modal, Text, Dimensions, TouchableOpacity } from 'react-native';
-import * as colors from '../../config/data';
+import { MAIN_COLOR } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -39,7 +39,7 @@ const styles = {
     alignItems: 'center',
   },
   containerStyle: {
-    backgroundColor: colors.MAIN,
+    backgroundColor: MAIN_COLOR,
     width: 0.8 * width,
     height: 0.3 * width,
     justifyContent: 'space-around',
