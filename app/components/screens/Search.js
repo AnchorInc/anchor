@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Dimensions } from 'react-native';
-import Input from '../common/Input';
+import { Input } from '../common';
 
 const { width, height } = Dimensions.get('window');
 

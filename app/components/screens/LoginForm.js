@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as colors from '../../config/data';
 import { loginUserWithFB, loginUserWithGoogle } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
+import { SplashScreen } from '../screens';
 
 const loginHeader = require('../../resources/images/loginHeader.png');
 
@@ -50,8 +51,12 @@ class LoginForm extends Component {
       logoStyle,
     } = styles;
     if (this.state.userLoggedIn === undefined) {
-      return <StatusBar backgroundColor={colors.STATUS_BAR} />;
-      // TODO: add a Splash screen
+      return (
+        <View>
+          <StatusBar backgroundColor={colors.STATUS_BAR} />
+          <SplashScreen />
+        </View>
+      );
     } else if (this.state.userLoggedIn) {
       this.props.navigation.navigate('Main');
       return null;

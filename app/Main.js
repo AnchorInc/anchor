@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Tabs } from './navigation/Router';
-import Header from './components/common/Header';
+import { Header } from './components/common';
 
 const Main = () => {
   return (
