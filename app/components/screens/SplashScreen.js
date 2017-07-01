@@ -27,7 +27,6 @@ class SplashScreen extends Component {
         AsyncStorage.getItem('provider_type')
         .then((providerType) => {
           const credential = this.getCredential(userToken, providerType);
-          console.log(`Google Credential: ${JSON.stringify(credential, undefined, 2)}`);
           if (credential === null) {
             this.props.navigation.navigate('Login');
           }

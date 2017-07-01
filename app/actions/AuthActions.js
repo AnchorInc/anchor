@@ -28,7 +28,6 @@ export const loginUserWithFB = () => {
         return firebase.auth().signInWithCredential(credential);
       })
       .then(() => {
-        // console.log(userData);
         AsyncStorage.setItem('provider_type', PROVIDER_FB);
         loginUserSuccess(dispatch);
       });
@@ -46,11 +45,9 @@ export const loginUserWithGoogle = () => {
     .then((user) => {
       startAuth(dispatch);
       const credential = googleProvider.credential(user.idToken);
-      AsyncStorage.setItem('user_credential', JSON.stringify(user.idToken, undefined, undefined));
       return firebase.auth().signInWithCredential(credential);
     })
     .then(() => {
-      // console.log(`Login successful: ${JSON.stringify(userData, undefined, 2)}`);
       AsyncStorage.setItem('provider_type', PROVIDER_GOOGLE);
       loginUserSuccess(dispatch);
     })
