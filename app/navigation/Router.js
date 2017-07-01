@@ -2,7 +2,7 @@ import React from 'react';
 import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigation';
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import * as colors from '../config/data';
+import { BOTTOM_BAR_COLOR, BOTTOM_BAR_ICON_COLOR, MAIN_COLOR } from '../config';
 import { Home, Activities, Settings, Search, SplashScreen } from '../components/screens';
 import LoginForm from '../components/screens/LoginForm';
 import Main from '../Main';
@@ -46,28 +46,28 @@ export const Tabs = TabNavigator({
     screen: Home,
      navigationOptions: {
         tabBarLabel: 'Home',
-        tabBarIcon: () => <Icon size={24} name="home" color={colors.BOTTOM_BAR_ICON} />,
+        tabBarIcon: () => <Icon size={24} name="home" color={BOTTOM_BAR_ICON_COLOR} />,
       },
     },
   Activities: {
     screen: Activities,
     navigationOptions: {
       tabBarLabel: 'Activities',
-      tabBarIcon: () => <Icon size={24} name="directions-run" color={colors.BOTTOM_BAR_ICON} />,
+      tabBarIcon: () => <Icon size={24} name="directions-run" color={BOTTOM_BAR_ICON_COLOR} />,
     },
   },
   Search: {
     screen: Search,
     navigationOptions: {
       tabBarLabel: 'Search',
-      tabBarIcon: () => <Icon size={24} name="search" color={colors.BOTTOM_BAR_ICON} />,
+      tabBarIcon: () => <Icon size={24} name="search" color={BOTTOM_BAR_ICON_COLOR} />,
     },
   },
   Settings: {
     screen: Settings,
     navigationOptions: {
       tabBarLabel: 'Settings',
-      tabBarIcon: () => <Icon size={24} name="settings" color={colors.BOTTOM_BAR_ICON} />,
+      tabBarIcon: () => <Icon size={24} name="settings" color={BOTTOM_BAR_ICON_COLOR} />,
     },
   },
 }, {
@@ -77,29 +77,29 @@ export const Tabs = TabNavigator({
   swipeEnabled: false,
   tabBarOptions: {
     bottomNavigationOptions: {
-      labelColor: colors.BOTTOM_BAR_ICON,
-      rippleColor: colors.MAIN,
+      labelColor: BOTTOM_BAR_ICON_COLOR,
+      rippleColor: MAIN_COLOR,
       shifting: false,
       tabs: {
         Home: {
-          barBackgroundColor: colors.BOTTOM_BAR,
-          activeIcon: <Icon size={24} name="home" color={colors.MAIN} />,
-          activeLabelColor: colors.MAIN,
+          barBackgroundColor: BOTTOM_BAR_COLOR,
+          activeIcon: <Icon size={24} name="home" color={MAIN_COLOR} />,
+          activeLabelColor: MAIN_COLOR,
         },
         Search: {
-          barBackgroundColor: colors.BOTTOM_BAR,
-          activeIcon: <Icon size={24} name="search" color={colors.MAIN} />,
-          activeLabelColor: colors.MAIN,
+          barBackgroundColor: BOTTOM_BAR_COLOR,
+          activeIcon: <Icon size={24} name="search" color={MAIN_COLOR} />,
+          activeLabelColor: MAIN_COLOR,
         },
         Activities: {
-          barBackgroundColor: colors.BOTTOM_BAR,
-          activeIcon: <Icon size={24} name="directions-run" color={colors.MAIN} />,
-          activeLabelColor: colors.MAIN,
+          barBackgroundColor: BOTTOM_BAR_COLOR,
+          activeIcon: <Icon size={24} name="directions-run" color={MAIN_COLOR} />,
+          activeLabelColor: MAIN_COLOR,
         },
         Settings: {
-          barBackgroundColor: colors.BOTTOM_BAR,
-          activeIcon: <Icon size={24} name="settings" color={colors.MAIN} />,
-          activeLabelColor: colors.MAIN,
+          barBackgroundColor: BOTTOM_BAR_COLOR,
+          activeIcon: <Icon size={24} name="settings" color={MAIN_COLOR} />,
+          activeLabelColor: MAIN_COLOR,
         },
       },
     },

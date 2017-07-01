@@ -20,9 +20,7 @@ export const loginUserWithFB = () => {
       if (result.isCancelled) {
         return;
       }
-
       startAuth(dispatch);
-
       AccessToken.getCurrentAccessToken()
       .then((data) => {
         const credential = provider.credential(data.accessToken);
@@ -48,6 +46,7 @@ export const loginUserWithGoogle = () => {
     .then((user) => {
       startAuth(dispatch);
       const credential = googleProvider.credential(user.idToken);
+      AsyncStorage.setItem('user_credential', JSON.stringify(user.idToken, undefined, undefined));
       return firebase.auth().signInWithCredential(credential);
     })
     .then(() => {
@@ -56,6 +55,7 @@ export const loginUserWithGoogle = () => {
       loginUserSuccess(dispatch);
     })
     .catch((error) => {
+      console.log(error);
       loginUserFail(dispatch, error.message);
     });
   };
