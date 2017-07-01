@@ -10,7 +10,7 @@ const loginHeader = require('../../resources/images/loginHeader.png');
 
 const { width, height } = Dimensions.get('window');
 
-class LoginForm extends Component {
+class Login extends Component {
   constructor() {
     super();
     this.state = { userLoggedIn: undefined };
@@ -97,4 +97,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { loginUserWithFB, loginUserWithGoogle })(LoginForm);
+export default connect(mapStateToProps, { loginUserWithFB, loginUserWithGoogle })(Login);

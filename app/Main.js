@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Tabs } from './navigation/Router';
 import { Header } from './components/common';
-import { ProfileScreen } from './components/screens';
+import { Profile } from './components/screens';
 
 class Main extends Component {
   constructor() {
@@ -12,7 +12,7 @@ class Main extends Component {
 
   renderProfileScreen() {
     if (this.state.isProfileVisible) {
-      return <ProfileScreen />;
+      return <Profile />;
     }
 
     return null;
