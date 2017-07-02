@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Modal, Dimensions, View } from 'react-native';
+import { Text, Modal, Dimensions, View, ToolbarAndroid, Animated } from 'react-native';
 import firebase from 'firebase';
 import {
   AppBarLayout,
@@ -20,6 +20,7 @@ class ProfileScreen extends Component {
       email: '',
       phoneNumber: '',
       profilePictureURL: '',
+      scrollY: new Animated.Value(0)
     };
   }
 
@@ -33,51 +34,64 @@ class ProfileScreen extends Component {
     });
   }
 
+  handleOffsetChanged = (e) => {
+    Animated.event(
+      [{ nativeEvent: { offset: this.state.scrollY }}, { useNativeDriver: true }]
+    )(e, this.state)
+  }
+
   render() {
     console.log(this.state);
     return (
-      <Modal visible={this.props.visible} transparent animationType='slide' onRequestClose={() => console.log('closing')}>
-        <CoordinatorLayout>
-          <AppBarLayout style={{ height: 300, backgroundColor: '#000' }}>
-            <CollapsingToolbarLayout
-              title='Collapsing Toolbar'
-              contentScrimColor={MAIN_COLOR}
-              expandedTitleColor='#ffffff'
-              expandedTitleGravity='BOTTOM'
-              scrimAnimationDuration={500}
-              expandedTitleMarginStart={22}
-              expandedTitleMarginBottom={22}
-              scrollFlags={AppBarLayout.SCROLL_FLAG_SCROLL | AppBarLayout.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED | AppBarLayout.SCROLL_FLAG_SNAP}
-            >
-              <CollapsingParallax parallaxMultiplier={0.6}>
-                <View collapsable={false} style={{height: 300, justifyContent: 'center' }}>
-                  <Text>Some Custom Text Inside the Parallax</Text>
-                </View>
-              </CollapsingParallax>
-            </CollapsingToolbarLayout>
-          </AppBarLayout>
-          <NestedScrollView>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-            <Text>Test</Text>
-          </NestedScrollView>
-        </CoordinatorLayout>
+      <Modal visible={this.props.visible} transparent animationType='slide' onRequestClose={() => console.log(' ')}>
+        <View style={{ flex: 1 }}>
+          <CoordinatorLayout>
+            <AppBarLayout  onOffsetChanged={this.handleOffsetChanged} style={{ height: 250, backgroundColor: '#fff' }}>
+              <CollapsingToolbarLayout
+                title='Collapsing Toolbar'
+                contentScrimColor='#673AB7'
+                expandedTitleColor='black'
+                collapsedTitleTextColor='black'
+                expandedTitleGravity='BOTTOM'
+                scrimVisibleHeightTrigger={100}
+                scrimAnimationDuration={400}
+                expandedTitleMarginStart={22}
+                expandedTitleMarginBottom={22}
+                scrollFlags={
+                  AppBarLayout.SCROLL_FLAG_SCROLL || AppBarLayout.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
+                }
+              >
+                <CollapsingParallax parallaxMultiplier={0.6}>
+                  <View collapsable={false} style={{ height: 250, justifyContent: 'center' }}>
+                    <Text>Some Custom Text Inside the Parallax</Text>
+                  </View>
+                </CollapsingParallax>
+                <ToolbarAndroid />
+              </CollapsingToolbarLayout>
+            </AppBarLayout>
+            <NestedScrollView>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+              <Text>Test</Text>
+            </NestedScrollView>
+          </CoordinatorLayout>
+        </View>
       </Modal>
     );
   }
