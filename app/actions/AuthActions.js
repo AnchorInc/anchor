@@ -33,7 +33,6 @@ export const loginUserWithFB = () => {
       });
     })
     .catch((error) => {
-      console.log(error);
       loginUserFail(dispatch, error.message);
     });
   };
@@ -53,7 +52,6 @@ export const loginUserWithGoogle = () => {
       loginUserSuccess(dispatch);
     })
     .catch((error) => {
-      console.log(error);
       loginUserFail(dispatch, error.message);
     });
   };

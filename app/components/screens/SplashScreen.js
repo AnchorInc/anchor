@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { View, Text, Image, Dimensions, AsyncStorage, StatusBar} from 'react-native';
+import { View, Text, Image, Dimensions, AsyncStorage, StatusBar } from 'react-native';
 import { MAIN_COLOR, STATUS_BAR_COLOR, PROVIDER_FB, PROVIDER_GOOGLE } from '../../config';
 
 const logo = require('../../resources/images/splashScreenLogo.png');
@@ -29,11 +29,12 @@ class SplashScreen extends Component {
           const credential = this.getCredential(userToken, providerType);
           if (credential === null) {
             this.props.navigation.navigate('Login');
+          } else {
+            firebase.auth().signInWithCredential(credential)
+            .then(() => {
+              this.props.navigation.navigate('Main');
+            });
           }
-          return firebase.auth().signInWithCredential(credential);
-        })
-        .then(() => {
-          this.props.navigation.navigate('Main');
         })
         .catch((error) => {
           console.log(error);

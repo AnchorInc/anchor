@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Platform, Text, StatusBar, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
-import * as colors from '../../config/data';
+import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -9,7 +9,7 @@ const ProfileHeader = ({ title, button1, button2 }) => {
   return (
     <View style={{ width }}>
       <StatusBar
-        backgroundColor={colors.STATUS_BAR}
+        backgroundColor={STATUS_BAR_COLOR}
       />
       <View style={styles.containerStyle}>
         <TouchableOpacity>
@@ -26,7 +26,7 @@ const ProfileHeader = ({ title, button1, button2 }) => {
 
 const styles = {
   containerStyle: {
-    backgroundColor: colors.MAIN,
+    backgroundColor: MAIN_COLOR,
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 0.08 * height,
