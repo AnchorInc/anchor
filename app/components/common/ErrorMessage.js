@@ -1,36 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Modal, Text, Dimensions, TouchableOpacity } from 'react-native';
-import { MAIN_COLOR } from '../../config';
+import { MAIN_COLOR, ACCENT_COLOR } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
-const ErrorMessage = (props) => {
-  return (
-    <Modal
-      visible={props.visible}
-      transparent
-      animationType='fade'
-      onRequestClose={() => {}}
-    >
-      <View style={styles.modalStyle}>
-        <View style={styles.containerStyle}>
-          <Text style={styles.textStyle}>{props.error}</Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-            <TouchableOpacity>
-              <Text style={styles.buttonTextStyle}>{props.button1Text}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.buttonTextStyle}>{props.button2Text}</Text>
+class ErrorMessage extends Component {
+  render() {
+    const { containerStyle, textContainerStyle, textStyle, buttonStyle, buttonTextStyle } = styles;
+
+    return (
+      <Modal
+        visible={this.props.visible}
+        transparent
+        animationType='fade'
+        onRequestClose={() => {}}
+      >
+        <View style={containerStyle}>
+          <View style={textContainerStyle}>
+            <View style={{ flex: 2, justifyContent: 'center' }}>
+              <Text style={textStyle}>{this.props.message}</Text>
+            </View>
+            <TouchableOpacity style={buttonStyle}>
+              <Text style={buttonTextStyle}>{this.props.button1Text}</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </View>
-    </Modal>
-  );
-};
+      </Modal>
+    );
+  }
+}
 
 const styles = {
-  modalStyle: {
+  containerStyle: {
     width,
     height,
     flex: 1,
@@ -38,14 +39,10 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  containerStyle: {
+  textContainerStyle: {
     backgroundColor: MAIN_COLOR,
     width: 0.8 * width,
     height: 0.3 * width,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'column',
-    borderRadius: 2,
   },
   textStyle: {
     color: 'white',
@@ -53,11 +50,16 @@ const styles = {
     fontFamily: 'avenir_roman',
     textAlign: 'center',
   },
+  buttonStyle: {
+    flex: 1,
+    backgroundColor: ACCENT_COLOR,
+    width: 0.8 * width,
+    justifyContent: 'center',
+  },
   buttonTextStyle: {
     color: 'white',
     fontSize: 15,
-    fontFamily: 'avenir_book',
-    padding: 10,
+    alignSelf: 'center',
   },
 };
 
