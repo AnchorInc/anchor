@@ -56,9 +56,8 @@ class Login extends Component {
         <LoginSpinner visible={this.props.loading} title='Authenticating...' />
         <ErrorMessage
           visible={this.props.isError}
-          error={JSON.stringify(this.props.errorMessage)}
-          button1Text='Try Again'
-          button2Text='Cancel'
+          message={'Unable to Login'}
+          button1Text='Ok'
         />
         {this.onSignIn()}
       </View>

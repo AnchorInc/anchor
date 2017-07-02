@@ -7,29 +7,31 @@ import {
   LOGIN_USER_FAIL,
   START_AUTH,
 } from './types';
-import { PROVIDER_FB, PROVIDER_GOOGLE } from '../config';
+import { PROVIDER_FB, PROVIDER_GOOGLE, USER_TOKEN, PROVIDER } from '../config';
 
 const provider = firebase.auth.FacebookAuthProvider;
 const { LoginManager, AccessToken } = FBSDK;
 const googleProvider = firebase.auth.GoogleAuthProvider;
+
+let userToken = null;
 
 export const loginUserWithFB = () => {
   return (dispatch) => {
     LoginManager.logInWithReadPermissions(['public_profile', 'email'])
     .then((result) => {
       if (result.isCancelled) {
+        userToken = null;
         return;
       }
       startAuth(dispatch);
       AccessToken.getCurrentAccessToken()
-      .then((data) => {
-        const credential = provider.credential(data.accessToken);
-        AsyncStorage.setItem('user_credential', JSON.stringify(data.accessToken, undefined, undefined));
+      .then((user) => {
+        const credential = provider.credential(user.accessToken);
+        userToken = user.accessToken;
         return firebase.auth().signInWithCredential(credential);
       })
       .then(() => {
-        AsyncStorage.setItem('provider_type', PROVIDER_FB);
-        loginUserSuccess(dispatch);
+        loginUserSuccess(dispatch, PROVIDER_FB);
       });
     })
     .catch((error) => {
@@ -44,24 +46,31 @@ export const loginUserWithGoogle = () => {
     .then((user) => {
       startAuth(dispatch);
       const credential = googleProvider.credential(user.idToken);
-      AsyncStorage.setItem('user_credential', JSON.stringify(user.idToken, undefined, undefined));
+      userToken = user.idToken;
       return firebase.auth().signInWithCredential(credential);
     })
     .then(() => {
-      AsyncStorage.setItem('provider_type', PROVIDER_GOOGLE);
-      loginUserSuccess(dispatch);
+      loginUserSuccess(dispatch, PROVIDER_GOOGLE);
     })
     .catch((error) => {
-      loginUserFail(dispatch, error.message);
+      userToken = null;
+      if (error.code !== 12501) {
+        console.log(error);
+      }
     });
   };
 };
 
 const loginUserFail = (dispatch, error) => {
+  userToken = null;
   dispatch({ type: LOGIN_USER_FAIL, payload: error });
 };
 
-const loginUserSuccess = (dispatch) => {
+const loginUserSuccess = (dispatch, providerType) => {
+  AsyncStorage.multiSet([[USER_TOKEN, JSON.stringify(userToken, undefined, undefined)], [PROVIDER, providerType]])
+  .catch((error) => {
+    console.log(error);
+  });
   dispatch({ type: LOGIN_USER_SUCCESS });
 };
 

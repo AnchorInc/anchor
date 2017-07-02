@@ -9,3 +9,7 @@ export const BOTTOM_BAR_ICON_COLOR = '#404040';
 // provider type
 export const PROVIDER_GOOGLE = 'google';
 export const PROVIDER_FB = 'fb';
+export const PROVIDER = 'provider';
+
+// user token
+export const USER_TOKEN = 'user_token';
