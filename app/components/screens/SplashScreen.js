@@ -1,27 +1,42 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { View, Text, Image, Dimensions, AsyncStorage } from 'react-native';
-import { MAIN_COLOR } from '../../config';
+import { View, Text, Image, Dimensions, AsyncStorage, StatusBar} from 'react-native';
+import { MAIN_COLOR, STATUS_BAR_COLOR, PROVIDER_FB, PROVIDER_GOOGLE } from '../../config';
 
 const logo = require('../../resources/images/splashScreenLogo.png');
 
 const { width } = Dimensions.get('window');
 
 class SplashScreen extends Component {
-  getCredential() {
+  getCredential(token, providerType) {
+    if (providerType === PROVIDER_FB) {
+      return firebase.auth.FacebookAuthProvider.credential(token);
+    } else if (providerType === PROVIDER_GOOGLE) {
+      return firebase.auth.GoogleAuthProvider.credential(token);
+    }
+    return null;
   }
 
   checkForUser() {
     AsyncStorage.getItem('user_credential')
     .then((token) => {
-      const facebookToken = JSON.parse(token);
-      if (facebookToken === null) {
+      const userToken = JSON.parse(token);
+      if (userToken === null) {
         this.props.navigation.navigate('Login');
       } else {
-        const credential = firebase.auth.FacebookAuthProvider.credential(facebookToken);
-        firebase.auth().signInWithCredential(credential)
+        AsyncStorage.getItem('provider_type')
+        .then((providerType) => {
+          const credential = this.getCredential(userToken, providerType);
+          if (credential === null) {
+            this.props.navigation.navigate('Login');
+          }
+          return firebase.auth().signInWithCredential(credential);
+        })
         .then(() => {
           this.props.navigation.navigate('Main');
+        })
+        .catch((error) => {
+          console.log(error);
         });
       }
     });
@@ -30,6 +45,7 @@ class SplashScreen extends Component {
   render() {
     return (
       <View style={styles.viewStyle}>
+        <StatusBar backgroundColor={STATUS_BAR_COLOR} />
         <Image source={logo} style={styles.logoStyle} />
         <Text style={styles.textStyle}>Start Learning With Anchor</Text>
         {this.checkForUser()}

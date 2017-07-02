@@ -12,7 +12,7 @@ import { MAIN_COLOR } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
-class ProfileScreen extends Component {
+class Profile extends Component {
   constructor() {
     super();
     this.state = {
@@ -108,4 +108,4 @@ const styles = {
   },
 };
 
-export { ProfileScreen };
+export { Profile };
