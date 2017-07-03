@@ -12,7 +12,7 @@ class SplashScreen extends Component {
     if (providerType === PROVIDER_FB) {
       return firebase.auth.FacebookAuthProvider.credential(token);
     } else if (providerType === PROVIDER_GOOGLE) {
-      return firebase.auth.GoogleAuthProvider.credential(token);
+      return firebase.auth.GoogleAuthProvider.credential(null, token);
     }
     return null;
   }

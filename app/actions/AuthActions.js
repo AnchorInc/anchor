@@ -45,24 +45,29 @@ export const loginUserWithGoogle = () => {
     GoogleSignin.signIn()
     .then((user) => {
       startAuth(dispatch);
-      const credential = googleProvider.credential(user.idToken);
-      userToken = user.idToken;
+      const credential = googleProvider.credential(null, user.accessToken);
+      userToken = user.accessToken;
       return firebase.auth().signInWithCredential(credential);
     })
     .then(() => {
       loginUserSuccess(dispatch, PROVIDER_GOOGLE);
     })
     .catch((error) => {
-      userToken = null;
       if (error.code !== 12501) {
         console.log(error);
+        loginUserFail(dispatch, error.message);
       }
     });
   };
 };
 
+export const closeErrorMessage = () => {
+  return {
+    type: 'close_error_message',
+  };
+};
+
 const loginUserFail = (dispatch, error) => {
-  userToken = null;
   dispatch({ type: LOGIN_USER_FAIL, payload: error });
 };
 

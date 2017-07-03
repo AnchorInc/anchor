@@ -13,14 +13,14 @@ class ErrorMessage extends Component {
         visible={this.props.visible}
         transparent
         animationType='fade'
-        onRequestClose={() => {}}
+        onRequestClose={() => { console.log('modal close'); }}
       >
         <View style={containerStyle}>
           <View style={textContainerStyle}>
             <View style={{ flex: 2, justifyContent: 'center' }}>
               <Text style={textStyle}>{this.props.message}</Text>
             </View>
-            <TouchableOpacity style={buttonStyle}>
+            <TouchableOpacity style={buttonStyle} onPress={this.props.onPress}>
               <Text style={buttonTextStyle}>{this.props.button1Text}</Text>
             </TouchableOpacity>
           </View>
