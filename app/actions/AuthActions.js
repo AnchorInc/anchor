@@ -45,8 +45,8 @@ export const loginUserWithGoogle = () => {
     GoogleSignin.signIn()
     .then((user) => {
       startAuth(dispatch);
-      const credential = googleProvider.credential(null, user.accessToken);
-      userToken = user.accessToken;
+      const credential = googleProvider.credential(user.idToken);
+      userToken = user.idToken;
       return firebase.auth().signInWithCredential(credential);
     })
     .then(() => {
