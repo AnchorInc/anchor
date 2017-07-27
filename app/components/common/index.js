@@ -1,5 +1,6 @@
 export * from './ActivityDetail';
 export * from './ActivityList';
+export * from './BatchDetail';
 export * from './Card';
 export * from './CardSection';
 export * from './ErrorMessage';
@@ -8,3 +9,5 @@ export * from './HeaderProfileButton';
 export * from './Input';
 export * from './LoginButton';
 export * from './LoginSpinner';
+export * from './ListDetail';
+export * from './PopupMenu';

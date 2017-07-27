@@ -140,11 +140,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.facebook.react:react-native:+'
     compile(project(":react-native-google-signin")){
-        exclude group: "com.google.android.gms" // very important
+        exclude group: "com.google.android.gms", module: 'play-services-auth' // very important
     }
-    compile 'com.google.android.gms:play-services-auth:11.0.1' // should be at least 9.0.0
-    compile project(':react-native-collapsing-toolbar')
-    compile project(':react-native-nested-scroll-view')
+    compile 'com.google.android.gms:play-services-auth:10.0.1' // should be at least 9.0.0
     // From node_modules
 }
 

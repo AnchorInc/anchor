@@ -1,28 +1,29 @@
 import React from 'react';
-import { Text, Image, View, Dimensions } from 'react-native';
-import Card from './Card';
-import CardSection from './CardSection';
+import { Text, Image, View, Dimensions, TouchableOpacity } from 'react-native';
+import { Card, CardSection } from './';
 
 
 const { width } = Dimensions.get('window');
 
-const ActivityDetail = (props) => {
+const ActivityDetail = ({ person, onPress }) => {
   return (
-    <Card style={{ flex: 1, flexDirection: 'row' }}>
-      <CardSection>
-        <Image style={styles.headerStyle} source={{ uri: props.person.Header }} />
-        <View style={styles.containerStyle}>
-          <Image style={styles.profileStyle} source={{ uri: props.person.Profile }} />
-        </View>
-        <View style={{ width: 0.93 * width, height: 0.09 * width }} />
-      </CardSection>
-      <CardSection>
-        <View style={styles.textContainerStyle}>
-          <Text style={styles.nameStyle}>{props.person.Name}</Text>
-          <Text style={styles.classStyle}>{props.person.Subject}</Text>
-        </View>
-      </CardSection>
-    </Card>
+    <TouchableOpacity onPress={onPress}>
+      <Card style={{ flex: 1, flexDirection: 'row' }}>
+        <CardSection>
+          <Image style={styles.headerStyle} source={{ uri: person.Header }} />
+          <View style={styles.containerStyle}>
+            <Image style={styles.profileStyle} source={{ uri: person.Profile }} />
+          </View>
+          <View style={{ width: 0.93 * width, height: 0.09 * width }} />
+        </CardSection>
+        <CardSection>
+          <View style={styles.textContainerStyle}>
+            <Text style={styles.classStyle}>{person.Subject}</Text>
+            <Text style={styles.nameStyle}>{person.Name}</Text>
+          </View>
+        </CardSection>
+      </Card>
+    </TouchableOpacity>
   );
 };
 
@@ -46,7 +47,7 @@ const styles = {
     top: 65,
     position: 'absolute',
   },
-  nameStyle: {
+  classStyle: {
     fontSize: 20,
     color: '#000',
     paddingBottom: 5,
@@ -62,7 +63,7 @@ const styles = {
     alignItems: 'center',
     flex: 1,
   },
-  classStyle: {
+  nameStyle: {
     fontSize: 18,
     color: '#aaa',
   },

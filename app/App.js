@@ -21,7 +21,7 @@ setCustomText(customTextProps);
 class App extends Component {
   componentWillMount() {
     const config = {
-      apiKey: 'AIzaSyBJlKq6rsEVUQlaJOrFYKJc15HLWpHjMII',
+      apiKey: 'AIzaSyCGttWR24ng1Y87ruWfjAcGCISGLKz8jUE',
       authDomain: 'anchorapp-feed3.firebaseapp.com',
       databaseURL: 'https://anchorapp-feed3.firebaseio.com',
       projectId: 'anchorapp-feed3',

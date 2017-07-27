@@ -2,11 +2,7 @@ import React from 'react';
 import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigation';
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-<<<<<<< HEAD
 import { MAIN_COLOR, BOTTOM_BAR_COLOR, BOTTOM_BAR_ICON_COLOR } from '../config';
-=======
-import { BOTTOM_BAR_COLOR, BOTTOM_BAR_ICON_COLOR, MAIN_COLOR } from '../config';
->>>>>>> 640ae0c84592df6d5a86ef4ab83d9a2043596424
 import { Home, Activities, Settings, Search, SplashScreen } from '../components/screens';
 import Login from '../components/screens/Login';
 import Main from '../Main';
@@ -26,6 +22,12 @@ export const LoginStack = StackNavigator({
   },
   Main: {
     screen: Main,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Activites: {
+    screen: Activities,
     navigationOptions: {
       header: null,
     },

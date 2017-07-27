@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Dimensions, Platform, StatusBar } from 'react-native';
+import { View, Text, Dimensions, Platform, StatusBar, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { HeaderProfileButton } from './';
 import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config/';
 
@@ -11,11 +12,14 @@ const Header = ({ title, onPress }) => {
       <StatusBar
         backgroundColor={STATUS_BAR_COLOR}
       />
-      <View style={styles.containerStyle}>
+      <View style={styles.containerStyle} backgroundColor={MAIN_COLOR}>
       <Text style={styles.headerStyle}>
         {title}
       </Text>
       <View style={styles.buttonContainerStyle}>
+        <TouchableOpacity>
+          <Icon name='message-text' color='white' size={24} style={{ paddingRight: 20 }} />
+        </TouchableOpacity>
         <HeaderProfileButton onPress={onPress} />
       </View>
     </View>
@@ -25,7 +29,6 @@ const Header = ({ title, onPress }) => {
 
 const styles = {
   containerStyle: {
-    backgroundColor: MAIN_COLOR,
     justifyContent: 'space-between',
     alignContent: 'center',
     height: 0.08 * height,

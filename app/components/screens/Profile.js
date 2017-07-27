@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import { Text, StatusBar, Modal, Dimensions, View } from 'react-native';
-import firebase from 'firebase';
+import { Modal, StatusBar, Dimensions, View, Image, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {
-  AppBarLayout,
-  CoordinatorLayout,
-  CollapsingToolbarLayout,
-  CollapsingParallax,
-} from 'react-native-collapsing-toolbar';
-import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config';
+import { STATUS_BAR_COLOR } from '../../config';
+import { ListDetail, PopupMenu } from '../common';
+import { getCurrentUser } from '../../models/User';
 
 const { width, height } = Dimensions.get('window');
 
@@ -20,68 +15,92 @@ class Profile extends Component {
       email: '',
       phoneNumber: '',
       profilePictureURL: '',
+      header: '',
     };
   }
 
   componentWillMount() {
-    const { displayName, email, phoneNumber, photoURL } = firebase.auth().currentUser;
-    this.setState({
-      name: displayName,
-      email,
-      phoneNumber,
-      profilePictureURL: photoURL,
-    });
+    getCurrentUser().then(currentUser => this.setState({
+      name: currentUser.displayName,
+      email: currentUser.email,
+      profilePictureURL: currentUser.photoURL,
+      header: currentUser.header,
+      phoneNumber: currentUser.phoneNumber,
+    }));
   }
 
   render() {
     console.log(this.state);
     return (
-      <Modal visible={this.props.visible} transparent animationType='slide' onRequestClose={() => console.log(' ')}>
-        <StatusBar transparent backgroundColor={STATUS_BAR_COLOR} />
-        {/*<View style={styles.statusBar} />*/}
-        <CoordinatorLayout style={styles.modalStyle}>
-            <AppBarLayout style={{ height: 250, backgroundColor: 'black' }}>
-              <CollapsingToolbarLayout
-                title={this.state.name}
-                contentScrimColor={MAIN_COLOR}
-                expandedTitleColor='white'
-                collapsedTitleTextColor='white'
-                collapsedTitleTypeface='avenir_book'
-                collapsedTitleGravity='CENTER'
-                scrimAnimationDuration={300}
-                expandedTitleGravity='BOTTOM'
-                scrimVisibleHeightTrigger={150}
-                expandedTitleMarginStart={20}
-                expandedTitleMarginBottom={22}
-                expandedTitleTypeface='avenir_book'
-                scrollFlags={AppBarLayout.SCROLL_FLAG_SNAP | AppBarLayout.SCROLL_FLAG_SCROLL | AppBarLayout.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED}
-              >
-                <CollapsingParallax parallaxMultiplier={0.6}>
-                  <View collapsable={false} style={{ height: 250, justifyContent: 'center' }} />
-                </CollapsingParallax>
-                <Icon.ToolbarAndroid
-                  navIconName="keyboard-backspace"
-                  iconColor='white'
-                  actions={[{ title: 'SAVE', show: 'never' }]}
-                  overflowIconName='dots-vertical'
-                />
-              </CollapsingToolbarLayout>
-            </AppBarLayout>
-        </CoordinatorLayout>
+      <Modal
+        visible={this.props.visible}
+        transparent
+        animationType='slide'
+        onRequestClose={() => console.log(' ')}
+        style={styles.modalStyle}
+      >
+        <StatusBar backgroundColor={STATUS_BAR_COLOR} />
+        <View style={styles.modalStyle}>
+          <View style={styles.headerStyle}>
+            <Image source={{ uri: this.state.header }} style={styles.coverStyle}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
+                <TouchableOpacity style={{ padding: 15 }} onPress={this.props.onPress}>
+                  <Icon name='keyboard-backspace' size={24} color='white' />
+                </TouchableOpacity>
+                <View style={{ padding: 15 }}>
+                  <PopupMenu actions={['Edit']} onPress={() => console.log('pressed')} />
+                </View>
+              </View>
+            </Image>
+            <Image source={{ uri: this.state.profilePictureURL }} style={styles.profileStyle} />
+            <View style={{ height: 90, justifyContent: 'center', alignItems: 'center', paddingTop: 20 }}>
+              <Text style={styles.nameStyle}>{this.state.name}</Text>
+            </View>
+          </View>
+          <ScrollView>
+            <ListDetail contentText={this.state.email}>
+              <Icon name='account' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
+              <View>
+                <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Contact Information</Text>
+                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.email}</Text>
+                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.phoneNumber}</Text>
+                <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
+              </View>
+            </ListDetail>
+          </ScrollView>
+        </View>
       </Modal>
     );
   }
 }
-
 const styles = {
   modalStyle: {
     width,
     height,
-    flex: 1,
     backgroundColor: 'white',
   },
-  statusBar: {
-    height: 24,
+  profileStyle: {
+    width: 0.24 * width,
+    height: 0.24 * width,
+    borderRadius: (0.24 * width) / 2,
+    paddingLeft: 5,
+    paddingRight: 5,
+    alignSelf: 'center',
+    top: 120,
+    position: 'absolute',
+  },
+  headerStyle: {
+    height: 260,
+  },
+  coverStyle: {
+    height: 170,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  nameStyle: {
+    fontSize: 25,
+    color: 'black',
+    paddingTop: 10,
   },
 };
 
