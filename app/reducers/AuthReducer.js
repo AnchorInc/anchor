@@ -20,6 +20,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, errorMessage: action.payload, loading: false, isError: true };
     case START_AUTH:
       return { ...state, errorMessage: null, loading: true, isError: false };
+    case 'close_error_message':
+      return { ...state, isError: false, loading: false };
     default:
       return state;
   }

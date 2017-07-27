@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import { View, StatusBar, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { STATUS_BAR_COLOR } from '../../config';
-import { loginUserWithFB, loginUserWithGoogle } from '../../actions';
+import { loginUserWithFB, loginUserWithGoogle, closeErrorMessage } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
 const loginHeader = require('../../resources/images/loginHeader.png');
@@ -56,9 +56,9 @@ class Login extends Component {
         <LoginSpinner visible={this.props.loading} title='Authenticating...' />
         <ErrorMessage
           visible={this.props.isError}
-          error={JSON.stringify(this.props.errorMessage)}
-          button1Text='Try Again'
-          button2Text='Cancel'
+          message={'Unable to Login'}
+          button1Text='Ok'
+          onPress={() => { this.props.closeErrorMessage(); }}
         />
         {this.onSignIn()}
       </View>
@@ -97,4 +97,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { loginUserWithFB, loginUserWithGoogle })(Login);
+export default connect(mapStateToProps, { loginUserWithFB, loginUserWithGoogle, closeErrorMessage })(Login);

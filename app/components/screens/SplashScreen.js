@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { View, Text, Image, Dimensions, AsyncStorage, StatusBar} from 'react-native';
-import { MAIN_COLOR, STATUS_BAR_COLOR, PROVIDER_FB, PROVIDER_GOOGLE } from '../../config';
+import { View, Text, Image, Dimensions, AsyncStorage, StatusBar } from 'react-native';
+import { MAIN_COLOR, STATUS_BAR_COLOR, PROVIDER_FB, PROVIDER_GOOGLE, PROVIDER, USER_TOKEN } from '../../config';
 
 const logo = require('../../resources/images/splashScreenLogo.png');
 
@@ -18,27 +18,22 @@ class SplashScreen extends Component {
   }
 
   checkForUser() {
-    AsyncStorage.getItem('user_credential')
-    .then((token) => {
-      const userToken = JSON.parse(token);
-      if (userToken === null) {
+    AsyncStorage.multiGet([USER_TOKEN, PROVIDER])
+    .then((values) => {
+      const userToken = JSON.parse(values[0][1]);
+      const providerType = values[1][1];
+      if (!userToken && !providerType) {
         this.props.navigation.navigate('Login');
       } else {
-        AsyncStorage.getItem('provider_type')
-        .then((providerType) => {
-          const credential = this.getCredential(userToken, providerType);
-          if (credential === null) {
-            this.props.navigation.navigate('Login');
-          }
-          return firebase.auth().signInWithCredential(credential);
-        })
+        const credential = this.getCredential(userToken, providerType);
+        firebase.auth().signInWithCredential(credential)
         .then(() => {
           this.props.navigation.navigate('Main');
-        })
-        .catch((error) => {
-          console.log(error);
         });
       }
+    })
+    .catch((error) => {
+      console.log(error);
     });
   }
 
