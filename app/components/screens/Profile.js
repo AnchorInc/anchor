@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Text, Modal, Dimensions, View, ToolbarAndroid, Animated } from 'react-native';
+import { Text, StatusBar, Modal, Dimensions, View } from 'react-native';
 import firebase from 'firebase';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   AppBarLayout,
   CoordinatorLayout,
   CollapsingToolbarLayout,
   CollapsingParallax,
-  NestedScrollView,
 } from 'react-native-collapsing-toolbar';
-import { MAIN_COLOR } from '../../config';
+import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -20,7 +20,6 @@ class Profile extends Component {
       email: '',
       phoneNumber: '',
       profilePictureURL: '',
-      scrollY: new Animated.Value(0)
     };
   }
 
@@ -34,64 +33,41 @@ class Profile extends Component {
     });
   }
 
-  handleOffsetChanged = (e) => {
-    Animated.event(
-      [{ nativeEvent: { offset: this.state.scrollY }}, { useNativeDriver: true }]
-    )(e, this.state)
-  }
-
   render() {
     console.log(this.state);
     return (
       <Modal visible={this.props.visible} transparent animationType='slide' onRequestClose={() => console.log(' ')}>
-        <View style={{ flex: 1 }}>
-          <CoordinatorLayout>
-            <AppBarLayout  onOffsetChanged={this.handleOffsetChanged} style={{ height: 250, backgroundColor: '#fff' }}>
+        <StatusBar transparent backgroundColor={STATUS_BAR_COLOR} />
+        {/*<View style={styles.statusBar} />*/}
+        <CoordinatorLayout style={styles.modalStyle}>
+            <AppBarLayout style={{ height: 250, backgroundColor: 'black' }}>
               <CollapsingToolbarLayout
-                title='Collapsing Toolbar'
-                contentScrimColor='#673AB7'
-                expandedTitleColor='black'
-                collapsedTitleTextColor='black'
+                title={this.state.name}
+                contentScrimColor={MAIN_COLOR}
+                expandedTitleColor='white'
+                collapsedTitleTextColor='white'
+                collapsedTitleTypeface='avenir_book'
+                collapsedTitleGravity='CENTER'
+                scrimAnimationDuration={300}
                 expandedTitleGravity='BOTTOM'
-                scrimVisibleHeightTrigger={100}
-                scrimAnimationDuration={400}
-                expandedTitleMarginStart={22}
+                scrimVisibleHeightTrigger={150}
+                expandedTitleMarginStart={20}
                 expandedTitleMarginBottom={22}
-                scrollFlags={
-                  AppBarLayout.SCROLL_FLAG_SCROLL || AppBarLayout.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
-                }
+                expandedTitleTypeface='avenir_book'
+                scrollFlags={AppBarLayout.SCROLL_FLAG_SNAP | AppBarLayout.SCROLL_FLAG_SCROLL | AppBarLayout.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED}
               >
                 <CollapsingParallax parallaxMultiplier={0.6}>
-                  <View collapsable={false} style={{ height: 250, justifyContent: 'center' }}>
-                    <Text>Some Custom Text Inside the Parallax</Text>
-                  </View>
+                  <View collapsable={false} style={{ height: 250, justifyContent: 'center' }} />
                 </CollapsingParallax>
-                <ToolbarAndroid />
+                <Icon.ToolbarAndroid
+                  navIconName="keyboard-backspace"
+                  iconColor='white'
+                  actions={[{ title: 'SAVE', show: 'never' }]}
+                  overflowIconName='dots-vertical'
+                />
               </CollapsingToolbarLayout>
             </AppBarLayout>
-            <NestedScrollView>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-              <Text>Test</Text>
-            </NestedScrollView>
-          </CoordinatorLayout>
-        </View>
+        </CoordinatorLayout>
       </Modal>
     );
   }
@@ -103,8 +79,9 @@ const styles = {
     height,
     flex: 1,
     backgroundColor: 'white',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+  },
+  statusBar: {
+    height: 24,
   },
 };
 
