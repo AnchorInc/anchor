@@ -3,6 +3,7 @@ package com.anchor;
 import android.app.Application;
 
 import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -18,11 +19,11 @@ import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
-    private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
+  private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
-    protected static CallbackManager getCallbackManager() {
-        return mCallbackManager;
-    }
+  protected static CallbackManager getCallbackManager() {
+      return mCallbackManager;
+  }
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -49,6 +50,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    FacebookSdk.sdkInitialize(getApplicationContext());
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

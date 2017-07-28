@@ -73,7 +73,6 @@ import com.android.build.OutputFile
  */
 
 apply from: "../../node_modules/react-native/react.gradle"
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -91,8 +90,8 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    compileSdkVersion 24
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.anchor"
@@ -134,14 +133,14 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-fbsdk')
-    compile project(':react-native-vector-icons')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.facebook.react:react-native:+'
     compile(project(":react-native-google-signin")){
         exclude group: "com.google.android.gms", module: 'play-services-auth' // very important
     }
+    compile project(':react-native-fbsdk')
+    compile project(':react-native-vector-icons')
     compile 'com.google.android.gms:play-services-auth:10.0.1' // should be at least 9.0.0
     // From node_modules
 }
