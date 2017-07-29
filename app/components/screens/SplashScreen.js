@@ -18,22 +18,14 @@ class SplashScreen extends Component {
   }
 
   checkForUser() {
-    AsyncStorage.multiGet([USER_TOKEN, PROVIDER])
-    .then((values) => {
-      const userToken = JSON.parse(values[0][1]);
-      const providerType = values[1][1];
-      if (!userToken && !providerType) {
-        this.props.navigation.navigate('Login');
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log('there is a user signed in');
+        this.props.navigation.navigate('Main');
       } else {
-        const credential = this.getCredential(userToken, providerType);
-        firebase.auth().signInWithCredential(credential)
-        .then(() => {
-          this.props.navigation.navigate('Main');
-        });
+        console.log('no user signed in');
+        this.props.navigation.navigate('Login');
       }
-    })
-    .catch((error) => {
-      console.log(error);
     });
   }
 
