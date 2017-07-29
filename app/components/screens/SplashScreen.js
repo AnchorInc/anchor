@@ -8,15 +8,6 @@ const logo = require('../../resources/images/splashScreenLogo.png');
 const { width } = Dimensions.get('window');
 
 class SplashScreen extends Component {
-  getCredential(token, providerType) {
-    if (providerType === PROVIDER_FB) {
-      return firebase.auth.FacebookAuthProvider.credential(token);
-    } else if (providerType === PROVIDER_GOOGLE) {
-      return firebase.auth.GoogleAuthProvider.credential(token);
-    }
-    return null;
-  }
-
   checkForUser() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
