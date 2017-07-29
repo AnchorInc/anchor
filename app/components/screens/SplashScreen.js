@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { View, Text, Image, Dimensions, AsyncStorage, StatusBar } from 'react-native';
-import { MAIN_COLOR, STATUS_BAR_COLOR, PROVIDER_FB, PROVIDER_GOOGLE, PROVIDER, USER_TOKEN } from '../../config';
+import { View, Text, Image, Dimensions, StatusBar } from 'react-native';
+import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config';
 
 const logo = require('../../resources/images/splashScreenLogo.png');
 
