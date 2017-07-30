@@ -22,7 +22,6 @@ class Main extends Component {
     return (
       <View style={{ flex: 1 }}>
         <Header title='Anchor' onPress={() => { this.setState({ isProfileVisible: true }); }} color='#01152d' />
-        {/* <ProfileScreen visible={this.state.isProfileVisible} />*/}
         {this.renderProfileScreen()}
         <Tabs />
       </View>
