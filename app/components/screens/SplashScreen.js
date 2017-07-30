@@ -9,36 +9,12 @@ const { width } = Dimensions.get('window');
 
 class SplashScreen extends Component {
   checkForUser() {
-<<<<<<< HEAD
-    // AsyncStorage.multiGet([USER_TOKEN, PROVIDER])
-    // .then((values) => {
-    //   const userToken = JSON.parse(values[0][1]);
-    //   const providerType = values[1][1];
-    //   if (!userToken && !providerType) {
-    //     this.props.navigation.navigate('Login');
-    //   } else {
-    //     const credential = this.getCredential(userToken, providerType);
-    //     firebase.auth().signInWithCredential(credential)
-    //     .then(() => {
-    //       this.props.navigation.navigate('Main');
-    //     });
-    //   }
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.props.navigation.navigate('Main');
-      } else {
-=======
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log('there is a user signed in');
         this.props.navigation.navigate('Main');
       } else {
         console.log('no user signed in');
->>>>>>> 862150220cf084b5b4c18b75c58619023250bd36
         this.props.navigation.navigate('Login');
       }
     });
