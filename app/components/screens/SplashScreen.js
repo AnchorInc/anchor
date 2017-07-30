@@ -18,22 +18,29 @@ class SplashScreen extends Component {
   }
 
   checkForUser() {
-    AsyncStorage.multiGet([USER_TOKEN, PROVIDER])
-    .then((values) => {
-      const userToken = JSON.parse(values[0][1]);
-      const providerType = values[1][1];
-      if (!userToken && !providerType) {
-        this.props.navigation.navigate('Login');
+    // AsyncStorage.multiGet([USER_TOKEN, PROVIDER])
+    // .then((values) => {
+    //   const userToken = JSON.parse(values[0][1]);
+    //   const providerType = values[1][1];
+    //   if (!userToken && !providerType) {
+    //     this.props.navigation.navigate('Login');
+    //   } else {
+    //     const credential = this.getCredential(userToken, providerType);
+    //     firebase.auth().signInWithCredential(credential)
+    //     .then(() => {
+    //       this.props.navigation.navigate('Main');
+    //     });
+    //   }
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.props.navigation.navigate('Main');
       } else {
-        const credential = this.getCredential(userToken, providerType);
-        firebase.auth().signInWithCredential(credential)
-        .then(() => {
-          this.props.navigation.navigate('Main');
-        });
+        this.props.navigation.navigate('Login');
       }
-    })
-    .catch((error) => {
-      console.log(error);
     });
   }
 
