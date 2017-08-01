@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, StatusBar, Dimensions, View, Image, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { Modal, StatusBar, Dimensions, View, Image, Text, ScrollView, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { STATUS_BAR_COLOR } from '../../config';
 import { ListDetail, PopupMenu } from '../common';
@@ -20,13 +20,25 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    getCurrentUser().then(currentUser => this.setState({
-      name: currentUser.displayName,
-      email: currentUser.email,
-      profilePictureURL: currentUser.photoURL,
-      header: currentUser.header,
-      phoneNumber: currentUser.phoneNumber,
-    }));
+    AsyncStorage.multiGet(['profile', 'header', 'name', 'email', 'phoneNumber'], (err, data) => {
+      console.log(data);
+      if (data != null) {
+        this.setState({
+          profilePictureURL: data[0][1],
+          header: data[1][1],
+          name: data[2][1],
+          email: data[3][1],
+          phoneNumber: data[4][1],
+        });
+      } else {
+        getCurrentUser().then((currentUser) => {
+          AsyncStorage.multiSet([['header', currentUser.header], ['profile', currentUser.photoURL], ['name', currentUser.displayName], ['email', currentUser.email], ['phoneNumber', currentUser.phoneNumber]]);
+          this.setState({ header: currentUser.header });
+        }).catch((error) => {
+          console.log(error);
+        });
+      }
+    });
   }
 
   render() {

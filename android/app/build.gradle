@@ -141,7 +141,7 @@ dependencies {
     }
     compile project(':react-native-fbsdk')
     compile project(':react-native-vector-icons')
-    compile 'com.google.android.gms:play-services-auth:10.0.1' // should be at least 9.0.0
+    compile 'com.google.android.gms:play-services-auth:10.0.1' //should at least be 9.0.0
     // From node_modules
 }
 

@@ -1,25 +1,48 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Dimensions, Image, View } from 'react-native';
+import { TouchableOpacity, Dimensions, Image, View, AsyncStorage } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getCurrentUser } from '../../models/User';
-import { LIGHT_GRAY } from '../../config';
 
 const { width } = Dimensions.get('window');
-
 
 class HeaderProfileButton extends Component {
   constructor() {
     super();
     this.state = {
-      profilePictureURL: '',
+      profilePhoto: '',
+      iconVisible: true,
     };
-    getCurrentUser().then(currentUser => this.setState({ profilePictureURL: currentUser.photoURL }));
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem('profile').then((profile) => {
+      if (profile != null) {
+        this.setState({ profilePhoto: profile, iconVisible: false });
+      } else {
+        this.setState({ iconVisible: true });
+        getCurrentUser().then((currentUser) => {
+          AsyncStorage.setItem('profile', currentUser.photoURL);
+          this.setState({ profilePhoto: currentUser.photoURL, iconVisible: false });
+        }).catch((error) => {
+          this.setState({ iconVisible: true });
+          console.log(error);
+        });
+      }
+    });
+  }
+
+  renderProfile() {
+    if (!this.state.iconVisible) {
+      return <Image style={styles.profileStyle} source={{ uri: this.state.profilePhoto }} />;
+    }
+    return <Icon name='account-circle' color='white' size={24} />;
   }
 
   render() {
     return (
       <TouchableOpacity onPress={this.props.onPress}>
         <View>
-          <Image source={{ uri: this.state.profilePictureURL }} style={styles.profileStyle} />
+          {this.renderProfile()}
         </View>
       </TouchableOpacity>
     );
@@ -33,14 +56,6 @@ const styles = {
     borderRadius: (0.07 * width) / 2,
     paddingLeft: 5,
     paddingRight: 5,
-  },
-  containerStyle: {
-    width: 0.07 * width,
-    height: 0.07 * width,
-    borderRadius: (0.07 * width) / 2,
-    paddingLeft: 5,
-    paddingRight: 5,
-    backgroundColor: LIGHT_GRAY,
   },
 };
 

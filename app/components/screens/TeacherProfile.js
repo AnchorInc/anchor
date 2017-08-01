@@ -4,7 +4,7 @@ import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import StarRating from 'react-native-star-rating';
 import { STATUS_BAR_COLOR } from '../../config';
-import { ListDetail, BatchDetail, PopupMenu } from '../common';
+import { ListDetail, PopupMenu } from '../common';
 
 const { width, height } = Dimensions.get('window');
 
@@ -44,9 +44,9 @@ class TeacherProfile extends Component {
     }));
   }
 
-  renderBatches() {
-    return this.state.batchList.map(batch => <BatchDetail key={batch} batch={batch} />);
-  }
+  // renderBatches() {
+  //   return this.state.batchList.map(batch => <BatchDetail key={batch} batch={batch} />);
+  // }
 
   render() {
     return (
@@ -111,7 +111,6 @@ class TeacherProfile extends Component {
                 <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
               </View>
             </ListDetail>
-            {/* {this.renderBatches()} */}
           </ScrollView>
         </View>
       </Modal>
