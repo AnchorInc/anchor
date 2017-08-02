@@ -18,7 +18,7 @@ const Header = ({ title, onPress }) => {
       </Text>
       <View style={styles.buttonContainerStyle}>
         <TouchableOpacity>
-          <Icon name='message-text' color='white' size={24} style={{ paddingRight: 20 }} />
+          <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
         </TouchableOpacity>
         <HeaderProfileButton onPress={onPress} />
       </View>

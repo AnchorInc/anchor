@@ -11,3 +11,4 @@ export * from './LoginButton';
 export * from './LoginSpinner';
 export * from './ListDetail';
 export * from './PopupMenu';
+export * from './SearchDetail';

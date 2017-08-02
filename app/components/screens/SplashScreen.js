@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { View, Text, Image, Dimensions, StatusBar } from 'react-native';
-import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config';
+import { View, Image, Dimensions, StatusBar } from 'react-native';
+import { STATUS_BAR_COLOR } from '../../config';
 
-const logo = require('../../resources/images/splashScreenLogo.png');
+const logo = require('../../resources/images/splashScreen.png');
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class SplashScreen extends Component {
   checkForUser() {
@@ -25,8 +25,7 @@ class SplashScreen extends Component {
       <View style={styles.viewStyle}>
         <StatusBar backgroundColor={STATUS_BAR_COLOR} />
         <Image source={logo} style={styles.logoStyle} />
-        <Text style={styles.textStyle}>Start Learning With Anchor</Text>
-        {this.checkForUser()}
+         {this.checkForUser()}
       </View>
     );
   }
@@ -42,23 +41,7 @@ const styles = {
   logoStyle: {
     flex: 1,
     width,
-    height: width,
-    transform: [
-      {
-        scaleX: 0.5,
-      },
-      {
-        scaleY: 0.5,
-      },
-    ],
-  },
-  textStyle: {
-    fontSize: 35,
-    color: MAIN_COLOR,
-    textAlign: 'center',
-    fontFamily: 'avenir_medium',
-    padding: 20,
-    marginBottom: 20,
+    height,
   },
 };
 

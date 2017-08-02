@@ -6,7 +6,7 @@ import { STATUS_BAR_COLOR } from '../../config';
 import { loginUserWithFB, loginUserWithGoogle, closeErrorMessage } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
-const loginHeader = require('../../resources/images/loginHeader.png');
+const loginHeader = require('../../resources/images/loginImage.png');
 
 const { width, height } = Dimensions.get('window');
 

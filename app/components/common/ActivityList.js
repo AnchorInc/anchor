@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, RefreshControl, Dimensions } from 'react-native';
+import { ScrollView, View, Text, RefreshControl, Dimensions, NetInfo } from 'react-native';
 import firebase from 'firebase';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ActivityDetail } from './';
 import { getCurrentUser } from '../../models/User';
 import { ACCENT_COLOR } from '../../config';
@@ -18,15 +18,20 @@ class ActivityList extends Component {
       messageVisible: false,
       isActivityVisible: false,
       selectedActivity: '',
+      isConnected: true,
     };
   }
 
   componentWillMount() {
     this.getActivityList();
+    NetInfo.isConnected.addEventListener(
+      'change',
+      this.handleConnectionChanged.bind(this),
+    );
   }
 
   getActivityList() {
-    this.setState({ teachers: [], refreshing: true });
+    this.setState({ teachers: [], refreshing: true, isConnected: true });
     getCurrentUser()
     .then((currentUser) => {
       if (currentUser.batchList != null && currentUser.batchList.length >= 1) {
@@ -34,27 +39,26 @@ class ActivityList extends Component {
         .once('value')
         .then(Class => firebase.database().ref(`/users/teachers/${Class.val().Teacher}`)
         .once('value')
-        .then(teacher => this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, messageVisible: false }))));
+        .then(teacher => this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, messageVisible: false, isConnected: true }))));
       } else {
-        this.setState({ refreshing: false, messageVisible: true });
+        this.setState({ refreshing: false, messageVisible: true, isConnected: true });
       }
     });
   }
 
-  renderPeople() {
-    if (this.state.teachers != null && this.state.teachers.length >= 1) {
-      return this.state.teachers.map(teacher => (
-        <ActivityDetail key={teacher.UID} person={teacher} onPress={() => this.setState({ isTeacherVisible: true, selectedTeacher: teacher.UID })} />
-      ));
+  handleConnectionChanged(isConnected) {
+    if (isConnected) {
+      this.setState({ isConnected: true });
+    } else {
+      this.setState({ isConnected: false, refreshing: false, teachers: [] });
     }
-    return null;
   }
 
-  renderMessage() {
+  noBatchMessage() {
     if (this.state.messageVisible) {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
-          <Icon size={85} name='notebook' color='black' />
+          <Icon size={85} name='library-books' color='black' />
           <Text style={{ paddingTop: 10, paddingBottom: 0, color: 'black', fontSize: 20, fontFamily: 'avenir_medium' }}>
             You Are Not Enrolled In Any Class
           </Text>
@@ -63,6 +67,32 @@ class ActivityList extends Component {
           </Text>
         </View>
       );
+    }
+    return null;
+  }
+
+  connectionIssueMessage() {
+    if (!(this.state.isConnected)) {
+      return (
+        <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
+          <Icon size={85} name='signal-wifi-off' color='black' />
+          <Text style={{ paddingTop: 10, paddingBottom: 0, color: 'black', fontSize: 20, fontFamily: 'avenir_medium' }}>
+            You Are Offline
+          </Text>
+          <Text style={{ padding: 10, color: '#727272', fontSize: 17, fontFamily: 'avenir_book', textAlign: 'center' }}>
+            Please Connect To The Internet And Try Again
+          </Text>
+        </View>
+      );
+    }
+    return null;
+  }
+
+  renderPeople() {
+    if (this.state.teachers != null && this.state.teachers.length >= 1) {
+      return this.state.teachers.map(teacher => (
+        <ActivityDetail key={teacher.UID} person={teacher} onPress={() => this.setState({ isTeacherVisible: true, selectedTeacher: teacher.UID })} />
+      ));
     }
     return null;
   }
@@ -89,8 +119,9 @@ class ActivityList extends Component {
         }
       >
          {this.renderPeople()}
-         {this.renderMessage()}
+         {this.noBatchMessage()}
          {this.renderTeacher()}
+         {this.connectionIssueMessage()}
       </ScrollView>
     );
   }

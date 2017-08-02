@@ -22,7 +22,7 @@ class Profile extends Component {
   componentWillMount() {
     AsyncStorage.multiGet(['profile', 'header', 'name', 'email', 'phoneNumber'], (err, data) => {
       console.log(data);
-      if (data != null) {
+      if (data[0][1] != null && data[1][1] != null && data[2][1] != null && data[3][1] != null && data[4][1] != null) {
         this.setState({
           profilePictureURL: data[0][1],
           header: data[1][1],

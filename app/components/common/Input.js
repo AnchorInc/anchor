@@ -1,15 +1,15 @@
 import React from 'react';
 import { TextInput, View, Dimensions } from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LIGHT_GRAY } from '../../config';
 
 const { width } = Dimensions.get('window');
 
-const Input = ({ label, icon }) => {
+const Input = ({ label, icon, cb }) => {
   return (
     <View style={styles.containerStyle}>
-      <Icon size={24} name={icon} color='#000' style={styles.iconStyle} />
-      <TextInput style={styles.inputStyle} placeholder={label} placeholderTextColor='#000' underlineColorAndroid='transparent' />
+      <Icon size={20} name={icon} color='#555' style={styles.iconStyle} />
+      <TextInput style={styles.inputStyle} placeholder={label} placeholderTextColor='#555' underlineColorAndroid='transparent' autoCapitalize='words' onChangeText={cb} blurOnSubmit />
     </View>
   );
 };
