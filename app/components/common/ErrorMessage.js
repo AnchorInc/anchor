@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Modal, Text, Dimensions, TouchableOpacity } from 'react-native';
-import { MAIN_COLOR, LIGHT_BLUE } from '../../config';
+import { MAIN_COLOR, ACCENT_COLOR } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -52,7 +52,7 @@ const styles = {
   },
   buttonStyle: {
     flex: 1,
-    backgroundColor: LIGHT_BLUE,
+    backgroundColor: ACCENT_COLOR,
     width: 0.8 * width,
     justifyContent: 'center',
   },

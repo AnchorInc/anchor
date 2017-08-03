@@ -4,7 +4,7 @@ import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ActivityDetail } from './';
 import { getCurrentUser } from '../../models/User';
-import { ACCENT_COLOR } from '../../config';
+import { DARK_GRAY, ACCENT_COLOR } from '../../config';
 import { TeacherProfile } from '../screens';
 
 const { width, height } = Dimensions.get('window');
@@ -114,7 +114,7 @@ class ActivityList extends Component {
             refreshing={this.state.refreshing}
             onRefresh={this.getActivityList.bind(this)}
             colors={[ACCENT_COLOR]}
-            tintColor={ACCENT_COLOR}
+            tintColor={DARK_GRAY}
           />
         }
       >
