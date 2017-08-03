@@ -78,7 +78,6 @@ export const Tabs = TabNavigator({
   },
 }, {
   tabBarComponent: NavigationComponent,
-  transitions: false,
   tabBarPosition: 'bottom',
   swipeEnabled: false,
   tabBarOptions: {

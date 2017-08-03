@@ -24,12 +24,6 @@ class Login extends Component {
     this.props.loginUserWithGoogle();
   }
 
-  onSignIn() {
-    if (firebase.auth().currentUser !== null) {
-      this.props.navigation.navigate('Main');
-    }
-  }
-
   render() {
     const {
       loginContainerStyle,
@@ -60,7 +54,6 @@ class Login extends Component {
           button1Text='Ok'
           onPress={() => { this.props.closeErrorMessage(); }}
         />
-        {this.onSignIn()}
       </View>
     );
   }

@@ -25,7 +25,7 @@ class SplashScreen extends Component {
       <View style={styles.viewStyle}>
         <StatusBar backgroundColor={STATUS_BAR_COLOR} />
         <Image source={logo} style={styles.logoStyle} />
-           {this.checkForUser()} 
+           {this.checkForUser()}
       </View>
     );
   }

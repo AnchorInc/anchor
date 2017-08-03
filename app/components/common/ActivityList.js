@@ -73,6 +73,7 @@ class ActivityList extends Component {
 
   connectionIssueMessage() {
     if (!(this.state.isConnected)) {
+      this.setState({ refreshing: false });
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
           <Icon size={85} name='signal-wifi-off' color='black' />

@@ -17,7 +17,7 @@ class Search extends Component {
   searchText(searchValue) {
     this.setState({ values: [] });
     const ref = firebase.database().ref('users/teachers');
-    ref.orderByChild('Subject').equalTo(searchValue).on('child_added', (snap) => {
+    ref.orderByKey().equalTo(searchValue).on('child_added', (snap) => {
       console.log(snap.val());
       this.setState({ showSearchVal: true, values: this.state.values.concat([snap.val()]) });
     });
@@ -34,7 +34,7 @@ class Search extends Component {
     return (
       <View style={{ width, height, alignItems: 'center' }}>
         <Input icon="search" label="Search" cb={this.searchText.bind(this)} />
-        <ScrollView>
+        <ScrollView horizontal>
           {this.renderSearchVal()}
         </ScrollView>
       </View>

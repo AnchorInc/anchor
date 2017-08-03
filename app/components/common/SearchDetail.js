@@ -51,10 +51,10 @@ const styles = {
     paddingBottom: 5,
   },
   headerStyle: {
-    width: 0.465 * width,
+    position: 'relative',
+    resizeMode: 'cover',
     height: 0.25 * width,
     borderRadius: 4,
-    flex: 2,
   },
   textContainerStyle: {
     justifyContent: 'center',

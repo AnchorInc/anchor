@@ -1,6 +1,8 @@
 package com.anchor;
 
 import android.app.Application;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -47,10 +49,12 @@ public class MainApplication extends Application implements ReactApplication {
     return mReactNativeHost;
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @Override
   public void onCreate() {
     super.onCreate();
     FacebookSdk.sdkInitialize(getApplicationContext());
     SoLoader.init(this, /* native exopackage */ false);
   }
+
 }
