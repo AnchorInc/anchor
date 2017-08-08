@@ -5,7 +5,7 @@ import { Card, CardSection } from './';
 
 const { width } = Dimensions.get('window');
 
-const ActivityDetail = ({ person, onPress }) => {
+const ClassDetail = ({ person, onPress }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <Card style={{ flex: 1, flexDirection: 'row' }}>
@@ -69,4 +69,4 @@ const styles = {
   },
 };
 
-export { ActivityDetail };
+export { ClassDetail };

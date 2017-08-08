@@ -3,7 +3,7 @@ import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigatio
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { MAIN_COLOR, BOTTOM_BAR_COLOR, BOTTOM_BAR_ICON_COLOR } from '../config';
-import { Home, Activities, Settings, Search, SplashScreen } from '../components/screens';
+import { Classes, Settings, Search, SplashScreen } from '../components/screens';
 import Login from '../components/screens/Login';
 import Main from '../Main';
 
@@ -26,12 +26,6 @@ export const LoginStack = StackNavigator({
       header: null,
     },
   },
-  Activites: {
-    screen: Activities,
-    navigationOptions: {
-      header: null,
-    },
-  },
 });
 
 const defaultGetStateForAction = LoginStack.router.getStateForAction;
@@ -48,18 +42,11 @@ LoginStack.router.getStateForAction = (action, state) => {
 };
 
 export const Tabs = TabNavigator({
-  Home: {
-    screen: Home,
-     navigationOptions: {
-        tabBarLabel: 'Home',
-        tabBarIcon: () => <Icon size={24} name="home" color={BOTTOM_BAR_ICON_COLOR} />,
-      },
-    },
-  Activities: {
-    screen: Activities,
+  Classes: {
+    screen: Classes,
     navigationOptions: {
-      tabBarLabel: 'Activities',
-      tabBarIcon: () => <Icon size={24} name="directions-run" color={BOTTOM_BAR_ICON_COLOR} />,
+      tabBarLabel: 'Classes',
+      tabBarIcon: () => <Icon size={24} name="list" color={BOTTOM_BAR_ICON_COLOR} />,
     },
   },
   Search: {
@@ -86,19 +73,14 @@ export const Tabs = TabNavigator({
       rippleColor: MAIN_COLOR,
       shifting: false,
       tabs: {
-        Home: {
-          barBackgroundColor: BOTTOM_BAR_COLOR,
-          activeIcon: <Icon size={24} name="home" color={MAIN_COLOR} />,
-          activeLabelColor: MAIN_COLOR,
-        },
         Search: {
           barBackgroundColor: BOTTOM_BAR_COLOR,
           activeIcon: <Icon size={24} name="search" color={MAIN_COLOR} />,
           activeLabelColor: MAIN_COLOR,
         },
-        Activities: {
+        Classes: {
           barBackgroundColor: BOTTOM_BAR_COLOR,
-          activeIcon: <Icon size={24} name="directions-run" color={MAIN_COLOR} />,
+          activeIcon: <Icon size={24} name="list" color={MAIN_COLOR} />,
           activeLabelColor: MAIN_COLOR,
         },
         Settings: {

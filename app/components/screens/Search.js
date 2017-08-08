@@ -14,12 +14,19 @@ class Search extends Component {
     };
   }
 
-  searchText(searchValue) {
-    this.setState({ values: [] });
-    const ref = firebase.database().ref('users/teachers');
-    ref.orderByKey().equalTo(searchValue).on('child_added', (snap) => {
-      console.log(snap.val());
-      this.setState({ showSearchVal: true, values: this.state.values.concat([snap.val()]) });
+  // searchText(searchValue) {
+  //   this.setState({ values: [] });
+  //   const ref = firebase.database().ref('users/teachers');
+  // }
+
+  requestData(queryObj) {
+    const key = firebase.database().ref().child('search/request').push({
+      index: 'firebase',
+      type: 'user',
+      q: queryObj,
+    }).key;
+    return firebase.database().ref().child(`search/response/${key}/hits/hits`).on('value', (data) => {
+      console.log(data.val());
     });
   }
 
@@ -33,7 +40,7 @@ class Search extends Component {
   render() {
     return (
       <View style={{ width, height, alignItems: 'center' }}>
-        <Input icon="search" label="Search" cb={this.searchText.bind(this)} />
+        <Input icon="search" label="Search" cb={this.requestData.bind(this)} />
         <ScrollView horizontal>
           {this.renderSearchVal()}
         </ScrollView>

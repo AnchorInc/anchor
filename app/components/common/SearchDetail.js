@@ -59,7 +59,7 @@ const styles = {
   textContainerStyle: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
+    height: 25,
   },
 };
 

@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, RefreshControl, Dimensions, NetInfo } from 'react-native';
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { ActivityDetail } from './';
+import { ClassDetail } from './';
 import { getCurrentUser } from '../../models/User';
 import { DARK_GRAY, ACCENT_COLOR } from '../../config';
 import { TeacherProfile } from '../screens';
 
 const { width, height } = Dimensions.get('window');
 
-class ActivityList extends Component {
+class ClassList extends Component {
   constructor() {
     super();
     this.state = {
@@ -92,7 +92,7 @@ class ActivityList extends Component {
   renderPeople() {
     if (this.state.teachers != null && this.state.teachers.length >= 1) {
       return this.state.teachers.map(teacher => (
-        <ActivityDetail key={teacher.UID} person={teacher} onPress={() => this.setState({ isTeacherVisible: true, selectedTeacher: teacher.UID })} />
+        <ClassDetail key={teacher.UID} person={teacher} onPress={() => this.setState({ isTeacherVisible: true, selectedTeacher: teacher.UID })} />
       ));
     }
     return null;
@@ -128,4 +128,4 @@ class ActivityList extends Component {
   }
 }
 
-export { ActivityList };
+export { ClassList };
