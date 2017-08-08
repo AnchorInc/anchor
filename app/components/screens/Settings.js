@@ -47,7 +47,7 @@ const styles = {
   textStyle: {
     padding: 10,
     fontSize: 14,
-    color: '#a5a5a5',
+    color: '#858585',
     fontFamily: 'avenir_medium',
   },
 };
