@@ -21,12 +21,6 @@ class Settings extends Component {
         <View style={styles.headerStyle}>
           <Text style={styles.textStyle}>General</Text>
         </View>
-        <ListDetail>
-          <Text>
-            I Am a Potato
-          </Text>
-          <Switch thumbTintColor={ACCENT_COLOR} onTintColor='#de9393' onValueChange={this.toggleSwitch.bind(this)} value={this.state.switchValue} />
-        </ListDetail>
         <View style={styles.headerStyle}>
           <Text style={styles.textStyle}>Reminders</Text>
         </View>

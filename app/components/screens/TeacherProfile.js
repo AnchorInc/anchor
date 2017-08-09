@@ -66,7 +66,7 @@ class TeacherProfile extends Component {
                   <Icon name='keyboard-backspace' size={24} color='white' />
                 </TouchableOpacity>
                 <View style={{ padding: 15 }}>
-                  <PopupMenu actions={['Report']} onPress={() => console.log('pressed')} />
+                  <PopupMenu actions={['Report']} onPress={() => console.log('pressed')} color='white' />
                 </View>
               </View>
             </Image>

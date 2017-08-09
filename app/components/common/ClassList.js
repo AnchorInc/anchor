@@ -13,7 +13,7 @@ class ClassList extends Component {
   constructor() {
     super();
     this.state = {
-      activities: [],
+      teachers: [],
       refreshing: false,
       messageVisible: false,
       isActivityVisible: false,

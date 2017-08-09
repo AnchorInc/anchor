@@ -1,34 +1,26 @@
 import React from 'react';
-import { Text, Image, View, Dimensions, TouchableOpacity } from 'react-native';
-import { PopupMenu } from './';
+import { Text, View, Dimensions, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const { width } = Dimensions.get('window');
 
-const SearchDetail = ({ person, onPress }) => {
+const SubjectDetail = ({ subject, onPress }) => {
   return (
     <View style={styles.containerStyle}>
       <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
-        <View style={styles.profileContainerStyle}>
-          <Image style={styles.profileStyle} source={{ uri: person.Profile }} />
+        <View style={styles.iconContainerStyle}>
+          <Icon name="run" size={24} />
         </View>
         <View style={styles.textContainerStyle}>
-          <Text style={styles.nameStyle}>{person.Name}</Text>
-          <Text style={styles.classStyle}>{person.Subject}</Text>
+          <Text style={styles.subjectStyle}>{subject.Subject}</Text>
         </View>
       </TouchableOpacity>
-      <PopupMenu actions={['View Profile', 'Contact']} onPress={() => console.log('pressed')} color='#888' />
     </View>
   );
 };
 
 const styles = {
-  profileStyle: {
-    height: 0.11 * width,
-    width: 0.11 * width,
-    alignSelf: 'center',
-    resizeMode: 'cover',
-  },
-  profileContainerStyle: {
+  iconContainerStyle: {
     width: 0.15 * width,
     height: 0.15 * width,
     borderRadius: (0.15 * width) / 2,
@@ -38,7 +30,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  nameStyle: {
+  subjectStyle: {
     fontSize: 16,
     fontFamily: 'avenir_roman',
     color: '#000',
@@ -50,11 +42,6 @@ const styles = {
     height: 40,
     padding: 10,
   },
-  classStyle: {
-    fontSize: 14,
-    color: '#888',
-    paddingBottom: 5,
-  },
   containerStyle: {
     flexDirection: 'row',
     width,
@@ -64,4 +51,4 @@ const styles = {
   },
 };
 
-export { SearchDetail };
+export { SubjectDetail };

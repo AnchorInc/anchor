@@ -32,8 +32,8 @@ public class MainActivity extends ReactActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bitmap Icon = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-        ActivityManager.TaskDescription taskDescription = new ActivityManager.TaskDescription(getResources().getString(R.string.app_name), Icon, getResources().getColor(R.color.colorPrimary));
+        Bitmap Icon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        ActivityManager.TaskDescription taskDescription = new ActivityManager.TaskDescription(getResources().getString(R.string.app_name), Icon, getResources().getColor(R.color.black));
         this.setTaskDescription(taskDescription);
     }
 }

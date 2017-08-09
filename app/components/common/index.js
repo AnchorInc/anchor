@@ -12,3 +12,4 @@ export * from './LoginSpinner';
 export * from './ListDetail';
 export * from './PopupMenu';
 export * from './SearchDetail';
+export * from './SubjectDetail';
