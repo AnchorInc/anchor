@@ -12,10 +12,9 @@ class Search extends Component {
   constructor() {
     super();
     this.state = {
-      showSearchVal: false,
-      teachers: [''],
-      subjects: [''],
-      rating: 4,
+      teachers: [],
+      subjects: [],
+      rating: 3.5,
     };
   }
 
@@ -24,7 +23,7 @@ class Search extends Component {
     const queries = [{
       indexName: 'teachers',
       query: queryObj,
-      filters: `Rating >= ${this.state.rating}`,
+      filters: 'Rating >= 4',
     }, {
       indexName: 'subjects',
       query: queryObj,
@@ -41,38 +40,19 @@ class Search extends Component {
       console.error(err);
       return;
     }
-    this.setState({ showSearchVal: true, teachers: content.results[0].hits, subjects: content.results[1].hits });
-  }
-
-  renderTopResult() {
-     if (this.state.showSearchVal && this.state.teachers[0] != null && this.state.teachers != null) {
-       if (this.state.teachers.length > this.state.subjects.length) {
-        return (
-          <SearchDetail key={this.state.teachers[0].UID} person={this.state.teachers[0]} />
-        );
-       } else if (this.state.subjects.length > this.state.teachers.length) {
-        return (
-          <SearchDetail key={this.state.subjects[0].UID} person={this.state.subjects[0]} />
-        );
-       }
-    }
-    return null;
+    this.setState({ teachers: content.results[0].hits, subjects: content.results[1].hits });
   }
 
   renderSubjects() {
-    if (this.state.showSearchVal) {
-      return <Text style={styles.topResultTextStyle}>Subjects</Text>
-        &&
-      this.state.subjects.map(subject => <SubjectDetail key={subject.objectID} subject={subject} onPress={() => console.log('pressed')} />);
+    if (this.state.subjects.length >= 1) {
+      return this.state.subjects.map(subject => <SubjectDetail key={subject.objectID} subject={subject} />);
     }
     return null;
   }
 
    renderTeachers() {
-    if (this.state.showSearchVal) {
-      return <Text style={styles.topResultTextStyle}>Teachers</Text>
-        &&
-      this.state.teachers.map(teacher => <SearchDetail key={teacher.UID} person={teacher} />);
+    if (this.state.teachers.length >= 1) {
+      return this.state.teachers.map(teacher => <SearchDetail key={teacher.UID} person={teacher} />);
     }
     return null;
   }
@@ -85,7 +65,13 @@ class Search extends Component {
           <Icon name="filter-variant" size={22} style={{ padding: 5 }} />
         </View>
         <ScrollView style={{ flex: 1 }}>
+          <Text style={styles.topResultTextStyle}>
+            {this.state.subjects.length >= 1 ? 'Subjects' : ''}
+          </Text>
           {this.renderSubjects()}
+          <Text style={styles.topResultTextStyle}>
+            {this.state.teachers.length >= 1 ? 'Teachers' : ''}
+          </Text>
           {this.renderTeachers()}
         </ScrollView>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
