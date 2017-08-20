@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigation';
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { MAIN_COLOR, BOTTOM_BAR_COLOR, BOTTOM_BAR_ICON_COLOR } from '../config';
-import { Classes, Settings, Search, SplashScreen } from '../components/screens';
+import { Classes, Settings, Search, SplashScreen, Preferences } from '../components/screens';
+import { Header } from '../components/common';
 import Login from '../components/screens/Login';
 import Main from '../Main';
 
@@ -18,6 +20,12 @@ export const LoginStack = StackNavigator({
     screen: Login,
     navigationOptions: {
       header: null,
+    },
+  },
+  Preferences: {
+    screen: Preferences,
+    navigationOptions: {
+      header: <Header title='Preferences' prefButtons />,
     },
   },
   Main: {

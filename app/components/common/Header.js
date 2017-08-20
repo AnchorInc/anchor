@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, Dimensions, Platform, StatusBar, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { HeaderProfileButton } from './';
@@ -6,26 +6,51 @@ import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config/';
 
 const { width, height } = Dimensions.get('window');
 
-const Header = ({ title, onPress }) => {
-  return (
-    <View>
-      <StatusBar
-        backgroundColor={STATUS_BAR_COLOR}
-      />
-      <View style={styles.containerStyle} backgroundColor={MAIN_COLOR}>
-      <Text style={styles.headerStyle}>
-        {title}
-      </Text>
-      <View style={styles.buttonContainerStyle}>
-        <TouchableOpacity>
-          <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
-        </TouchableOpacity>
-        <HeaderProfileButton onPress={onPress} />
+class Header extends Component {
+  renderMainButtons() {
+    if (this.props.mainButtons) {
+      return (
+        <View style={styles.buttonContainerStyle}>
+          <TouchableOpacity>
+            <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
+          </TouchableOpacity>
+          <HeaderProfileButton onPress={this.props.onPress} />
+        </View>
+      );
+    }
+    return null;
+  }
+
+  renderPrefButtons() {
+    if (this.props.prefButtons) {
+      return (
+        <View style={styles.buttonContainerStyle}>
+          <TouchableOpacity>
+            <Icon name='check' color='white' size={24} />
+          </TouchableOpacity>
+        </View>
+      );
+    }
+    return null;
+  }
+
+  render() {
+    return (
+      <View>
+        <StatusBar
+          backgroundColor={STATUS_BAR_COLOR}
+        />
+        <View style={styles.containerStyle} backgroundColor={MAIN_COLOR}>
+          <Text style={styles.headerStyle}>
+            {this.props.title}
+          </Text>
+          {this.renderMainButtons()}
+          {this.renderPrefButtons()}
+        </View>
       </View>
-    </View>
-    </View>
-  );
-};
+    );
+  }
+}
 
 const styles = {
   containerStyle: {
