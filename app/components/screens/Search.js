@@ -23,7 +23,7 @@ class Search extends Component {
     const queries = [{
       indexName: 'teachers',
       query: queryObj,
-      filters: 'Rating >= 4',
+      filters: 'Rating >= 3.5',
     }, {
       indexName: 'subjects',
       query: queryObj,
@@ -74,10 +74,6 @@ class Search extends Component {
           </Text>
           {this.renderTeachers()}
         </ScrollView>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={{ color: 'black', fontFamily: 'avenir_light', padding: 5 }}>Search By Algolia</Text>
-          <Image source={algolialogo} style={{ height: 20, width: 20 }} />
-        </View>
       </View>
     );
   }

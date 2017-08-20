@@ -60,7 +60,7 @@ class Profile extends Component {
                   <Icon name='keyboard-backspace' size={24} color='white' />
                 </TouchableOpacity>
                 <View style={{ padding: 15 }}>
-                  <PopupMenu actions={['Edit']} onPress={() => console.log('pressed')} />
+                  <PopupMenu actions={['Edit']} onPress={() => console.log('pressed')} color='white' />
                 </View>
               </View>
             </Image>
