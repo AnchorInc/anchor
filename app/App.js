@@ -9,8 +9,6 @@ import rootSaga from './config/sagas';
 import reducers from './reducers';
 import { LoginStack } from './navigation/Router';
 
-console.disableYellowBox = true;
-
 const customTextProps = {
   style: {
     fontFamily: 'avenir_book',
