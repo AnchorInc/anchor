@@ -4,7 +4,8 @@ import { GoogleSignin } from 'react-native-google-signin';
 import { setCustomText } from 'react-native-global-props';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import ReduxThunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './config/sagas';
 import reducers from './reducers';
 import { LoginStack } from './navigation/Router';
 
@@ -28,15 +29,20 @@ class App extends Component {
       storageBucket: 'anchorapp-feed3.appspot.com',
       messagingSenderId: '489771714033',
     };
-    firebase.initializeApp(config);
+    try {
+      firebase.initializeApp(config);
+    } catch (err) {
+      console.log('error');
+    }
 
     GoogleSignin.configure({
       webClientId: '489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com',
     });
   }
   render() {
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-
+    const middleware = createSagaMiddleware();
+    const store = createStore(reducers, {}, applyMiddleware(middleware));
+    middleware.run(rootSaga);
     return (
       <Provider store={store} >
         <LoginStack />

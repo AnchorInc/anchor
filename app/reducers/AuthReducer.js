@@ -2,7 +2,8 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   START_AUTH,
-} from '../actions/types';
+  CLOSE_ERROR_MESSAGE,
+} from '../config/types';
 
 const INITIAL_STATE = {
   user: null,
@@ -20,7 +21,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, errorMessage: action.payload, loading: false, isError: true };
     case START_AUTH:
       return { ...state, errorMessage: null, loading: true, isError: false };
-    case 'close_error_message':
+    case CLOSE_ERROR_MESSAGE:
       return { ...state, isError: false, loading: false };
     default:
       return state;

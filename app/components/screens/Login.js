@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StatusBar, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { STATUS_BAR_COLOR } from '../../config';
-import { loginUserWithFB, loginUserWithGoogle, closeErrorMessage } from '../../actions';
+import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
 const loginHeader = require('../../resources/images/loginImage.png');
@@ -15,12 +15,12 @@ class Login extends Component {
     this.state = { userLoggedIn: undefined };
   }
 
-  onFBSignIn() {
-    this.props.loginUserWithFB();
+  onFBLoginRequest() {
+    this.props.fbLoginRequest();
   }
 
-  onGoogleSignIn() {
-    this.props.loginUserWithGoogle();
+  onGoogleLoginRequest() {
+    this.props.googleLoginRequest();
   }
 
   render() {
@@ -41,8 +41,8 @@ class Login extends Component {
 
         <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
-            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.onFBSignIn.bind(this)} />
-            <LoginButton title='Sign in with Google' iconName='google' onPress={this.onGoogleSignIn.bind(this)} />
+            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.onFBLoginRequest.bind(this)} />
+            <LoginButton title='Sign in with Google' iconName='google' onPress={this.onGoogleLoginRequest.bind(this)} />
           </View>
         </View>
 
@@ -89,4 +89,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { loginUserWithFB, loginUserWithGoogle, closeErrorMessage })(Login);
+export default connect(mapStateToProps, { googleLoginRequest, fbLoginRequest, closeErrorMessage })(Login);
