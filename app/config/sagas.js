@@ -8,7 +8,7 @@ import {
   START_AUTH,
   GOOGLE_LOGIN_REQUEST,
   FB_LOGIN_REQUEST,
-} from './types';
+} from './';
 
 const loginUserFail = (error) => {
   return { type: LOGIN_USER_FAIL, payload: error };

@@ -3,7 +3,7 @@ import {
   LOGIN_USER_FAIL,
   START_AUTH,
   CLOSE_ERROR_MESSAGE,
-} from '../config/types';
+} from '../config';
 
 const INITIAL_STATE = {
   user: null,

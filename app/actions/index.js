@@ -1,4 +1,4 @@
-import { GOOGLE_LOGIN_REQUEST, FB_LOGIN_REQUEST, CLOSE_ERROR_MESSAGE } from '../config/types';
+import { GOOGLE_LOGIN_REQUEST, FB_LOGIN_REQUEST, CLOSE_ERROR_MESSAGE, SHOW_ERROR_MESSAGE } from '../config';
 
 export const googleLoginRequest = () => {
   return {
@@ -12,7 +12,11 @@ export const fbLoginRequest = () => {
   };
 };
 
-export const showErrorMessage = () => {};
+export const showErrorMessage = () => {
+  return {
+    type: SHOW_ERROR_MESSAGE,
+  };
+};
 
 export const closeErrorMessage = () => {
   return {

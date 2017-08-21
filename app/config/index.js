@@ -6,3 +6,12 @@ export const LIGHT_GRAY = '#d5d5d5';
 export const BOTTOM_BAR_COLOR = '#efefef';
 export const BOTTOM_BAR_ICON_COLOR = '#404040';
 export const DARK_GRAY = '#333';
+
+// action types
+export const GOOGLE_LOGIN_REQUEST = 'google_login_request';
+export const FB_LOGIN_REQUEST = 'fb_login_request';
+export const LOGIN_USER_SUCCESS = 'login_user_success';
+export const LOGIN_USER_FAIL = 'login_user_fail';
+export const START_AUTH = 'start_auth';
+export const CLOSE_ERROR_MESSAGE = 'close_error_message';
+export const SHOW_ERROR_MESSAGE = 'show_error_message';

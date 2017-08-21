@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ScrollView, Dimensions } from 'react-native';
+import { View, Text, ScrollView, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Input, SearchDetail, SubjectDetail } from '../common';
 
 const algoliasearch = require('algoliasearch/reactnative');
-const algolialogo = require('../../resources/images/search-by-algolia.png');
 
 const { width, height } = Dimensions.get('window');
 
