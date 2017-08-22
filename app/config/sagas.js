@@ -38,7 +38,6 @@ function* loginUserWithGoogle() {
   })
   .catch((error) => {
     if (error.code !== 12501) {
-      console.log(error);
       put(loginUserFail());
       put(showErrorMessage(error.message));
     }
@@ -52,9 +51,7 @@ function* loginUserWithFB() {
 
   yield LoginManager.logInWithReadPermissions(['public_profile', 'email'])
   .then((result) => {
-    if (result.isCancelled) {
-      return;
-    }
+    if (result.isCancelled) return;
     put(startAuth());
     AccessToken.getCurrentAccessToken()
     .then((user) => {

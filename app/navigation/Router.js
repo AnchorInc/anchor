@@ -39,13 +39,20 @@ export const LoginStack = StackNavigator({
 const defaultGetStateForAction = LoginStack.router.getStateForAction;
 
 LoginStack.router.getStateForAction = (action, state) => {
+  // Prevent from going back to the Splash Screen from the Login Screen
   if (
     state &&
     action.type === NavigationActions.BACK &&
-    state.routes[state.index].routeName === 'Main'
-  ) {
-    return null;
-  }
+    state.routes[state.index].routeName === 'Login'
+  ) { return null; }
+
+  // Prevent from going back to Login from any screen
+  if (
+    state &&
+    action.type === 'Navigation/BACK' && 
+    (state.routes[state.index].routeName !== 'SplashScreen' &&
+    state.routes[state.index].routeName !== 'Login')
+  ) { return null; }
   return defaultGetStateForAction(action, state);
 };
 
