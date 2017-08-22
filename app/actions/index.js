@@ -12,9 +12,10 @@ export const fbLoginRequest = () => {
   };
 };
 
-export const showErrorMessage = () => {
+export const showErrorMessage = (payload) => {
   return {
     type: SHOW_ERROR_MESSAGE,
+    payload,
   };
 };
 

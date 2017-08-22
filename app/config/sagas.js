@@ -9,6 +9,7 @@ import {
   GOOGLE_LOGIN_REQUEST,
   FB_LOGIN_REQUEST,
 } from './';
+import { showErrorMessage } from '../actions';
 
 const loginUserFail = (error) => {
   return { type: LOGIN_USER_FAIL, payload: error };
@@ -38,7 +39,8 @@ function* loginUserWithGoogle() {
   .catch((error) => {
     if (error.code !== 12501) {
       console.log(error);
-      put(loginUserFail(error.message));
+      put(loginUserFail());
+      put(showErrorMessage(error.message));
     }
   });
 }
@@ -64,7 +66,8 @@ function* loginUserWithFB() {
     });
   })
   .catch((error) => {
-    put(loginUserFail(error.message));
+    put(loginUserFail());
+    put(showErrorMessage(error.message));
   });
 }
 

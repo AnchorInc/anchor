@@ -10,17 +10,16 @@ const loginHeader = require('../../resources/images/loginImage.png');
 const { width, height } = Dimensions.get('window');
 
 class Login extends Component {
-  constructor() {
-    super();
-    this.state = { userLoggedIn: undefined };
-  }
-
   onFBLoginRequest() {
     this.props.fbLoginRequest();
   }
 
   onGoogleLoginRequest() {
     this.props.googleLoginRequest();
+  }
+
+  closeErrorMessage() {
+    this.props.closeErrorMessage();
   }
 
   render() {
@@ -48,10 +47,10 @@ class Login extends Component {
 
         <LoginSpinner visible={this.props.loading} title='Authenticating...' />
         <ErrorMessage
-          visible={this.props.isError}
-          message={'Unable to Login'}
+          visible={this.props.error}
+          message={this.props.errorMessage}
           button1Text='Ok'
-          onPress={() => { this.props.closeErrorMessage(); }}
+          onPress={() => this.closeErrorMessage()}
         />
       </View>
     );
@@ -82,10 +81,11 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state.global.error);
   return {
-    errorMessage: state.auth.errorMessage,
+    errorMessage: state.global.errorMessage,
+    error: state.global.error,
     loading: state.auth.loading,
-    isError: state.auth.isError,
   };
 };
 
