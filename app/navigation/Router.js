@@ -49,7 +49,7 @@ LoginStack.router.getStateForAction = (action, state) => {
   // Prevent from going back to Login from any screen
   if (
     state &&
-    action.type === 'Navigation/BACK' && 
+    action.type === 'Navigation/BACK' &&
     (state.routes[state.index].routeName !== 'SplashScreen' &&
     state.routes[state.index].routeName !== 'Login')
   ) { return null; }
