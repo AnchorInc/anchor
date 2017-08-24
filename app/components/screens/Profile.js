@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import { Modal, StatusBar, Dimensions, View, Image, Text, ScrollView, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native';
+import {
+  Modal,
+  StatusBar,
+  Dimensions,
+  View,
+  Image,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+  AsyncStorage,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import _ from 'lodash';
 import { STATUS_BAR_COLOR } from '../../config';
