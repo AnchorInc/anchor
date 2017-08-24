@@ -37,6 +37,7 @@ function* loginUserWithGoogle() {
     put(loginUserSuccess());
   })
   .catch((error) => {
+    // Error handling for login cancellation by user
     if (error.code !== 12501) {
       put(loginUserFail());
       put(showErrorMessage(error.message));
