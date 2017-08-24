@@ -5,7 +5,7 @@ import { setCustomText } from 'react-native-global-props';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from './config/sagas';
+import rootSaga from './sagas';
 import reducers from './reducers';
 import { LoginStack } from './navigation/Router';
 
