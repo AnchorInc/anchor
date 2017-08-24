@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StatusBar, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { STATUS_BAR_COLOR } from '../../config';
-import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
+import { googleLoginRequest, fbLoginRequest, closeErrorMessage, startAuth } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
 const loginHeader = require('../../resources/images/loginImage.png');
@@ -22,7 +22,6 @@ class Login extends Component {
         <StatusBar
           backgroundColor={STATUS_BAR_COLOR}
         />
-
         <View reacstyle={containerStyle}>
           <Image source={loginHeader} style={logoStyle} />
         </View>
@@ -39,7 +38,7 @@ class Login extends Component {
           visible={this.props.error}
           message={this.props.errorMessage}
           button1Text='Ok'
-          onPress={() => this.props.closeErrorMessage}
+          onPress={() => this.props.closeErrorMessage()}
         />
       </View>
     );
@@ -70,7 +69,7 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.global.error);
+  console.log('Loading: ', state.auth.loading);
   return {
     errorMessage: state.global.errorMessage,
     error: state.global.error,
@@ -78,4 +77,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { googleLoginRequest, fbLoginRequest, closeErrorMessage })(Login);
+export default connect(mapStateToProps, { googleLoginRequest, fbLoginRequest, closeErrorMessage, startAuth })(Login);
