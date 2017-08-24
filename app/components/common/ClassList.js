@@ -3,7 +3,7 @@ import { ScrollView, View, Text, RefreshControl, Dimensions, NetInfo } from 'rea
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ClassDetail } from './';
-import { getCurrentUser } from '../../models/User';
+import { getUser } from '../../models/User';
 import { DARK_GRAY, ACCENT_COLOR } from '../../config';
 import { TeacherProfile } from '../screens';
 
@@ -32,10 +32,10 @@ class ClassList extends Component {
 
   getActivityList() {
     this.setState({ teachers: [], refreshing: true, isConnected: true });
-    getCurrentUser()
-    .then((currentUser) => {
-      if (currentUser.batchList != null && currentUser.batchList.length >= 1) {
-        currentUser.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
+    getUser()
+    .then((user) => {
+      if (user.batchList != null && user.batchList.length >= 1) {
+        user.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
         .once('value')
         .then(Class => firebase.database().ref(`/users/teachers/${Class.val().Teacher}`)
         .once('value')

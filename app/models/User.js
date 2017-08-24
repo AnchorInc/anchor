@@ -1,19 +1,21 @@
 import firebase from 'firebase';
 
 class User {
-  getCurrentUser() {
-    const { currentUser } = firebase.auth();
-    return firebase.database().ref(`/users/students/${currentUser.uid}`)
+  constructor() {
+    this.user = firebase.auth().currentUser;
+  }
+
+  getUser() {
+    return firebase.database().ref(`/users/students/${this.user.uid}`)
       .once('value')
       .then((response) => {
-         return response.val();
+        return response.val();
       });
   }
 
   updateUser(displayName, email, phoneNumber, batchList) {
-    const { currentUser } = firebase.auth();
-    const db = firebase.database().ref(`/users/students/${currentUser.uid}`);
-    db.set({
+    const db = firebase.database().ref(`/users/students/${this.user.uid}`);
+    db.update({
       displayName,
       email,
       phoneNumber,
@@ -22,13 +24,12 @@ class User {
   }
 
   deleteUser() {
-    const { currentUser } = firebase.auth();
-    currentUser.delete()
+    this.user.delete()
       .then(() => console.log('delete successful'))
       .catch(error => console.log(error));
   }
 }
 
-export const getCurrentUser = User.prototype.getCurrentUser;
+export const getUser = User.prototype.getUser;
 export const updateUser = User.prototype.updateUser;
 export const deleteUser = User.prototype.deleteUser;

@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import _ from 'lodash';
 import { STATUS_BAR_COLOR } from '../../config';
 import { ListDetail, PopupMenu } from '../common';
-import { getCurrentUser } from '../../models/User';
+import { getUser } from '../../models/User';
 
 const { width, height } = Dimensions.get('window');
 
@@ -31,7 +31,7 @@ class Profile extends Component {
         if (user != null) {
           this.setState({ user: JSON.parse(user) });
         } else {
-          getCurrentUser()
+          getUser()
             .then((currentUser) => {
               if (currentUser != null) {
                 const newUser = _.pick(currentUser, ['displayName', 'photoURL', 'email', 'phoneNumber', 'header']);
