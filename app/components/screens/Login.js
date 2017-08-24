@@ -10,19 +10,8 @@ const loginHeader = require('../../resources/images/loginImage.png');
 const { width, height } = Dimensions.get('window');
 
 class Login extends Component {
-  onFBLoginRequest() {
-    this.props.fbLoginRequest();
-  }
-
-  onGoogleLoginRequest() {
-    this.props.googleLoginRequest();
-  }
-
-  closeErrorMessage() {
-    this.props.closeErrorMessage();
-  }
-
   render() {
+    console.log(this.props.loading);
     const {
       loginContainerStyle,
       containerStyle,
@@ -40,8 +29,8 @@ class Login extends Component {
 
         <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
-            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.onFBLoginRequest.bind(this)} />
-            <LoginButton title='Sign in with Google' iconName='google' onPress={this.onGoogleLoginRequest.bind(this)} />
+            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.props.fbLoginRequest} />
+            <LoginButton title='Sign in with Google' iconName='google' onPress={this.props.googleLoginRequest} />
           </View>
         </View>
 
@@ -50,7 +39,7 @@ class Login extends Component {
           visible={this.props.error}
           message={this.props.errorMessage}
           button1Text='Ok'
-          onPress={() => this.closeErrorMessage()}
+          onPress={() => this.props.closeErrorMessage}
         />
       </View>
     );
