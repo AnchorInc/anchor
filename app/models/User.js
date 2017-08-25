@@ -1,12 +1,9 @@
 import firebase from 'firebase';
 
 class User {
-  constructor() {
-    this.user = firebase.auth().currentUser;
-  }
-
   getUser() {
-    return firebase.database().ref(`/users/students/${this.user.uid}`)
+    const user = firebase.auth().currentUser;
+    return firebase.database().ref(`/users/students/${user.uid}`)
       .once('value')
       .then((response) => {
         return response.val();
@@ -14,7 +11,8 @@ class User {
   }
 
   updateUser(displayName, email, phoneNumber, batchList) {
-    const db = firebase.database().ref(`/users/students/${this.user.uid}`);
+    const user = firebase.auth().currentUser;
+    const db = firebase.database().ref(`/users/students/${user.uid}`);
     db.update({
       displayName,
       email,
@@ -24,7 +22,8 @@ class User {
   }
 
   deleteUser() {
-    this.user.delete()
+    const user = firebase.auth().currentUser;
+    user.delete()
       .then(() => console.log('delete successful'))
       .catch(error => console.log(error));
   }

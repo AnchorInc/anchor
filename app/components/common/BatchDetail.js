@@ -7,15 +7,11 @@ import { Card, CardSection, ListDetail } from './';
 const { width } = Dimensions.get('window');
 
 class BatchDetail extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      location: '',
-      timing: '',
-      spaceAvailable: '',
-    };
-  }
+  state = {
+    location: '',
+    timing: '',
+    spaceAvailable: '',
+  };
 
   componentWillMount() {
     firebase.database().ref(`/batches/${this.props.batch}`)

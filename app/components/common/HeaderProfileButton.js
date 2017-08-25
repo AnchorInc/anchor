@@ -6,13 +6,10 @@ import { getCurrentUser } from '../../models/User';
 const { width } = Dimensions.get('window');
 
 class HeaderProfileButton extends Component {
-  constructor() {
-    super();
-    this.state = {
-      profilePhoto: '',
-      iconVisible: true,
-    };
-  }
+  state = {
+    profilePhoto: '',
+    iconVisible: true,
+  };
 
   componentWillMount() {
     AsyncStorage.getItem('profile').then((profile) => {
@@ -31,7 +28,7 @@ class HeaderProfileButton extends Component {
     });
   }
 
-  renderProfile() {
+  renderProfile = () => {
     if (!this.state.iconVisible) {
       return <Image style={styles.profileStyle} source={{ uri: this.state.profilePhoto }} />;
     }

@@ -7,7 +7,7 @@ import { MAIN_COLOR, BOTTOM_BAR_COLOR, BOTTOM_BAR_ICON_COLOR } from '../config';
 import { Classes, Settings, Search, SplashScreen, Preferences } from '../components/screens';
 import { Header } from '../components/common';
 import Login from '../components/screens/Login';
-import Main from '../Main';
+import Main from '../components/screens/Main';
 
 export const LoginStack = StackNavigator({
   SplashScreen: {
@@ -46,12 +46,13 @@ LoginStack.router.getStateForAction = (action, state) => {
     state.routes[state.index].routeName === 'Login'
   ) { return null; }
 
-  // Prevent access to Login screen after login/signup
+  // Prevent access to Login screen after login/signup or to the Preferences screen
   if (
     state &&
     action.type === 'Navigation/BACK' &&
     (state.routes[state.index].routeName !== 'SplashScreen' &&
-    state.routes[state.index].routeName !== 'Login')
+    state.routes[state.index].routeName !== 'Login' &&
+    state.routes[state.index].routeName !== 'Preferences')
   ) { return null; }
   return defaultGetStateForAction(action, state);
 };

@@ -10,15 +10,12 @@ import React, { Component, PropTypes } from 'react'
      actions:  PropTypes.arrayOf(PropTypes.string).isRequired,
      onPress: PropTypes.func.isRequired
    }
+
+    state = {
+      icon: null
+    }
  
-   constructor (props) {
-     super(props)
-     this.state = {
-       icon: null
-     }
-   }
- 
-   onError () {
+   onError = () => {
      console.log('Popup Error')
    }
  
@@ -32,25 +29,25 @@ import React, { Component, PropTypes } from 'react'
        )
      }
    }
+
+   onRef = icon => {
+    if (!this.state.icon) {
+      this.setState({icon})
+    }
+  }
  
    render () {
      return (
        <View>
-         <TouchableOpacity onPress={this.onPress}>
+         <TouchableOpacity onPress={() => this.onPress()}>
            <Icon
              name='more-vert'
              size={ICON_SIZE}
              color={this.props.color}
-             ref={this.onRef} />
+             ref={() => this.onRef()} />
          </TouchableOpacity>
        </View>
      )
-   }
- 
-   onRef = icon => {
-     if (!this.state.icon) {
-       this.setState({icon})
-     }
    }
  }
  

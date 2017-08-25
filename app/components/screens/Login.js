@@ -11,7 +11,6 @@ const { width, height } = Dimensions.get('window');
 
 class Login extends Component {
   render() {
-    console.log(this.props.loading);
     const {
       loginContainerStyle,
       containerStyle,
@@ -28,8 +27,8 @@ class Login extends Component {
 
         <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
-            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.props.fbLoginRequest} />
-            <LoginButton title='Sign in with Google' iconName='google' onPress={this.props.googleLoginRequest} />
+            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={() => this.props.fbLoginRequest()} />
+            <LoginButton title='Sign in with Google' iconName='google' onPress={() => this.props.googleLoginRequest()} />
           </View>
         </View>
 
@@ -69,7 +68,6 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  console.log('Loading: ', state.auth.loading);
   return {
     errorMessage: state.global.errorMessage,
     error: state.global.error,

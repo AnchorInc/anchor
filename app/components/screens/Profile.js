@@ -20,10 +20,7 @@ import { getUser } from '../../models/User';
 const { width, height } = Dimensions.get('window');
 
 class Profile extends Component {
-  constructor() {
-    super();
-    this.state = { user: null };
-  }
+  state = { user: null };
 
   componentWillMount() {
     AsyncStorage.getItem('user')
@@ -47,8 +44,6 @@ class Profile extends Component {
   }
 
   render() {
-    getCurrentUser()
-    .then(user => console.log(user));
     if (this.state.user == null) {
       return null;
     }

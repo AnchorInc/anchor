@@ -9,22 +9,19 @@ import { ListDetail, PopupMenu } from '../common';
 const { width, height } = Dimensions.get('window');
 
 class TeacherProfile extends Component {
-  constructor() {
-    super();
-    this.state = {
-      name: '',
-      email: '',
-      phoneNumber: '',
-      profilePictureURL: '#fff',
-      header: '#fff',
-      subject: '',
-      experience: '',
-      rating: 0,
-      price: '',
-      location: '',
-      batchList: [],
-    };
-  }
+  state = {
+    name: '',
+    email: '',
+    phoneNumber: '',
+    profilePictureURL: '#fff',
+    header: '#fff',
+    subject: '',
+    experience: '',
+    rating: 0,
+    price: '',
+    location: '',
+    batchList: [],
+  };
 
   componentWillMount() {
     firebase.database().ref(`/users/teachers/${this.props.uid}`)

@@ -10,17 +10,14 @@ import { TeacherProfile } from '../screens';
 const { width, height } = Dimensions.get('window');
 
 class ClassList extends Component {
-  constructor() {
-    super();
-    this.state = {
-      teachers: [],
-      refreshing: false,
-      messageVisible: false,
-      isActivityVisible: false,
-      selectedActivity: '',
-      isConnected: true,
-    };
-  }
+  state = {
+    teachers: [],
+    refreshing: false,
+    messageVisible: false,
+    isActivityVisible: false,
+    selectedActivity: '',
+    isConnected: true,
+  };
 
   componentWillMount() {
     this.getActivityList();
@@ -30,7 +27,7 @@ class ClassList extends Component {
     );
   }
 
-  getActivityList() {
+  getActivityList = () => {
     this.setState({ teachers: [], refreshing: true, isConnected: true });
     getUser()
     .then((user) => {
@@ -46,7 +43,7 @@ class ClassList extends Component {
     });
   }
 
-  handleConnectionChanged(isConnected) {
+  handleConnectionChanged = (isConnected) => {
     if (isConnected) {
       this.setState({ isConnected: true });
     } else {
@@ -54,7 +51,7 @@ class ClassList extends Component {
     }
   }
 
-  noBatchMessage() {
+  noBatchMessage = () => {
     if (this.state.messageVisible) {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
@@ -71,7 +68,7 @@ class ClassList extends Component {
     return null;
   }
 
-  connectionIssueMessage() {
+  connectionIssueMessage = () => {
     if (!(this.state.isConnected)) {
       this.setState({ refreshing: false });
       return (
@@ -89,7 +86,7 @@ class ClassList extends Component {
     return null;
   }
 
-  renderPeople() {
+  renderPeople = () => {
     if (this.state.teachers != null && this.state.teachers.length >= 1) {
       return this.state.teachers.map(teacher => (
         <ClassDetail key={teacher.UID} person={teacher} onPress={() => this.setState({ isTeacherVisible: true, selectedTeacher: teacher.UID })} />
@@ -98,7 +95,7 @@ class ClassList extends Component {
     return null;
   }
 
-  renderTeacher() {
+  renderTeacher = () => {
     if (this.state.isTeacherVisible) {
       return (
         <TeacherProfile visible={this.state.isTeacherVisible} uid={this.state.selectedTeacher} onPress={() => this.setState({ isTeacherVisible: false })} />
@@ -113,7 +110,7 @@ class ClassList extends Component {
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this.getActivityList.bind(this)}
+            onRefresh={() => this.getActivityList()}
             colors={[ACCENT_COLOR]}
             tintColor={DARK_GRAY}
           />

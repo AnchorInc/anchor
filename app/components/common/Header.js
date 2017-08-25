@@ -7,7 +7,7 @@ import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config/';
 const { width, height } = Dimensions.get('window');
 
 class Header extends Component {
-  renderMainButtons() {
+  renderMainButtons = () => {
     if (this.props.mainButtons) {
       return (
         <View style={styles.buttonContainerStyle}>
@@ -21,7 +21,7 @@ class Header extends Component {
     return null;
   }
 
-  renderPrefButtons() {
+  renderPrefButtons = () => {
     if (this.props.prefButtons) {
       return (
         <View style={styles.buttonContainerStyle}>

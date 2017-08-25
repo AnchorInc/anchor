@@ -8,13 +8,11 @@ const logo = require('../../resources/images/splashScreen.png');
 const { width, height } = Dimensions.get('window');
 
 class SplashScreen extends Component {
-  checkForUser() {
+  checkForUser = () => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('there is a user signed in');
         this.props.navigation.navigate('Main');
       } else {
-        console.log('no user signed in');
         this.props.navigation.navigate('Login');
       }
     });
@@ -25,7 +23,7 @@ class SplashScreen extends Component {
       <View style={styles.viewStyle}>
         <StatusBar backgroundColor={STATUS_BAR_COLOR} />
         <Image source={logo} style={styles.logoStyle} />
-           {this.checkForUser()}
+        {this.checkForUser()}
       </View>
     );
   }
