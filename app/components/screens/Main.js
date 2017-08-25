@@ -32,7 +32,7 @@ class Main extends Component {
   }
 
   render() {
-    console.log(this.state.donePref)
+    console.log(this.state.donePref);
     return (
       <View style={{ flex: 1 }}>
         <Header title='Anchor' onPress={() => { this.setState({ isProfileVisible: true }); }} color='#01152d' mainButtons />
