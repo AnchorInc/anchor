@@ -27,17 +27,17 @@ class Login extends Component {
 
         <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
-            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={() => this.props.fbLoginRequest()} />
-            <LoginButton title='Sign in with Google' iconName='google' onPress={() => this.props.googleLoginRequest()} />
+            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.props.fbLoginRequest} />
+            <LoginButton title='Sign in with Google' iconName='google' onPress={this.props.googleLoginRequest} />
           </View>
         </View>
 
-        <LoginSpinner visible={this.props.loading} title='Authenticating...' />
+        <LoginSpinner visible={this.props.loading} title='Authenticating' />
         <ErrorMessage
           visible={this.props.error}
           message={this.props.errorMessage}
           button1Text='Ok'
-          onPress={() => this.props.closeErrorMessage()}
+          onPress={this.props.closeErrorMessage}
         />
       </View>
     );

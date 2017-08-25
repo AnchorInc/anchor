@@ -14,7 +14,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import _ from 'lodash';
 import { STATUS_BAR_COLOR } from '../../config';
-import { ListDetail, PopupMenu } from '../common';
+import { ListDetail, PopupMenu, LoginSpinner } from '../common';
 import { getUser } from '../../models/User';
 
 const { width, height } = Dimensions.get('window');
@@ -43,48 +43,53 @@ class Profile extends Component {
       });
   }
 
-  render() {
+  showProfile = () => {
     if (this.state.user == null) {
-      return null;
+      return <LoginSpinner visible title='Loading Profile' />;
     }
+    return (
+      <View style={styles.modalStyle}>
+        <View style={styles.headerStyle}>
+          <Image source={{ uri: this.state.user.header }} style={styles.coverStyle}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
+              <TouchableOpacity style={{ padding: 15 }} onPress={this.props.onPress}>
+                <Icon name='keyboard-backspace' size={24} color='white' />
+              </TouchableOpacity>
+              <View style={{ padding: 15 }}>
+                <PopupMenu actions={['Edit']} onPress={() => console.log('pressed')} color='white' />
+              </View>
+            </View>
+          </Image>
+          <Image source={{ uri: this.state.user.photoURL }} style={styles.profileStyle} />
+          <View style={{ height: 90, justifyContent: 'center', alignItems: 'center', paddingTop: 20 }}>
+            <Text style={styles.nameStyle}>{this.state.user.displayName}</Text>
+          </View>
+        </View>
+        <ScrollView>
+          <ListDetail contentText={this.state.email}>
+            <Icon name='account' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
+            <View>
+              <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Contact Information</Text>
+              <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.user.email}</Text>
+              <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.user.phoneNumber}</Text>
+              <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
+            </View>
+          </ListDetail>
+        </ScrollView>
+      </View>
+    );
+  }
+
+  render() {
     return (
       <Modal
         visible={this.props.visible}
         transparent
         animationType='slide'
         onRequestClose={() => console.log('Modal has been closed')}
-        style={styles.modalStyle}
       >
         <StatusBar backgroundColor={STATUS_BAR_COLOR} />
-        <View style={styles.modalStyle}>
-          <View style={styles.headerStyle}>
-            <Image source={{ uri: this.state.user.header }} style={styles.coverStyle}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
-                <TouchableOpacity style={{ padding: 15 }} onPress={this.props.onPress}>
-                  <Icon name='keyboard-backspace' size={24} color='white' />
-                </TouchableOpacity>
-                <View style={{ padding: 15 }}>
-                  <PopupMenu actions={['Edit']} onPress={() => console.log('pressed')} color='white' />
-                </View>
-              </View>
-            </Image>
-            <Image source={{ uri: this.state.user.photoURL }} style={styles.profileStyle} />
-            <View style={{ height: 90, justifyContent: 'center', alignItems: 'center', paddingTop: 20 }}>
-              <Text style={styles.nameStyle}>{this.state.user.displayName}</Text>
-            </View>
-          </View>
-          <ScrollView>
-            <ListDetail contentText={this.state.email}>
-              <Icon name='account' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
-              <View>
-                <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Contact Information</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.user.email}</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.user.phoneNumber}</Text>
-                <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
-              </View>
-            </ListDetail>
-          </ScrollView>
-        </View>
+        {this.showProfile()}
       </Modal>
     );
   }

@@ -17,9 +17,13 @@ class Main extends Component {
     });
   }
 
+  setProfileVisibleState = (visible) => {
+    this.setState({ isProfileVisible: visible })
+  }
+
   renderProfileScreen = () => {
     if (this.state.isProfileVisible) {
-      return <Profile onPress={() => this.setState({ isProfileVisible: false })} />;
+      return <Profile onPress={() => this.setProfileVisibleState(false)} />;
     }
     return null;
   }
@@ -35,9 +39,9 @@ class Main extends Component {
     console.log(this.state.donePref);
     return (
       <View style={{ flex: 1 }}>
-        <Header title='Anchor' onPress={() => { this.setState({ isProfileVisible: true }); }} color='#01152d' mainButtons />
+        <Header title='Anchor' onPress={() => this.setProfileVisibleState(true)} color='#01152d' mainButtons />
         {this.renderProfileScreen()}
-        {this.renderPreferencesScreen()}
+        {/* {this.renderPreferencesScreen()} */}
         <Tabs />
       </View>
     );
