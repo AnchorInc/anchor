@@ -18,7 +18,7 @@ class Main extends Component {
   }
 
   setProfileVisibleState = (visible) => {
-    this.setState({ isProfileVisible: visible })
+    this.setState({ isProfileVisible: visible });
   }
 
   renderProfileScreen = () => {
