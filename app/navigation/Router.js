@@ -4,7 +4,6 @@ import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'r
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { MAIN_COLOR, BOTTOM_BAR_ICON_COLOR } from '../config';
 import { Classes, Settings, Search, AppSetup, Preferences, Main } from '../components/screens';
-// import { Header } from '../components/common';
 import Login from '../components/screens/Login';
 
 const LoginStackConfig = {
