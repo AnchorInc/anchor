@@ -2,7 +2,7 @@ import React from 'react';
 
 import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { BOTTOM_BAR_ICON_COLOR, BOTTOM_BAR_COLOR } from '../config';
+import { BOTTOM_BAR_ICON_COLOR, BOTTOM_BAR_COLOR, MAIN_COLOR, ACCENT_COLOR } from '../config';
 import { Classes, Settings, Search, AppSetup, Preferences, Main } from '../components/screens';
 // import { Header } from '../components/common';
 import Login from '../components/screens/Login';
@@ -36,48 +36,52 @@ LoginStack.router.getStateForAction = (action, state) => {
     state &&
     action.type === 'Navigation/BACK' &&
     (state.routes[state.index].routeName !== 'AppSetup' &&
-    state.routes[state.index].routeName !== 'Login' &&
-    state.routes[state.index].routeName !== 'Preferences')
+      state.routes[state.index].routeName !== 'Login' &&
+      state.routes[state.index].routeName !== 'Preferences')
   ) { return null; }
   return defaultGetStateForAction(action, state);
 };
 
 const TabNavigatorConfig = {
+  navigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused }) => {
+      const { routeName } = navigation.state;
+      const color = ACCENT_COLOR;
+      let iconName;
+      switch (routeName) {
+        case 'Classes':
+          iconName = 'list';
+          break;
+        case 'Search':
+          iconName = 'search';
+          break;
+        case 'Settings':
+          iconName = 'settings';
+          break;
+        default:
+          iconName = 'list';
+          break;
+      }
+      return (<Icon size={22} name={iconName} color={focused ? color : 'white'} />);
+    },
+  }),
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
   swipeEnabled: true,
-  animationEnabled: false,
+  animationEnabled: true,
   tabBarOptions: {
-    showLabel: true,
+    showLabel: false,
     labelStyle: {
       fontSize: 12,
     },
-    tabStyle: {
-      backgroundColor: BOTTOM_BAR_COLOR,
+    style: {
+      backgroundColor: MAIN_COLOR,
     },
-   },
+  },
 };
 
 export const Tabs = TabNavigator({
-  Classes: {
-    screen: Classes,
-    navigationOptions: {
-      tabBarLabel: 'Classes',
-      tabBarIcon: () => <Icon size={24} name="list" color={BOTTOM_BAR_ICON_COLOR} />,
-    },
-  },
-  Search: {
-    screen: Search,
-    navigationOptions: {
-      tabBarLabel: 'Search',
-      tabBarIcon: () => <Icon size={24} name="search" color={BOTTOM_BAR_ICON_COLOR} />,
-    },
-  },
-  Settings: {
-    screen: Settings,
-    navigationOptions: {
-      tabBarLabel: 'Settings',
-      tabBarIcon: () => <Icon size={24} name="settings" color={BOTTOM_BAR_ICON_COLOR} />,
-    },
-  },
+  Classes: { screen: Classes },
+  Search: { screen: Search },
+  Settings: { screen: Settings },
 }, TabNavigatorConfig);
