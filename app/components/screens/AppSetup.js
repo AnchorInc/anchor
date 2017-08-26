@@ -5,20 +5,10 @@ import SplashScreen from 'react-native-splash-screen';
 class AppSetup extends Component {
   componentWillMount() {
     // splash screen is already showing
-    const user = this.checkForUser();
-    SplashScreen.hide();
-    if (user) {
-      this.props.navigation.navigate('Main');
-    }
-    this.props.navigation.navigate('Login');
-  }
-
-  checkForUser = () => {
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        return true;
-      }
-      return false;
+      SplashScreen.hide();
+      if (user) return this.props.navigation.navigate('Main');
+      return this.props.navigation.navigate('Login');
     });
   }
 
