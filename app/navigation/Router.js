@@ -2,7 +2,7 @@ import React from 'react';
 
 import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { BOTTOM_BAR_ICON_COLOR, BOTTOM_BAR_COLOR, MAIN_COLOR, ACCENT_COLOR } from '../config';
+import { MAIN_COLOR, BOTTOM_BAR_ICON_COLOR } from '../config';
 import { Classes, Settings, Search, AppSetup, Preferences, Main } from '../components/screens';
 // import { Header } from '../components/common';
 import Login from '../components/screens/Login';
@@ -46,7 +46,7 @@ const TabNavigatorConfig = {
   navigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused }) => {
       const { routeName } = navigation.state;
-      const color = ACCENT_COLOR;
+      const color = BOTTOM_BAR_ICON_COLOR;
       let iconName;
       switch (routeName) {
         case 'Classes':
