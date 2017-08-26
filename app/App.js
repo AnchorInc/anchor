@@ -39,6 +39,7 @@ class App extends Component {
       webClientId: '489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com',
     });
   }
+
   render() {
     const middleware = createSagaMiddleware();
     const store = createStore(reducers, {}, applyMiddleware(middleware));

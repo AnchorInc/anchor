@@ -57,18 +57,18 @@ class Search extends Component {
     return (
       <View style={{ width, height, alignItems: 'center', flex: 1 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Input icon="search" label="Search" cb={() => this.requestData()} rkt='search' />
+          <Input icon="search" label="Search" cb={this.requestData} rkt='search' />
           <Icon name="filter-variant" size={22} style={{ padding: 5 }} />
         </View>
         <ScrollView style={{ flex: 1 }}>
           <Text style={styles.topResultTextStyle}>
             {this.state.subjects.length >= 1 ? 'Subjects' : ''}
           </Text>
-          {this.renderSubjects()}
+          {this.renderSubjects}
           <Text style={styles.topResultTextStyle}>
             {this.state.teachers.length >= 1 ? 'Teachers' : ''}
           </Text>
-          {this.renderTeachers()}
+          {this.renderTeachers}
         </ScrollView>
       </View>
     );

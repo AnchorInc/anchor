@@ -4,14 +4,13 @@ import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigatio
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { MAIN_COLOR, BOTTOM_BAR_COLOR, BOTTOM_BAR_ICON_COLOR } from '../config';
-import { Classes, Settings, Search, SplashScreen, Preferences } from '../components/screens';
+import { Classes, Settings, Search, AppSetup, Preferences, Main } from '../components/screens';
 import { Header } from '../components/common';
 import Login from '../components/screens/Login';
-import Main from '../components/screens/Main';
 
 export const LoginStack = StackNavigator({
-  SplashScreen: {
-    screen: SplashScreen,
+  AppSetup: {
+    screen: AppSetup,
     navigationOptions: {
       header: null,
     },
@@ -50,7 +49,7 @@ LoginStack.router.getStateForAction = (action, state) => {
   if (
     state &&
     action.type === 'Navigation/BACK' &&
-    (state.routes[state.index].routeName !== 'SplashScreen' &&
+    (state.routes[state.index].routeName !== 'AppSetup' &&
     state.routes[state.index].routeName !== 'Login' &&
     state.routes[state.index].routeName !== 'Preferences')
   ) { return null; }
