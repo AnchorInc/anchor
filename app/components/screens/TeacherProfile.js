@@ -56,8 +56,8 @@ class TeacherProfile extends Component {
         animationType='fade'
         onRequestClose={() => console.log(' ')}
         style={styles.modalStyle}
+        hideStatusBar
       >
-        <StatusBar backgroundColor={STATUS_BAR_COLOR} />
         <View style={styles.modalStyle}>
           <View style={styles.headerStyle}>
             <Image source={{ uri: this.state.header }} style={styles.coverStyle}>
