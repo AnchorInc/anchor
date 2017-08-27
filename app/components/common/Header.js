@@ -36,17 +36,13 @@ class Header extends Component {
 
   render() {
     return (
-      <View>
-        <StatusBar
-          backgroundColor={STATUS_BAR_COLOR}
-        />
-        <View style={styles.containerStyle} backgroundColor={MAIN_COLOR}>
+      <View style={styles.containerStyle} backgroundColor={MAIN_COLOR}>
+        <StatusBar backgroundColor={STATUS_BAR_COLOR} />
           <Text style={styles.headerStyle}>
             {this.props.title}
           </Text>
           {this.renderMainButtons()}
           {this.renderPrefButtons()}
-        </View>
       </View>
     );
   }
