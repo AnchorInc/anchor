@@ -2,27 +2,14 @@ import React, { Component } from 'react';
 import { View, StatusBar, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { STATUS_BAR_COLOR } from '../../config';
-import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
+import { googleLoginRequest, fbLoginRequest, closeErrorMessage, startAuth } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
-const loginHeader = require('../../resources/images/loginImage.png');
+const loginHeader = require('../../res/images/loginImage.png');
 
 const { width, height } = Dimensions.get('window');
 
 class Login extends Component {
-  constructor() {
-    super();
-    this.state = { userLoggedIn: undefined };
-  }
-
-  onFBLoginRequest() {
-    this.props.fbLoginRequest();
-  }
-
-  onGoogleLoginRequest() {
-    this.props.googleLoginRequest();
-  }
-
   render() {
     const {
       loginContainerStyle,
@@ -34,24 +21,23 @@ class Login extends Component {
         <StatusBar
           backgroundColor={STATUS_BAR_COLOR}
         />
-
         <View reacstyle={containerStyle}>
           <Image source={loginHeader} style={logoStyle} />
         </View>
 
         <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
-            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.onFBLoginRequest.bind(this)} />
-            <LoginButton title='Sign in with Google' iconName='google' onPress={this.onGoogleLoginRequest.bind(this)} />
+            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.props.fbLoginRequest} />
+            <LoginButton title='Sign in with Google' iconName='google' onPress={this.props.googleLoginRequest} />
           </View>
         </View>
 
-        <LoginSpinner visible={this.props.loading} title='Authenticating...' />
+        <LoginSpinner visible={this.props.loading} title='Authenticating' />
         <ErrorMessage
-          visible={this.props.isError}
-          message={'Unable to Login'}
+          visible={this.props.error}
+          message={this.props.errorMessage}
           button1Text='Ok'
-          onPress={() => { this.props.closeErrorMessage(); }}
+          onPress={this.props.closeErrorMessage}
         />
       </View>
     );
@@ -83,10 +69,10 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    errorMessage: state.auth.errorMessage,
+    errorMessage: state.global.errorMessage,
+    error: state.global.error,
     loading: state.auth.loading,
-    isError: state.auth.isError,
   };
 };
 
-export default connect(mapStateToProps, { googleLoginRequest, fbLoginRequest, closeErrorMessage })(Login);
+export default connect(mapStateToProps, { googleLoginRequest, fbLoginRequest, closeErrorMessage, startAuth })(Login);

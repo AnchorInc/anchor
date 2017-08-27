@@ -5,7 +5,7 @@ import { setCustomText } from 'react-native-global-props';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from './config/sagas';
+import rootSaga from './sagas';
 import reducers from './reducers';
 import { LoginStack } from './navigation/Router';
 
@@ -39,6 +39,7 @@ class App extends Component {
       webClientId: '489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com',
     });
   }
+
   render() {
     const middleware = createSagaMiddleware();
     const store = createStore(reducers, {}, applyMiddleware(middleware));

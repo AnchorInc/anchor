@@ -1,102 +1,85 @@
 import React from 'react';
 
-import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigation';
-import { NavigationComponent } from 'react-native-material-bottom-navigation';
+import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { MAIN_COLOR, BOTTOM_BAR_COLOR, BOTTOM_BAR_ICON_COLOR } from '../config';
-import { Classes, Settings, Search, SplashScreen, Preferences } from '../components/screens';
-import { Header } from '../components/common';
+import { BOTTOM_BAR_ICON_NORMAL, BOTTOM_BAR_ICON_FOCUSED, BOTTOM_BAR_COLOR } from '../config';
+import { Classes, Settings, Search, AppSetup, Preferences, Main } from '../components/screens';
 import Login from '../components/screens/Login';
-import Main from '../Main';
+
+const LoginStackConfig = {
+  navigationOptions: {
+    header: null,
+  },
+  headerMode: 'none',
+};
 
 export const LoginStack = StackNavigator({
-  SplashScreen: {
-    screen: SplashScreen,
-    navigationOptions: {
-      header: null,
-    },
-  },
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      header: null,
-    },
-  },
-  Preferences: {
-    screen: Preferences,
-    navigationOptions: {
-      header: <Header title='Preferences' prefButtons />,
-    },
-  },
-  Main: {
-    screen: Main,
-    navigationOptions: {
-      header: null,
-    },
-  },
-});
+  AppSetup: { screen: AppSetup },
+  Login: { screen: Login },
+  Preferences: { screen: Preferences },
+  Main: { screen: Main },
+}, LoginStackConfig);
 
 const defaultGetStateForAction = LoginStack.router.getStateForAction;
 
 LoginStack.router.getStateForAction = (action, state) => {
+  // Prevent access to the Splash screen from the Login screen
   if (
     state &&
     action.type === NavigationActions.BACK &&
-    state.routes[state.index].routeName === 'Main'
-  ) {
-    return null;
-  }
+    state.routes[state.index].routeName === 'Login'
+  ) { return null; }
+
+  // Prevent access to Login screen after login/signup or to the Preferences screen
+  if (
+    state &&
+    action.type === 'Navigation/BACK' &&
+    (state.routes[state.index].routeName !== 'AppSetup' &&
+      state.routes[state.index].routeName !== 'Login' &&
+      state.routes[state.index].routeName !== 'Preferences')
+  ) { return null; }
   return defaultGetStateForAction(action, state);
 };
 
-export const Tabs = TabNavigator({
-  Classes: {
-    screen: Classes,
-    navigationOptions: {
-      tabBarLabel: 'Classes',
-      tabBarIcon: () => <Icon size={24} name="list" color={BOTTOM_BAR_ICON_COLOR} />,
+const TabNavigatorConfig = {
+  navigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused }) => {
+      const { routeName } = navigation.state;
+      let iconName;
+      switch (routeName) {
+        case 'Classes':
+          iconName = 'list';
+          break;
+        case 'Search':
+          iconName = 'search';
+          break;
+        case 'Settings':
+          iconName = 'settings';
+          break;
+        default:
+          iconName = 'list';
+          break;
+      }
+      return (<Icon size={22} name={iconName} color={focused ? BOTTOM_BAR_ICON_FOCUSED : BOTTOM_BAR_ICON_NORMAL} />);
     },
-  },
-  Search: {
-    screen: Search,
-    navigationOptions: {
-      tabBarLabel: 'Search',
-      tabBarIcon: () => <Icon size={24} name="search" color={BOTTOM_BAR_ICON_COLOR} />,
-    },
-  },
-  Settings: {
-    screen: Settings,
-    navigationOptions: {
-      tabBarLabel: 'Settings',
-      tabBarIcon: () => <Icon size={24} name="settings" color={BOTTOM_BAR_ICON_COLOR} />,
-    },
-  },
-}, {
-  tabBarComponent: NavigationComponent,
+  }),
+  tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
-  swipeEnabled: false,
+  swipeEnabled: true,
+  animationEnabled: true,
   tabBarOptions: {
-    bottomNavigationOptions: {
-      labelColor: BOTTOM_BAR_ICON_COLOR,
-      rippleColor: MAIN_COLOR,
-      shifting: false,
-      tabs: {
-        Search: {
-          barBackgroundColor: BOTTOM_BAR_COLOR,
-          activeIcon: <Icon size={24} name="search" color={MAIN_COLOR} />,
-          activeLabelColor: MAIN_COLOR,
-        },
-        Classes: {
-          barBackgroundColor: BOTTOM_BAR_COLOR,
-          activeIcon: <Icon size={24} name="list" color={MAIN_COLOR} />,
-          activeLabelColor: MAIN_COLOR,
-        },
-        Settings: {
-          barBackgroundColor: BOTTOM_BAR_COLOR,
-          activeIcon: <Icon size={24} name="settings" color={MAIN_COLOR} />,
-          activeLabelColor: MAIN_COLOR,
-        },
-      },
+    showLabel: false,
+    labelStyle: {
+      fontSize: 12,
+    },
+    style: {
+      backgroundColor: BOTTOM_BAR_COLOR,
     },
   },
-});
+};
+
+export const Tabs = TabNavigator({
+  Classes: { screen: Classes },
+  Search: { screen: Search },
+  Settings: { screen: Settings },
+}, TabNavigatorConfig);

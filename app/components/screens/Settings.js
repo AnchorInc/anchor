@@ -4,14 +4,11 @@ import { ListDetail } from '../common';
 import { ACCENT_COLOR } from '../../config';
 
 class Settings extends Component {
-  constructor() {
-    super();
-    this.state = {
-      switchValue: false,
-   };
-  }
+  state = {
+    switchValue: false,
+  };
 
-  toggleSwitch(value) {
+  toggleSwitch = (value) => {
     this.setState({ switchValue: value });
   }
 

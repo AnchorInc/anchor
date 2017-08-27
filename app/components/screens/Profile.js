@@ -1,86 +1,95 @@
 import React, { Component } from 'react';
-import { Modal, StatusBar, Dimensions, View, Image, Text, ScrollView, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native';
+import {
+  Modal,
+  StatusBar,
+  Dimensions,
+  View,
+  Image,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+  AsyncStorage,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import _ from 'lodash';
 import { STATUS_BAR_COLOR } from '../../config';
-import { ListDetail, PopupMenu } from '../common';
-import { getCurrentUser } from '../../models/User';
+import { ListDetail, PopupMenu, LoginSpinner } from '../common';
+import { getUser } from '../../models/User';
 
 const { width, height } = Dimensions.get('window');
 
 class Profile extends Component {
-  constructor() {
-    super();
-    this.state = {
-      name: '',
-      email: '',
-      phoneNumber: '',
-      profilePictureURL: '',
-      header: '',
-    };
-  }
+  state = { user: null };
 
   componentWillMount() {
-    AsyncStorage.multiGet(['profile', 'header', 'name', 'email', 'phoneNumber'], (err, data) => {
-      console.log(data);
-      if (data[0][1] != null && data[1][1] != null && data[2][1] != null && data[3][1] != null && data[4][1] != null) {
-        this.setState({
-          profilePictureURL: data[0][1],
-          header: data[1][1],
-          name: data[2][1],
-          email: data[3][1],
-          phoneNumber: data[4][1],
-        });
-      } else {
-        getCurrentUser().then((currentUser) => {
-          AsyncStorage.multiSet([['header', currentUser.header], ['profile', currentUser.photoURL], ['name', currentUser.displayName], ['email', currentUser.email], ['phoneNumber', currentUser.phoneNumber]]);
-          this.setState({ header: currentUser.header });
-        }).catch((error) => {
-          console.log(error);
-        });
-      }
-    });
+    AsyncStorage.getItem('user')
+      .then((user) => {
+        if (user != null) {
+          this.setState({ user: JSON.parse(user) });
+        } else {
+          getUser()
+            .then((currentUser) => {
+              if (currentUser != null) {
+                const newUser = _.pick(currentUser, ['displayName', 'photoURL', 'email', 'phoneNumber', 'header']);
+                this.setState({ user: newUser });
+                AsyncStorage.setItem('user', JSON.stringify(newUser, undefined, undefined));
+              }
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  showProfile = () => {
+    if (this.state.user == null) {
+      return <LoginSpinner visible title='Loading Profile' />;
+    }
+    return (
+      <View style={styles.modalStyle}>
+        <View style={styles.headerStyle}>
+          <Image source={{ uri: this.state.user.header }} style={styles.coverStyle}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
+              <TouchableOpacity style={{ padding: 15 }} onPress={this.props.onPress}>
+                <Icon name='keyboard-backspace' size={24} color='white' />
+              </TouchableOpacity>
+              <View style={{ padding: 15 }}>
+                <PopupMenu actions={['Edit']} onPress={() => console.log('pressed')} color='white' />
+              </View>
+            </View>
+          </Image>
+          <Image source={{ uri: this.state.user.photoURL }} style={styles.profileStyle} />
+          <View style={{ height: 90, justifyContent: 'center', alignItems: 'center', paddingTop: 20 }}>
+            <Text style={styles.nameStyle}>{this.state.user.displayName}</Text>
+          </View>
+        </View>
+        <ScrollView>
+          <ListDetail contentText={this.state.email}>
+            <Icon name='account' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
+            <View>
+              <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Contact Information</Text>
+              <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.user.email}</Text>
+              <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.user.phoneNumber}</Text>
+              <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
+            </View>
+          </ListDetail>
+        </ScrollView>
+      </View>
+    );
   }
 
   render() {
-    console.log(this.state);
     return (
       <Modal
         visible={this.props.visible}
         transparent
         animationType='slide'
-        onRequestClose={() => console.log(' ')}
-        style={styles.modalStyle}
+        onRequestClose={() => console.log('Modal has been closed')}
       >
         <StatusBar backgroundColor={STATUS_BAR_COLOR} />
-        <View style={styles.modalStyle}>
-          <View style={styles.headerStyle}>
-            <Image source={{ uri: this.state.header }} style={styles.coverStyle}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
-                <TouchableOpacity style={{ padding: 15 }} onPress={this.props.onPress}>
-                  <Icon name='keyboard-backspace' size={24} color='white' />
-                </TouchableOpacity>
-                <View style={{ padding: 15 }}>
-                  <PopupMenu actions={['Edit']} onPress={() => console.log('pressed')} color='white' />
-                </View>
-              </View>
-            </Image>
-            <Image source={{ uri: this.state.profilePictureURL }} style={styles.profileStyle} />
-            <View style={{ height: 90, justifyContent: 'center', alignItems: 'center', paddingTop: 20 }}>
-              <Text style={styles.nameStyle}>{this.state.name}</Text>
-            </View>
-          </View>
-          <ScrollView>
-            <ListDetail contentText={this.state.email}>
-              <Icon name='account' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
-              <View>
-                <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Contact Information</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.email}</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.phoneNumber}</Text>
-                <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
-              </View>
-            </ListDetail>
-          </ScrollView>
-        </View>
+        {this.showProfile()}
       </Modal>
     );
   }

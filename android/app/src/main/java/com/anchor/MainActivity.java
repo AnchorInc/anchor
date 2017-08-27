@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 
 import com.facebook.react.ReactActivity;
+import com.cboy.rn.splashscreen.SplashScreen;
 
 
 public class MainActivity extends ReactActivity {
@@ -31,6 +32,7 @@ public class MainActivity extends ReactActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        SplashScreen.show(this);
         super.onCreate(savedInstanceState);
         Bitmap Icon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         ActivityManager.TaskDescription taskDescription = new ActivityManager.TaskDescription(getResources().getString(R.string.app_name), Icon, getResources().getColor(R.color.black));

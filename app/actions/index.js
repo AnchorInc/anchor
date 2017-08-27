@@ -1,21 +1,17 @@
-import { GOOGLE_LOGIN_REQUEST, FB_LOGIN_REQUEST, CLOSE_ERROR_MESSAGE } from '../config/types';
+import {
+  CLOSE_ERROR_MESSAGE,
+  SHOW_ERROR_MESSAGE,
+} from '../config';
 
-export const googleLoginRequest = () => {
+export * from './AuthActions';
+
+export const showErrorMessage = (payload) => {
   return {
-    type: GOOGLE_LOGIN_REQUEST,
+    type: SHOW_ERROR_MESSAGE,
+    payload,
   };
 };
-
-export const fbLoginRequest = () => {
-  return {
-    type: FB_LOGIN_REQUEST,
-  };
-};
-
-export const showErrorMessage = () => {};
 
 export const closeErrorMessage = () => {
-  return {
-    type: CLOSE_ERROR_MESSAGE,
-  };
+  return { type: CLOSE_ERROR_MESSAGE };
 };

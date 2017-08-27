@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Dimensions, Image, View, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getCurrentUser } from '../../models/User';
+import { getUser } from '../../models/User';
 
 const { width } = Dimensions.get('window');
 
 class HeaderProfileButton extends Component {
-  constructor() {
-    super();
-    this.state = {
-      profilePhoto: '',
-      iconVisible: true,
-    };
-  }
+  state = {
+    profilePhoto: '',
+    iconVisible: true,
+  };
 
   componentWillMount() {
     AsyncStorage.getItem('profile').then((profile) => {
@@ -20,9 +17,9 @@ class HeaderProfileButton extends Component {
         this.setState({ profilePhoto: profile, iconVisible: false });
       } else {
         this.setState({ iconVisible: true });
-        getCurrentUser().then((currentUser) => {
-          AsyncStorage.setItem('profile', currentUser.photoURL);
-          this.setState({ profilePhoto: currentUser.photoURL, iconVisible: false });
+        getUser().then((user) => {
+          AsyncStorage.setItem('profile', user.photoURL);
+          this.setState({ profilePhoto: user.photoURL, iconVisible: false });
         }).catch((error) => {
           this.setState({ iconVisible: true });
           console.log(error);
@@ -31,7 +28,7 @@ class HeaderProfileButton extends Component {
     });
   }
 
-  renderProfile() {
+  renderProfile = () => {
     if (!this.state.iconVisible) {
       return <Image style={styles.profileStyle} source={{ uri: this.state.profilePhoto }} />;
     }
