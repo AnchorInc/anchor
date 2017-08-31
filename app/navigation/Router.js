@@ -3,7 +3,8 @@ import React from 'react';
 import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { BOTTOM_BAR_ICON_NORMAL, BOTTOM_BAR_ICON_FOCUSED, BOTTOM_BAR_COLOR } from '../config';
-import { Classes, Settings, Search, AppSetup, Preferences, Main } from '../components/screens';
+import { Classes, Settings, Search, Main } from '../components/screens';
+import AppSetup from '../components/screens/AppSetup';
 import Login from '../components/screens/Login';
 
 const LoginStackConfig = {
@@ -16,7 +17,6 @@ const LoginStackConfig = {
 export const LoginStack = StackNavigator({
   AppSetup: { screen: AppSetup },
   Login: { screen: Login },
-  Preferences: { screen: Preferences },
   Main: { screen: Main },
 }, LoginStackConfig);
 
@@ -30,13 +30,12 @@ LoginStack.router.getStateForAction = (action, state) => {
     state.routes[state.index].routeName === 'Login'
   ) { return null; }
 
-  // Prevent access to Login screen after login/signup or to the Preferences screen
+  // Prevent access to Login screen after login/signup
   if (
     state &&
     action.type === 'Navigation/BACK' &&
     (state.routes[state.index].routeName !== 'AppSetup' &&
-      state.routes[state.index].routeName !== 'Login' &&
-      state.routes[state.index].routeName !== 'Preferences')
+      state.routes[state.index].routeName !== 'Login')
   ) { return null; }
   return defaultGetStateForAction(action, state);
 };

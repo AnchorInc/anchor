@@ -1,36 +1,13 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Dimensions, Image, View, AsyncStorage } from 'react-native';
+import { TouchableOpacity, Dimensions, Image, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getUser } from '../../models/User';
 
 const { width } = Dimensions.get('window');
 
 class HeaderProfileButton extends Component {
-  state = {
-    profilePhoto: '',
-    iconVisible: true,
-  };
-
-  componentWillMount() {
-    AsyncStorage.getItem('profile').then((profile) => {
-      if (profile != null) {
-        this.setState({ profilePhoto: profile, iconVisible: false });
-      } else {
-        this.setState({ iconVisible: true });
-        getUser().then((user) => {
-          AsyncStorage.setItem('profile', user.photoURL);
-          this.setState({ profilePhoto: user.photoURL, iconVisible: false });
-        }).catch((error) => {
-          this.setState({ iconVisible: true });
-          console.log(error);
-        });
-      }
-    });
-  }
-
   renderProfile = () => {
-    if (!this.state.iconVisible) {
-      return <Image style={styles.profileStyle} source={{ uri: this.state.profilePhoto }} />;
+    if (this.props.photoURL != null) {
+      return <Image style={styles.profileStyle} source={{ uri: this.props.photoURL }} />;
     }
     return <Icon name='account-circle' color='white' size={24} />;
   }

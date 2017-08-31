@@ -14,7 +14,7 @@ class Header extends Component {
           <TouchableOpacity>
             <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
           </TouchableOpacity>
-          <HeaderProfileButton onPress={this.props.onPress} />
+          <HeaderProfileButton onPress={this.props.onPress} photoURL={this.props.photoURL} />
         </View>
       );
     }
@@ -25,7 +25,7 @@ class Header extends Component {
     if (this.props.prefButtons) {
       return (
         <View style={styles.buttonContainerStyle}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon name='check' color='white' size={24} />
           </TouchableOpacity>
         </View>

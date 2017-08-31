@@ -29,7 +29,12 @@ class ClassList extends Component {
 
   getActivityList = () => {
     this.setState({ teachers: [], refreshing: true, isConnected: true });
-    getUser()
+    const curUser = getUser();
+    firebase.database().ref(`/users/students/${curUser.uid}`)
+    .once('value')
+    .then((response) => {
+      return response.val();
+    })
     .then((user) => {
       if (user.batchList != null && user.batchList.length >= 1) {
         user.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)

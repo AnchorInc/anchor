@@ -2,30 +2,27 @@ import firebase from 'firebase';
 
 class User {
   getUser() {
-    const user = firebase.auth().currentUser;
-    return firebase.database().ref(`/users/students/${user.uid}`)
-      .once('value')
-      .then((response) => {
-        return response.val();
-      });
+    return firebase.auth().currentUser;
   }
 
-  updateUser(displayName, email, phoneNumber, batchList) {
-    const user = firebase.auth().currentUser;
-    const db = firebase.database().ref(`/users/students/${user.uid}`);
-    db.update({
+  updateUser(displayName, email, phoneNumber, photoURL, batchList) {
+    const userData = {
       displayName,
       email,
       phoneNumber,
+      photoURL,
       batchList,
-    });
+    };
+    const user = firebase.auth().currentUser;
+    const db = firebase.database().ref(`/users/students/${user.uid}`);
+    db.update(userData);
   }
 
   deleteUser() {
     const user = firebase.auth().currentUser;
     user.delete()
-      .then(() => console.log('delete successful'))
-      .catch(error => console.log(error));
+    .then(() => console.log('delete successful'))
+    .catch(error => console.log(error));
   }
 }
 
