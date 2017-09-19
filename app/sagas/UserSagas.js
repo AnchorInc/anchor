@@ -24,14 +24,18 @@ function* getUser() {
 }
 
 function* userSetup() {
-  const data = yield AsyncStorage.multiGet(['done_pref', 'photo_url']);
-  const setupData = {
-    donePref: data[0][1],
-    photoURL: JSON.parse(data[1][1]),
-  };
-  console.log(data);
-  console.log(setupData);
-  yield put({ type: types.USER.SYNC_SETUP, setupData });
+  try {
+    const data = yield AsyncStorage.multiGet(['done_pref', 'photo_url']);
+    const setupData = {
+      donePref: data[0][1],
+      photoURL: data[1][1],
+    };
+    console.log(data);
+    console.log(setupData);
+    yield put({ type: types.USER.SYNC_SETUP, setupData });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function* watchUserRequests() {
