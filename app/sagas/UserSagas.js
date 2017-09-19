@@ -17,7 +17,7 @@ function* getUser() {
   const path = `/users/students/${firebase.auth().currentUser.uid}`;
   const channel = yield call(rsf.database.channel, path);
 
-  while (true) {
+  while (firebase.auth().currentUser) {
     const { value: user } = yield take(channel);
     yield put(syncUser(user));
   }
