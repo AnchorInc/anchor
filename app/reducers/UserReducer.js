@@ -1,15 +1,17 @@
-import {
-  SEND_USER_PROFILE,
-} from '../config';
+import { types } from '../config';
 
 const INITIAL_STATE = {
-  profile: null,
+  user: null,
+  donePref: false,
+  photoURL: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SEND_USER_PROFILE:
-      return { ...state, profile: action.payload };
+    case types.USER.SYNC:
+      return { ...state, user: action.user };
+    case types.USER.SYNC_SETUP:
+      return { ...state, user: action.user, donePref: action.setupData.donePref, photoURL: action.setupData.photoURL };
     default:
       return state;
   }

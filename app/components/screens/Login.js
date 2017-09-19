@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StatusBar, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { STATUS_BAR_COLOR } from '../../config';
-import { googleLoginRequest, fbLoginRequest, closeErrorMessage, startAuth } from '../../actions';
+import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
 const loginHeader = require('../../res/images/loginImage.png');
@@ -75,4 +75,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { googleLoginRequest, fbLoginRequest, closeErrorMessage, startAuth })(Login);
+export default connect(mapStateToProps, { googleLoginRequest, fbLoginRequest, closeErrorMessage })(Login);

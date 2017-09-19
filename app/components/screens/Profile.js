@@ -90,4 +90,4 @@ const styles = {
   },
 };
 
-export default Profile;
+export { Profile };

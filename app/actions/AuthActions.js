@@ -1,27 +1,21 @@
-import {
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAIL,
-  START_AUTH,
-  GOOGLE_LOGIN_REQUEST,
-  FB_LOGIN_REQUEST,
-} from '../config';
+import { types } from '../config';
 
 export const googleLoginRequest = () => {
-  return { type: GOOGLE_LOGIN_REQUEST };
+  return { type: types.LOGIN.GOOGLE };
 };
 
 export const fbLoginRequest = () => {
-  return { type: FB_LOGIN_REQUEST };
+  return { type: types.LOGIN.FB };
 };
 
 export const loginUserFail = (error) => {
-  return { type: LOGIN_USER_FAIL, payload: error };
+  return { type: types.LOGIN.FAIL, payload: error };
 };
 
 export const loginUserSuccess = () => {
-  return { type: LOGIN_USER_SUCCESS };
+  return { type: types.LOGIN.SUCESS };
 };
 
-export const startAuth = () => {
-  return { type: START_AUTH };
+export const showSpinner = () => {
+  return { type: types.LOGIN.SHOW_SPINNER };
 };

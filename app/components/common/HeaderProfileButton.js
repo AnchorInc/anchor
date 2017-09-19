@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Dimensions, Image, View } from 'react-native';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const { width } = Dimensions.get('window');
@@ -33,4 +34,8 @@ const styles = {
   },
 };
 
-export { HeaderProfileButton };
+const mapStateToProps = (state) => {
+  return { photoURL: state.user.photoURL };
+};
+
+export default connect(mapStateToProps)(HeaderProfileButton);

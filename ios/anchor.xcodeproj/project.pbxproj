@@ -42,6 +42,16 @@
 		CBBEDDEE589C416ABC081AC1 /* avenir_medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 96D0204E1D2947FBBD036687 /* avenir_medium.otf */; };
 		C3A66C2F087E4183B291DA71 /* avenir_roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4B7F0D1A0E1C4AEEBF3A7E95 /* avenir_roman.otf */; };
 		00E4B9C6D7224A05B05036CF /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 130CEA88AC2440E7AD74640F /* libSplashScreen.a */; };
+		D18AE89A6B0D4EB88558C280 /* avenir_book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 499DAE204AF6481AA887C335 /* avenir_book.otf */; };
+		A1001CCA88764C55A5FCF1C0 /* avenir_heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F04EE21A63841E7B2392660 /* avenir_heavy.ttf */; };
+		0C88F36CE01A4F90B2864878 /* avenir_light.otf in Resources */ = {isa = PBXBuildFile; fileRef = EB007643631B4B0A95BBF4D3 /* avenir_light.otf */; };
+		931384E8073043709A33E49F /* avenir_medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0691B90C3EE6401CAFDA40F2 /* avenir_medium.otf */; };
+		8042426FAE7F4F7EA6802226 /* avenir_roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 76B8442515EE48D09FB85FFC /* avenir_roman.otf */; };
+		9CD2BCE2B2D7493BB42AAE1B /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3ABE8A157B41AEA1515F21 /* libRNGoogleSignin.a */; };
+		A750A7E83E78400499E084E4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F3CF530559EC4965AAE3E575 /* libz.tbd */; };
+		0E3FBFE6D7F54946B54BF563 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384EE3BDFA884D0CB1A0A12B /* SafariServices.framework */; };
+		7AC96B30FB624F7F822B4B22 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB6EE50AF3540B1A3B645CD /* SystemConfiguration.framework */; };
+		8798FFB40FCF4F87874F1064 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5A3B601221468FB408222A /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +280,17 @@
 		4B7F0D1A0E1C4AEEBF3A7E95 /* avenir_roman.otf */ = {isa = PBXFileReference; name = "avenir_roman.otf"; path = "../app/resources/fonts/avenir_roman.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		4F789AB573E5410293C21A19 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; name = "SplashScreen.xcodeproj"; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		130CEA88AC2440E7AD74640F /* libSplashScreen.a */ = {isa = PBXFileReference; name = "libSplashScreen.a"; path = "libSplashScreen.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		499DAE204AF6481AA887C335 /* avenir_book.otf */ = {isa = PBXFileReference; name = "avenir_book.otf"; path = "../app/res/fonts/avenir_book.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5F04EE21A63841E7B2392660 /* avenir_heavy.ttf */ = {isa = PBXFileReference; name = "avenir_heavy.ttf"; path = "../app/res/fonts/avenir_heavy.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EB007643631B4B0A95BBF4D3 /* avenir_light.otf */ = {isa = PBXFileReference; name = "avenir_light.otf"; path = "../app/res/fonts/avenir_light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0691B90C3EE6401CAFDA40F2 /* avenir_medium.otf */ = {isa = PBXFileReference; name = "avenir_medium.otf"; path = "../app/res/fonts/avenir_medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		76B8442515EE48D09FB85FFC /* avenir_roman.otf */ = {isa = PBXFileReference; name = "avenir_roman.otf"; path = "../app/res/fonts/avenir_roman.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		ACE6108ECE254B75A154F8FA /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; name = "RNGoogleSignin.xcodeproj"; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		0C3ABE8A157B41AEA1515F21 /* libRNGoogleSignin.a */ = {isa = PBXFileReference; name = "libRNGoogleSignin.a"; path = "libRNGoogleSignin.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		F3CF530559EC4965AAE3E575 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		384EE3BDFA884D0CB1A0A12B /* SafariServices.framework */ = {isa = PBXFileReference; name = "SafariServices.framework"; path = "System/Library/Frameworks/SafariServices.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		0FB6EE50AF3540B1A3B645CD /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		8F5A3B601221468FB408222A /* AddressBook.framework */ = {isa = PBXFileReference; name = "AddressBook.framework"; path = "System/Library/Frameworks/AddressBook.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +319,11 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				8E3D0E3813EF43679E5CE951 /* libAirMaps.a in Frameworks */,
 				00E4B9C6D7224A05B05036CF /* libSplashScreen.a in Frameworks */,
+				9CD2BCE2B2D7493BB42AAE1B /* libRNGoogleSignin.a in Frameworks */,
+				A750A7E83E78400499E084E4 /* libz.tbd in Frameworks */,
+				0E3FBFE6D7F54946B54BF563 /* SafariServices.framework in Frameworks */,
+				7AC96B30FB624F7F822B4B22 /* SystemConfiguration.framework in Frameworks */,
+				8798FFB40FCF4F87874F1064 /* AddressBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +492,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				14CEE6E575C44DDD9D308547 /* AirMaps.xcodeproj */,
 				4F789AB573E5410293C21A19 /* SplashScreen.xcodeproj */,
+				ACE6108ECE254B75A154F8FA /* RNGoogleSignin.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -487,6 +514,7 @@
 				00E356EF1AD99517003FC87E /* anchorTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				947232DF4B9F4727BE01DE6F /* Resources */,
+				B6697A923A5A4B10905F4026 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -511,8 +539,25 @@
 				8B5CB2EB5ED740FFB334B935 /* avenir_light.otf */,
 				96D0204E1D2947FBBD036687 /* avenir_medium.otf */,
 				4B7F0D1A0E1C4AEEBF3A7E95 /* avenir_roman.otf */,
+				499DAE204AF6481AA887C335 /* avenir_book.otf */,
+				5F04EE21A63841E7B2392660 /* avenir_heavy.ttf */,
+				EB007643631B4B0A95BBF4D3 /* avenir_light.otf */,
+				0691B90C3EE6401CAFDA40F2 /* avenir_medium.otf */,
+				76B8442515EE48D09FB85FFC /* avenir_roman.otf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+			path = "";
+		};
+		B6697A923A5A4B10905F4026 /* Frameworks */ = {
+			isa = "PBXGroup";
+			children = (
+				F3CF530559EC4965AAE3E575 /* libz.tbd */,
+				384EE3BDFA884D0CB1A0A12B /* SafariServices.framework */,
+				0FB6EE50AF3540B1A3B645CD /* SystemConfiguration.framework */,
+				8F5A3B601221468FB408222A /* AddressBook.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 			path = "";
 		};
@@ -879,6 +924,11 @@
 				9B17EFD1EDAD469A8A70DF46 /* avenir_light.otf in Resources */,
 				CBBEDDEE589C416ABC081AC1 /* avenir_medium.otf in Resources */,
 				C3A66C2F087E4183B291DA71 /* avenir_roman.otf in Resources */,
+				D18AE89A6B0D4EB88558C280 /* avenir_book.otf in Resources */,
+				A1001CCA88764C55A5FCF1C0 /* avenir_heavy.ttf in Resources */,
+				0C88F36CE01A4F90B2864878 /* avenir_light.otf in Resources */,
+				931384E8073043709A33E49F /* avenir_medium.otf in Resources */,
+				8042426FAE7F4F7EA6802226 /* avenir_roman.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1014,11 +1064,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
 				);
 			};
 			name = Debug;
@@ -1041,11 +1093,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
 				);
 			};
 			name = Release;
@@ -1069,6 +1123,7 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
 				);
 			};
 			name = Debug;
@@ -1091,6 +1146,7 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
 				);
 			};
 			name = Release;
@@ -1122,11 +1178,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
 				);
 			};
 			name = Debug;
@@ -1158,11 +1216,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
 				);
 			};
 			name = Release;
@@ -1189,6 +1249,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1213,6 +1274,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
