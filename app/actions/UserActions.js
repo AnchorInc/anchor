@@ -19,4 +19,4 @@ export const getUser = () => {
 
 export const appSetup = () => {
   return { type: types.USER.SETUP };
-}
+};
