@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
 import { Tabs } from '../../navigation/Router';
 import { Header } from '../common';
-import Profile from './Profile';
-import Preferences from './Preferences';
+import { Profile, Preferences } from './';
+import { getUser } from '../../actions';
 
 class Main extends Component {
-  state = {
-    isProfileVisible: false,
-    donPref: this.props.navigation.state.params.donPref,
-    profile: this.props.navigation.state.params.profile,
+  state = { isProfileVisible: false }
+
+  componentWillMount() {
+    this.props.getUser();
   }
 
   setProfileVisibleState = (visible) => {
@@ -22,14 +23,14 @@ class Main extends Component {
 
   renderProfileScreen = () => {
     if (this.state.isProfileVisible) {
-      return <Profile onPress={() => this.setProfileVisibleState(false)} profile={this.state.profile} />;
+      return <Profile onPress={() => this.setProfileVisibleState(false)} profile={this.props.user} />;
     }
     return null;
   }
 
   renderPreferencesScreen = () => {
-    if (!this.state.navProps.donePref) {
-      return <Preferences onPress={() => this.setPreferencesState(true)} profile={this.state.profile} />;
+    if (!this.props.donePref) {
+      return <Preferences onPress={() => this.setPreferencesState(true)} profile={this.props.user} />;
     }
     return null;
   }
@@ -37,7 +38,7 @@ class Main extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header title='Anchor' onPress={() => this.setProfileVisibleState(true)} color='#01152d' photoURL={this.state.profile.photoURL} mainButtons />
+        <Header title='Anchor' onPress={() => this.setProfileVisibleState(true)} color='#01152d' mainButtons />
         {this.renderProfileScreen()}
         {/* {this.renderPreferencesScreen()} */}
         <Tabs />
@@ -46,4 +47,11 @@ class Main extends Component {
   }
 }
 
-export { Main };
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.user,
+    donePref: state.user.donePref,
+  };
+};
+
+export default connect(mapStateToProps, { getUser })(Main);

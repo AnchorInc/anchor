@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Dimensions, Platform, StatusBar, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { HeaderProfileButton } from './';
+import HeaderProfileButton from './HeaderProfileButton';
 import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config/';
 
 const { width, height } = Dimensions.get('window');
@@ -14,7 +14,7 @@ class Header extends Component {
           <TouchableOpacity>
             <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
           </TouchableOpacity>
-          <HeaderProfileButton onPress={this.props.onPress} photoURL={this.props.photoURL} />
+          <HeaderProfileButton onPress={this.props.onPress} />
         </View>
       );
     }

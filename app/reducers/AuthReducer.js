@@ -1,8 +1,4 @@
-import {
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAIL,
-  START_AUTH,
-} from '../config';
+import { types } from '../config';
 
 const INITIAL_STATE = {
   loading: false,
@@ -10,11 +6,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LOGIN_USER_SUCCESS:
+    case types.LOGIN.SUCESS:
       return { ...state, loading: false };
-    case LOGIN_USER_FAIL:
+    case types.LOGIN.FAIL:
       return { ...state, loading: false };
-    case START_AUTH:
+    case types.LOGIN.SHOW_SPINNER:
       return { ...state, loading: true };
     default:
       return state;
