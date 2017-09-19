@@ -26,7 +26,7 @@ export const types = {
     UPDATE: 'types.USER.UPDATE',
     DELETE: 'types.USER.DELETE',
     GET: 'types.USER.GET',
-    SETUP: 'types,USER.SETUP',
+    SETUP: 'types.USER.SETUP',
     SYNC_SETUP: 'types.USER.SYNC_SETUP',
   },
 };
