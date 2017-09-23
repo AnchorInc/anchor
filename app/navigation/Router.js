@@ -3,9 +3,8 @@ import React from 'react';
 import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { BOTTOM_BAR_ICON_NORMAL, BOTTOM_BAR_ICON_FOCUSED, BOTTOM_BAR_COLOR } from '../config';
-import { Classes, Settings, Search } from '../components/screens';
+import { Classes, Settings, Search, Main } from '../components/screens';
 import AppSetup from '../components/screens/AppSetup';
-import Main from '../components/screens/Main';
 import Login from '../components/screens/Login';
 
 const LoginStackConfig = {
