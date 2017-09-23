@@ -4,14 +4,9 @@ import { connect } from 'react-redux';
 import { Tabs } from '../../navigation/Router';
 import { Header } from '../common';
 import { Profile, Preferences } from './';
-import { getUser } from '../../actions';
 
 class Main extends Component {
   state = { isProfileVisible: false }
-
-  componentWillMount() {
-    this.props.getUser();
-  }
 
   setProfileVisibleState = (visible) => {
     this.setState({ isProfileVisible: visible });
@@ -54,4 +49,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getUser })(Main);
+export default connect(mapStateToProps)(Main);

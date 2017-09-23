@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import SplashScreen from 'react-native-splash-screen';
-import { appSetup } from '../../actions';
+import { appSetup, getUser } from '../../actions';
 
 class AppSetup extends Component {
   state = { donePref: true, photoURL: null };
@@ -10,11 +10,13 @@ class AppSetup extends Component {
   componentWillMount() {
     // splash screen is already showing
     firebase.auth().onAuthStateChanged((user) => {
-      SplashScreen.hide();
       if (user) {
+        this.props.getUser();
         this.props.appSetup();
+        SplashScreen.hide();
         return this.props.navigation.navigate('Main');
       }
+      SplashScreen.hide();
       return this.props.navigation.navigate('Login');
     });
   }
@@ -24,4 +26,4 @@ class AppSetup extends Component {
   }
 }
 
-export default connect(null, { appSetup })(AppSetup);
+export default connect(null, { appSetup, getUser })(AppSetup);
