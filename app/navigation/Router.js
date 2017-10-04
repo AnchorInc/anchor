@@ -83,10 +83,3 @@ export const Tabs = TabNavigator({
   Search: { screen: Search },
   Settings: { screen: Settings },
 }, TabNavigatorConfig);
-
-const InAppStackConfig = {
-  navigationOptions: {
-    header: null,
-  },
-  headerMode: 'none',
-};
