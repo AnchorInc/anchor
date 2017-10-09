@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
-  Modal,
   StatusBar,
   Dimensions,
   View,
@@ -19,18 +19,13 @@ const { width, height } = Dimensions.get('window');
 class Profile extends Component {
   render() {
     return (
-      <Modal
-        visible={this.props.visible}
-        transparent
-        animationType='slide'
-        onRequestClose={() => console.log('Modal has been closed')}
-      >
+      <View>
         <StatusBar backgroundColor={STATUS_BAR_COLOR} />
         <View style={styles.modalStyle}>
           <View style={styles.headerStyle}>
             <View style={styles.coverStyle}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
-                <TouchableOpacity style={{ padding: 15 }} onPress={this.props.onPress}>
+                <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.navigate('Main')}>
                   <Icon name='keyboard-backspace' size={24} color='black' />
                 </TouchableOpacity>
                 <View style={{ padding: 15 }}>
@@ -38,24 +33,24 @@ class Profile extends Component {
                 </View>
               </View>
             </View>
-            <Image source={{ uri: this.props.profile.photoURL }} style={styles.profileStyle} />
+            <Image source={{ uri: this.props.user.photoURL }} style={styles.profileStyle} />
             <View style={{ height: 90, justifyContent: 'center', alignItems: 'center', paddingTop: 20 }}>
-              <Text style={styles.nameStyle}>{this.props.profile.displayName}</Text>
+              <Text style={styles.nameStyle}>{this.props.user.displayName}</Text>
             </View>
           </View>
           <ScrollView>
-            <ListDetail contentText={this.props.profile.email}>
+            <ListDetail contentText={this.props.user.email}>
               <Icon name='account' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
               <View>
                 <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Contact Information</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.props.profile.email}</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.props.profile.phoneNumber}</Text>
+                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.props.user.email}</Text>
+                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.props.user.phoneNumber}</Text>
                 <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
               </View>
             </ListDetail>
           </ScrollView>
         </View>
-      </Modal>
+      </View>
     );
   }
 }
@@ -90,4 +85,8 @@ const styles = {
   },
 };
 
-export { Profile };
+const mapStateToProps = (state) => {
+  return { user: state.user.user };
+};
+
+export default connect(mapStateToProps)(Profile);

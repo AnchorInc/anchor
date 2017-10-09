@@ -8,7 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 import ReduxSagaFirebase from 'redux-saga-firebase';
 import rootSaga from './sagas';
 import reducers from './reducers';
-import { LoginStack } from './navigation/Router';
+import { MainStack } from './navigation/Router';
 
 console.disableYellowBox = true;
 
@@ -50,7 +50,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store} >
-        <LoginStack />
+        <MainStack />
       </Provider>
     );
   }

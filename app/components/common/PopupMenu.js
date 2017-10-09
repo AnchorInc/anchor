@@ -39,12 +39,12 @@ import React, { Component, PropTypes } from 'react';
    render() {
      return (
        <View>
-         <TouchableOpacity onPress={() => this.onPress()}>
+         <TouchableOpacity onPress={this.onPress}>
            <Icon
              name='more-vert'
              size={ICON_SIZE}
              color={this.props.color}
-             ref={() => this.onRef()}
+             ref={this.onRef}
            />
          </TouchableOpacity>
        </View>

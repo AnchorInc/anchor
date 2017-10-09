@@ -7,23 +7,25 @@ import { Classes, Settings, Search } from '../components/screens';
 import AppSetup from '../components/screens/AppSetup';
 import Main from '../components/screens/Main';
 import Login from '../components/screens/Login';
+import Profile from '../components/screens/Profile';
 
-const LoginStackConfig = {
+const MainStackConfig = {
   navigationOptions: {
     header: null,
   },
   headerMode: 'none',
 };
 
-export const LoginStack = StackNavigator({
+export const MainStack = StackNavigator({
   AppSetup: { screen: AppSetup },
   Login: { screen: Login },
   Main: { screen: Main },
-}, LoginStackConfig);
+  Profile: { screen: Profile },
+}, MainStackConfig);
 
-const defaultGetStateForAction = LoginStack.router.getStateForAction;
+const defaultGetStateForAction = MainStack.router.getStateForAction;
 
-LoginStack.router.getStateForAction = (action, state) => {
+MainStack.router.getStateForAction = (action, state) => {
   // Prevent access to the Splash screen from the Login screen
   if (
     state &&
