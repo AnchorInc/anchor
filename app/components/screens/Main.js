@@ -6,10 +6,6 @@ import { Header } from '../common';
 import { Preferences } from './';
 
 class Main extends Component {
-  onComponentWillMount() {
-    this.props.navigation.reset();
-  }
-
   setPreferencesState = (value) => {
     this.props.navigation.setParams({ donePref: value });
   }
