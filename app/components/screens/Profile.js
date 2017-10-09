@@ -25,7 +25,7 @@ class Profile extends Component {
           <View style={styles.headerStyle}>
             <View style={styles.coverStyle}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
-                <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.navigate('Main')}>
+                <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
                   <Icon name='keyboard-backspace' size={24} color='black' />
                 </TouchableOpacity>
                 <View style={{ padding: 15 }}>
