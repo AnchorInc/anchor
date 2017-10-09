@@ -37,8 +37,7 @@ MainStack.router.getStateForAction = (action, state) => {
   if (
     state &&
     action.type === 'Navigation/BACK' &&
-    (state.routes[state.index].routeName !== 'AppSetup' &&
-      state.routes[state.index].routeName !== 'Login' &&
+    (state.routes[state.index].routeName !== 'Login' &&
       state.routes[state.index].routeName !== 'Profile')
   ) { return null; }
   return defaultGetStateForAction(action, state);
