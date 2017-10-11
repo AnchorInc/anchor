@@ -26,20 +26,15 @@ export const MainStack = StackNavigator({
 const defaultGetStateForAction = MainStack.router.getStateForAction;
 
 MainStack.router.getStateForAction = (action, state) => {
-  // Prevent access to the Splash screen from the Login screen
+  // Prevent access to the 'goback' nav prop
   if (
     state &&
     action.type === NavigationActions.BACK &&
-    state.routes[state.index].routeName === 'Login'
+    (state.routes[state.index].routeName === 'AppSetup' ||
+    state.routes[state.index].routeName === 'Login' ||
+    state.routes[state.index].routeName === 'Main')
   ) { return null; }
 
-  // Prevent access to Login screen after login/signup
-  if (
-    state &&
-    action.type === 'Navigation/BACK' &&
-    (state.routes[state.index].routeName !== 'Login' &&
-      state.routes[state.index].routeName !== 'Profile')
-  ) { return null; }
   return defaultGetStateForAction(action, state);
 };
 
@@ -50,7 +45,7 @@ const TabNavigatorConfig = {
       let iconName;
       switch (routeName) {
         case 'Classes':
-          iconName = 'list';
+          iconName = 'home';
           break;
         case 'Search':
           iconName = 'search';
@@ -59,7 +54,7 @@ const TabNavigatorConfig = {
           iconName = 'settings';
           break;
         default:
-          iconName = 'list';
+          iconName = 'home';
           break;
       }
       return (<Icon size={22} name={iconName} color={focused ? BOTTOM_BAR_ICON_FOCUSED : BOTTOM_BAR_ICON_NORMAL} />);
@@ -67,7 +62,9 @@ const TabNavigatorConfig = {
   }),
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
-  swipeEnabled: true,
+  swipeEnabled: false,
+  lazy: true,
+  backBehavior: 'none',
   animationEnabled: true,
   tabBarOptions: {
     showLabel: false,

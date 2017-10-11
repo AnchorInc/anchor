@@ -64,11 +64,11 @@ class Search extends Component {
           <Text style={styles.topResultTextStyle}>
             {this.state.subjects.length >= 1 ? 'Subjects' : ''}
           </Text>
-          {this.renderSubjects}
+          {this.renderSubjects()}
           <Text style={styles.topResultTextStyle}>
             {this.state.teachers.length >= 1 ? 'Teachers' : ''}
           </Text>
-          {this.renderTeachers}
+          {this.renderTeachers()}
         </ScrollView>
       </View>
     );

@@ -53,7 +53,6 @@ class TeacherProfile extends Component {
         animationType='fade'
         onRequestClose={() => console.log(' ')}
         style={styles.modalStyle}
-        hideStatusBar
       >
         <View style={styles.modalStyle}>
           <View style={styles.headerStyle}>
