@@ -8,6 +8,7 @@ import AppSetup from '../components/screens/AppSetup';
 import Main from '../components/screens/Main';
 import Login from '../components/screens/Login';
 import Profile from '../components/screens/Profile';
+import Preferences from '../components/screens/Preferences';
 
 const MainStackConfig = {
   navigationOptions: {
@@ -20,6 +21,7 @@ export const MainStack = StackNavigator({
   AppSetup: { screen: AppSetup },
   Login: { screen: Login },
   Main: { screen: Main },
+  Preferences: { screen: Preferences },
   Profile: { screen: Profile },
 }, MainStackConfig);
 

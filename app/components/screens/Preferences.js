@@ -1,43 +1,43 @@
 import React, { Component } from 'react';
-import { View, Modal, Dimensions, StatusBar } from 'react-native';
+import { View, Dimensions, StatusBar } from 'react-native';
+import { connect } from 'react-redux';
 import { Header } from '../common';
 import { STATUS_BAR_COLOR } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
 class Preferences extends Component {
-  state = { userFinished: false, user: null };
+  state = { userFinished: false };
 
   checkIfUserIsDone = () => {
     console.log('checking if user is done');
     // TODO: update the donePref AsyncStorage var to true
-    this.props.onPress();
+    this.props.navigation.goBack();
   }
 
   render() {
-    const { modalStyle } = styles;
+    const { containerStyle } = styles;
     return (
-      <Modal
-        visible={this.props.visible}
-        transparent
-        animationType='slide'
-        onRequestClose={() => console.log('Modal has been closed')}
-      >
+      <View>
         <StatusBar backgroundColor={STATUS_BAR_COLOR} />
-        <View style={modalStyle}>
-          <Header title='Preferences' prefButtons onPress={this.checkIfUserIsDone} />
+        <View style={containerStyle}>
+          <Header title='Preferences' onPress={() => this.checkIfUserIsDone()} prefButtons />
         </View>
-      </Modal>
+      </View>
     );
   }
 }
 
 const styles = {
-  modalStyle: {
+  containerStyle: {
     width,
     height,
     backgroundColor: 'white',
   },
 };
 
-export { Preferences };
+const mapStateToProps = (state) => {
+  return { user: state.user.user };
+};
+
+export default connect(mapStateToProps)(Preferences);

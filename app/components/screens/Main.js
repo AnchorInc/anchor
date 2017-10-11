@@ -3,24 +3,19 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Tabs } from '../../navigation/Router';
 import { Header } from '../common';
-import { Preferences } from './';
 
 class Main extends Component {
-  setPreferencesState = (value) => {
-    this.props.navigation.setParams({ donePref: value });
-  }
-  renderPreferencesScreen = () => {
-    if (!this.props.donePref) {
-      return <Preferences onPress={() => this.setPreferencesState(true)} profile={this.props.user} />;
+
+  componentDidMount() {
+    if (this.props.donePref !== null && !this.props.donePref) {
+      this.props.navigation.navigate('Preferences');
     }
-    return null;
   }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
         <Header title='Anchor' onPress={() => this.props.navigation.navigate('Profile')} color='#01152d' mainButtons />
-        {/* {this.renderPreferencesScreen()} */}
         <Tabs />
       </View>
     );
