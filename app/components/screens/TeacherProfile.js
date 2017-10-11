@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Modal, StatusBar, Dimensions, View, Image, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { Modal, Dimensions, View, Image, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import StarRating from 'react-native-star-rating';
-import { STATUS_BAR_COLOR } from '../../config';
 import { ListDetail, PopupMenu } from '../common';
 
 const { width, height } = Dimensions.get('window');
