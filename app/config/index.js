@@ -27,6 +27,7 @@ export const types = {
     DELETE: 'types.USER.DELETE',
     GET: 'types.USER.GET',
     SETUP: 'types.USER.SETUP',
+    START_SYNC: 'types.USER.START_SYNC',
     SYNC_SETUP: 'types.USER.SYNC_SETUP',
   },
 };

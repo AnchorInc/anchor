@@ -15,7 +15,8 @@ function* loginUserWithGoogle() {
     yield put(showSpinner());
     const credential = firebase.auth.GoogleAuthProvider.credential(user.idToken);
     const userData = yield call(rsf.auth.signInWithCredential, credential);
-    AsyncStorage.setItem('photo_url', userData.photoURL);
+    AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
+    AsyncStorage.setItem('done_pref', JSON.stringify(false, undefined, undefined));
     yield put(loginUserSuccess());
   } catch (error) {
     // Error handling for login cancellation by user
@@ -36,7 +37,7 @@ function* loginUserWithFB() {
     const user = yield AccessToken.getCurrentAccessToken();
     const credential = firebase.auth.FacebookAuthProvider.credential(user.accessToken);
     const userData = yield call(rsf.auth.signInWithCredential, credential);
-    AsyncStorage.setItem('photo_url', userData.photoURL);
+    AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
   } catch (error) {
     yield put(loginUserFail());
     yield put(showErrorMessage(error.message));

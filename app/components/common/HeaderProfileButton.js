@@ -35,7 +35,11 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  return { photoURL: state.user.photoURL };
+  let photoURL;
+  if (state.user.user) {
+    photoURL = state.user.user.photoURL;
+  }
+  return { photoURL };
 };
 
 export default connect(mapStateToProps)(HeaderProfileButton);

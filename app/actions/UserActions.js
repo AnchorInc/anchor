@@ -1,5 +1,9 @@
 import { types } from '../config';
 
+export const startSyncUser = () => {
+  return { type: types.USER.START_SYNC };
+}; 
+
 export const syncUser = (user) => {
   console.log(user);
   return { type: types.USER.SYNC, user };

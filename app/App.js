@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import firebase from 'firebase';
 import { GoogleSignin } from 'react-native-google-signin';
 import { setCustomText } from 'react-native-global-props';

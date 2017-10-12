@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 import { takeLatest, all, put, call, take } from 'redux-saga/effects';
 import firebase from 'firebase';
 import { rsf } from '../App';
-import { syncUser } from '../actions';
+import { syncUser, getUser } from '../actions';
 import { types } from '../config';
 
 function* updateUser() {
@@ -13,26 +13,36 @@ function* deleteUser() {
   yield console.log('deleting user');
 }
 
-function* getUser() {
+function* syncUserSaga() {
   const path = `/users/students/${firebase.auth().currentUser.uid}`;
   const channel = yield call(rsf.database.channel, path);
 
   while (firebase.auth().currentUser) {
     const { value: user } = yield take(channel);
+
+    try {
+      yield AsyncStorage.setItem('user_data', JSON.stringify(user, undefined, undefined));
+      yield put(getUser());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+function* getUserSaga() {
+  try {
+    const data = yield AsyncStorage.getItem('user_data');
+    const user = JSON.parse(data);
     yield put(syncUser(user));
+  } catch (error) {
+    console.log(error);
   }
 }
 
 function* userSetup() {
   try {
-    const data = yield AsyncStorage.multiGet(['done_pref', 'photo_url']);
-    const setupData = {
-      donePref: data[0][1],
-      photoURL: data[1][1],
-    };
-    console.log(data);
-    console.log(setupData);
-    yield put({ type: types.USER.SYNC_SETUP, setupData });
+    const data = yield AsyncStorage.getItem('done_pref');
+    yield put({ type: types.USER.SYNC_SETUP, data });
   } catch (error) {
     console.log(error);
   }
@@ -40,7 +50,8 @@ function* userSetup() {
 
 export function* watchUserRequests() {
   yield all([
-    takeLatest(types.USER.GET, getUser),
+    takeLatest(types.USER.START_SYNC, syncUserSaga),
+    takeLatest(types.USER.GET, getUserSaga),
     takeLatest(types.USER.UPDATE, updateUser),
     takeLatest(types.USER.DELETE, deleteUser),
     takeLatest(types.USER.SETUP, userSetup),
