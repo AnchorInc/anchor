@@ -30,6 +30,7 @@ const styles = {
     width: 0.9 * width,
     alignSelf: 'center',
     padding: 10,
+    fontFamily: 'avenir_demi',
   },
   iconStyle: {
     alignSelf: 'center',
