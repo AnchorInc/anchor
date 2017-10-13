@@ -14,7 +14,7 @@ class AppSetup extends Component {
         this.props.startSyncUser();
         this.props.getUser();
         SplashScreen.hide();
-        return this.props.navigation.navigate('Main');
+        return this.props.navigation.navigate('Preferences');
       }
       SplashScreen.hide();
       return this.props.navigation.navigate('Login');

@@ -78,8 +78,8 @@ const MainStackConfig = {
 export const MainStack = StackNavigator({
   AppSetup: { screen: AppSetup },
   Login: { screen: Login },
-  Main: { screen: Main },
   Preferences: { screen: Preferences },
+  Main: { screen: Main },
   Profile: { screen: Profile },
 }, MainStackConfig);
 
@@ -92,6 +92,7 @@ MainStack.router.getStateForAction = (action, state) => {
     action.type === NavigationActions.BACK &&
     (state.routes[state.index].routeName === 'AppSetup' ||
       state.routes[state.index].routeName === 'Login' ||
+      state.routes[state.index].routeName === 'Preferences' ||
       state.routes[state.index].routeName === 'Main')
   ) { return null; }
 
