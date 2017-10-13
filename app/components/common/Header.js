@@ -34,27 +34,79 @@ class Header extends Component {
     return null;
   }
 
-  render() {
+  renderTitle = () => {
     return (
-      <View style={styles.containerStyle} backgroundColor={MAIN_COLOR}>
-        <StatusBar backgroundColor={STATUS_BAR_COLOR} />
-          <Text style={styles.headerStyle}>
-            {this.props.title}
-          </Text>
+      <Text style={styles.headerStyle}>
+        {this.props.title}
+      </Text>
+    );
+  }
+
+  renderSearch = () => {
+    if (this.props.search) {
+      return (
+        <View style={styles.searchContainerStyle} backgroundColor={MAIN_COLOR}>
+          <View style={styles.searchBoxStyle} backgroundColor='#02254e'>
+            <Text style={styles.searchTextStyle}>
+              Search
+            </Text>
+          </View>
+        </View>
+      );
+    }
+    return null;
+  }
+
+  renderNormal = () => {
+    if (!this.props.search) {
+      return (
+        <View style={styles.normalContainerStyle} backgroundColor={MAIN_COLOR}>
+          {this.renderTitle()}
           {this.renderMainButtons()}
           {this.renderPrefButtons()}
+        </View>
+      );
+    }
+    return null;
+  }
+
+  render() {
+    return (
+      <View>
+        <StatusBar backgroundColor={STATUS_BAR_COLOR} />
+        {this.renderNormal()}
+        {this.renderSearch()}
       </View>
     );
   }
 }
 
 const styles = {
-  containerStyle: {
+  normalContainerStyle: {
     justifyContent: 'space-between',
-    alignContent: 'center',
     height: 0.08 * height,
     paddingTop: (Platform.OS === 'ios') ? 15 : 0,
     flexDirection: 'row',
+  },
+  searchContainerStyle: {
+    justifyContent: 'center',
+    height: 0.08 * height,
+    paddingTop: (Platform.OS === 'ios') ? 15 : 0,
+    flexDirection: 'row',
+  },
+  searchBoxStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    height: 0.057 * height,
+    width: 0.95 * width,
+    padding: 10,
+    borderRadius: 4,
+  },
+  searchTextStyle: {
+    fontFamily: 'avenir_heavy',
+    fontSize: 18,
+    color: '#4F5D6D',
   },
   headerStyle: {
     fontSize: 20,

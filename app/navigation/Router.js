@@ -33,12 +33,12 @@ const TabNavigatorConfig = {
       return (<Icon size={22} name={iconName} color={focused ? BOTTOM_BAR_ICON_FOCUSED : BOTTOM_BAR_ICON_NORMAL} />);
     },
   }),
+  animationEnabled: false,
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
   swipeEnabled: false,
   lazy: true,
   backBehavior: 'none',
-  animationEnabled: true,
   tabBarOptions: {
     showLabel: false,
     labelStyle: {
