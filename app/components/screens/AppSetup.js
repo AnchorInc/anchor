@@ -14,6 +14,9 @@ class AppSetup extends Component {
         this.props.startSyncUser();
         this.props.getUser();
         SplashScreen.hide();
+        if (this.props.donePref) {
+         return this.props.navigation.navigate('Main') ;
+        }
         return this.props.navigation.navigate('Preferences');
       }
       SplashScreen.hide();
@@ -26,10 +29,18 @@ class AppSetup extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  let donePref;
+  if (state.user.user) {
+    donePref = state.user.user.donePref;
+  }
+  return { donePref };
+};
+
 const mapFunctionsToProps = {
   appSetup,
   getUser,
   startSyncUser,
 };
 
-export default connect(null, mapFunctionsToProps)(AppSetup);
+export default connect(mapStateToProps, mapFunctionsToProps)(AppSetup);
