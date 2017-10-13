@@ -1,5 +1,4 @@
 export * from './ClassDetail';
-export * from './ClassList';
 export * from './BatchDetail';
 export * from './Card';
 export * from './CardSection';

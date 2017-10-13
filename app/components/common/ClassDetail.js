@@ -6,25 +6,25 @@ import { Card, CardSection } from './';
 const { width } = Dimensions.get('window');
 
 const ClassDetail = ({ person, onPress }) => {
-  return (
-    <TouchableOpacity onPress={onPress}>
-      <Card style={{ flex: 1, flexDirection: 'row' }}>
-        <CardSection>
-          <Image style={styles.headerStyle} source={{ uri: person.Header }} />
-          <View style={styles.containerStyle}>
-            <Image style={styles.profileStyle} source={{ uri: person.Profile }} />
-          </View>
-          <View style={{ width: 0.93 * width, height: 0.09 * width }} />
-        </CardSection>
-        <CardSection>
-          <View style={styles.textContainerStyle}>
-            <Text style={styles.classStyle}>{person.Subject}</Text>
-            <Text style={styles.nameStyle}>{person.Name}</Text>
-          </View>
-        </CardSection>
-      </Card>
-    </TouchableOpacity>
-  );
+    return (
+      <TouchableOpacity onPress={onPress.bind(this, person.UID)}>
+        <Card style={{ flex: 1, flexDirection: 'row' }}>
+          <CardSection>
+            <Image style={styles.headerStyle} source={{ uri: person.Header }} />
+            <View style={styles.containerStyle}>
+              <Image style={styles.profileStyle} source={{ uri: person.Profile }} />
+            </View>
+            <View style={{ width: 0.93 * width, height: 0.09 * width }} />
+          </CardSection>
+          <CardSection>
+            <View style={styles.textContainerStyle}>
+              <Text style={styles.classStyle}>{person.Subject}</Text>
+              <Text style={styles.nameStyle}>{person.Name}</Text>
+            </View>
+          </CardSection>
+        </Card>
+      </TouchableOpacity>
+    );
 };
 
 const styles = {

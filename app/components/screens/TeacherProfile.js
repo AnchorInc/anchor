@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { Modal, Dimensions, View, Image, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  Dimensions,
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+  StatusBar,
+} from 'react-native';
+import { connect } from 'react-redux';
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import StarRating from 'react-native-star-rating';
@@ -23,7 +33,7 @@ class TeacherProfile extends Component {
   };
 
   componentWillMount() {
-    firebase.database().ref(`/users/teachers/${this.props.uid}`)
+    firebase.database().ref(`/users/teachers/${this.props.navigation.state.params.uid}`)
     .once('value')
     .then(teacher => this.setState({
       name: teacher.val().Name,
@@ -40,24 +50,15 @@ class TeacherProfile extends Component {
     }));
   }
 
-  // renderBatches() {
-  //   return this.state.batchList.map(batch => <BatchDetail key={batch} batch={batch} />);
-  // }
-
   render() {
     return (
-      <Modal
-        visible={this.props.visible}
-        transparent
-        animationType='fade'
-        onRequestClose={() => console.log(' ')}
-        style={styles.modalStyle}
-      >
+      <View>
+        <StatusBar hidden />
         <View style={styles.modalStyle}>
           <View style={styles.headerStyle}>
             <Image source={{ uri: this.state.header }} style={styles.coverStyle}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
-                <TouchableOpacity style={{ padding: 15 }} onPress={this.props.onPress}>
+                <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
                   <Icon name='keyboard-backspace' size={24} color='white' />
                 </TouchableOpacity>
                 <View style={{ padding: 15 }}>
@@ -108,7 +109,7 @@ class TeacherProfile extends Component {
             </ListDetail>
           </ScrollView>
         </View>
-      </Modal>
+      </View>
     );
   }
 }
@@ -157,4 +158,4 @@ const styles = {
   },
 };
 
-export { TeacherProfile };
+export default connect()(TeacherProfile);

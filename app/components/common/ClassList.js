@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, RefreshControl, Dimensions, NetInfo } from 'react-native';
+import { connect } from 'react-redux';
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ClassDetail } from './';
-import { getUser } from '../../models/User';
 import { DARK_GRAY, ACCENT_COLOR } from '../../config';
-import { TeacherProfile } from '../screens';
 
 const { width, height } = Dimensions.get('window');
 
@@ -17,6 +16,7 @@ class ClassList extends Component {
     isActivityVisible: false,
     selectedActivity: '',
     isConnected: true,
+    gotBatchList: false,
   };
 
   componentWillMount() {
@@ -28,24 +28,40 @@ class ClassList extends Component {
   }
 
   getActivityList = () => {
-    this.setState({ teachers: [], refreshing: true, isConnected: true });
-    const curUser = getUser();
-    firebase.database().ref(`/users/students/${curUser.uid}`)
-    .once('value')
-    .then((response) => {
-      return response.val();
-    })
-    .then((user) => {
-      if (user.batchList != null && user.batchList.length >= 1) {
-        user.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
+    // this.setState({ teachers: [], refreshing: true, isConnected: true });
+    if (this.props.batchList !== null && this.props.batchList.length >= 1) {
+      this.props.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
         .once('value')
         .then(Class => firebase.database().ref(`/users/teachers/${Class.val().Teacher}`)
-        .once('value')
-        .then(teacher => this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, messageVisible: false, isConnected: true }))));
-      } else {
-        this.setState({ refreshing: false, messageVisible: true, isConnected: true });
-      }
-    });
+          .once('value')
+          .then((teacher) => {
+            this.addTeacher(teacher);
+          })));
+    } else if (this.props.batchList !== null && this.props.batchList.length === 0) {
+      this.setState({ refreshing: false, messageVisible: true, isConnected: true, gotBatchList: true });
+    } else {
+      this.setState({ gotBatchList: false });
+    }
+  }
+
+  addTeacher = (teacher) => {
+    if (this.state.teachers.length >= 1) {
+      this.state.teachers.forEach((t) => {
+        if (t.UID === teacher.val().UID) {
+          this.setState({ refreshing: false, messageVisible: false, isConnected: true, gotBatchList: true });
+        } else {
+          this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, messageVisible: false, isConnected: true, gotBatchList: true });
+        }
+      }, this);
+    } else {
+      this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, messageVisible: false, isConnected: true, gotBatchList: true });
+    }
+  }
+
+  callGetActivityList = () => {
+    if (this.props.batchList && !this.state.gotBatchList) {
+      this.getActivityList();
+    }
   }
 
   handleConnectionChanged = (isConnected) => {
@@ -94,17 +110,8 @@ class ClassList extends Component {
   renderPeople = () => {
     if (this.state.teachers != null && this.state.teachers.length >= 1) {
       return this.state.teachers.map(teacher => (
-        <ClassDetail key={teacher.UID} person={teacher} onPress={() => this.setState({ isTeacherVisible: true, selectedTeacher: teacher.UID })} />
+        <ClassDetail key={teacher.UID} person={teacher} onPress={this.props.onPress} />
       ));
-    }
-    return null;
-  }
-
-  renderTeacher = () => {
-    if (this.state.isTeacherVisible) {
-      return (
-        <TeacherProfile visible={this.state.isTeacherVisible} uid={this.state.selectedTeacher} onPress={() => this.setState({ isTeacherVisible: false })} />
-      );
     }
     return null;
   }
@@ -121,13 +128,21 @@ class ClassList extends Component {
           />
         }
       >
-         {this.renderPeople()}
-         {this.noBatchMessage()}
-         {this.renderTeacher()}
-         {this.connectionIssueMessage()}
+        {this.renderPeople()}
+        {this.noBatchMessage()}
+        {this.connectionIssueMessage()}
+        {this.callGetActivityList()}
       </ScrollView>
     );
   }
 }
 
-export { ClassList };
+const mapStateToProps = (state) => {
+  let batchList = null;
+  if (state.user.user) {
+    batchList = state.user.user.batchList;
+  }
+  return { batchList };
+};
+
+export default connect(mapStateToProps)(ClassList);

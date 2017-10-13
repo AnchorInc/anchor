@@ -8,37 +8,8 @@ import AppSetup from '../components/screens/AppSetup';
 import Main from '../components/screens/Main';
 import Login from '../components/screens/Login';
 import Profile from '../components/screens/Profile';
+import TeacherProfile from '../components/screens/TeacherProfile';
 import Preferences from '../components/screens/Preferences';
-
-const MainStackConfig = {
-  navigationOptions: {
-    header: null,
-  },
-  headerMode: 'none',
-};
-
-export const MainStack = StackNavigator({
-  AppSetup: { screen: AppSetup },
-  Login: { screen: Login },
-  Main: { screen: Main },
-  Preferences: { screen: Preferences },
-  Profile: { screen: Profile },
-}, MainStackConfig);
-
-const defaultGetStateForAction = MainStack.router.getStateForAction;
-
-MainStack.router.getStateForAction = (action, state) => {
-  // Prevent access to the 'goback' nav prop
-  if (
-    state &&
-    action.type === NavigationActions.BACK &&
-    (state.routes[state.index].routeName === 'AppSetup' ||
-    state.routes[state.index].routeName === 'Login' ||
-    state.routes[state.index].routeName === 'Main')
-  ) { return null; }
-
-  return defaultGetStateForAction(action, state);
-};
 
 const TabNavigatorConfig = {
   navigationOptions: ({ navigation }) => ({
@@ -84,3 +55,45 @@ export const Tabs = TabNavigator({
   Search: { screen: Search },
   Settings: { screen: Settings },
 }, TabNavigatorConfig);
+
+const ClassesStackConfig = {
+  navigationOptions: {
+    header: null,
+  },
+  headerMode: 'none',
+};
+
+export const ClassesStack = StackNavigator({
+  Classes: { screen: Tabs },
+  TeacherProfile: { screen: TeacherProfile },
+}, ClassesStackConfig);
+
+const MainStackConfig = {
+  navigationOptions: {
+    header: null,
+  },
+  headerMode: 'none',
+};
+
+export const MainStack = StackNavigator({
+  AppSetup: { screen: AppSetup },
+  Login: { screen: Login },
+  Main: { screen: Main },
+  Preferences: { screen: Preferences },
+  Profile: { screen: Profile },
+}, MainStackConfig);
+
+const defaultGetStateForAction = MainStack.router.getStateForAction;
+
+MainStack.router.getStateForAction = (action, state) => {
+  // Prevent access to the 'goback' nav prop
+  if (
+    state &&
+    action.type === NavigationActions.BACK &&
+    (state.routes[state.index].routeName === 'AppSetup' ||
+      state.routes[state.index].routeName === 'Login' ||
+      state.routes[state.index].routeName === 'Main')
+  ) { return null; }
+
+  return defaultGetStateForAction(action, state);
+};
