@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, Switch } from 'react-native';
-import { ListDetail } from '../common';
-import { ACCENT_COLOR } from '../../config';
+import { Text, View } from 'react-native';
+import { Header } from '../common';
 
 class Settings extends Component {
   state = {
@@ -15,6 +14,7 @@ class Settings extends Component {
   render() {
     return (
       <View>
+        <Header title='Settings' />
         <View style={styles.headerStyle}>
           <Text style={styles.textStyle}>General</Text>
         </View>

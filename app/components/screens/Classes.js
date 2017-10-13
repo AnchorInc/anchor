@@ -13,7 +13,7 @@ class Classes extends Component {
   render() {
     return (
       <View style={{ width, height }}>
-        <Header title='Anchor' onPress={() => this.props.navigation.navigate('Profile')} color='#01152d' mainButtons />
+        <Header title='Home' onPress={() => this.props.navigation.navigate('Profile')} color='#01152d' mainButtons />
         <ClassList onPress={person => this.onPress(person)} />
       </View>
     );

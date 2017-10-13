@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Input, SearchDetail, SubjectDetail, Header } from '../common';
+import { SearchDetail, SubjectDetail, Header } from '../common';
 
 const algoliasearch = require('algoliasearch/reactnative');
 
@@ -56,7 +56,7 @@ class Search extends Component {
   render() {
     return (
       <View>
-        <Header title='Anchor' onPress={() => this.props.navigation.navigate('Profile')} color='#01152d' search />
+        <Header search handleChangeText={this.requestData.bind(this)} />
         <View style={{ width, height, alignItems: 'center', flex: 1 }}>
           <ScrollView style={{ flex: 1 }}>
             <Text style={styles.topResultTextStyle}>

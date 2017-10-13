@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Platform, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, Dimensions, Platform, StatusBar, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import SearchBar from 'react-native-searchbar';
 import HeaderProfileButton from './HeaderProfileButton';
 import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config/';
 
@@ -46,11 +47,27 @@ class Header extends Component {
     if (this.props.search) {
       return (
         <View style={styles.searchContainerStyle} backgroundColor={MAIN_COLOR}>
-          <View style={styles.searchBoxStyle} backgroundColor='#02254e'>
-            <Text style={styles.searchTextStyle}>
-              Search
-            </Text>
-          </View>
+          <TouchableWithoutFeedback onPress={() => this.searchBar.show()} >
+            <View style={styles.searchBoxStyle} backgroundColor='#02254e'>
+              <Icon name='magnify' color='#4F5D6D' size={24} style={{ marginRight: 5 }} />
+              <Text style={styles.searchTextStyle}>
+                Search
+              </Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <SearchBar
+            backgroundColor='#02254e'
+            iconColor='#4f5d6d'
+            placeholderTextColor='#4f5d6d'
+            backButton={<Icon name='keyboard-backspace' size={24} color='#4f5d6d' style={{ alignSelf: 'center' }} />}
+            textColor='white'
+            animate={false}
+            handleChangeText={this.props.handleChangeText}
+            selectionColor='#01152d'
+            fontFamily='avenir_heavy'
+            backCloseSize={24}
+            ref={(ref) => this.searchBar = ref}
+          />
         </View>
       );
     }
@@ -84,13 +101,13 @@ class Header extends Component {
 const styles = {
   normalContainerStyle: {
     justifyContent: 'space-between',
-    height: 0.08 * height,
+    height: (Platform.OS === 'ios' ? 52 : 62),
     paddingTop: (Platform.OS === 'ios') ? 15 : 0,
     flexDirection: 'row',
   },
   searchContainerStyle: {
     justifyContent: 'center',
-    height: 0.08 * height,
+    height: (Platform.OS === 'ios' ? 52 : 62),
     paddingTop: (Platform.OS === 'ios') ? 15 : 0,
     flexDirection: 'row',
   },
@@ -102,6 +119,7 @@ const styles = {
     width: 0.96 * width,
     padding: 10,
     borderRadius: 4,
+    flexDirection: 'row',
   },
   searchTextStyle: {
     fontFamily: 'avenir_heavy',
@@ -116,10 +134,10 @@ const styles = {
     alignSelf: 'center',
   },
   buttonContainerStyle: {
-    paddingTop: 0.25 * 0.07 * height,
     paddingRight: 0.05 * width,
     justifyContent: 'space-between',
     flexDirection: 'row',
+    alignSelf: 'center',
   },
 };
 

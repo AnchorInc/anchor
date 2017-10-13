@@ -40,10 +40,10 @@ class TeacherProfile extends Component {
           <View style={styles.headerStyle}>
             <Image source={{ uri: this.state.teacher.Header }} style={styles.coverStyle}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
-                <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
+                <TouchableOpacity style={{ padding: 15, paddingTop: 24 }} onPress={() => this.props.navigation.goBack()}>
                   <Icon name='keyboard-backspace' size={24} color='white' />
                 </TouchableOpacity>
-                <View style={{ padding: 15 }}>
+                <View style={{ padding: 15, paddingTop: 24 }}>
                   <PopupMenu actions={['Contact']} onPress={() => console.log('pressed')} color='white' />
                 </View>
               </View>
@@ -117,14 +117,14 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    top: 120,
+    top: 144,
     position: 'absolute',
   },
   headerStyle: {
-    height: 290,
+    height: 314,
   },
   coverStyle: {
-    height: 180,
+    height: 204,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
