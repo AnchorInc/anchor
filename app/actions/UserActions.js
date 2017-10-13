@@ -2,7 +2,7 @@ import { types } from '../config';
 
 export const startSyncUser = () => {
   return { type: types.USER.START_SYNC };
-}; 
+};
 
 export const syncUser = (user) => {
   console.log(user);
@@ -19,8 +19,4 @@ export const deleteUser = () => {
 
 export const getUser = () => {
   return { type: types.USER.GET };
-};
-
-export const appSetup = () => {
-  return { type: types.USER.SETUP };
 };

@@ -13,7 +13,6 @@ class AppSetup extends Component {
       if (user) {
         this.props.startSyncUser();
         this.props.getUser();
-        this.props.appSetup();
         SplashScreen.hide();
         return this.props.navigation.navigate('Main');
       }

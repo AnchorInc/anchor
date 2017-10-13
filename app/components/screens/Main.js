@@ -7,7 +7,7 @@ import { Header } from '../common';
 class Main extends Component {
 
   componentDidMount() {
-    if (this.props.donePref !== null && !this.props.donePref) {
+    if (!this.props.donePref) {
       this.props.navigation.navigate('Preferences');
     }
   }
@@ -23,9 +23,11 @@ class Main extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    donePref: state.user.donePref,
-  };
+  let donePref;
+  if (state.user.user) {
+    donePref = state.user.user.donePref;
+  }
+  return { donePref };
 };
 
 export default connect(mapStateToProps)(Main);

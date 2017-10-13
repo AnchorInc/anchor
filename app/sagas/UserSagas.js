@@ -39,21 +39,11 @@ function* getUserSaga() {
   }
 }
 
-function* userSetup() {
-  try {
-    const data = yield AsyncStorage.getItem('done_pref');
-    yield put({ type: types.USER.SYNC_SETUP, data });
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 export function* watchUserRequests() {
   yield all([
     takeLatest(types.USER.START_SYNC, syncUserSaga),
     takeLatest(types.USER.GET, getUserSaga),
     takeLatest(types.USER.UPDATE, updateUser),
     takeLatest(types.USER.DELETE, deleteUser),
-    takeLatest(types.USER.SETUP, userSetup),
   ]);
 }

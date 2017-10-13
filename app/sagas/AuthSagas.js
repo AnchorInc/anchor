@@ -16,7 +16,6 @@ function* loginUserWithGoogle() {
     const credential = firebase.auth.GoogleAuthProvider.credential(user.idToken);
     const userData = yield call(rsf.auth.signInWithCredential, credential);
     AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
-    AsyncStorage.setItem('done_pref', JSON.stringify(false, undefined, undefined));
     yield put(loginUserSuccess());
   } catch (error) {
     // Error handling for login cancellation by user
