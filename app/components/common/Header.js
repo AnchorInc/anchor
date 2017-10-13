@@ -99,7 +99,7 @@ const styles = {
     alignItems: 'center',
     alignSelf: 'center',
     height: 0.057 * height,
-    width: 0.95 * width,
+    width: 0.96 * width,
     padding: 10,
     borderRadius: 4,
   },
