@@ -65,6 +65,7 @@ const ClassesStackConfig = {
 
 export const ClassesStack = StackNavigator({
   Classes: { screen: Tabs },
+  Profile: { screen: Profile },
   TeacherProfile: { screen: TeacherProfile },
 }, ClassesStackConfig);
 
@@ -80,7 +81,6 @@ export const MainStack = StackNavigator({
   Login: { screen: Login },
   Main: { screen: Main },
   Preferences: { screen: Preferences },
-  Profile: { screen: Profile },
 }, MainStackConfig);
 
 const defaultGetStateForAction = MainStack.router.getStateForAction;
