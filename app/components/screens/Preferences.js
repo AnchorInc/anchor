@@ -12,7 +12,7 @@ class Preferences extends Component {
   checkIfUserIsDone = () => {
     console.log('checking if user is done');
     // TODO: update the donePref AsyncStorage var to true
-    this.props.navigation.navigate('Main');
+    this.props.navigation.goBack();
   }
 
   render() {
