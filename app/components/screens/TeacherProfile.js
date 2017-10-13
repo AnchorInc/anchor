@@ -30,25 +30,8 @@ class TeacherProfile extends Component {
     price: '',
     location: '',
     batchList: [],
+    teacher: this.props.navigation.state.params.person,
   };
-
-  componentWillMount() {
-    firebase.database().ref(`/users/teachers/${this.props.navigation.state.params.uid}`)
-    .once('value')
-    .then(teacher => this.setState({
-      name: teacher.val().Name,
-      email: teacher.val().Email,
-      profilePictureURL: teacher.val().Profile,
-      phoneNumber: teacher.val().Phone,
-      header: teacher.val().Header,
-      subject: teacher.val().Subject,
-      experience: teacher.val().Experience,
-      rating: teacher.val().Rating,
-      price: teacher.val().Price,
-      location: teacher.val().Location,
-      batchList: teacher.val().BatchList,
-    }));
-  }
 
   render() {
     return (
@@ -56,7 +39,7 @@ class TeacherProfile extends Component {
         <StatusBar hidden />
         <View style={styles.modalStyle}>
           <View style={styles.headerStyle}>
-            <Image source={{ uri: this.state.header }} style={styles.coverStyle}>
+            <Image source={{ uri: this.state.teacher.Header }} style={styles.coverStyle}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
                 <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
                   <Icon name='keyboard-backspace' size={24} color='white' />
@@ -67,14 +50,14 @@ class TeacherProfile extends Component {
               </View>
             </Image>
             <View style={styles.containerStyle}>
-              <Image source={{ uri: this.state.profilePictureURL }} style={styles.profileStyle} />
+              <Image source={{ uri: this.state.teacher.Profile }} style={styles.profileStyle} />
             </View>
             <View style={{ height: 110, justifyContent: 'center', alignItems: 'center', paddingTop: 20 }}>
-              <Text style={styles.nameStyle}>{this.state.name}</Text>
-              <Text style={styles.classStyle}>{this.state.subject}</Text>
+              <Text style={styles.nameStyle}>{this.state.teacher.Name}</Text>
+              <Text style={styles.classStyle}>{this.state.teacher.Subject}</Text>
               <StarRating
                 disabled
-                rating={this.state.rating}
+                rating={this.state.teacher.Rating}
                 starSize={25}
                 starColor='#ffa000'
                 emptyStarColor='#ffa000'
@@ -82,16 +65,16 @@ class TeacherProfile extends Component {
             </View>
           </View>
           <ScrollView>
-            <ListDetail contentText={this.state.email}>
+            <ListDetail contentText={this.state.teacher.Email}>
               <Icon name='account' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
               <View>
                 <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Contact Information</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.email}</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.phoneNumber}</Text>
+                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.teacher.Email}</Text>
+                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.teacher.Phone}</Text>
                 <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
               </View>
             </ListDetail>
-            <ListDetail contentText={this.state.email}>
+            <ListDetail contentText={this.state.teacher.Email}>
               <Icon name='briefcase' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
               <View>
                 <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Experience</Text>
@@ -99,11 +82,11 @@ class TeacherProfile extends Component {
                 <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
               </View>
             </ListDetail>
-            <ListDetail contentText={this.state.email}>
+            <ListDetail contentText={this.state.teacher.Email}>
               <Icon name='currency-inr' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
               <View>
                 <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Price</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.price}</Text>
+                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.teacher.Price}</Text>
                 <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
               </View>
             </ListDetail>

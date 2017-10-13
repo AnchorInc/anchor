@@ -7,7 +7,7 @@ const { width } = Dimensions.get('window');
 
 const ClassDetail = ({ person, onPress }) => {
     return (
-      <TouchableOpacity onPress={onPress.bind(this, person.UID)}>
+      <TouchableOpacity onPress={onPress.bind(this, person)}>
         <Card style={{ flex: 1, flexDirection: 'row' }}>
           <CardSection>
             <Image style={styles.headerStyle} source={{ uri: person.Header }} />

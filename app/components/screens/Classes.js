@@ -6,15 +6,15 @@ import ClassList from '../common/ClassList';
 const { width, height } = Dimensions.get('window');
 
 class Classes extends Component {
-  onPress = (uid) => {
-    this.props.navigation.navigate('TeacherProfile', { uid });
+  onPress = (person) => {
+    this.props.navigation.navigate('TeacherProfile', { person });
   }
 
   render() {
     return (
       <View style={{ width, height }}>
         <Header title='Anchor' onPress={() => this.props.navigation.navigate('Profile')} color='#01152d' mainButtons />
-        <ClassList onPress={uid => this.onPress(uid)} />
+        <ClassList onPress={person => this.onPress(person)} />
       </View>
     );
   }
