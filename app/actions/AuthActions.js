@@ -8,8 +8,8 @@ export const fbLoginRequest = () => {
   return { type: types.LOGIN.FB };
 };
 
-export const loginUserFail = (error) => {
-  return { type: types.LOGIN.FAIL, payload: error };
+export const loginUserFail = () => {
+  return { type: types.LOGIN.FAIL };
 };
 
 export const loginUserSuccess = () => {
