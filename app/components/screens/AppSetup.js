@@ -2,14 +2,13 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import SplashScreen from 'react-native-splash-screen';
-import { appSetup, getUser, startSyncUser } from '../../actions';
+import { getUser, startSyncUser } from '../../actions';
 
 class AppSetup extends Component {
-  state = { donePref: true, photoURL: null };
-
   componentWillMount() {
     // splash screen is already showing
     firebase.auth().onAuthStateChanged((user) => {
+      console.log(user);
       if (user) {
         this.props.startSyncUser();
         this.props.getUser();
@@ -27,7 +26,6 @@ class AppSetup extends Component {
 }
 
 const mapFunctionsToProps = {
-  appSetup,
   getUser,
   startSyncUser,
 };
