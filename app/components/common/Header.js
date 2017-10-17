@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Platform, StatusBar, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Dimensions, Platform, StatusBar, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import SearchBar from 'react-native-searchbar';
 import HeaderProfileButton from './HeaderProfileButton';
 import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config/';
 
 const { width, height } = Dimensions.get('window');
 
 class Header extends Component {
+  handleChangeText = () => {
+    this.props.handleChangeText(this.searchBar.getValue());
+  }
+
   renderMainButtons = () => {
     if (this.props.mainButtons) {
       return (
@@ -43,37 +46,6 @@ class Header extends Component {
     );
   }
 
-  renderSearch = () => {
-    if (this.props.search) {
-      return (
-        <View style={styles.searchContainerStyle} backgroundColor={MAIN_COLOR}>
-          <TouchableWithoutFeedback onPress={() => this.searchBar.show()} >
-            <View style={styles.searchBoxStyle} backgroundColor='#02254e'>
-              <Icon name='magnify' color='#4F5D6D' size={24} style={{ marginRight: 5 }} />
-              <Text style={styles.searchTextStyle}>
-                Search
-              </Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <SearchBar
-            backgroundColor='#02254e'
-            iconColor='#4f5d6d'
-            placeholderTextColor='#4f5d6d'
-            backButton={<Icon name='keyboard-backspace' size={24} color='#4f5d6d' style={{ alignSelf: 'center' }} />}
-            textColor='white'
-            animate={false}
-            handleChangeText={this.props.handleChangeText}
-            selectionColor='#01152d'
-            fontFamily='avenir_heavy'
-            backCloseSize={24}
-            ref={(ref) => this.searchBar = ref}
-          />
-        </View>
-      );
-    }
-    return null;
-  }
-
   renderNormal = () => {
     if (!this.props.search) {
       return (
@@ -92,7 +64,6 @@ class Header extends Component {
       <View>
         <StatusBar backgroundColor={STATUS_BAR_COLOR} />
         {this.renderNormal()}
-        {this.renderSearch()}
       </View>
     );
   }
@@ -101,13 +72,13 @@ class Header extends Component {
 const styles = {
   normalContainerStyle: {
     justifyContent: 'space-between',
-    height: (Platform.OS === 'ios' ? 52 : 62),
+    height: (Platform.OS === 'ios' ? 52 : 52),
     paddingTop: (Platform.OS === 'ios') ? 15 : 0,
     flexDirection: 'row',
   },
   searchContainerStyle: {
     justifyContent: 'center',
-    height: (Platform.OS === 'ios' ? 52 : 62),
+    height: (Platform.OS === 'ios' ? 52 : 52),
     paddingTop: (Platform.OS === 'ios') ? 15 : 0,
     flexDirection: 'row',
   },
@@ -115,7 +86,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    height: 0.057 * height,
+    height: 0.05 * height,
     width: 0.96 * width,
     padding: 10,
     borderRadius: 4,
@@ -124,7 +95,7 @@ const styles = {
   searchTextStyle: {
     fontFamily: 'avenir_heavy',
     fontSize: 18,
-    color: '#4F5D6D',
+    color: 'white',
   },
   headerStyle: {
     fontSize: 20,

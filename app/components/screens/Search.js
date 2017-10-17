@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { SearchDetail, SubjectDetail, Header } from '../common';
+import { Input, SearchDetail, SubjectDetail } from '../common';
 
 const algoliasearch = require('algoliasearch/reactnative');
 
@@ -55,22 +55,22 @@ class Search extends Component {
 
   render() {
     return (
-      <View>
-        <Header search handleChangeText={this.requestData.bind(this)} />
-        <View style={{ width, height, alignItems: 'center', flex: 1 }}>
-          <ScrollView style={{ flex: 1 }}>
-            <Text style={styles.topResultTextStyle}>
-              {this.state.subjects.length >= 1 ? 'Subjects' : ''}
-            </Text>
-            {this.renderSubjects()}
-            <Text style={styles.topResultTextStyle}>
-              {this.state.teachers.length >= 1 ? 'Teachers' : ''}
-            </Text>
-            {this.renderTeachers()}
-          </ScrollView>
+      <View style={{ width, height, alignItems: 'center', flex: 1 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Input icon="search" label="Search" cb={this.requestData} rkt='search' />
+          <Icon name="filter-variant" size={22} style={{ padding: 5 }} />
         </View>
+        <ScrollView style={{ flex: 1 }}>
+          <Text style={styles.topResultTextStyle}>
+            {this.state.subjects.length >= 1 ? 'Subjects' : ''}
+          </Text>
+          {this.renderSubjects()}
+          <Text style={styles.topResultTextStyle}>
+            {this.state.teachers.length >= 1 ? 'Teachers' : ''}
+          </Text>
+          {this.renderTeachers()}
+        </ScrollView>
       </View>
-      
     );
   }
 }
