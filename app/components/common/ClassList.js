@@ -20,41 +20,30 @@ class ClassList extends Component {
   };
 
   componentWillMount() {
-    this.getActivityList();
     NetInfo.isConnected.addEventListener(
       'change',
       this.handleConnectionChanged.bind(this),
     );
   }
 
+  componentWillReceiveProps() {
+    this.callGetActivityList();
+  }
+
   getActivityList = () => {
-    // this.setState({ teachers: [], refreshing: true, isConnected: true });
+    this.setState({ teachers: [], refreshing: true, isConnected: true });
     if (this.props.batchList !== null && this.props.batchList.length >= 1) {
       this.props.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
         .once('value')
         .then(Class => firebase.database().ref(`/users/teachers/${Class.val().Teacher}`)
           .once('value')
           .then((teacher) => {
-            this.addTeacher(teacher);
+            this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, messageVisible: false, isConnected: true, gotBatchList: true });
           })));
     } else if (this.props.batchList !== null && this.props.batchList.length === 0) {
       this.setState({ refreshing: false, messageVisible: true, isConnected: true, gotBatchList: true });
     } else {
       this.setState({ gotBatchList: false });
-    }
-  }
-
-  addTeacher = (teacher) => {
-    if (this.state.teachers.length >= 1) {
-      this.state.teachers.forEach((t) => {
-        if (t.UID === teacher.val().UID) {
-          this.setState({ refreshing: false, messageVisible: false, isConnected: true, gotBatchList: true });
-        } else {
-          this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, messageVisible: false, isConnected: true, gotBatchList: true });
-        }
-      }, this);
-    } else {
-      this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, messageVisible: false, isConnected: true, gotBatchList: true });
     }
   }
 
@@ -122,7 +111,7 @@ class ClassList extends Component {
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={() => this.getActivityList()}
+            onRefresh={this.getActivityList}
             colors={[ACCENT_COLOR]}
             tintColor={DARK_GRAY}
           />
@@ -131,7 +120,6 @@ class ClassList extends Component {
         {this.renderPeople()}
         {this.noBatchMessage()}
         {this.connectionIssueMessage()}
-        {this.callGetActivityList()}
       </ScrollView>
     );
   }
