@@ -8,7 +8,6 @@ class AppSetup extends Component {
   componentWillMount() {
     // splash screen is already showing
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user);
       if (user) {
         this.props.startSyncUser();
         this.props.getUser();
