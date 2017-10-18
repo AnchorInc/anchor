@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { BOTTOM_BAR_ICON_NORMAL, BOTTOM_BAR_ICON_FOCUSED, BOTTOM_BAR_COLOR } from '../config';
@@ -30,7 +29,7 @@ const TabNavigatorConfig = {
           iconName = 'home';
           break;
       }
-      return (<Icon size={22} name={iconName} color={focused ? BOTTOM_BAR_ICON_FOCUSED : BOTTOM_BAR_ICON_NORMAL} />);
+      return <Icon size={22} name={iconName} color={focused ? BOTTOM_BAR_ICON_FOCUSED : BOTTOM_BAR_ICON_NORMAL} />;
     },
   }),
   animationEnabled: false,
@@ -41,9 +40,6 @@ const TabNavigatorConfig = {
   backBehavior: 'none',
   tabBarOptions: {
     showLabel: false,
-    labelStyle: {
-      fontSize: 12,
-    },
     style: {
       backgroundColor: BOTTOM_BAR_COLOR,
     },
