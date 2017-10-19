@@ -77,7 +77,7 @@ class TeacherProfile extends Component {
               <Icon name='briefcase' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
               <View>
                 <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Experience</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.experience}</Text>
+                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.teacher.Experience}</Text>
                 <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
               </View>
             </ListDetail>
