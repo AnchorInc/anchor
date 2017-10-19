@@ -4,9 +4,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HeaderProfileButton from './HeaderProfileButton';
 import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config/';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class Header extends Component {
+
   handleChangeText = () => {
     this.props.handleChangeText(this.searchBar.getValue());
   }
@@ -47,16 +48,13 @@ class Header extends Component {
   }
 
   renderNormal = () => {
-    if (!this.props.search) {
-      return (
-        <View style={styles.normalContainerStyle} backgroundColor={MAIN_COLOR}>
-          {this.renderTitle()}
-          {this.renderMainButtons()}
-          {this.renderPrefButtons()}
-        </View>
-      );
-    }
-    return null;
+    return (
+      <View style={styles.normalContainerStyle} backgroundColor={MAIN_COLOR}>
+        {this.renderTitle()}
+        {this.renderMainButtons()}
+        {this.renderPrefButtons()}
+      </View>
+    );
   }
 
   render() {
@@ -72,30 +70,9 @@ class Header extends Component {
 const styles = {
   normalContainerStyle: {
     justifyContent: 'space-between',
-    height: (Platform.OS === 'ios' ? 52 : 52),
+    height: (Platform.OS === 'ios' ? 52 : 62),
     paddingTop: (Platform.OS === 'ios') ? 15 : 0,
     flexDirection: 'row',
-  },
-  searchContainerStyle: {
-    justifyContent: 'center',
-    height: (Platform.OS === 'ios' ? 52 : 52),
-    paddingTop: (Platform.OS === 'ios') ? 15 : 0,
-    flexDirection: 'row',
-  },
-  searchBoxStyle: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    height: 0.05 * height,
-    width: 0.96 * width,
-    padding: 10,
-    borderRadius: 4,
-    flexDirection: 'row',
-  },
-  searchTextStyle: {
-    fontFamily: 'avenir_heavy',
-    fontSize: 18,
-    color: 'white',
   },
   headerStyle: {
     fontSize: 20,

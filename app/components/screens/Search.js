@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Input, SearchDetail, SubjectDetail } from '../common';
+import { SearchBar, SearchDetail, SubjectDetail } from '../common';
 
 const algoliasearch = require('algoliasearch/reactnative');
 
@@ -12,9 +11,11 @@ class Search extends Component {
     teachers: [],
     subjects: [],
     rating: 3.5,
+    showSearchVal: false,
   };
 
   requestData = (queryObj) => {
+    // this.setState({ teachers: [], subjects: [] });
     const client = algoliasearch('HZZZN58AJ0', 'fd2e8b88f354f7b81eced75ff5991de5');
     const queries = [{
       indexName: 'teachers',
@@ -25,7 +26,7 @@ class Search extends Component {
       query: queryObj,
     }];
     if (queryObj === '') {
-      this.setState({ showSearchVal: false });
+      this.setState({ showSearchVal: false, teachers: [], subjects: [] });
     } else {
       client.search(queries, this.searchCallback.bind(this));
     }
@@ -40,14 +41,14 @@ class Search extends Component {
   }
 
   renderSubjects = () => {
-    if (this.state.subjects.length >= 1) {
+    if (this.state.subjects.length >= 1 && !this.state.showSearchVal) {
       return this.state.subjects.map(subject => <SubjectDetail key={subject.objectID} subject={subject} />);
     }
     return null;
   }
 
   renderTeachers = () => {
-    if (this.state.teachers.length >= 1) {
+    if (this.state.teachers.length >= 1 && !this.state.showSearchVal) {
       return this.state.teachers.map(teacher => <SearchDetail key={teacher.UID} person={teacher} />);
     }
     return null;
@@ -56,10 +57,7 @@ class Search extends Component {
   render() {
     return (
       <View style={{ width, height, alignItems: 'center', flex: 1 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Input icon="search" label="Search" cb={this.requestData} rkt='search' />
-          <Icon name="filter-variant" size={22} style={{ padding: 5 }} />
-        </View>
+        <SearchBar searchCallback={queryobj => this.requestData(queryobj)} rkt="search" />
         <ScrollView style={{ flex: 1 }}>
           <Text style={styles.topResultTextStyle}>
             {this.state.subjects.length >= 1 ? 'Subjects' : ''}
