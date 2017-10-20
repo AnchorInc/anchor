@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Dimensions } from 'react-native';
 import { Header } from '../common';
 import ClassList from '../common/ClassList';
+import { BACKGROUND_COLOR } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -12,7 +13,7 @@ class Classes extends Component {
 
   render() {
     return (
-      <View style={{ width, height }}>
+      <View style={{ width, height, backgroundColor: BACKGROUND_COLOR }}>
         <Header title='Home' onPress={() => this.props.navigation.navigate('Profile')} color='#01152d' mainButtons />
         <ClassList onPress={person => this.onPress(person)} />
       </View>

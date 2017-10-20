@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions } from 'react-native';
 import { SearchBar, SearchDetail, SubjectDetail } from '../common';
+import { BACKGROUND_COLOR } from '../../config';
 
 const algoliasearch = require('algoliasearch/reactnative');
 
@@ -56,7 +57,7 @@ class Search extends Component {
 
   render() {
     return (
-      <View style={{ width, height, alignItems: 'center', flex: 1 }}>
+      <View style={styles.containerStyle}>
         <SearchBar searchCallback={queryobj => this.requestData(queryobj)} rkt="search" />
         <ScrollView style={{ flex: 1 }}>
           <Text style={styles.topResultTextStyle}>
@@ -74,6 +75,13 @@ class Search extends Component {
 }
 
 const styles = {
+  containerStyle: {
+    width,
+    height,
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: BACKGROUND_COLOR,
+  },
   topResultTextStyle: {
     fontSize: 22,
     color: 'black',

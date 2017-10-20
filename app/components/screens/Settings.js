@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { Header } from '../common';
+import { BACKGROUND_COLOR } from '../../config';
 
 class Settings extends Component {
   state = {
@@ -13,7 +14,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.containerStyle}>
         <Header title='Settings' />
         <View style={styles.headerStyle}>
           <Text style={styles.textStyle}>General</Text>
@@ -30,6 +31,9 @@ class Settings extends Component {
 }
 
 const styles = {
+  containerStyle: {
+    backgroundColor: BACKGROUND_COLOR,
+  },
   headerStyle: {
     backgroundColor: '#d5d5d5',
     justifyContent: 'center',
