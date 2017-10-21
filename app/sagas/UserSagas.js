@@ -5,6 +5,9 @@ import { rsf } from '../App';
 import { syncUser, getUser } from '../actions';
 import { types } from '../config';
 
+/**
+ * FIXME: add actual code that updates the user
+*/
 function* updateUser() {
   yield console.log('updating user profile');
 }

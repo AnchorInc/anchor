@@ -6,7 +6,7 @@ import { ClassesStack } from '../../navigation/Router';
 class Main extends Component {
   componentWillMount() {
     if (!this.props.donePref) {
-      this.props.navigation.navigate('Preferences');
+      this.props.navigation.navigate('ProfileEditing');
     }
   }
 

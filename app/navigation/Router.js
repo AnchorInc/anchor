@@ -8,7 +8,7 @@ import Main from '../components/screens/Main';
 import Login from '../components/screens/Login';
 import Profile from '../components/screens/Profile';
 import TeacherProfile from '../components/screens/TeacherProfile';
-import Preferences from '../components/screens/Preferences';
+import ProfileEditing from '../components/screens/ProfileEditing';
 
 const TabNavigatorConfig = {
   navigationOptions: ({ navigation }) => ({
@@ -76,7 +76,7 @@ export const MainStack = StackNavigator({
   AppSetup: { screen: AppSetup },
   Login: { screen: Login },
   Main: { screen: Main },
-  Preferences: { screen: Preferences },
+  ProfileEditing: { screen: ProfileEditing },
 }, MainStackConfig);
 
 const defaultGetStateForAction = MainStack.router.getStateForAction;
@@ -88,7 +88,9 @@ MainStack.router.getStateForAction = (action, state) => {
     action.type === NavigationActions.BACK &&
     (state.routes[state.index].routeName === 'AppSetup' ||
       state.routes[state.index].routeName === 'Login' ||
-      state.routes[state.index].routeName === 'Main')
+      state.routes[state.index].routeName === 'Main'
+      // state.routes[state.index].routeName === 'ProfileEditing'
+    )
   ) { return null; }
 
   return defaultGetStateForAction(action, state);
