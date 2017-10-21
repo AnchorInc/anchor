@@ -38,7 +38,7 @@ class Profile extends Component {
             </View>
           </View>
           <ScrollView>
-            <ListDetail contentText={this.props.user.email}>
+            <ListDetail>
               <Icon name='account' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
               <View>
                 <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Contact Information</Text>

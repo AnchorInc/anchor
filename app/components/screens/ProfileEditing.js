@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Dimensions, Text, TextInput, TouchableOpacity, DatePickerAndroid, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Header } from '../common';
-import { MAIN_COLOR } from '../../config';
+import { MAIN_COLOR, ACCENT_COLOR } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -20,7 +20,7 @@ class ProfileEditing extends Component {
       ['phoneNumber', 'What is your phone number?'],
       ['age', 'How old are you?'],
       ['photoURL', 'Please choose your profile photo'],
-      ['header', 'Please choose your   cover photo'],
+      ['header', 'Please choose your  cover photo'],
     ],
     response: {},
     questionIndex: 0,
@@ -29,15 +29,17 @@ class ProfileEditing extends Component {
 
   prefBackButton = () => this.setState({ questionIndex: this.state.questionIndex - 1 });
   prefNextButton = () => this.setState({ questionIndex: this.state.questionIndex + 1 });
+  prefDoneButton = () => this.props.navigation.goBack();
 
-  renderTextInput = (defaultValue, placeHolder, keyboardType) => {
+  renderTextInput = (defaultValue, placeHolder, keyboardType, autocapitalize) => {
     return (<TextInput
       style={styles.responseTextInputStyle}
       placeholder={placeHolder}
       placeholderTextColor='#4f5d6d'
       defaultValue={defaultValue}
-      underlineColorAndroid='transparent'
+      underlineColorAndroid={ACCENT_COLOR}
       keyboardType={keyboardType}
+      autoCapitalize={autocapitalize}
       caretHidden
     />);
   }
@@ -58,7 +60,7 @@ class ProfileEditing extends Component {
         this.setState({ editField: false });
       }
     } catch ({ code, message }) {
-      console.warn(`Cannot open date picker: ${message}`);
+     console.warn(`Cannot open date picker: ${message}`);
     }
   }
 
@@ -94,14 +96,14 @@ class ProfileEditing extends Component {
   renderOptions = () => {
     switch (this.state.questions[this.state.questionIndex][0]) {
       case 'displayName':
-        return this.renderTextInput(this.props.user.displayName, 'Enter Full Name');
+        return this.renderTextInput(this.props.user.displayName, 'Enter Full Name', 'default', 'words');
       case 'email':
-        return this.renderTextInput(this.props.user.email, 'Enter Email Address');
+        return this.renderTextInput(this.props.user.email, 'Enter Email Address', 'email-address');
       case 'phoneNumber':
         return this.renderTextInput(this.props.user.phoneNumber, 'Enter Phone Number', 'numeric');
       case 'age':
-        return this.renderAgeInput();
-      case 'photoURL':
+       return this.renderAgeInput();
+     case 'photoURL':
         return this.renderPhotoURL();
       case 'header':
         // TODO: finish renderHeader method
@@ -128,8 +130,10 @@ class ProfileEditing extends Component {
           title="Profile"
           showPrefBackButton={(this.state.questionIndex > 0)}
           showPrefNextButton={(this.state.questionIndex < this.state.questions.length - 1)}
+          showPrefDoneButton={(this.state.questionIndex == this.state.questions.length - 1)}
           prefBackButton={this.prefBackButton}
           prefNextButton={this.prefNextButton}
+          prefDoneButton={this.prefDoneButton}
           prefButtons
         />
         {this.renderQuestions()}
@@ -168,12 +172,12 @@ const styles = {
     textAlign: 'center',
   },
   dobButtonContainerStyle: {
-    backgroundColor: MAIN_COLOR,
+    backgroundColor: ACCENT_COLOR,
     width: 0.6 * width,
     height: 0.08 * height,
     justifyContent: 'center',
   },
-  dobButtonTextStyle: {
+   dobButtonTextStyle: {
     color: 'white',
     textAlign: 'center',
     fontFamily: 'avenir_roman',

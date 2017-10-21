@@ -48,12 +48,24 @@ class Header extends Component {
     return null;
   }
 
+  renderPrefDoneButton = () => {
+    if (this.props.showPrefDoneButton) {
+      return (
+        <TouchableOpacity onPress={this.props.prefDoneButton}>
+          <Icon name='check' color='white' size={24} />
+        </TouchableOpacity>
+      );
+    }
+    return null;
+  }
+
   renderPrefButtons = () => {
     if (this.props.prefButtons) {
       return (
         <View style={styles.buttonContainerStyle}>
           {this.renderPrefBackButton()}
           {this.renderPrefNextButton()}
+          {this.renderPrefDoneButton()}
         </View>
       );
     }
