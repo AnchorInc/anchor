@@ -130,7 +130,7 @@ class ProfileEditing extends Component {
           title="Profile"
           showPrefBackButton={(this.state.questionIndex > 0)}
           showPrefNextButton={(this.state.questionIndex < this.state.questions.length - 1)}
-          showPrefDoneButton={(this.state.questionIndex == this.state.questions.length - 1)}
+          showPrefDoneButton={(this.state.questionIndex === this.state.questions.length - 1)}
           prefBackButton={this.prefBackButton}
           prefNextButton={this.prefNextButton}
           prefDoneButton={this.prefDoneButton}
