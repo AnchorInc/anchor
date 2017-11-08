@@ -26,50 +26,12 @@ class Header extends Component {
     return null;
   }
 
-  renderPrefBackButton = () => {
-    if (this.props.showPrefBackButton) {
-      return (
-        <TouchableOpacity style={{ paddingRight: 10 }} onPress={this.props.prefBackButton}>
-          <Icon name='arrow-left' color='white' size={24} />
-        </TouchableOpacity>
-      );
-    }
-    return null;
-  }
-
-  renderPrefNextButton = () => {
-    if (this.props.showPrefNextButton) {
-      return (
-        <TouchableOpacity onPress={this.props.prefNextButton}>
-          <Icon name='arrow-right' color='white' size={24} />
-        </TouchableOpacity>
-      );
-    }
-    return null;
-  }
-
-  renderPrefDoneButton = () => {
-    if (this.props.showPrefDoneButton) {
-      return (
-        <TouchableOpacity onPress={this.props.prefDoneButton}>
-          <Icon name='check' color='white' size={24} />
-        </TouchableOpacity>
-      );
-    }
-    return null;
-  }
-
   renderPrefButtons = () => {
-    if (this.props.prefButtons) {
-      return (
-        <View style={styles.buttonContainerStyle}>
-          {this.renderPrefBackButton()}
-          {this.renderPrefNextButton()}
-          {this.renderPrefDoneButton()}
-        </View>
-      );
-    }
-    return null;
+    return (<View style={styles.buttonContainerStyle}>
+      <TouchableOpacity onPress={this.props.onPress}>
+        <Icon name='check' color='white' size={24} style={{ paddingRight: 20 }} />
+      </TouchableOpacity>
+    </View>);
   }
 
   renderTitle = () => {
