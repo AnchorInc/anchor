@@ -8,8 +8,11 @@ import { types } from '../config';
 /**
  * FIXME: add actual code that updates the user
 */
-function* updateUser() {
-  yield console.log('updating user profile');
+function* updateUserSaga() {
+  const path = `/users/students/${firebase.auth().currentUser.uid}`;
+  yield call(rsf.database.patch, path, {
+    displayName: 'Potato Pie',
+  });
 }
 
 function* deleteUser() {
@@ -46,7 +49,7 @@ export function* watchUserRequests() {
   yield all([
     takeLatest(types.USER.START_SYNC, syncUserSaga),
     takeLatest(types.USER.GET, getUserSaga),
-    takeLatest(types.USER.UPDATE, updateUser),
+    takeLatest(types.USER.UPDATE, updateUserSaga),
     takeLatest(types.USER.DELETE, deleteUser),
   ]);
 }

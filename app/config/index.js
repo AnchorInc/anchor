@@ -7,7 +7,7 @@ export const DARK_GRAY = '#333';
 export const BOTTOM_BAR_ICON_NORMAL = '#858585';
 export const BOTTOM_BAR_ICON_FOCUSED = MAIN_COLOR;
 export const BOTTOM_BAR_COLOR = '#dfdfdf';
-export const BACKGROUND_COLOR = '#e3e3e3';
+export const BACKGROUND_COLOR = '#e9e9ef';
 
 // action types
 export const types = {

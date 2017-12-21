@@ -9,8 +9,8 @@ export const syncUser = (user) => {
   return { type: types.USER.SYNC, user };
 };
 
-export const updateUser = (payload) => {
-  return { type: types.USER.UPDATE, payload };
+export const updateUser = () => {
+  return { type: types.USER.UPDATE };
 };
 
 export const deleteUser = () => {

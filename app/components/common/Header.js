@@ -27,11 +27,16 @@ class Header extends Component {
   }
 
   renderPrefButtons = () => {
-    return (<View style={styles.buttonContainerStyle}>
-      <TouchableOpacity onPress={this.props.onPress}>
-        <Icon name='check' color='white' size={24} style={{ paddingRight: 20 }} />
-      </TouchableOpacity>
-    </View>);
+    if (this.props.prefButtons) {
+      return (
+        <View style={styles.prefContainerStyle}>
+          <TouchableOpacity onPress={this.props.onPress}>
+            <Icon name='check' color='white' size={24} />
+          </TouchableOpacity>
+        </View>
+      );
+    }
+    return null;
   }
 
   renderTitle = () => {
@@ -79,6 +84,13 @@ const styles = {
   buttonContainerStyle: {
     paddingRight: 0.05 * width,
     justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignSelf: 'center',
+  },
+  prefContainerStyle: {
+    paddingRight: 0.05 * width,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     flexDirection: 'row',
     alignSelf: 'center',
   },

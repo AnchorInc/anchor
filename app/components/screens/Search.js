@@ -59,7 +59,7 @@ class Search extends Component {
     return (
       <View style={styles.containerStyle}>
         <SearchBar searchCallback={queryobj => this.requestData(queryobj)} rkt="search" />
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1, backgroundColor: BACKGROUND_COLOR }}>
           <Text style={styles.topResultTextStyle}>
             {this.state.subjects.length >= 1 ? 'Subjects' : ''}
           </Text>
