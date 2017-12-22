@@ -5,13 +5,16 @@ import { rsf } from '../App';
 import { syncUser, getUser } from '../actions';
 import { types } from '../config';
 
-/**
- * FIXME: add actual code that updates the user
-*/
-function* updateUserSaga() {
+function* updateUserSaga(action) {
   const path = `/users/students/${firebase.auth().currentUser.uid}`;
+  console.log(action.user);
+  const { displayName, email, phoneNumber, photoURL, header } = action.user;
   yield call(rsf.database.patch, path, {
-    displayName: 'Potato Pie',
+    displayName,
+    email,
+    phoneNumber,
+    photoURL,
+    header,
   });
 }
 

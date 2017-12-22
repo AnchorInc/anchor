@@ -10,16 +10,19 @@ class Cover extends Component {
   };
 
   componentWillMount() {
-    colorsFromUrl(this.props.url, (err, colors) => {
-      if (!err) {
-        this.setState({ color: colors.vibrantColor });
-      }
-    });
+    if (!this.props.header) {
+      colorsFromUrl(this.props.url, (err, colors) => {
+        if (!err) {
+          this.setState({ color: colors.vibrantColor });
+        }
+      });
+      this.props.updateUser({ header: this.state.color });
+    }
   }
 
   render() {
     return (
-      <View style={[styles.coverStyle, { backgroundColor: this.state.color }]} />
+      <View style={[styles.coverStyle, { backgroundColor: this.props.header ? this.props.header : this.state.color }]} />
     );
   }
 }
