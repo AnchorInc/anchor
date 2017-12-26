@@ -7,15 +7,8 @@ import { types } from '../config';
 
 function* updateUserSaga(action) {
   const path = `/users/students/${firebase.auth().currentUser.uid}`;
-  console.log(action.user);
-  const { displayName, email, phoneNumber, photoURL, header } = action.user;
-  yield call(rsf.database.patch, path, {
-    displayName,
-    email,
-    phoneNumber,
-    photoURL,
-    header,
-  });
+  const db = firebase.database().ref(path);
+  yield db.update(action.user);
 }
 
 function* deleteUser() {

@@ -17,7 +17,7 @@ class ProfileEditing extends Component {
     return (
       <View>
         <Header title={this.props.user.displayName} prefButtons onPress={() => this.props.navigation.goBack()} />
-        <Cover url={this.props.user.photoURL} header={this.props.user.header} updateUser={updateUser} />
+        <Cover url={this.props.user.photoURL} header={this.props.user.header} updateUser={this.updateUser} />
         <Image source={{ uri: this.props.user.photoURL }} style={styles.profileStyle} />
         <TouchableOpacity style={styles.profileStyle} onPress={() => console.log('editing photo')}>
           <View style={{ width: 32, height: 32, backgroundColor: DARK_GRAY, alignItems: 'center', justifyContent: 'center', borderRadius: 16 }}>
