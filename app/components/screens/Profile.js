@@ -85,7 +85,11 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  return { user: state.user.user };
+  let user;
+  if (state.user.user) {
+    user = state.user.user;
+  }
+  return { user };
 };
 
 export default connect(mapStateToProps)(Profile);

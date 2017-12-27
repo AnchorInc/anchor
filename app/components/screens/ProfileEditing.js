@@ -26,9 +26,9 @@ class ProfileEditing extends Component {
         </TouchableOpacity>
         <View style={{ height: 70 }} />
         <ScrollView>
-          <Input placeholder='Name' cb={() => console.log('nithin')} defaultVal={this.props.user.displayName} />
-          <Input placeholder='Email' cb={() => console.log('nithin')} defaultVal={this.props.user.email} />
-          <Input placeholder='Phone' cb={() => console.log('nithin')} defaultVal={this.props.user.phone} />
+          <Input placeholder='Name' cb={() => console.log('name')} defaultVal={this.props.user.displayName} />
+          <Input placeholder='Email' cb={() => console.log('email')} defaultVal={this.props.user.email} />
+          <Input placeholder='Phone' cb={() => console.log('phone')} defaultVal={this.props.user.phone} />
         </ScrollView>
       </View>
     );
@@ -54,7 +54,11 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  return { user: state.user.user };
+  let user;
+  if (state.user.user) {
+    user = state.user.user;
+  }
+  return { user };
 };
 
 export default connect(mapStateToProps, { updateUser })(ProfileEditing);
