@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ListDetail, PopupMenu } from '../common';
+import { MAIN_COLOR } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -22,7 +23,7 @@ class Profile extends Component {
         <StatusBar hidden />
         <View style={styles.modalStyle}>
           <View style={styles.headerStyle}>
-            <Image source={{ uri: this.props.user.header }} style={styles.coverStyle}>
+            <View style={styles.coverStyle}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
                 <TouchableOpacity style={{ padding: 15, paddingTop: 24 }} onPress={() => this.props.navigation.goBack()}>
                   <Icon name='keyboard-backspace' size={24} color='white' />
@@ -31,7 +32,7 @@ class Profile extends Component {
                   <PopupMenu actions={['Edit']} onPress={() => console.log('pressed')} color='white' />
                 </View>
               </View>
-            </Image>
+            </View>
             <Image source={{ uri: this.props.user.photoURL }} style={styles.profileStyle} />
             <View style={{ height: 90, justifyContent: 'center', alignItems: 'center', paddingTop: 20 }}>
               <Text style={styles.nameStyle}>{this.props.user.displayName}</Text>
@@ -76,6 +77,7 @@ const styles = {
     height: 194,
     alignItems: 'center',
     justifyContent: 'flex-start',
+    backgroundColor: MAIN_COLOR,
   },
   nameStyle: {
     fontSize: 25,
