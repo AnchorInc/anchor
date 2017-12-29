@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Card, CardSection, ListDetail } from './';
+import { ListDetail } from './';
 
 const { width } = Dimensions.get('window');
 

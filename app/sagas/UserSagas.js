@@ -7,8 +7,7 @@ import { types } from '../config';
 
 function* updateUserSaga(action) {
   const path = `/users/students/${firebase.auth().currentUser.uid}`;
-  const db = firebase.database().ref(path);
-  yield db.update(action.user);
+  yield call(rsf.database.patch, path, action.user);
 }
 
 function* deleteUser() {
@@ -23,7 +22,7 @@ function* syncUserSaga() {
     const { value: user } = yield take(channel);
 
     try {
-      yield AsyncStorage.setItem('user_data', JSON.stringify(user, undefined, undefined));
+      yield call(AsyncStorage.setItem, 'user_data', JSON.stringify(user, undefined, undefined));
       yield put(getUser());
     } catch (error) {
       console.log(error);
@@ -33,8 +32,8 @@ function* syncUserSaga() {
 
 function* getUserSaga() {
   try {
-    const data = yield AsyncStorage.getItem('user_data');
-    const user = JSON.parse(data);
+    const data = yield call(AsyncStorage.getItem, 'user_data');
+    const user = yield call(JSON.parse, data);
     yield put(syncUser(user));
   } catch (error) {
     console.log(error);
