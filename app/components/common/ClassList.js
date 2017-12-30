@@ -12,48 +12,42 @@ class ClassList extends Component {
   state = {
     teachers: [],
     refreshing: false,
-    messageVisible: false,
-    isActivityVisible: false,
-    selectedActivity: '',
+    noBatches: true,
     isConnected: true,
-    gotBatchList: false,
   };
 
   componentWillMount() {
     NetInfo.isConnected.addEventListener(
-      'change',
-      this.handleConnectionChanged.bind(this),
+      'connectionChange',
+      this.handleConnectionChange.bind(this),
     );
   }
 
-  componentWillReceiveProps() {
-    this.callGetActivityList();
+  componentWillReceiveProps(props) {
+    this.refresh(props.batchList);
   }
 
-  getActivityList = () => {
-    this.setState({ teachers: [], refreshing: true, isConnected: true });
-    if (this.props.batchList !== null && this.props.batchList.length >= 1) {
-      this.props.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
-        .once('value')
-        .then(Class => firebase.database().ref(`/users/teachers/${Class.val().Teacher}`)
-          .once('value')
-          .then((teacher) => {
-            this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, messageVisible: false, isConnected: true, gotBatchList: true });
-          })));
-    } else if (this.props.batchList !== null && this.props.batchList.length === 0) {
-      this.setState({ refreshing: false, messageVisible: true, isConnected: true, gotBatchList: true });
+  getTeachersFromBatchList = (batchList) => {
+    this.setState({ teachers: [] });
+    batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
+    .once('value')
+    .then(Class => firebase.database().ref(`/users/teachers/${Class.val().Teacher}`)
+    .once('value')
+    .then((teacher) => {
+      this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, noBatches: false });
+    })));
+  }
+
+  refresh = (batchList) => {
+    this.setState({ refreshing: true, isConnected: true });
+    if (batchList) {
+      this.getTeachersFromBatchList(batchList);
     } else {
-      this.setState({ gotBatchList: false });
+      this.setState({ refreshing: false, noBatches: true });
     }
   }
 
-  callGetActivityList = () => {
-    if (this.props.batchList && !this.state.gotBatchList) {
-      this.getActivityList();
-    }
-  }
-
-  handleConnectionChanged = (isConnected) => {
+  handleConnectionChange = (isConnected) => {
     if (isConnected) {
       this.setState({ isConnected: true });
     } else {
@@ -61,48 +55,45 @@ class ClassList extends Component {
     }
   }
 
-  noBatchMessage = () => {
-    if (this.state.messageVisible) {
-      return (
-        <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
-          <Icon size={85} name='library-books' color='black' />
-          <Text style={{ paddingTop: 10, paddingBottom: 0, color: 'black', fontSize: 20, fontFamily: 'avenir_medium' }}>
-            You Are Not Enrolled In Any Class
-          </Text>
-          <Text style={{ padding: 10, color: '#727272', fontSize: 17, fontFamily: 'avenir_book' }}>
-            Search For Tutors Near You
-          </Text>
-        </View>
-      );
-    }
-    return null;
+  renderNoBatchMessage = () => {
+    return (
+      <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
+        <Icon size={85} name='library-books' color='black' />
+        <Text style={{ paddingTop: 10, paddingBottom: 0, color: 'black', fontSize: 20, fontFamily: 'avenir_medium' }}>
+          You Are Not Enrolled In Any Class
+        </Text>
+        <Text style={{ padding: 10, color: '#727272', fontSize: 17, fontFamily: 'avenir_book' }}>
+          Search For Tutors Near You
+        </Text>
+      </View>
+    );
   }
 
-  connectionIssueMessage = () => {
-    if (!(this.state.isConnected)) {
-      this.setState({ refreshing: false });
-      return (
-        <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
-          <Icon size={85} name='signal-wifi-off' color='black' />
-          <Text style={{ paddingTop: 10, paddingBottom: 0, color: 'black', fontSize: 20, fontFamily: 'avenir_medium' }}>
-            You Are Offline
-          </Text>
-          <Text style={{ padding: 10, color: '#727272', fontSize: 17, fontFamily: 'avenir_book', textAlign: 'center' }}>
-            Please Connect To The Internet And Try Again
-          </Text>
-        </View>
-      );
+  renderConnectionIssueMessage = () => {
+    if (this.state.isConnected) {
+      return null;
     }
-    return null;
+    this.setState({ refreshing: false });
+    return (
+      <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
+        <Icon size={85} name='signal-wifi-off' color='black' />
+        <Text style={{ paddingTop: 10, paddingBottom: 0, color: 'black', fontSize: 20, fontFamily: 'avenir_medium' }}>
+          Are you still online?
+        </Text>
+        <Text style={{ padding: 10, color: '#727272', fontSize: 17, fontFamily: 'avenir_book', textAlign: 'center' }}>
+          Better check that.
+        </Text>
+      </View>
+    );
   }
 
-  renderPeople = () => {
-    if (this.state.teachers != null && this.state.teachers.length >= 1) {
-      return this.state.teachers.map(teacher => (
-        <ClassDetail key={teacher.UID} person={teacher} onPress={this.props.onPress} />
-      ));
+  renderTeachers = () => {
+    if (this.state.noBatches) {
+      return this.renderNoBatchMessage();
     }
-    return null;
+    return this.state.teachers.map(teacher => (
+      <ClassDetail key={teacher.UID} person={teacher} onPress={this.props.onPress} />
+    ));
   }
 
   render() {
@@ -111,15 +102,14 @@ class ClassList extends Component {
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this.getActivityList}
+            onRefresh={this.refresh.bind(this, this.props.batchList)}
             colors={[ACCENT_COLOR]}
             tintColor={DARK_GRAY}
           />
         }
       >
-        {this.renderPeople()}
-        {this.noBatchMessage()}
-        {this.connectionIssueMessage()}
+        {this.renderTeachers()}
+        {this.renderConnectionIssueMessage()}
       </ScrollView>
     );
   }
@@ -127,7 +117,7 @@ class ClassList extends Component {
 
 const mapStateToProps = (state) => {
   let batchList = null;
-  if (state.user.user) {
+  if (state.user.user && state.user.user.batchList) {
     batchList = state.user.user.batchList;
   }
   return { batchList };
