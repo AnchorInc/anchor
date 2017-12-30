@@ -4,10 +4,13 @@ import { connect } from 'react-redux';
 import { ClassesStack } from '../../navigation/Router';
 
 class Main extends Component {
-  render() {
-    if (!this.props.donePref && this.props.batchList && this.props.user) {
+  componentWillMount() {
+    if (!this.props.donePref) {
       this.props.navigation.navigate('ProfileEditing');
     }
+  }
+
+  render() {
     return (
       <View style={{ flex: 1 }}>
         <ClassesStack />
@@ -18,16 +21,10 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
   let donePref;
-  let batchList;
-  let user = false;
-  if (state.user.user) {
-      batchList = state.user.user.batchList;
-      user = true;
-  }
   if (state.user.user) {
     donePref = state.user.user.donePref;
   }
-  return { donePref, batchList, user };
+  return { donePref };
 };
 
 export default connect(mapStateToProps)(Main);
