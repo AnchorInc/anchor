@@ -63,6 +63,7 @@ export const ClassesStack = StackNavigator({
   Classes: { screen: Tabs },
   Profile: { screen: Profile },
   TeacherProfile: { screen: TeacherProfile },
+  ProfileEditing: { screen: ProfileEditing },
 }, ClassesStackConfig);
 
 const MainStackConfig = {
@@ -89,7 +90,6 @@ MainStack.router.getStateForAction = (action, state) => {
     (state.routes[state.index].routeName === 'AppSetup' ||
       state.routes[state.index].routeName === 'Login' ||
       state.routes[state.index].routeName === 'Main'
-      // state.routes[state.index].routeName === 'ProfileEditing'
     )
   ) { return null; }
 

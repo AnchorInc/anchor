@@ -29,7 +29,7 @@ class Profile extends Component {
                   <Icon name='keyboard-backspace' size={24} color='white' />
                 </TouchableOpacity>
                 <View style={{ padding: 15, paddingTop: 24 }}>
-                  <PopupMenu actions={['Edit']} onPress={() => console.log('pressed')} color='white' />
+                  <PopupMenu actions={['Edit']} onPress={() => this.props.navigation.navigate('ProfileEditing')} color='white' />
                 </View>
               </View>
             </View>
