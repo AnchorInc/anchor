@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HeaderProfileButton from './HeaderProfileButton';
 import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config/';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class Header extends Component {
 
@@ -12,31 +12,18 @@ class Header extends Component {
     this.props.handleChangeText(this.searchBar.getValue());
   }
 
-  renderMainButtons = () => {
-    if (this.props.mainButtons) {
-      return (
-        <View style={styles.buttonContainerStyle}>
-          <TouchableOpacity>
-            <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
-          </TouchableOpacity>
-          <HeaderProfileButton onPress={this.props.onPress} />
-        </View>
-      );
+  renderButtons = () => {
+    if (!this.props.mainButtons) {
+      return null;
     }
-    return null;
-  }
-
-  renderPrefButtons = () => {
-    if (this.props.prefButtons) {
-      return (
-        <View style={styles.prefContainerStyle}>
-          <TouchableOpacity onPress={this.props.onPress}>
-            <Icon name='check' color='white' size={24} />
-          </TouchableOpacity>
-        </View>
-      );
-    }
-    return null;
+    return (
+      <View style={styles.buttonContainerStyle}>
+        <TouchableOpacity>
+          <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
+        </TouchableOpacity>
+        <HeaderProfileButton onPress={this.props.onPress} />
+      </View>
+    );
   }
 
   renderTitle = () => {
@@ -47,12 +34,11 @@ class Header extends Component {
     );
   }
 
-  renderNormal = () => {
+  renderHeader = () => {
     return (
       <View style={styles.normalContainerStyle} backgroundColor={MAIN_COLOR}>
         {this.renderTitle()}
-        {this.renderMainButtons()}
-        {this.renderPrefButtons()}
+        {this.renderButtons()}
       </View>
     );
   }
@@ -61,7 +47,7 @@ class Header extends Component {
     return (
       <View>
         <StatusBar backgroundColor={STATUS_BAR_COLOR} />
-        {this.renderNormal()}
+        {this.renderHeader()}
       </View>
     );
   }
@@ -70,7 +56,7 @@ class Header extends Component {
 const styles = {
   normalContainerStyle: {
     justifyContent: 'space-between',
-    height: (Platform.OS === 'ios' ? 52 : 62),
+    height: height * 0.08,
     paddingTop: (Platform.OS === 'ios') ? 15 : 0,
     flexDirection: 'row',
   },

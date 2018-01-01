@@ -20,7 +20,7 @@ class Profile extends Component {
   render() {
     return (
       <View>
-        <StatusBar hidden />
+        <StatusBar />
         <View style={styles.modalStyle}>
           <View style={styles.headerStyle}>
             <View style={styles.coverStyle}>
