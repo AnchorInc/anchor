@@ -107,7 +107,7 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width,
-    height: height * 0.08,
+    height: 0.09 * height,
     alignItems: 'center',
   },
   imageStyle: {

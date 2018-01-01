@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput, TouchableWithoutFeedback, TouchableOpacity, View, Dimensions, Platform } from 'react-native';
+import { Text, TextInput, TouchableWithoutFeedback, TouchableOpacity, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { MAIN_COLOR } from '../../config';
 
@@ -75,7 +75,7 @@ const styles = {
     flexDirection: 'row',
     backgroundColor: '#02254e',
     width,
-    height: 62,
+    height: 0.09 * height,
   },
   inputStyle: {
     width: 0.75 * width,
@@ -106,7 +106,7 @@ const styles = {
   searchContainerStyle: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: (Platform.OS === 'ios' ? 52 : 62),
+    height: 0.09 * height,
     width,
   },
 };
