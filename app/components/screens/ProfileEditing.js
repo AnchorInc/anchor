@@ -123,6 +123,8 @@ const styles = {
   buttonStyle: {
     color: 'white',
     justifyContent: 'flex-start',
+    paddingLeft: 0.05 * width,
+    paddingRight: 0.05 * width,
   },
   nameStyle: {
     color: 'white',

@@ -73,13 +73,6 @@ const styles = {
     flexDirection: 'row',
     alignSelf: 'center',
   },
-  prefContainerStyle: {
-    paddingRight: 0.05 * width,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    flexDirection: 'row',
-    alignSelf: 'center',
-  },
 };
 
 export { Header };
