@@ -2,7 +2,6 @@ export * from './ClassDetail';
 export * from './BatchDetail';
 export * from './Card';
 export * from './CardSection';
-export * from './Cover';
 export * from './ErrorMessage';
 export * from './Header';
 export * from './Input';

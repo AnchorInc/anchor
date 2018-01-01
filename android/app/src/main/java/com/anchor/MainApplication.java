@@ -8,7 +8,6 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 
 import com.facebook.react.ReactApplication;
-import cl.hasaezs.rndominantcolor.RNDominantColorPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;

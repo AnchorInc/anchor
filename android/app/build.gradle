@@ -134,7 +134,6 @@ android {
 
 dependencies {
     compile project(':react-native-splash-screen')
-    compile project(':react-native-dominant-color')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.facebook.react:react-native:+'
