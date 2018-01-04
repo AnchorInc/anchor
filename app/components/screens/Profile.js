@@ -44,7 +44,7 @@ class Profile extends Component {
               <View>
                 <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Contact Information</Text>
                 <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.props.user.email}</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.props.user.phoneNumber}</Text>
+                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.props.user.phone}</Text>
                 <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
               </View>
             </ListDetail>
