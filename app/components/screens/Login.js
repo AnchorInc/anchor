@@ -18,7 +18,7 @@ class Login extends Component {
     } = styles;
     return (
       <View style={{ flex: 1 }}>
-        <StatusBar  backgroundColor={STATUS_BAR_COLOR} />
+        <StatusBar backgroundColor={STATUS_BAR_COLOR} />
         <View style={containerStyle}>
         <Image
           style={logoStyle}

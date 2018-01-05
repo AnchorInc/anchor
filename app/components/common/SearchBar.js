@@ -53,7 +53,7 @@ class SearchBar extends Component {
     return (
       <TouchableWithoutFeedback onPress={() => this.setState({ search: true })}>
         <View style={styles.searchContainerStyle} backgroundColor={MAIN_COLOR}>
-          <View style={styles.searchBoxStyle} backgroundColor='#001d7b'>
+          <View style={styles.searchBoxStyle} backgroundColor='#001148'>
             <Text style={styles.searchTextStyle}>
               Search
             </Text>
