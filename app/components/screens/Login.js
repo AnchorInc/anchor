@@ -18,8 +18,7 @@ class Login extends Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar />
-        <View style={containerStyle}>
-        </View>
+        <View style={containerStyle} />
         <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
             <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.props.fbLoginRequest} />
