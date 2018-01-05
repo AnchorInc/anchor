@@ -90,7 +90,7 @@ const styles = {
   textStyle: {
     fontSize: 20,
     color: 'white',
-    paddingBottom: 15,
+    paddingBottom: 30,
   },
 };
 
