@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { MAIN_COLOR } from '../../config';
 import { updateUser } from '../../actions';
 
-const { height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class ProfileEditing extends Component {
   updateUser = (user) => {
@@ -19,13 +19,13 @@ class ProfileEditing extends Component {
         <View style={styles.headerContainerStyle}>
           <View style={styles.headerStyle}>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-              <Icon name='keyboard-backspace' size={24} style={styles.headerIconStyle} />
+              <Icon name='keyboard-backspace' size={24} style={styles.backIconStyle} />
             </TouchableOpacity>
             <Text style={styles.headerTextStyle}>
               Edit Profile
             </Text>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-              <Icon name='check' size={22} style={styles.headerIconStyle} />
+              <Icon name='check' size={22} style={styles.saveIconStyle} />
             </TouchableOpacity>
           </View>
           <View style={styles.profPicContainerStyle}>
@@ -59,9 +59,15 @@ const styles = {
     color: 'white',
     padding: 5,
   },
-  headerIconStyle: {
+  backIconStyle: {
     color: 'white',
-    padding: 6.5,
+    paddingTop: 5,
+    paddingLeft: 0.05 * width,
+  },
+  saveIconStyle: {
+    color: 'white',
+    paddingTop: 5,
+    paddingRight: 0.05 * width,
   },
   profPicContainerStyle: {
     flex: 3,
@@ -69,10 +75,10 @@ const styles = {
     alignItems: 'center',
   },
   profPicStyle: {
-    width: 100,
-    height: 100,
-    backgroundColor: "rgba(255,255,255,0.4)",
-    borderRadius: 100,
+    width: 105,
+    height: 105,
+    backgroundColor: 'rgba(255,255,255,0.4)',
+    borderRadius: 52.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
