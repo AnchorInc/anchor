@@ -79,6 +79,8 @@ const styles = {
     height: 105,
     backgroundColor: 'rgba(255,255,255,0.4)',
     borderRadius: 52.5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   profImageStyle: {
     width: 90,
