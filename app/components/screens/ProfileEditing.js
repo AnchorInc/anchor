@@ -75,19 +75,10 @@ const styles = {
     alignItems: 'center',
   },
   profPicStyle: {
-<<<<<<< HEAD
     width: 105,
     height: 105,
     backgroundColor: 'rgba(255,255,255,0.4)',
     borderRadius: 52.5,
-=======
-    width: 100,
-    height: 100,
-    backgroundColor: 'rgba(255,255,255,0.4)',
-    borderRadius: 100,
->>>>>>> dc99c38cdc33fac3ac888860f3128e99be189a3b
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   profImageStyle: {
     width: 90,
