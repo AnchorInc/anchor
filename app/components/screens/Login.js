@@ -5,7 +5,7 @@ import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config';
 import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
-const logo = require('../../res/Images/logo.png');
+const logo = require('../../res/images/logo.png');
 
 const { width, height } = Dimensions.get('window');
 
