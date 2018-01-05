@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { GoogleSignin } from 'react-native-google-signin';
-import { setCustomText } from 'react-native-global-props';
+import { setCustomText, setCustomStatusBar } from 'react-native-global-props';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
@@ -9,6 +9,7 @@ import ReduxSagaFirebase from 'redux-saga-firebase';
 import rootSaga from './sagas';
 import reducers from './reducers';
 import { MainStack } from './navigation/Router';
+import { STATUS_BAR_COLOR } from './config';
 
 console.disableYellowBox = true;
 
@@ -19,6 +20,7 @@ const customTextProps = {
 };
 
 setCustomText(customTextProps);
+setCustomStatusBar({ backgroundColor: STATUS_BAR_COLOR });
 
 const config = {
   apiKey: 'AIzaSyCGttWR24ng1Y87ruWfjAcGCISGLKz8jUE',

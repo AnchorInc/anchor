@@ -1,7 +1,7 @@
 // colors
-export const STATUS_BAR_COLOR = '#000a2a';
-export const MAIN_COLOR = '#000e3b';
-export const ACCENT_COLOR = '#bf3b3b';
+export const STATUS_BAR_COLOR = '#004FF4';
+export const MAIN_COLOR = '#0065F4';
+export const ACCENT_COLOR_RED = '#F63119';
 export const LIGHT_GRAY = '#dbdbdb';
 export const DARK_GRAY = '#333';
 export const BOTTOM_BAR_ICON_NORMAL = '#858585';

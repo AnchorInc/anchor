@@ -38,7 +38,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new RNDominantColorPackage(),
           new SplashScreenReactPackage(),
           new RNGoogleSigninPackage(),
           new VectorIconsPackage(),

@@ -4,13 +4,15 @@ import { LIGHT_GRAY } from '../../config';
 
 const { width } = Dimensions.get('window');
 
-const Input = ({ placeholder, defaultVal }) => {
+const Input = ({ placeholder, defaultVal, getValue, onEnd }) => {
   return (
     <View>
       <TextInput
         placeholder={placeholder}
         defaultValue={defaultVal}
         style={styles.textInputStyle}
+        onChangeText={getValue}
+        onEndEditing={onEnd}
         underlineColorAndroid='transparent'
       />
     </View>

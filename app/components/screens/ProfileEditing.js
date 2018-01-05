@@ -1,134 +1,90 @@
 import React, { Component } from 'react';
-import { View, Dimensions, TouchableOpacity, Image, ScrollView, Text, StatusBar } from 'react-native';
+import { View, Dimensions, TouchableOpacity, Image, Text, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Input } from '../common';
 import { MAIN_COLOR } from '../../config';
 import { updateUser } from '../../actions';
 
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 class ProfileEditing extends Component {
   updateUser = (user) => {
     this.props.updateUser(user);
   }
 
-  renderEditableFields = () => {
-    return (
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.cardStyle}>
-          <Text style={styles.nameStyle}>
-            Edit Your Profile Pic
-          </Text>
-          <View style={styles.cardSectionStyle}>
-            <TouchableOpacity onPress={() => console.log('editing profile pic')}>
-              <Image source={{ uri: this.props.user.photoURL }} style={styles.imageStyle} />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.cardStyle}>
-          <Text style={styles.nameStyle}>
-            Name
-          </Text>
-          <View style={styles.cardSectionStyle}>
-            <Input
-              placeholder='Name'
-              defaultVal={this.props.user.displayName}
-            />
-          </View>
-        </View>
-        <View style={styles.cardStyle}>
-          <Text style={styles.nameStyle}>
-            Email
-          </Text>
-          <View style={styles.cardSectionStyle}>
-            <Input
-              placeholder='Email'
-              defaultVal={this.props.user.email}
-            />
-          </View>
-        </View>
-        <View style={styles.cardStyle}>
-          <Text style={styles.nameStyle}>
-            Phone
-          </Text>
-          <View style={styles.cardSectionStyle}>
-            <Input
-              placeholder='Phone'
-              defaultVal={this.props.user.phone}
-            />
-          </View>
-        </View>
-      </ScrollView>
-    );
-  }
-
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center' }}>
+      <View>
         <StatusBar />
-        <View style={styles.containerStyle}>
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-            <Icon name='arrow-left' size={24} style={styles.buttonStyle} />
-          </TouchableOpacity>
-          <Text style={styles.headerStyle}>
-            Edit Your Profile
-          </Text>
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-            <Icon name='check' size={24} style={styles.buttonStyle} />
-          </TouchableOpacity>
+        <View style={styles.headerContainerStyle}>
+          <View style={styles.headerStyle}>
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+              <Icon name='keyboard-backspace' size={24} style={styles.headerIconStyle} />
+            </TouchableOpacity>
+            <Text style={styles.headerTextStyle}>
+              Edit Profile
+            </Text>
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+              <Icon name='check' size={22} style={styles.headerIconStyle} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.profPicContainerStyle}>
+            <TouchableOpacity style={styles.profPicStyle}>
+              <Image source={{ uri: this.props.user.photoURL }} style={styles.profImageStyle} />
+            </TouchableOpacity>
+            <Text style={styles.textStyle}>
+              {this.props.user.displayName}
+            </Text>
+          </View>
         </View>
-        {this.renderEditableFields()}
       </View>
     );
   }
 }
 
 const styles = {
-  cardStyle: {
+  headerContainerStyle: {
     backgroundColor: MAIN_COLOR,
-    borderRadius: 4,
-    marginTop: 15,
-    marginBottom: 15,
-    paddingTop: 30,
-    paddingLeft: 5,
-    paddingRight: 5,
-    alignItems: 'center',
-  },
-  cardSectionStyle: {
-    paddingLeft: 6,
-    paddingRight: 6,
-    paddingBottom: 30,
-    paddingTop: 15,
-    position: 'relative',
-  },
-  containerStyle: {
-    backgroundColor: MAIN_COLOR,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width,
-    height: 0.09 * height,
-    alignItems: 'center',
-  },
-  imageStyle: {
-    width: 0.24 * width,
-    height: 0.24 * width,
-    borderRadius: (0.24 * width) / 2,
+    height: 0.4 * height,
   },
   headerStyle: {
-    color: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 5,
+    flex: 1,
+  },
+  headerTextStyle: {
+    fontSize: 20,
     fontWeight: 'bold',
-    fontSize: 22,
-  },
-  buttonStyle: {
     color: 'white',
-    justifyContent: 'flex-start',
-    paddingLeft: 0.05 * width,
-    paddingRight: 0.05 * width,
+    padding: 5,
   },
-  nameStyle: {
+  headerIconStyle: {
     color: 'white',
-    fontSize: 18,
+    padding: 6.5,
+  },
+  profPicContainerStyle: {
+    flex: 3,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  profPicStyle: {
+    width: 100,
+    height: 100,
+    backgroundColor: 'rgba(255,255,255,0.4)',
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  profImageStyle: {
+    width: 90,
+    height: 90,
+    borderRadius: 100,
+  },
+  textStyle: {
+    fontSize: 20,
+    color: 'white',
+    paddingBottom: 15,
   },
 };
 

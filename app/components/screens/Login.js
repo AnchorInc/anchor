@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Image, Dimensions } from 'react-native';
+import { View, StatusBar, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-import { STATUS_BAR_COLOR } from '../../config';
+import SVGImage from 'react-native-svg-image';
+import { MAIN_COLOR } from '../../config';
 import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
-
-const loginHeader = require('../../res/images/loginHeader.png');
 
 const { width, height } = Dimensions.get('window');
 
@@ -17,14 +16,10 @@ class Login extends Component {
       logoStyle,
     } = styles;
     return (
-      <View style={{ flexDirection: 'column', flex: 1 }}>
-        <StatusBar
-          backgroundColor={STATUS_BAR_COLOR}
-        />
-        <View reacstyle={containerStyle}>
-          <Image source={loginHeader} style={logoStyle} />
+      <View style={{ flex: 1 }}>
+        <StatusBar />
+        <View style={containerStyle}>
         </View>
-
         <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
             <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.props.fbLoginRequest} />
@@ -48,22 +43,15 @@ const styles = {
   containerStyle: {
     flex: 2,
     justifyContent: 'center',
+    backgroundColor: MAIN_COLOR,
   },
   loginContainerStyle: {
     alignItems: 'center',
   },
   logoStyle: {
     alignSelf: 'center',
-    width,
+    width: 0.5 * width,
     height: 0.6 * height,
-    transform: [
-      {
-        scaleX: 1.04,
-      },
-      {
-        scaleY: 1,
-      },
-    ],
   },
 };
 
