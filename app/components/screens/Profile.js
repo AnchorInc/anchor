@@ -25,10 +25,10 @@ class Profile extends Component {
           <View style={styles.headerStyle}>
             <View style={styles.coverStyle}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
-                <TouchableOpacity style={{ padding: 15, paddingTop: 24 }} onPress={() => this.props.navigation.goBack()}>
+                <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
                   <Icon name='keyboard-backspace' size={24} color='white' />
                 </TouchableOpacity>
-                <View style={{ padding: 15, paddingTop: 24 }}>
+                <View style={{ padding: 15 }}>
                   <PopupMenu actions={['Edit']} onPress={() => this.props.navigation.navigate('ProfileEditing')} color='white' />
                 </View>
               </View>

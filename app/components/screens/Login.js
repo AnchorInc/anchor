@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StatusBar, Dimensions, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { MAIN_COLOR } from '../../config';
+import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config';
 import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
@@ -18,7 +18,7 @@ class Login extends Component {
     } = styles;
     return (
       <View style={{ flex: 1 }}>
-        <StatusBar />
+        <StatusBar  backgroundColor={STATUS_BAR_COLOR} />
         <View style={containerStyle}>
         <Image
           style={logoStyle}
