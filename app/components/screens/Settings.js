@@ -14,7 +14,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <View style={styles.containerStyle}>
+      <View>
         <Header title='Settings' />
         <View style={styles.headerStyle}>
           <Text style={styles.textStyle}>General</Text>
@@ -31,9 +31,6 @@ class Settings extends Component {
 }
 
 const styles = {
-  containerStyle: {
-    backgroundColor: BACKGROUND_COLOR,
-  },
   headerStyle: {
     backgroundColor: '#d5d5d5',
     justifyContent: 'center',

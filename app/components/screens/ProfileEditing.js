@@ -71,7 +71,7 @@ const styles = {
   profPicStyle: {
     width: 100,
     height: 100,
-    backgroundColor: "rgba(255,255,255,0.4)",
+    backgroundColor: 'rgba(255,255,255,0.4)',
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
