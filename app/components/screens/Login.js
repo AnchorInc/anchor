@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, StatusBar, Dimensions, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config';
+import { MAIN_COLOR } from '../../config';
 import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
-const logo = require('../../res/Images/logo.png');
+const logo = require('../../res/images/logo.png');
 
 const { width, height } = Dimensions.get('window');
 
@@ -18,11 +18,12 @@ class Login extends Component {
     } = styles;
     return (
       <View style={{ flex: 1 }}>
-        <StatusBar backgroundColor={STATUS_BAR_COLOR}/>
+        <StatusBar />
         <View style={containerStyle}>
         <Image
           style={logoStyle}
           source={logo}
+          resizeMode='contain'
         />
         </View>
         <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
@@ -55,16 +56,8 @@ const styles = {
   },
   logoStyle: {
     alignSelf: 'center',
-    width: 0.51 * width,
-    height: 0.44 * height,
-    transform: [
-      {
-        scaleX: 1,
-      },
-      {
-        scaleY: 1,
-      },
-    ],
+    width: 0.5 * width,
+    height: 0.6 * height,
   },
 };
 

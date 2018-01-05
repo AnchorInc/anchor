@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TextInput, TouchableWithoutFeedback, TouchableOpacity, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { MAIN_COLOR } from '../../config';
+import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -31,7 +31,7 @@ class SearchBar extends Component {
           this.props.searchCallback('');
           }}
         >
-          <Icon size={24} name="close" color='#4f5d6d' style={styles.iconStyle} />
+          <Icon size={24} name="close" color='white' style={styles.iconStyle} />
         </TouchableOpacity>
       );
     }
@@ -43,9 +43,9 @@ class SearchBar extends Component {
       return (
         <View style={styles.containerStyle}>
           <TouchableOpacity onPress={() => { this.setState({ search: false, editingInput: false }); this.props.searchCallback(''); }}>
-            <Icon size={24} name="keyboard-backspace" color='#4f5d6d' style={styles.iconStyle} />
+            <Icon size={24} name="keyboard-backspace" color='white' style={styles.iconStyle} />
           </TouchableOpacity>
-          <TextInput style={styles.inputStyle} placeholder="Search" placeholderTextColor='#4f5d6d' underlineColorAndroid='transparent' autoCapitalize='words' onChangeText={this.onChangeText} returnKeyType={this.props.rkt} autoFocus ref={(ref) => { this.searchBar = ref; }} />
+          <TextInput style={styles.inputStyle} placeholder="Search" placeholderTextColor='white' underlineColorAndroid='transparent' autoCapitalize='words' onChangeText={this.onChangeText} returnKeyType={this.props.rkt} autoFocus ref={(ref) => { this.searchBar = ref; }} />
           {this.showClearTextButton()}
         </View>
       );
@@ -53,7 +53,7 @@ class SearchBar extends Component {
     return (
       <TouchableWithoutFeedback onPress={() => this.setState({ search: true })}>
         <View style={styles.searchContainerStyle} backgroundColor={MAIN_COLOR}>
-          <View style={styles.searchBoxStyle} backgroundColor='#02254e'>
+          <View style={styles.searchBoxStyle} backgroundColor={STATUS_BAR_COLOR}>
             <Text style={styles.searchTextStyle}>
               Search
             </Text>
@@ -73,7 +73,7 @@ const styles = {
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: '#02254e',
+    backgroundColor: STATUS_BAR_COLOR,
     width,
     height: 0.09 * height,
   },
@@ -101,7 +101,7 @@ const styles = {
   searchTextStyle: {
     fontFamily: 'avenir_heavy',
     fontSize: 20,
-    color: '#4f5d6d',
+    color: 'white',
   },
   searchContainerStyle: {
     justifyContent: 'center',
