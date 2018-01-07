@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Dimensions, TouchableOpacity, Image, Text, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { MAIN_COLOR } from '../../config';
+import { MAIN_COLOR, ACCENT_COLOR } from '../../config';
 import { updateUser } from '../../actions';
 
 const { width, height } = Dimensions.get('window');
@@ -29,8 +29,11 @@ class ProfileEditing extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.profPicContainerStyle}>
-            <TouchableOpacity style={styles.profPicStyle}>
+            <View style={styles.profPicStyle}>
               <Image source={{ uri: this.props.user.photoURL }} style={styles.profImageStyle} />
+            </View>
+            <TouchableOpacity style={styles.editProfPicStyle}>
+              <Icon name='camera' size={24} color='white' />
             </TouchableOpacity>
             <Text style={styles.textStyle}>
               {this.props.user.displayName}
@@ -52,6 +55,13 @@ const styles = {
     justifyContent: 'space-between',
     paddingTop: 5,
     flex: 1,
+  },
+  editProfPicStyle: {
+    width: 0.2 * width,
+    height: 30,
+    backgroundColor: ACCENT_COLOR,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerTextStyle: {
     fontSize: 20,
