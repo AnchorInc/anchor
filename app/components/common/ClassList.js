@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ClassDetail } from './';
-import { DARK_GRAY, ACCENT_COLOR } from '../../config';
+import colors from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -103,8 +103,7 @@ class ClassList extends Component {
           <RefreshControl
             refreshing={this.state.refreshing}
             onRefresh={this.refresh.bind(this, this.props.batchList)}
-            colors={[ACCENT_COLOR]}
-            tintColor={DARK_GRAY}
+            colors={[colors.secondary.normal]}
           />
         }
       >

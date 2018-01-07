@@ -49,7 +49,7 @@ const styles = {
   },
   classStyle: {
     fontSize: 20,
-    color: '#000',
+    color: 'black',
     paddingBottom: 5,
   },
   headerStyle: {

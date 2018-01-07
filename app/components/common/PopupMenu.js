@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
- import { View, UIManager, findNodeHandle, TouchableOpacity } from 'react-native';
- import Icon from 'react-native-vector-icons/MaterialIcons';
-
- const ICON_SIZE = 24;
+import { View, UIManager, findNodeHandle, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
  class PopupMenu extends Component {
    static propTypes = {
@@ -42,7 +40,7 @@ import React, { Component, PropTypes } from 'react';
          <TouchableOpacity onPress={this.onPress}>
            <Icon
              name='more-vert'
-             size={ICON_SIZE}
+             size={24}
              color={this.props.color}
              ref={this.onRef}
            />

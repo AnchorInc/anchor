@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Dimensions, Platform, StatusBar, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HeaderProfileButton from './HeaderProfileButton';
-import { MAIN_COLOR } from '../../config/';
+import colors from '../../config/';
 
 const { width, height } = Dimensions.get('window');
 
@@ -36,7 +36,10 @@ class Header extends Component {
 
   renderHeader = () => {
     return (
-      <View style={styles.normalContainerStyle} backgroundColor={MAIN_COLOR}>
+      <View
+        style={styles.normalContainerStyle}
+        backgroundColor={colors.primary.normal}
+      >
         {this.renderTitle()}
         {this.renderButtons()}
       </View>

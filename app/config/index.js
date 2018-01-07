@@ -1,13 +1,21 @@
 // colors
-export const STATUS_BAR_COLOR = '#001148';
-export const MAIN_COLOR = '#001559';
-export const ACCENT_COLOR = '#e42252';
-export const LIGHT_GRAY = '#dbdbdb';
-export const DARK_GRAY = '#333';
-export const BOTTOM_BAR_ICON_NORMAL = '#858585';
-export const BOTTOM_BAR_ICON_FOCUSED = ACCENT_COLOR;
-export const BOTTOM_BAR_COLOR = '#dfdfdf';
-export const BACKGROUND_COLOR = '#e9e9ef';
+export const colors = {
+  primary: {
+    normal: '#1a237e',
+    light: '#534bae',
+    dark: '#000051',
+  },
+  secondary: {
+    normal: '#e91e63',
+    light: '#ff6090',
+    dark: '#b0003a',
+  },
+  other: {
+    bbIconNormal: '#858585',
+    bbNormal: '#dfdfdf',
+    bgColor: '#e9e9ef',
+  },
+};
 
 // action types
 export const types = {

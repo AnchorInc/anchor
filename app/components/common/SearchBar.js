@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TextInput, TouchableWithoutFeedback, TouchableOpacity, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { MAIN_COLOR } from '../../config';
+import colors from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -63,8 +63,8 @@ class SearchBar extends Component {
     }
     return (
       <TouchableWithoutFeedback onPress={() => this.setState({ search: true })}>
-        <View style={styles.searchContainerStyle} backgroundColor={MAIN_COLOR}>
-          <View style={styles.searchBoxStyle} backgroundColor='#3e62f6'>
+        <View style={styles.searchContainerStyle} backgroundColor={colors.primary.normal}>
+          <View style={styles.searchBoxStyle} backgroundColor={colors.primary.light}>
             <Text style={styles.searchTextStyle}>
               Search
             </Text>
