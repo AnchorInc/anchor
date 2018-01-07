@@ -1,30 +1,46 @@
 import React from 'react';
-import { View, TextInput, Dimensions } from 'react-native';
-import { LIGHT_GRAY } from '../../config';
+import { View, Text, TextInput, StyleSheet, Dimensions } from 'react-native';
+import { LIGHT_GRAY, DARK_GRAY } from '../../config';
 
 const { width } = Dimensions.get('window');
 
 const Input = ({ placeholder, defaultVal, getValue, onEnd }) => {
+  const {
+    containerStyle,
+    textStyle,
+    textInputStyle,
+  } = styles;
   return (
     <View>
-      <TextInput
-        placeholder={placeholder}
-        defaultValue={defaultVal}
-        style={styles.textInputStyle}
-        onChangeText={getValue}
-        onEndEditing={onEnd}
-        underlineColorAndroid='transparent'
-      />
+      <View style={containerStyle}>
+        <Text style={textStyle}>
+          {placeholder.toUpperCase()}
+        </Text>
+        <TextInput
+          defaultValue={defaultVal}
+          style={textInputStyle}
+          onChangeText={getValue}
+          onEndEditing={onEnd}
+          underlineColorAndroid='transparent'
+        />
+      </View>
+      <View style={{ width: width * 0.8, height: StyleSheet.hairlineWidth, backgroundColor: LIGHT_GRAY }} />
     </View>
   );
 };
 
 const styles = {
+  containerStyle: {
+    flexDirection: 'row',
+  },
+  textStyle: {
+    color: DARK_GRAY,
+    fontWeight: 'bold',
+    fontSize: 16,
+    padding: 10,
+  },
   textInputStyle: {
-    backgroundColor: LIGHT_GRAY,
-    borderRadius: 4,
-    width: 0.9 * width,
-    height: 45,
+    paddingBottom: 10,
   },
 };
 
