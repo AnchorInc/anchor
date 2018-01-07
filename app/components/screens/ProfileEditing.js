@@ -119,7 +119,7 @@ const styles = {
   textStyle: {
     fontSize: 20,
     color: 'white',
-    paddingBottom: 10,
+    paddingBottom: 20,
   },
 };
 
