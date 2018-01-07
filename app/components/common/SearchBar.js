@@ -45,7 +45,18 @@ class SearchBar extends Component {
           <TouchableOpacity onPress={() => { this.setState({ search: false, editingInput: false }); this.props.searchCallback(''); }}>
             <Icon size={24} name="keyboard-backspace" color='white' style={styles.iconStyle} />
           </TouchableOpacity>
-          <TextInput style={styles.inputStyle} placeholder="Search" placeholderTextColor='white' underlineColorAndroid='transparent' autoCapitalize='words' onChangeText={this.onChangeText} returnKeyType={this.props.rkt} autoFocus ref={(ref) => { this.searchBar = ref; }} />
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Search"
+            placeholderTextColor='white'
+            underlineColorAndroid='transparent'
+            autoCapitalize='words'
+            onChangeText={this.onChangeText}
+            returnKeyType={this.props.rkt}
+            ref={(ref) => { this.searchBar = ref; }}
+            selectionColor={'white'}
+            autoFocus
+          />
           {this.showClearTextButton()}
         </View>
       );
@@ -53,7 +64,7 @@ class SearchBar extends Component {
     return (
       <TouchableWithoutFeedback onPress={() => this.setState({ search: true })}>
         <View style={styles.searchContainerStyle} backgroundColor={MAIN_COLOR}>
-          <View style={styles.searchBoxStyle} backgroundColor={STATUS_BAR_COLOR}>
+          <View style={styles.searchBoxStyle} backgroundColor='#3e62f6'>
             <Text style={styles.searchTextStyle}>
               Search
             </Text>
@@ -73,7 +84,7 @@ const styles = {
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: STATUS_BAR_COLOR,
+    backgroundColor: '#3e62f6',
     width,
     height: 0.09 * height,
   },
