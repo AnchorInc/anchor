@@ -99,7 +99,7 @@ const styles = {
     paddingRight: 0.05 * width,
   },
   profPicContainerStyle: {
-    flex: 3,
+    flex: 4,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -119,7 +119,7 @@ const styles = {
   textStyle: {
     fontSize: 20,
     color: 'white',
-    paddingBottom: 30,
+    paddingBottom: 10,
   },
 };
 
