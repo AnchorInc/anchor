@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Dimensions, TouchableOpacity, Image, Text, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { MAIN_COLOR } from '../../config';
+import { colors } from '../../config';
 import { updateUser } from '../../actions';
 
 const { width, height } = Dimensions.get('window');
@@ -57,7 +57,7 @@ class ProfileEditing extends Component {
 
 const styles = {
   headerContainerStyle: {
-    backgroundColor: MAIN_COLOR,
+    backgroundColor: colors.primary.normal,
     height: 0.4 * height,
   },
   headerStyle: {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StatusBar, Dimensions, Image } from 'react-native';
 import { connect } from 'react-redux';
-import colors from '../../config';
+import { colors } from '../../config';
 import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 

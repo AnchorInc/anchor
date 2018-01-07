@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, UIManager, findNodeHandle, TouchableOpacity } from 'react-native';
+import { UIManager, findNodeHandle, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
  class PopupMenu extends Component {
@@ -36,16 +36,14 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
    render() {
      return (
-       <View>
-         <TouchableOpacity onPress={this.onPress}>
-           <Icon
-             name='more-vert'
-             size={24}
-             color={this.props.color}
-             ref={this.onRef}
-           />
-         </TouchableOpacity>
-       </View>
+       <TouchableOpacity onPress={this.onPress}>
+         <Icon
+           name='more-vert'
+           size={24}
+           color={this.props.color}
+           ref={this.onRef}
+         />
+       </TouchableOpacity>
      );
    }
  }

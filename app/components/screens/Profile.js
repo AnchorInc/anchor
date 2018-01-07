@@ -6,83 +6,122 @@ import {
   View,
   Image,
   Text,
-  ScrollView,
   TouchableOpacity,
-  StyleSheet,
+  ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ListDetail, PopupMenu } from '../common';
-import { MAIN_COLOR } from '../../config';
+import { ListDetail } from '../common';
+import { colors } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
 class Profile extends Component {
+
+  onPopupEvent = (eventName, index) => {
+    if (eventName !== 'itemSelected') return;
+    if (index === 0) this.props.navigation.navigate('ProfileEditing');
+    else this.onRemove();
+  }
+
   render() {
+    const {
+      headerContainerStyle,
+      headerStyle,
+      headerTextStyle,
+      profileStyle,
+      profileContainerStyle,
+      nameStyle,
+      nameContainerStyle,
+    } = styles;
     return (
       <View>
         <StatusBar />
-        <View style={styles.modalStyle}>
-          <View style={styles.headerStyle}>
-            <View style={styles.coverStyle}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
-                <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
-                  <Icon name='keyboard-backspace' size={24} color='white' />
-                </TouchableOpacity>
-                <View style={{ padding: 15 }}>
-                  <PopupMenu actions={['Edit']} onPress={() => this.props.navigation.navigate('ProfileEditing')} color='white' />
-                </View>
-              </View>
-            </View>
-            <Image source={{ uri: this.props.user.photoURL }} style={styles.profileStyle} />
-            <View style={{ height: 90, justifyContent: 'center', alignItems: 'center', paddingTop: 20 }}>
-              <Text style={styles.nameStyle}>{this.props.user.displayName}</Text>
-            </View>
+        <View style={headerContainerStyle}>
+          <View style={headerStyle}>
+            <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
+              <Icon name='arrow-left' size={24} color='white' />
+            </TouchableOpacity>
+            <Text style={headerTextStyle}>
+              Profile
+            </Text>
+            <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.navigate('ProfileEditing')}>
+              <Icon name='account-settings-variant' size={24} color='white' />
+            </TouchableOpacity>
           </View>
-          <ScrollView>
-            <ListDetail>
-              <Icon name='account' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
-              <View>
-                <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Contact Information</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.props.user.email}</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.props.user.phone}</Text>
-                <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
-              </View>
-            </ListDetail>
-          </ScrollView>
+          <View style={profileContainerStyle}>
+            <Image source={{ uri: this.props.user.photoURL }} style={profileStyle} />
+          </View>
         </View>
+        <View style={nameContainerStyle}>
+          <Text style={nameStyle}>
+            {this.props.user.displayName}
+          </Text>
+        </View>
+        <ScrollView>
+          <ListDetail
+            title={'First Name'}
+            value={this.props.user.displayName.substr(0, this.props.user.displayName.indexOf(' '))}
+          />
+          <ListDetail
+            title={'Last Name'}
+            value={this.props.user.displayName.substr(this.props.user.displayName.indexOf(' ') + 1, this.props.user.displayName.length)}
+          />
+          <ListDetail
+            title={'Email'}
+            value={this.props.user.email}
+          />
+          <ListDetail
+            title={'Phone Number'}
+            value={this.props.user.phone}
+          />
+        </ScrollView>
       </View>
     );
   }
 }
 const styles = {
-  modalStyle: {
-    width,
-    height,
-    backgroundColor: 'white',
-  },
-  profileStyle: {
-    width: 0.24 * width,
-    height: 0.24 * width,
-    borderRadius: (0.24 * width) / 2,
-    paddingLeft: 5,
-    paddingRight: 5,
-    alignSelf: 'center',
-    top: 144,
-    position: 'absolute',
+  headerContainerStyle: {
+    alignItems: 'center',
   },
   headerStyle: {
-    height: 260,
+    height: 0.3 * height,
+    backgroundColor: colors.primary.normal,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width,
   },
-  coverStyle: {
-    height: 194,
+  headerTextStyle: {
+    fontFamily: 'avenir_heavy',
+    fontSize: 20,
+    color: 'white',
+    padding: 15,
+  },
+  profileContainerStyle: {
+    position: 'absolute',
+    top: (height * 0.3) - ((0.27 * width) / 2),
+    width: width * 0.26,
+    height: width * 0.26,
+    backgroundColor: colors.other.bgColor,
+    borderRadius: 100,
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: MAIN_COLOR,
+  },
+  profileStyle: {
+    width: width * 0.25,
+    height: width * 0.25,
+    borderRadius: 100,
+  },
+  nameContainerStyle: {
+    paddingTop: 0.125 * width,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 0.0625 * width,
   },
   nameStyle: {
-    fontSize: 25,
+    fontSize: 20,
+    fontFamily: 'avenir_medium',
     color: 'black',
-    paddingTop: 10,
+    padding: 5,
   },
 };
 

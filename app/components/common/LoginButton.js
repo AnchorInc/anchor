@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import colors from '../../config';
+import { colors } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 

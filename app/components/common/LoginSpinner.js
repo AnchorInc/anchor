@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Modal, Text, ActivityIndicator, Dimensions } from 'react-native';
-import colors from '../../config';
+import { colors } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
