@@ -16,13 +16,6 @@ import { colors } from '../../config';
 const { width, height } = Dimensions.get('window');
 
 class Profile extends Component {
-
-  onPopupEvent = (eventName, index) => {
-    if (eventName !== 'itemSelected') return;
-    if (index === 0) this.props.navigation.navigate('ProfileEditing');
-    else this.onRemove();
-  }
-
   render() {
     const {
       headerContainerStyle,
