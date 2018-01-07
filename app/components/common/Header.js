@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Dimensions, Platform, StatusBar, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HeaderProfileButton from './HeaderProfileButton';
-import { MAIN_COLOR, STATUS_BAR_COLOR } from '../../config/';
+import { MAIN_COLOR } from '../../config/';
 
 const { width, height } = Dimensions.get('window');
 
@@ -46,7 +46,7 @@ class Header extends Component {
   render() {
     return (
       <View>
-        <StatusBar backgroundColor={STATUS_BAR_COLOR} />
+        <StatusBar />
         {this.renderHeader()}
       </View>
     );
