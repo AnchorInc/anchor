@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, TouchableOpacity, Image, Text, StatusBar } from 'react-native';
+import { View, Modal, Dimensions, TouchableOpacity, Image, Text, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { MAIN_COLOR, ACCENT_COLOR } from '../../config';
@@ -12,6 +12,9 @@ class ProfileEditing extends Component {
     this.props.updateUser(user);
   }
 
+  showPhotoEditMenu() {
+  }
+
   render() {
     const {
       headerContainerStyle,
@@ -20,6 +23,8 @@ class ProfileEditing extends Component {
       headerIconStyle,
       profPicStyle,
       profImageStyle,
+      editProfPicStyle,
+      editProfStyle,
       profPicContainerStyle,
       textStyle,
     } = styles;
@@ -38,12 +43,12 @@ class ProfileEditing extends Component {
               <Icon name='check' size={22} style={headerIconStyle} />
             </TouchableOpacity>
           </View>
-          <View style={styles.profPicContainerStyle}>
-            <View style={styles.profPicStyle}>
-              <Image source={{ uri: this.props.user.photoURL }} style={styles.profImageStyle} />
+          <View style={profPicContainerStyle}>
+            <View style={profPicStyle}>
+              <Image source={{ uri: this.props.user.photoURL }} style={profImageStyle} />
             </View>
-            <TouchableOpacity style={styles.editProfPicStyle}>
-              <Icon name='camera' size={24} color='white' />
+            <TouchableOpacity onPress={this.showPhotoEditMenu} style={editProfPicStyle}>
+              <Text style={editProfStyle}>EDIT IMAGE</Text>
             </TouchableOpacity>
             <Text style={textStyle}>
               {this.props.user.displayName}
@@ -67,11 +72,19 @@ const styles = {
     flex: 1,
   },
   editProfPicStyle: {
-    width: 0.2 * width,
-    height: 30,
+    width: 0.35 * width,
+    height: 35,
     backgroundColor: ACCENT_COLOR,
+    borderRadius: 45,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 10,
+  },
+  editProfStyle: {
+    color: 'white',
+    fontFamily: 'avenir_light',
+    fontSize: 14,
+    textAlign: 'center',
   },
   headerTextStyle: {
     fontSize: 20,
