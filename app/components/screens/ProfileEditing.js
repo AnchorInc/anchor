@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Dimensions, TouchableOpacity, Image, Text, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { MAIN_COLOR, ACCENT_COLOR } from '../../config';
+import { MAIN_COLOR } from '../../config';
 import { updateUser } from '../../actions';
 
 const { width, height } = Dimensions.get('window');
