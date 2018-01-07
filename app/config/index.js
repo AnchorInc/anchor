@@ -1,6 +1,6 @@
 // colors
-export const STATUS_BAR_COLOR = '#004ae3';
-export const MAIN_COLOR = '#004ff4';
+export const STATUS_BAR_COLOR = '#0b36e5';
+export const MAIN_COLOR = '#1E48F4';
 export const ACCENT_COLOR = '#e42252';
 export const LIGHT_GRAY = '#dbdbdb';
 export const DARK_GRAY = '#333';

@@ -13,19 +13,29 @@ class ProfileEditing extends Component {
   }
 
   render() {
+    const {
+      headerContainerStyle,
+      headerStyle,
+      headerTextStyle,
+      headerIconStyle,
+      profPicStyle,
+      profImageStyle,
+      profPicContainerStyle,
+      textStyle,
+    } = styles;
     return (
       <View>
         <StatusBar />
-        <View style={styles.headerContainerStyle}>
-          <View style={styles.headerStyle}>
+        <View style={headerContainerStyle}>
+          <View style={headerStyle}>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-              <Icon name='keyboard-backspace' size={24} style={styles.backIconStyle} />
+              <Icon name='keyboard-backspace' size={24} style={headerIconStyle} />
             </TouchableOpacity>
-            <Text style={styles.headerTextStyle}>
+            <Text style={headerTextStyle}>
               Edit Profile
             </Text>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-              <Icon name='check' size={22} style={styles.saveIconStyle} />
+              <Icon name='check' size={22} style={headerIconStyle} />
             </TouchableOpacity>
           </View>
           <View style={styles.profPicContainerStyle}>
@@ -35,7 +45,7 @@ class ProfileEditing extends Component {
             <TouchableOpacity style={styles.editProfPicStyle}>
               <Icon name='camera' size={24} color='white' />
             </TouchableOpacity>
-            <Text style={styles.textStyle}>
+            <Text style={textStyle}>
               {this.props.user.displayName}
             </Text>
           </View>
@@ -69,14 +79,10 @@ const styles = {
     color: 'white',
     padding: 5,
   },
-  backIconStyle: {
+  headerIconStyle: {
     color: 'white',
     paddingTop: 5,
     paddingLeft: 0.05 * width,
-  },
-  saveIconStyle: {
-    color: 'white',
-    paddingTop: 5,
     paddingRight: 0.05 * width,
   },
   profPicContainerStyle: {
