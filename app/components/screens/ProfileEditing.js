@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Dimensions, TouchableOpacity, Image, Text, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { InputForm } from '../common';
 import { colors } from '../../config';
 import { updateUser } from '../../actions';
 
@@ -20,36 +21,39 @@ class ProfileEditing extends Component {
       headerContainerStyle,
       headerStyle,
       headerTextStyle,
-      headerIconStyle,
-      profPicStyle,
-      profImageStyle,
-      profPicContainerStyle,
-      textStyle,
+      profileStyle,
+      profileContainerStyle,
+      buttonContainerStyle,
+      nameStyle,
+      nameContainerStyle,
     } = styles;
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <StatusBar />
         <View style={headerContainerStyle}>
           <View style={headerStyle}>
-            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-              <Icon name='keyboard-backspace' size={24} style={headerIconStyle} />
-            </TouchableOpacity>
-            <Text style={headerTextStyle}>
-              Edit Profile
-            </Text>
-            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-              <Icon name='check' size={22} style={headerIconStyle} />
-            </TouchableOpacity>
-          </View>
-          <View style={profPicContainerStyle}>
-            <View style={profPicStyle}>
-              <Image source={{ uri: this.props.user.photoURL }} style={profImageStyle} />
+            <View style={buttonContainerStyle}>
+              <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
+                <Icon name='arrow-left' size={24} color='white' />
+              </TouchableOpacity>
+              <Text style={headerTextStyle}>
+                Profile
+              </Text>
+              <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
+                <Icon name='check' size={24} color='white' />
+              </TouchableOpacity>
             </View>
-            <Text style={textStyle}>
-              {this.props.user.displayName}
-            </Text>
+          </View>
+          <View style={profileContainerStyle}>
+            <Image source={{ uri: this.props.user.photoURL }} style={profileStyle} />
           </View>
         </View>
+        <View style={nameContainerStyle}>
+          <Text style={nameStyle}>
+            {this.props.user.displayName}
+          </Text>
+        </View>
+        <InputForm updateUser={user => this.updateUser(user)} user={this.props.user} />
       </View>
     );
   }
@@ -57,51 +61,52 @@ class ProfileEditing extends Component {
 
 const styles = {
   headerContainerStyle: {
-    backgroundColor: colors.primary.normal,
-    height: 0.4 * height,
+    alignItems: 'center',
   },
-  headerStyle: {
+  buttonContainerStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 5,
-    flex: 1,
+    width,
+  },
+  headerStyle: {
+    height: 0.3 * height,
+    backgroundColor: colors.primary.normal,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width,
   },
   headerTextStyle: {
+    fontFamily: 'avenir_heavy',
     fontSize: 20,
-    fontWeight: 'bold',
     color: 'white',
-    padding: 5,
+    padding: 15,
   },
-  headerIconStyle: {
-    color: 'white',
-    paddingTop: 5,
-    paddingLeft: 0.05 * width,
-    paddingRight: 0.05 * width,
-  },
-  profPicContainerStyle: {
-    flex: 3,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingBottom: 30,
-  },
-  profPicStyle: {
-    width: width * 0.3,
-    height: width * 0.3,
-    backgroundColor: 'rgba(255,255,255,0.4)',
+  profileContainerStyle: {
+    position: 'absolute',
+    top: (height * 0.3) - ((0.27 * width) / 2),
+    width: width * 0.26,
+    height: width * 0.26,
+    backgroundColor: colors.other.bgColor,
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  profImageStyle: {
-    width: width * 0.27,
-    height: width * 0.27,
+  profileStyle: {
+    width: width * 0.25,
+    height: width * 0.25,
     borderRadius: 100,
   },
-  textStyle: {
+  nameContainerStyle: {
+    paddingTop: 0.125 * width,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 10,
+  },
+  nameStyle: {
     fontSize: 20,
-    color: 'white',
-    paddingRight: 20,
-    paddingLeft: 20,
+    fontFamily: 'avenir_medium',
+    color: 'black',
+    padding: 5,
   },
 };
 

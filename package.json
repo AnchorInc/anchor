@@ -15,6 +15,8 @@
     "react-native-fbsdk": "^0.6.0",
     "react-native-global-props": "^1.1.1",
     "react-native-google-signin": "^0.10.0",
+    "react-native-keyboard-aware-scrollview": "^2.0.0",
+    "react-native-material-textfield": "^0.11.0",
     "react-native-splash-screen": "^3.0.1",
     "react-native-star-rating": "^1.0.7",
     "react-native-vector-icons": "^4.2.0",
