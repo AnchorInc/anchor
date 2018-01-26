@@ -49,7 +49,7 @@ class Header extends Component {
   render() {
     return (
       <View>
-        <StatusBar />
+        <StatusBar backgroundColor={colors.primary.dark} />
         {this.renderHeader()}
       </View>
     );

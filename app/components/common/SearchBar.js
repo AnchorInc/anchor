@@ -64,7 +64,7 @@ class SearchBar extends Component {
     return (
       <TouchableWithoutFeedback onPress={() => this.setState({ search: true })}>
         <View style={styles.searchContainerStyle} backgroundColor={colors.primary.normal}>
-          <View style={styles.searchBoxStyle} backgroundColor={colors.primary.light}>
+          <View style={styles.searchBoxStyle} backgroundColor='#232fa8'>
             <Text style={styles.searchTextStyle}>
               Search
             </Text>
@@ -84,7 +84,7 @@ const styles = {
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: '#3e62f6',
+    backgroundColor: '#232fa8',
     width,
     height: 0.09 * height,
   },

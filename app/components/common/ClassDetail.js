@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, Image, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Card, CardSection } from './';
+import { colors } from '../../config';
 
 
 const { width } = Dimensions.get('window');
@@ -10,16 +11,16 @@ const ClassDetail = ({ person, onPress }) => {
       <TouchableOpacity onPress={onPress.bind(this, person)}>
         <Card style={{ flex: 1, flexDirection: 'row' }}>
           <CardSection>
-            <Image style={styles.headerStyle} source={{ uri: person.Header }} />
+            <View style={styles.headerStyle} />
             <View style={styles.containerStyle}>
-              <Image style={styles.profileStyle} source={{ uri: person.Profile }} />
+              <Image style={styles.profileStyle} source={{ uri: person.photoURL }} />
             </View>
             <View style={{ width: 0.93 * width, height: 0.09 * width }} />
           </CardSection>
           <CardSection>
             <View style={styles.textContainerStyle}>
-              <Text style={styles.classStyle}>{person.Subject}</Text>
-              <Text style={styles.nameStyle}>{person.Name}</Text>
+              <Text style={styles.classStyle}>{person.subject}</Text>
+              <Text style={styles.nameStyle}>{person.displayName}</Text>
             </View>
           </CardSection>
         </Card>
@@ -29,16 +30,17 @@ const ClassDetail = ({ person, onPress }) => {
 
 const styles = {
   profileStyle: {
-    height: 0.13 * width,
-    width: 0.13 * width,
+    height: 0.17 * width,
+    width: 0.17 * width,
+    borderRadius: 100,
     alignSelf: 'center',
     resizeMode: 'cover',
   },
   containerStyle: {
     width: 0.18 * width,
     height: 0.18 * width,
-    borderRadius: (0.18 * width) / 2,
-    backgroundColor: '#d5d5d5',
+    borderRadius: 100,
+    backgroundColor: 'white',
     paddingLeft: 5,
     paddingRight: 5,
     justifyContent: 'center',
@@ -57,6 +59,7 @@ const styles = {
     height: 0.25 * width,
     borderRadius: 4,
     flex: 2,
+    backgroundColor: colors.primary.normal,
   },
   textContainerStyle: {
     justifyContent: 'center',

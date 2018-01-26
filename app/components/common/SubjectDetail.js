@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, Dimensions, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const { width } = Dimensions.get('window');
 
@@ -8,9 +7,6 @@ const SubjectDetail = ({ subject, onPress }) => {
   return (
     <View style={styles.containerStyle}>
       <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
-        <View style={styles.iconContainerStyle}>
-          <Icon name="run" size={24} />
-        </View>
         <View style={styles.textContainerStyle}>
           <Text style={styles.subjectStyle}>{subject.Subject}</Text>
         </View>

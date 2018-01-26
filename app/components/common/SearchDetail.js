@@ -9,22 +9,23 @@ const SearchDetail = ({ person, onPress }) => {
     <View style={styles.containerStyle}>
       <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
         <View style={styles.profileContainerStyle}>
-          <Image style={styles.profileStyle} source={{ uri: person.Profile }} />
+          <Image style={styles.profileStyle} source={{ uri: person.photoURL }} />
         </View>
         <View style={styles.textContainerStyle}>
-          <Text style={styles.nameStyle}>{person.Name}</Text>
-          <Text style={styles.classStyle}>{person.Subject}</Text>
+          <Text style={styles.nameStyle}>{person.displayName}</Text>
+          <Text style={styles.classStyle}>{person.subject}</Text>
         </View>
       </TouchableOpacity>
-      <PopupMenu actions={['View Profile', 'Contact']} onPress={() => console.log('pressed')} color='#888' />
+      <PopupMenu actions={['Contact']} onPress={() => console.log('pressed')} color='#888' />
     </View>
   );
 };
 
 const styles = {
   profileStyle: {
-    height: 0.11 * width,
-    width: 0.11 * width,
+    height: 0.13 * width,
+    width: 0.13 * width,
+    borderRadius: (0.13 * width) / 2,
     alignSelf: 'center',
     resizeMode: 'cover',
   },

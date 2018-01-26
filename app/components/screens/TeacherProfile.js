@@ -3,140 +3,157 @@ import {
   Dimensions,
   Image,
   ScrollView,
-  StyleSheet,
   TouchableOpacity,
   Text,
   View,
   StatusBar,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import firebase from 'firebase';
 import StarRating from 'react-native-star-rating';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { colors } from '../../config';
 import { ListDetail, PopupMenu } from '../common';
 
 const { width, height } = Dimensions.get('window');
 
 class TeacherProfile extends Component {
   state = {
-    name: '',
-    email: '',
-    phoneNumber: '',
-    profilePictureURL: '#fff',
-    header: '#fff',
-    subject: '',
-    experience: '',
-    rating: 0,
-    price: '',
-    location: '',
-    batchList: [],
     teacher: this.props.navigation.state.params.person,
+    batches: [],
+    messages: [],
+    time: 'time',
+    place: 'place',
   };
+
+  componentWillMount() {
+    this.getBatches();
+  }
+
+  getBatches() {
+    this.state.teacher.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
+      .once('value')
+      .then(Batch => this.setState({ time: Batch.val().time, place: Batch.val().place })),
+    );
+  }
 
   render() {
     return (
-      <View>
-        <StatusBar hidden />
-        <View style={styles.modalStyle}>
+      <View style={{ flex: 1 }}>
+        <StatusBar />
+        <View style={styles.headerContainerStyle}>
           <View style={styles.headerStyle}>
-            <Image source={{ uri: this.state.teacher.Header }} style={styles.coverStyle}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', width }}>
-                <TouchableOpacity style={{ padding: 15, paddingTop: 24 }} onPress={() => this.props.navigation.goBack()}>
-                  <Icon name='keyboard-backspace' size={24} color='white' />
-                </TouchableOpacity>
-                <View style={{ padding: 15, paddingTop: 24 }}>
-                  <PopupMenu actions={['Contact']} onPress={() => console.log('pressed')} color='white' />
-                </View>
-              </View>
-            </Image>
-            <View style={styles.containerStyle}>
-              <Image source={{ uri: this.state.teacher.Profile }} style={styles.profileStyle} />
-            </View>
-            <View style={{ height: 110, justifyContent: 'center', alignItems: 'center', paddingTop: 20 }}>
-              <Text style={styles.nameStyle}>{this.state.teacher.Name}</Text>
-              <Text style={styles.classStyle}>{this.state.teacher.Subject}</Text>
-              <StarRating
-                disabled
-                rating={this.state.teacher.Rating}
-                starSize={25}
-                starColor='#ffa000'
-                emptyStarColor='#ffa000'
-              />
-            </View>
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+              <Icon name='arrow-left' size={24} color='white' />
+            </TouchableOpacity>
+            <Text style={styles.headerTextStyle}>
+              {this.state.teacher.displayName}
+            </Text>
+            <PopupMenu actions={['Contact']} color='white' onPress={() => console.log('contact')} />
           </View>
-          <ScrollView>
-            <ListDetail contentText={this.state.teacher.Email}>
-              <Icon name='account' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
-              <View>
-                <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Contact Information</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.teacher.Email}</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.teacher.Phone}</Text>
-                <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
-              </View>
-            </ListDetail>
-            <ListDetail contentText={this.state.teacher.Email}>
-              <Icon name='briefcase' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
-              <View>
-                <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Experience</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.teacher.Experience}</Text>
-                <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
-              </View>
-            </ListDetail>
-            <ListDetail contentText={this.state.teacher.Email}>
-              <Icon name='currency-inr' size={25} style={{ paddingLeft: 15, paddingRight: 15 }} />
-              <View>
-                <Text style={{ fontSize: 15, paddingTop: 5, color: 'black' }}>Price</Text>
-                <Text style={{ fontSize: 14, paddingTop: 5 }}>{this.state.teacher.Price}</Text>
-                <View style={{ marginTop: 5, width, height: StyleSheet.hairlineWidth, backgroundColor: '#727272' }} />
-              </View>
-            </ListDetail>
-          </ScrollView>
+          <View style={styles.profileContainerStyle}>
+            <Image source={{ uri: this.state.teacher.photoURL }} style={styles.profileStyle} />
+          </View>
         </View>
+        <View style={styles.nameContainerStyle}>
+          <Text style={styles.nameStyle}>
+            {this.state.teacher.subject}
+          </Text>
+          <StarRating
+            disabled
+            halftarEnabled
+            iconSet='MaterialCommunityIcons'
+            emptyStar='star-outline'
+            halfStar='star-half'
+            starColor='#ffb300'
+            emptyStarColor='#ffb300'
+            starSize={25}
+            rating={this.state.teacher.rating}
+          />
+        </View>
+        <ScrollView>
+          <ListDetail
+            title={'Name'}
+            value={this.state.teacher.displayName}
+          />
+          <ListDetail
+            title={'Subject'}
+            value={this.state.teacher.subject}
+          />
+          <ListDetail
+            title={'Email'}
+            value={this.state.teacher.email}
+          />
+          <ListDetail
+            title={'Phone Number'}
+            value={`+91 ${this.state.teacher.phone}`}
+          />
+          <ListDetail
+            title={'Price'}
+            value={`\u20b9 ${this.state.teacher.price} Per Class`}
+          />
+          <ListDetail
+            title={'Timings'}
+            value={`From ${this.state.time} at ${this.state.place}`}
+          >
+            <TouchableOpacity>
+              <Text>See More</Text>
+            </TouchableOpacity>
+          </ListDetail>
+        </ScrollView>
       </View>
     );
   }
 }
 const styles = {
-  modalStyle: {
-    width,
-    height,
-    backgroundColor: 'white',
-  },
-  profileStyle: {
-    height: 0.17 * width,
-    width: 0.17 * width,
-    alignSelf: 'center',
-    resizeMode: 'cover',
-  },
-  containerStyle: {
-    width: 0.24 * width,
-    height: 0.24 * width,
-    borderRadius: (0.24 * width) / 2,
-    paddingLeft: 5,
-    paddingRight: 5,
-    backgroundColor: '#d5d5d5',
-    justifyContent: 'center',
+  headerContainerStyle: {
     alignItems: 'center',
-    alignSelf: 'center',
-    top: 144,
-    position: 'absolute',
   },
   headerStyle: {
-    height: 314,
+    height: 0.3 * height,
+    backgroundColor: colors.primary.normal,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width,
+    padding: 15,
   },
-  coverStyle: {
-    height: 204,
+  headerTextStyle: {
+    fontFamily: 'avenir_heavy',
+    fontSize: 20,
+    color: 'white',
+  },
+  profileContainerStyle: {
+    position: 'absolute',
+    top: (height * 0.3) - ((0.27 * width) / 2),
+    width: width * 0.26,
+    height: width * 0.26,
+    backgroundColor: colors.other.bgColor,
+    borderRadius: 100,
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+  },
+  profileStyle: {
+    width: width * 0.25,
+    height: width * 0.25,
+    borderRadius: 100,
+  },
+  nameContainerStyle: {
+    paddingTop: 0.125 * width,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 0.03125 * width,
   },
   nameStyle: {
-    fontSize: 22,
+    fontSize: 20,
+    fontFamily: 'avenir_medium',
     color: 'black',
-    paddingTop: 15,
+    padding: 5,
   },
   classStyle: {
-    fontSize: 18,
-    color: '#aaa',
-    paddingTop: 0,
+    fontSize: 14,
+    fontFamily: 'avenir_heavy',
+    color: '#909094',
+    paddingTop: 8,
   },
 };
 

@@ -6,7 +6,7 @@ import { syncUser, getUser } from '../actions';
 import { types } from '../config';
 
 function* updateUserSaga(action) {
-  const path = `/users/students/${firebase.auth().currentUser.uid}`;
+  const path = `/users/${action.user.userType}/${firebase.auth().currentUser.uid}`;
   yield call(rsf.database.patch, path, action.user);
 }
 

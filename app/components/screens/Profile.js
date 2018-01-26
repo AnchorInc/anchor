@@ -27,7 +27,7 @@ class Profile extends Component {
       nameContainerStyle,
     } = styles;
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <StatusBar />
         <View style={headerContainerStyle}>
           <View style={headerStyle}>
@@ -65,7 +65,19 @@ class Profile extends Component {
           />
           <ListDetail
             title={'Phone Number'}
-            value={this.props.user.phone}
+            value={`+91 ${this.props.user.phone}`}
+          />
+          <ListDetail
+            title={'Location'}
+            value={this.props.user.location}
+          />
+          <ListDetail
+            title={'Age'}
+            value={this.props.user.age}
+          />
+          <ListDetail
+            title={'User'}
+            value={this.props.user.userType}
           />
         </ScrollView>
       </View>

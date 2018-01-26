@@ -14,6 +14,10 @@ class Search extends Component {
     showSearchVal: false,
   };
 
+  onPress = (person) => {
+    this.props.navigation.navigate('TeacherProfile', { person });
+  }
+
   requestData = (queryObj) => {
     // this.setState({ teachers: [], subjects: [] });
     const client = algoliasearch('HZZZN58AJ0', 'fd2e8b88f354f7b81eced75ff5991de5');
@@ -49,7 +53,7 @@ class Search extends Component {
 
   renderTeachers = () => {
     if (this.state.teachers.length >= 1 && !this.state.showSearchVal) {
-      return this.state.teachers.map(teacher => <SearchDetail key={teacher.UID} person={teacher} />);
+      return this.state.teachers.map(teacher => <SearchDetail key={teacher.UID} onPress={() => this.onPress(teacher)} person={teacher} />);
     }
     return null;
   }

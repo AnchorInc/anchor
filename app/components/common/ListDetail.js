@@ -4,7 +4,7 @@ import { colors } from '../../config';
 
 const { width } = Dimensions.get('window');
 
-const ListDetail = ({ title, value }) => {
+const ListDetail = ({ title, value, children }) => {
   return (
     <View style={styles.containerStyle}>
       <Text style={styles.titleTextStyle}>
@@ -13,6 +13,7 @@ const ListDetail = ({ title, value }) => {
       <Text style={styles.valueTextStyle}>
         {value}
       </Text>
+      {children}
       <View style={{ width, height: StyleSheet.hairlineWidth, backgroundColor: '#b5b5b5' }} />
     </View>
   );

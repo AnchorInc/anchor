@@ -8,6 +8,7 @@ import Main from '../components/screens/Main';
 import Login from '../components/screens/Login';
 import Profile from '../components/screens/Profile';
 import TeacherProfile from '../components/screens/TeacherProfile';
+import TeacherSetup from '../components/screens/TeacherSetup';
 import ProfileEditing from '../components/screens/ProfileEditing';
 
 const TabNavigatorConfig = {
@@ -67,9 +68,11 @@ const ClassesStackConfig = {
 
 export const ClassesStack = StackNavigator({
   Classes: { screen: Tabs },
+  Search: { screen: Tabs },
   Profile: { screen: Profile },
   TeacherProfile: { screen: TeacherProfile },
   ProfileEditing: { screen: ProfileEditing },
+  TeacherSetup: { screen: TeacherSetup },
 }, ClassesStackConfig);
 
 const MainStackConfig = {
@@ -84,6 +87,7 @@ export const MainStack = StackNavigator({
   Login: { screen: Login },
   Main: { screen: Main },
   ProfileEditing: { screen: ProfileEditing },
+  TeacherSetup: { screen: TeacherSetup },
 }, MainStackConfig);
 
 const defaultGetStateForAction = MainStack.router.getStateForAction;
