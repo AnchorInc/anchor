@@ -40,7 +40,7 @@ class ClassList extends Component {
   }
 
   renderNoBatchMessage = () => {
-    if (this.props.batchList === null){
+    if (this.props.batchList === null) {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
           <Icon size={85} name='library-books' color='black' />
