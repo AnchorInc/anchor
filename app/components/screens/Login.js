@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Dimensions, Image } from 'react-native';
+import { View, StatusBar, Dimensions, Image, Picker } from 'react-native';
 import { connect } from 'react-redux';
-import { colors } from '../../config';
+import { colors, userTypes } from '../../config';
 import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
@@ -10,6 +10,11 @@ const logo = require('../../res/images/logo.png');
 const { width, height } = Dimensions.get('window');
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {userType: userTypes.STUDENT};
+  }
+
   render() {
     const {
       loginContainerStyle,
@@ -28,8 +33,16 @@ class Login extends Component {
         </View>
         <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
-            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.props.fbLoginRequest} />
-            <LoginButton title='Sign in with Google' iconName='google' onPress={this.props.googleLoginRequest} />
+            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.props.fbLoginRequest.bind(this, this.state.userType)} />
+            <LoginButton title='Sign in with Google' iconName='google' onPress={this.props.googleLoginRequest.bind(this, this.state.userType)} />
+            <Picker
+              style={{width: 150}}
+              selectedValue={this.state.userType}
+              mode='dropdown'
+              onValueChange={(itemValue) => this.setState({userType: itemValue})}>
+              <Picker.Item label='Student' value={userTypes.STUDENT} />
+              <Picker.Item label='Teacher' value={userTypes.TEACHER} />
+            </Picker>
           </View>
         </View>
 

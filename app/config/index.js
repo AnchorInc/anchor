@@ -38,3 +38,15 @@ export const types = {
     GET: 'types.USER.GET',
   },
 };
+
+// user types
+export const userTypes = {
+  STUDENT: "student",
+  TEACHER: "teacher"
+}
+
+// firebase database constants
+export const firebasePaths = {
+  STUDENTS: "/users/students/",
+  TEACHERS: "/users/teachers/",
+}

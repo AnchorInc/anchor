@@ -1,7 +1,8 @@
-import { types } from '../config';
+import { types, UserTypes } from '../config';
 
 const INITIAL_STATE = {
   user: null,
+  type: null
 };
 
 export default (state = INITIAL_STATE, action) => {

@@ -1,11 +1,11 @@
 import { types } from '../config';
 
-export const googleLoginRequest = () => {
-  return { type: types.LOGIN.GOOGLE };
+export const googleLoginRequest = userType => {
+  return { type: types.LOGIN.GOOGLE, userType: userType };
 };
 
-export const fbLoginRequest = () => {
-  return { type: types.LOGIN.FB };
+export const fbLoginRequest = userType => {
+  return { type: types.LOGIN.FB, userType: userType };
 };
 
 export const loginUserFail = () => {
