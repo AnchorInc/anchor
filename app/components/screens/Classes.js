@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, AsyncStorage } from 'react-native';
 import { Header } from '../common';
 import ClassList from '../common/ClassList';
 
@@ -10,10 +10,19 @@ class Classes extends Component {
     this.props.navigation.navigate('TeacherProfile', { person });
   }
 
+  navigate = () => {
+    const user = this.props.user;
+    if (AsyncStorage.getItem('userType') === 'student') {
+      this.props.navigation.navigate('Profile');
+    } else {
+      this.props.navigation.navigate('TeacherProfile', { user });
+    }
+  }
+
   render() {
     return (
       <View style={{ width, height }}>
-        <Header title='Home' onPress={() => this.props.navigation.navigate('Profile')} color='#01152d' mainButtons />
+        <Header title='Home' onPress={() => this.navigate()} color='#01152d' mainButtons />
         <ClassList onPress={person => this.onPress(person)} />
       </View>
     );

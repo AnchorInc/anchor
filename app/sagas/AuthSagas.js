@@ -17,7 +17,7 @@ function* loginUserWithGoogle(action) {
     const userData = yield call(rsf.auth.signInWithCredential, credential);
     let firebasePath;
 
-    switch(action.userType) {
+    switch (action.userType) {
       case userTypes.STUDENT:
         firebasePath = firebasePaths.STUDENTS;
         break;
@@ -25,9 +25,11 @@ function* loginUserWithGoogle(action) {
         firebasePath = firebasePaths.TEACHERS;
         break;
       default:
-        throw "User is not student or teacher";
-        break; 
+        throw 'User is not student or teacher';
+        break;
     }
+    AsyncStorage.setItem('user_path', firebasePath);
+    AsyncStorage.setItem('user_type', action.userType);
     console.log(firebasePath);
     const result = yield call(rsf.database.update, firebasePath + userData.uid, {
       displayName: userData.displayName,

@@ -27,16 +27,14 @@ class ProfileEditing extends Component {
 
   state = {
     errors: {},
-    error: false,
     editing: false,
     value: '',
-    firstName: this.props.user.displayName.substr(0, this.props.user.displayName.indexOf(' ')) || null,
-    lastName: this.props.user.displayName.substr(this.props.user.displayName.indexOf(' ') + 1, this.props.user.displayName.length) || null,
-    email: this.props.user.email || null,
-    phone: this.props.user.phone || null,
+    firstName: this.props.user.displayName.substr(0, this.props.user.displayName.indexOf(' ')) || '',
+    lastName: this.props.user.displayName.substr(this.props.user.displayName.indexOf(' ') + 1, this.props.user.displayName.length) || '',
+    email: this.props.user.email || '',
+    phone: this.props.user.phone || '',
     age: this.props.user.age || 5,
-    location: this.props.user.location || null,
-    userType: this.props.user.userType || 'students',
+    location: this.props.user.location || '',
   };
 
   onFocus = () => {
@@ -122,17 +120,13 @@ class ProfileEditing extends Component {
       phone: this.state.phone,
       age: this.state.age,
       location: this.state.location,
-      userType: this.state.userType,
       uid: this.props.user.uid,
+      userType: 'student',
     };
-    if (this.state.errors && Object.keys(this.state.errors).length == 0) {
-      if (this.state.userType == 'teachers') {
-        this.props.navigation.navigate('TeacherSetup', { user });
-      } else {
+    if (this.state.errors && Object.keys(this.state.errors).length === 0) {
         this.props.updateUser(user);
         this.props.navigation.goBack();
       }
-    }
   }
 
   clearText = () => {
@@ -300,17 +294,6 @@ class ProfileEditing extends Component {
             </View>
             <Slider style={{ width: 0.95 * width }} value={this.props.user.age} onValueChange={value => this.setState({ age: value })} maximumValue={99} minimumValue={5} step={1} maximumTrackTintColor={colors.primary.light} thumbTintColor={colors.primary.light} />
           </View>
-          <View style={styles.pillContainerStyle}>
-            <Text style={styles.titleTextStyle}>User</Text>
-            <Picker
-              selectedValue={this.state.userType}
-              onValueChange={itemValue => this.setState({ userType: itemValue })}
-              style={{ width: 0.95 * width, alignSelf: 'center' }}
-            >
-              <Picker.Item label="Student" value="students" />
-              <Picker.Item label="Teacher" value="teachers" />
-            </Picker>
-          </View>
         </ScrollView>
       </View>
     );
@@ -393,7 +376,7 @@ const styles = {
     color: colors.primary.light,
   },
   textInputStyle: {
-    width: 0.85 * width,
+    width: 0.9 * width,
     paddingBottom: 0,
   },
   pillContainerStyle: {

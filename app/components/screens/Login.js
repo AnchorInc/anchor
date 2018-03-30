@@ -12,7 +12,7 @@ const { width, height } = Dimensions.get('window');
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {userType: userTypes.STUDENT};
+    this.state = { userType: userTypes.STUDENT };
   }
 
   render() {

@@ -6,7 +6,8 @@ import { syncUser, getUser } from '../actions';
 import { types } from '../config';
 
 function* updateUserSaga(action) {
-  const path = `/users/${action.user.userType}/${firebase.auth().currentUser.uid}`;
+  const userPath = yield call(AsyncStorage.getItem, 'user_path');
+  const path = `${userPath}${firebase.auth().currentUser.uid}`;
   yield call(rsf.database.patch, path, action.user);
 }
 
@@ -15,7 +16,8 @@ function* deleteUser() {
 }
 
 function* syncUserSaga() {
-  const path = `/users/students/${firebase.auth().currentUser.uid}`;
+  const userPath = yield call(AsyncStorage.getItem, 'user_path');
+  const path = `${userPath}${firebase.auth().currentUser.uid}`;
   const channel = yield call(rsf.database.channel, path);
 
   while (firebase.auth().currentUser) {
