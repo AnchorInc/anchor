@@ -15,22 +15,13 @@ function* loginUserWithGoogle(action) {
     yield put(showSpinner());
     const credential = firebase.auth.GoogleAuthProvider.credential(user.idToken);
     const userData = yield call(rsf.auth.signInWithCredential, credential);
-    let firebasePath;
 
-    switch (action.userType) {
-      case userTypes.STUDENT:
-        firebasePath = firebasePaths.STUDENTS;
-        break;
-      case userTypes.TEACHER:
-        firebasePath = firebasePaths.TEACHERS;
-        break;
-      default:
-        throw 'User is not student or teacher';
-        break;
-    }
+    const firebasePath = getFireBasePath(action);
+    console.log(firebasePath);
+
     AsyncStorage.setItem('user_path', firebasePath);
     AsyncStorage.setItem('user_type', action.userType);
-    console.log(firebasePath);
+
     const result = yield call(rsf.database.update, firebasePath + userData.uid, {
       displayName: userData.displayName,
       email: userData.email,
@@ -38,8 +29,9 @@ function* loginUserWithGoogle(action) {
       uid: userData.uid,
       isDeleted: false,
       phoneNumber: userData.phoneNumber,
-      batchList: []
+      batchList: [],
     });
+
     AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
     yield put(loginUserSuccess());
   } catch (error) {
@@ -58,15 +50,31 @@ function* loginUserWithFB(action) {
     const result = yield LoginManager.logInWithReadPermissions(['public_profile', 'email']);
     if (result.isCancelled) return;
     yield put(showSpinner());
+
     const user = yield AccessToken.getCurrentAccessToken();
     const credential = firebase.auth.FacebookAuthProvider.credential(user.accessToken);
     const userData = yield call(rsf.auth.signInWithCredential, credential);
+
+    const firebasePath = getFireBasePath(action);
+    console.log(firebasePath);
+
     AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
   } catch (error) {
     yield put(loginUserFail());
     yield put(showErrorMessage(error.message));
   }
 }
+
+const getFireBasePath = (action) => {
+  switch (action.userType) {
+    case userTypes.STUDENT:
+      return firebasePaths.STUDENTS;
+    case userTypes.TEACHER:
+      return firebasePaths.TEACHERS;
+    default:
+      throw new Error('User is not student or teacher');
+  }
+};
 
 export function* watchLoginRequests() {
   yield all([
