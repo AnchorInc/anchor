@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, Dimensions, Platform, StatusBar, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import HeaderProfileButton from './HeaderProfileButton';
+
 import { colors } from '../../config/';
+import HeaderProfileButton from './HeaderProfileButton';
 
 const { width, height } = Dimensions.get('window');
 

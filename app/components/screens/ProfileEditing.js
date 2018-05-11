@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, ScrollView, TouchableOpacity, Image, Text, StatusBar, Picker, Slider } from 'react-native';
+import { View, Dimensions, ScrollView, TouchableOpacity, Image, Text, StatusBar, Slider } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextField } from 'react-native-material-textfield';

@@ -2,7 +2,7 @@ import { types, UserTypes } from '../config';
 
 const INITIAL_STATE = {
   user: null,
-  type: null
+  type: null,
 };
 
 export default (state = INITIAL_STATE, action) => {

@@ -3,6 +3,7 @@ import { View, Dimensions, ScrollView, TouchableOpacity, Image, Text, StatusBar,
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextField } from 'react-native-material-textfield';
+
 import { colors } from '../../config';
 import { updateUser } from '../../actions';
 
@@ -34,8 +35,11 @@ class TeacherSetup extends Component {
     price: this.props.user.price || 100,
     location: this.props.user.location || 'Student\'s Location',
     subject: this.props.user.subject || '',
-    firstName: this.props.user.displayName.substr(0, this.props.user.displayName.indexOf(' ')) || '',
-    lastName: this.props.user.displayName.substr(this.props.user.displayName.indexOf(' ') + 1, this.props.user.displayName.length) || '',
+    firstName: this.props.user.displayName
+    .substr(0, this.props.user.displayName.indexOf(' ')) || '',
+    lastName: this.props.user.displayName
+      .substr(this.props.user.displayName
+        .indexOf(' ') + 1, this.props.user.displayName.length) || '',
     email: this.props.user.email || '',
     phone: this.props.user.phone || '',
   };

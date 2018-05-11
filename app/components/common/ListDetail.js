@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
+
 import { colors } from '../../config';
 
 const { width } = Dimensions.get('window');

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, Image, View, Dimensions, TouchableOpacity } from 'react-native';
-import { Card, CardSection } from './';
-import { colors } from '../../config';
 
+import { colors } from '../../config';
+import { Card, CardSection } from './';
 
 const { width } = Dimensions.get('window');
 

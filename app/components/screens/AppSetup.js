@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import SplashScreen from 'react-native-splash-screen';
+
 import { getUser, startSyncUser } from '../../actions';
 
 class AppSetup extends Component {

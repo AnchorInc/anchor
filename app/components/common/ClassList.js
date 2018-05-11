@@ -3,8 +3,9 @@ import { ScrollView, View, Text, RefreshControl, Dimensions } from 'react-native
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { ClassDetail } from './';
+
 import { colors } from '../../config';
+import { ClassDetail } from './';
 
 const { width, height } = Dimensions.get('window');
 

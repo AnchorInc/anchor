@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import firebase from 'firebase';
 import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import { colors } from '../../config';
 import { ListDetail, PopupMenu } from '../common';
 

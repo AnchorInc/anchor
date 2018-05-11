@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
+
 import { ClassesStack } from '../../navigation/Router';
 
 class Main extends Component {
   componentWillMount() {
-    const user = this.props.user;
     if (!this.props.donePref) {
       if (AsyncStorage.getItem('userType') === 'student') {
         this.props.navigation.navigate('ProfileEditing');
