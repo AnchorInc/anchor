@@ -41,12 +41,18 @@ export const types = {
 
 // user types
 export const userTypes = {
-  STUDENT: "student",
-  TEACHER: "teacher"
-}
+  STUDENT: 's',
+  TEACHER: 't',
+};
 
 // firebase database constants
 export const firebasePaths = {
-  STUDENTS: "/users/students/",
-  TEACHERS: "/users/teachers/",
-}
+  STUDENTS: '/users/students/',
+  TEACHERS: '/users/teachers/',
+};
+
+// algoliasearch config data
+export const algoliaConfig = {
+  adminID: 'HZZZN58AJ0',
+  apiKey: 'fd2e8b88f354f7b81eced75ff5991de5',
+};

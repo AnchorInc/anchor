@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions } from 'react-native';
+
+import { algoliaConfig } from '../../config';
 import { SearchBar, SearchDetail, SubjectDetail } from '../common';
 
 const algoliasearch = require('algoliasearch/reactnative');
@@ -20,7 +22,7 @@ class Search extends Component {
 
   requestData = (queryObj) => {
     // this.setState({ teachers: [], subjects: [] });
-    const client = algoliasearch('HZZZN58AJ0', 'fd2e8b88f354f7b81eced75ff5991de5');
+    const client = algoliasearch(algoliaConfig.adminID, algoliaConfig.apiKey);
     const queries = [{
       indexName: 'teachers',
       query: queryObj,
