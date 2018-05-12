@@ -40,13 +40,12 @@ class ProfileEditing extends Component {
 
   onFocus = () => {
     const { errors = {} } = this.state;
-    for (const name in errors) {
-      const ref = this[name];
-
+    Object.entries(errors).forEach(([key]) => {
+      const ref = this[key];
       if (ref && ref.isFocused()) {
-        delete errors[name];
+        delete errors[key];
       }
-    }
+    });
 
     ['firstName', 'lastName', 'email', 'phone', 'location']
     .map(name => ({ name, ref: this[name] }))
@@ -68,7 +67,7 @@ class ProfileEditing extends Component {
      .map(name => ({ name, ref: this[name] }))
      .forEach(({ ref, name }) => {
        const value = ref.value();
-       const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
        ref.blur();
        if (!value) {
          this.state.errors[name] = 'Should not be empty';

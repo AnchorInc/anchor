@@ -22,7 +22,7 @@ function* loginUserWithGoogle(action) {
     AsyncStorage.setItem('user_path', firebasePath);
     AsyncStorage.setItem('user_type', action.userType);
 
-    const result = yield call(rsf.database.update, firebasePath + userData.uid, {
+    yield call(rsf.database.update, firebasePath + userData.uid, {
       displayName: userData.displayName,
       email: userData.email,
       photoURL: userData.photoURL,

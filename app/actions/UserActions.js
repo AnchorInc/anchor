@@ -22,6 +22,5 @@ export const getUser = () => {
 };
 
 export const getUserType = (userType) => {
-  console.log(userType);
   return { type: types.USER.GET_TYPE, userType };
 };

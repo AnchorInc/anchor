@@ -77,7 +77,7 @@ class Profile extends Component {
             value={this.props.user.age}
           />
           <ListDetail
-            title={'User'}
+            title={'User Type'}
             value={this.props.user.userType}
           />
         </ScrollView>

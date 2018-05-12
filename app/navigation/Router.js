@@ -51,7 +51,7 @@ const TabNavigatorConfig = {
   tabBarOptions: {
     showLabel: false,
     style: {
-      backgroundColor: colors.other.bbNormal,
+      backgroundColor: colors.other.bgNormal,
     },
   },
 };
