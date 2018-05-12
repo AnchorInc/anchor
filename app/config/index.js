@@ -36,6 +36,7 @@ export const types = {
     UPDATE: 'types.USER.UPDATE',
     DELETE: 'types.USER.DELETE',
     GET: 'types.USER.GET',
+    GET_TYPE: 'types.USER.GET_TYPE',
   },
 };
 
@@ -55,4 +56,9 @@ export const firebasePaths = {
 export const algoliaConfig = {
   adminID: 'HZZZN58AJ0',
   apiKey: 'fd2e8b88f354f7b81eced75ff5991de5',
+};
+
+// google signin configure
+export const gsigninConfig = {
+  webClientId: '489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com',
 };

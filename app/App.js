@@ -9,7 +9,7 @@ import ReduxSagaFirebase from 'redux-saga-firebase';
 import rootSaga from './sagas';
 import reducers from './reducers';
 import { MainStack } from './navigation/Router';
-import { STATUS_BAR_COLOR } from './config';
+import { colors, gsigninConfig } from './config';
 
 console.disableYellowBox = true;
 
@@ -20,7 +20,7 @@ const customTextProps = {
 };
 
 setCustomText(customTextProps);
-setCustomStatusBar({ backgroundColor: STATUS_BAR_COLOR });
+setCustomStatusBar({ backgroundColor: colors.primary.dark });
 
 const config = {
   apiKey: 'AIzaSyCGttWR24ng1Y87ruWfjAcGCISGLKz8jUE',
@@ -38,7 +38,7 @@ try {
 }
 
 GoogleSignin.configure({
-  webClientId: '489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com',
+  webClientId: gsigninConfig.webClientId,
 });
 
 const rsf = new ReduxSagaFirebase(firebaseApp);
