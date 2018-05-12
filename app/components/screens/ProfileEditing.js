@@ -3,6 +3,7 @@ import { View, Dimensions, ScrollView, TouchableOpacity, Image, Text, StatusBar,
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextField } from 'react-native-material-textfield';
+
 import { colors } from '../../config';
 import { updateUser } from '../../actions';
 

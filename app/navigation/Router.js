@@ -1,8 +1,9 @@
 import React from 'react';
 import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { colors } from '../config';
-import { Classes, Settings, Search } from '../components/screens';
+
+import { Settings, Search } from '../components/screens';
+import Classes from '../components/screens/Classes';
 import AppSetup from '../components/screens/AppSetup';
 import Main from '../components/screens/Main';
 import Login from '../components/screens/Login';
@@ -10,6 +11,8 @@ import Profile from '../components/screens/Profile';
 import TeacherProfile from '../components/screens/TeacherProfile';
 import TeacherSetup from '../components/screens/TeacherSetup';
 import ProfileEditing from '../components/screens/ProfileEditing';
+
+import { colors } from '../config';
 
 const TabNavigatorConfig = {
   navigationOptions: ({ navigation }) => ({
