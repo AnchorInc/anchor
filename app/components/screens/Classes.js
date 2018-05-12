@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, Dimensions, AsyncStorage } from 'react-native';
+import { View, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
 
+import { userTypes } from '../../config';
 import { Header } from '../common';
 import ClassList from '../common/ClassList';
 
@@ -13,7 +15,7 @@ class Classes extends Component {
 
   navigate = () => {
     const user = this.props.user;
-    if (AsyncStorage.getItem('userType') === 'student') {
+    if (this.props.userType === userTypes.STUDENT) {
       this.props.navigation.navigate('Profile');
     } else {
       this.props.navigation.navigate('TeacherProfile', { user });
@@ -30,4 +32,12 @@ class Classes extends Component {
   }
 }
 
-export { Classes };
+const mapStateToProps = (state) => {
+  let userType;
+  if (state.user.type) {
+    userType = state.user.type;
+  }
+  return { userType };
+};
+
+export default connect(mapStateToProps)(Classes);

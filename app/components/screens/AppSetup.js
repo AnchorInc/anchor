@@ -1,13 +1,15 @@
 import { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import SplashScreen from 'react-native-splash-screen';
 
-import { getUser, startSyncUser } from '../../actions';
+import { getUser, getUserType, startSyncUser } from '../../actions';
 
 class AppSetup extends Component {
   componentWillMount() {
     // splash screen is already showing
+    this.getUserType();
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.props.startSyncUser();
@@ -20,6 +22,16 @@ class AppSetup extends Component {
     });
   }
 
+  getUserType() {
+    AsyncStorage.getItem('user_type')
+      .then((type) => {
+        this.props.getUserType(type);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   render() {
     return null;
   }
@@ -28,6 +40,7 @@ class AppSetup extends Component {
 const mapFunctionsToProps = {
   getUser,
   startSyncUser,
+  getUserType,
 };
 
 export default connect(null, mapFunctionsToProps)(AppSetup);
