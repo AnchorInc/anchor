@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, RefreshControl, Dimensions } from 'react-native';
+import { View, Text, Dimensions, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -31,10 +31,10 @@ class ClassList extends Component {
     })));
   }
 
-  refresh = (batchList) => {
+  refresh = () => {
     this.setState({ refreshing: true, isConnected: true });
-    if (batchList) {
-      this.getTeachersFromBatchList(batchList);
+    if (this.props.batchList) {
+      this.getTeachersFromBatchList(this.props.batchList);
     } else {
       this.setState({ refreshing: false, noBatches: true });
     }
@@ -57,26 +57,25 @@ class ClassList extends Component {
     return null;
   }
 
-  renderTeachers = () => {
-    return this.state.teachers.map(teacher => (
-      <ClassDetail key={teacher.UID} person={teacher} onPress={this.props.onPress} />
-    ));
+  renderTeachers = ({ item }) => {
+    return <ClassDetail person={item} onPress={this.props.onPress} />;
   }
 
   render() {
     return (
-      <ScrollView
+      <FlatList
+        data={this.state.teachers}
+        renderItem={this.renderTeachers}
+        keyExtractor={item => item.UID}
+        ListEmptyComponent={this.renderNoBatchMessage}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this.refresh.bind(this, this.props.batchList)}
+            onRefresh={this.refresh}
             colors={[colors.secondary.normal]}
           />
         }
-      >
-        {this.renderTeachers()}
-        {this.renderNoBatchMessage()}
-      </ScrollView>
+      />
     );
   }
 }
