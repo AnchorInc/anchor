@@ -17,21 +17,22 @@ function* loginUserWithGoogle(action) {
     const userData = yield call(rsf.auth.signInWithCredential, credential);
 
     const firebasePath = getFireBasePath(action);
-    console.log(firebasePath);
+
+    const data = yield call(rsf.database.read, firebasePath + userData.uid);
+    if (!data) {
+      yield call(rsf.database.create, firebasePath + userData.uid, {
+        displayName: userData.displayName,
+        email: userData.email,
+        photoURL: userData.photoURL,
+        uid: userData.uid,
+        isDeleted: false,
+        phoneNumber: userData.phoneNumber,
+        userType: action.userType,
+      });
+    }
 
     AsyncStorage.setItem('user_path', firebasePath);
     AsyncStorage.setItem('user_type', action.userType);
-
-    yield call(rsf.database.update, firebasePath + userData.uid, {
-      displayName: userData.displayName,
-      email: userData.email,
-      photoURL: userData.photoURL,
-      uid: userData.uid,
-      isDeleted: false,
-      phoneNumber: userData.phoneNumber,
-      batchList: [],
-    });
-
     AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
     yield put(loginUserSuccess());
   } catch (error) {
@@ -56,8 +57,22 @@ function* loginUserWithFB(action) {
     const userData = yield call(rsf.auth.signInWithCredential, credential);
 
     const firebasePath = getFireBasePath(action);
-    console.log(firebasePath);
 
+    const data = yield call(rsf.database.read, firebasePath + userData.uid);
+    if (!data) {
+      yield call(rsf.database.create, firebasePath + userData.uid, {
+        displayName: userData.displayName,
+        email: userData.email,
+        photoURL: userData.photoURL,
+        uid: userData.uid,
+        isDeleted: false,
+        phoneNumber: userData.phoneNumber,
+        userType: action.userType,
+      });
+    }
+
+    AsyncStorage.setItem('user_path', firebasePath);
+    AsyncStorage.setItem('user_type', action.userType);
     AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
   } catch (error) {
     yield put(loginUserFail());
