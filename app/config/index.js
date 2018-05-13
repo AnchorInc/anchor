@@ -42,8 +42,8 @@ export const types = {
 
 // user types
 export const userTypes = {
-  STUDENT: 's',
-  TEACHER: 't',
+  STUDENT: 'student',
+  TEACHER: 'teacher',
 };
 
 // firebase database constants

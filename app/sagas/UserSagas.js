@@ -6,7 +6,7 @@ import { syncUser, getUser } from '../actions';
 import { types } from '../config';
 
 function* updateUserSaga(action) {
-  const userPath = yield call(AsyncStorage.getItem, 'user_path');
+  const userPath = AsyncStorage.getItem('user_path');
   const path = `${userPath}${firebase.auth().currentUser.uid}`;
   yield call(rsf.database.patch, path, action.user);
 }
@@ -16,7 +16,7 @@ function* deleteUser() {
 }
 
 function* syncUserSaga() {
-  const userPath = yield call(AsyncStorage.getItem, 'user_path');
+  const userPath = AsyncStorage.getItem('user_path');
   const path = `${userPath}${firebase.auth().currentUser.uid}`;
   const channel = yield call(rsf.database.channel, path);
 
@@ -24,7 +24,7 @@ function* syncUserSaga() {
     const { value: user } = yield take(channel);
 
     try {
-      yield call(AsyncStorage.setItem, 'user_data', JSON.stringify(user, undefined, undefined));
+      AsyncStorage.setItem('user_data', JSON.stringify(user, undefined, undefined));
       yield put(getUser());
     } catch (error) {
       console.log(error);
@@ -34,8 +34,8 @@ function* syncUserSaga() {
 
 function* getUserSaga() {
   try {
-    const data = yield call(AsyncStorage.getItem, 'user_data');
-    const user = yield call(JSON.parse, data);
+    const data = AsyncStorage.getItem('user_data');
+    const user = JSON.parse(data);
     yield put(syncUser(user));
   } catch (error) {
     console.log(error);
