@@ -16,24 +16,8 @@ function* loginUserWithGoogle(action) {
     const credential = firebase.auth.GoogleAuthProvider.credential(user.idToken);
     const userData = yield call(rsf.auth.signInWithCredential, credential);
 
-    const firebasePath = getFireBasePath(action);
+    yield call(initUser, action, userData);
 
-    const data = yield call(rsf.database.read, firebasePath + userData.uid);
-    if (!data) {
-      yield call(rsf.database.create, firebasePath + userData.uid, {
-        displayName: userData.displayName,
-        email: userData.email,
-        photoURL: userData.photoURL,
-        uid: userData.uid,
-        isDeleted: false,
-        phoneNumber: userData.phoneNumber,
-        type: action.userType,
-        donePref: false,
-      });
-    }
-
-    AsyncStorage.setItem('user_path', firebasePath);
-    AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
     yield put(loginUserSuccess());
   } catch (error) {
     // Error handling for login cancellation by user
@@ -56,23 +40,7 @@ function* loginUserWithFB(action) {
     const credential = firebase.auth.FacebookAuthProvider.credential(user.accessToken);
     const userData = yield call(rsf.auth.signInWithCredential, credential);
 
-    const firebasePath = getFireBasePath(action);
-
-    const data = yield call(rsf.database.read, firebasePath + userData.uid);
-    if (!data) {
-      yield call(rsf.database.create, firebasePath + userData.uid, {
-        displayName: userData.displayName,
-        email: userData.email,
-        photoURL: userData.photoURL,
-        uid: userData.uid,
-        isDeleted: false,
-        phoneNumber: userData.phoneNumber,
-        type: action.userType,
-      });
-    }
-
-    AsyncStorage.setItem('user_path', firebasePath);
-    AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
+    yield call(initUser, action, userData);
   } catch (error) {
     yield put(loginUserFail());
     yield put(showErrorMessage(error.message));
@@ -89,6 +57,27 @@ const getFireBasePath = (action) => {
       throw new Error('User is not student or teacher');
   }
 };
+
+function* initUser(action, userData) {
+  const firebasePath = getFireBasePath(action);
+
+  const data = yield call(rsf.database.read, firebasePath + userData.uid);
+  if (!data) {
+    yield call(rsf.database.create, firebasePath + userData.uid, {
+      displayName: userData.displayName,
+      email: userData.email,
+      photoURL: userData.photoURL,
+      uid: userData.uid,
+      isDeleted: false,
+      phoneNumber: userData.phoneNumber,
+      type: action.userType,
+      donePref: false,
+    });
+  }
+
+  AsyncStorage.setItem('user_path', firebasePath);
+  AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
+}
 
 export function* watchLoginRequests() {
   yield all([
