@@ -27,7 +27,7 @@ function* loginUserWithGoogle(action) {
         uid: userData.uid,
         isDeleted: false,
         phoneNumber: userData.phoneNumber,
-        userType: action.userType,
+        type: action.userType,
       });
     }
 
@@ -67,7 +67,7 @@ function* loginUserWithFB(action) {
         uid: userData.uid,
         isDeleted: false,
         phoneNumber: userData.phoneNumber,
-        userType: action.userType,
+        type: action.userType,
       });
     }
 
