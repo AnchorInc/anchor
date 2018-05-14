@@ -172,9 +172,9 @@ class ProfileEditing extends Component {
         <View style={headerContainerStyle}>
           <View style={headerStyle}>
             <View style={buttonContainerStyle}>
-              <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
+              {/* <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
                 <Icon name='arrow-left' size={24} color='white' />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <Text style={headerTextStyle}>
                 Edit Profile
               </Text>
