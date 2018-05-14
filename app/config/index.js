@@ -36,7 +36,6 @@ export const types = {
     UPDATE: 'types.USER.UPDATE',
     DELETE: 'types.USER.DELETE',
     GET: 'types.USER.GET',
-    GET_TYPE: 'types.USER.GET_TYPE',
   },
 };
 

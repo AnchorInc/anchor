@@ -33,7 +33,6 @@ function* loginUserWithGoogle(action) {
     }
 
     AsyncStorage.setItem('user_path', firebasePath);
-    AsyncStorage.setItem('user_type', action.userType);
     AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
     yield put(loginUserSuccess());
   } catch (error) {
@@ -73,7 +72,6 @@ function* loginUserWithFB(action) {
     }
 
     AsyncStorage.setItem('user_path', firebasePath);
-    AsyncStorage.setItem('user_type', action.userType);
     AsyncStorage.setItem('user_data', JSON.stringify(userData, undefined, undefined));
   } catch (error) {
     yield put(loginUserFail());

@@ -20,7 +20,3 @@ export const deleteUser = () => {
 export const getUser = () => {
   return { type: types.USER.GET };
 };
-
-export const getUserType = (userType) => {
-  return { type: types.USER.GET_TYPE, userType };
-};
