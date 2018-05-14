@@ -30,8 +30,6 @@ class ClassList extends Component {
     .then((teacher) => {
       this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false });
     })));
-
-    console.log(this.state.teachers.length);
   }
 
   refresh = (batchList) => {
