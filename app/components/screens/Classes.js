@@ -34,8 +34,8 @@ class Classes extends Component {
 
 const mapStateToProps = (state) => {
   let userType;
-  if (state.user.type) {
-    userType = state.user.type;
+  if (state.user.user) {
+    userType = state.user.user.type;
   }
   return { userType };
 };

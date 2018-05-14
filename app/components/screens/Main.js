@@ -6,9 +6,9 @@ import { userTypes } from '../../config';
 import { ClassesStack } from '../../navigation/Router';
 
 class Main extends Component {
-  componentWillMount() {
-    if (!this.props.donePref) {
-      if (this.props.userType === userTypes.STUDENT) {
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.donePref) {
+      if (nextProps.userType === userTypes.STUDENT) {
         this.props.navigation.navigate('ProfileEditing');
       } else {
         this.props.navigation.navigate('TeacherSetup');
@@ -29,10 +29,8 @@ const mapStateToProps = (state) => {
   let donePref;
   let userType;
   if (state.user.user) {
+    userType = state.user.user.type;
     donePref = state.user.user.donePref;
-  }
-  if (state.user.type) {
-    userType = state.user.type;
   }
   return { donePref, userType };
 };
