@@ -28,6 +28,7 @@ function* loginUserWithGoogle(action) {
         isDeleted: false,
         phoneNumber: userData.phoneNumber,
         type: action.userType,
+        donePref: false,
       });
     }
 
