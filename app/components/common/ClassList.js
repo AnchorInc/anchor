@@ -13,7 +13,7 @@ class ClassList extends Component {
   state = {
     teachers: [],
     refreshing: false,
-    noBatches: true,
+    noBatches: false,
   };
 
   componentWillReceiveProps(props) {
@@ -31,17 +31,17 @@ class ClassList extends Component {
     })));
   }
 
-  refresh = () => {
+  refresh = (batchList) => {
     this.setState({ refreshing: true, isConnected: true });
-    if (this.props.batchList) {
-      this.getTeachersFromBatchList(this.props.batchList);
+    if (batchList) {
+      this.getTeachersFromBatchList(batchList);
     } else {
       this.setState({ refreshing: false, noBatches: true });
     }
   }
 
   renderNoBatchMessage = () => {
-    if (this.props.batchList === null) {
+    if (this.state.noBatches) {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
           <Icon size={85} name='library-books' color='black' />
@@ -71,7 +71,7 @@ class ClassList extends Component {
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this.refresh}
+            onRefresh={this.refresh.bind(this, this.props.batchList)}
             colors={[colors.secondary.normal]}
           />
         }
