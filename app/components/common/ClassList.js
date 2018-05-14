@@ -13,35 +13,40 @@ class ClassList extends Component {
   state = {
     teachers: [],
     refreshing: false,
-    noBatches: false,
+    initialRefresh: false,
   };
 
   componentWillReceiveProps(props) {
+    if (this.state.initialRefresh) return;
     this.refresh(props.batchList);
   }
 
   getTeachersFromBatchList = (batchList) => {
-    this.setState({ teachers: [], refreshing: true });
+    this.setState({ teachers: [] });
     batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
     .once('value')
     .then(Class => firebase.database().ref(`/users/teachers/${Class.val().teacher}`)
     .once('value')
     .then((teacher) => {
-      this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, noBatches: false });
+      this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false });
     })));
+
+    console.log(this.state.teachers.length);
   }
 
   refresh = (batchList) => {
-    this.setState({ refreshing: true, isConnected: true });
-    if (batchList) {
-      this.getTeachersFromBatchList(batchList);
+    const list = batchList || this.props.batchList;
+    this.setState({ refreshing: true });
+    if (list) {
+      this.getTeachersFromBatchList(list);
     } else {
-      this.setState({ refreshing: false, noBatches: true });
+      this.setState({ refreshing: false });
     }
+    if (!this.state.initialRefresh) this.setState({ initialRefresh: true });
   }
 
   renderNoBatchMessage = () => {
-    if (this.state.noBatches) {
+    if (!this.props.batchList) {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
           <Icon size={85} name='library-books' color='black' />
@@ -66,12 +71,12 @@ class ClassList extends Component {
       <FlatList
         data={this.state.teachers}
         renderItem={this.renderTeachers}
-        keyExtractor={item => item.UID}
+        keyExtractor={teacher => teacher.UID}
         ListEmptyComponent={this.renderNoBatchMessage}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this.refresh.bind(this, this.props.batchList)}
+            onRefresh={this.refresh}
             colors={[colors.secondary.normal]}
           />
         }
