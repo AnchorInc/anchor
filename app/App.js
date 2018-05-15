@@ -22,6 +22,7 @@ const customTextProps = {
 setCustomText(customTextProps);
 setCustomStatusBar({ backgroundColor: colors.primary.dark });
 
+// firebase config
 const config = {
   apiKey: 'AIzaSyCGttWR24ng1Y87ruWfjAcGCISGLKz8jUE',
   authDomain: 'anchorapp-feed3.firebaseapp.com',
@@ -37,6 +38,7 @@ try {
   console.log(err);
 }
 
+// google sign in config
 GoogleSignin.configure({
   webClientId: gsigninConfig.webClientId,
 });
