@@ -20,6 +20,7 @@ const customTextProps = {
 setCustomText(customTextProps);
 setCustomStatusBar({ backgroundColor: colors.primary.dark });
 
+// google sign in config
 GoogleSignin.configure({
   webClientId: gsigninConfig.webClientId,
 });
