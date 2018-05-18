@@ -18,7 +18,7 @@ export const colors = {
 };
 
 // action types
-export const types = {
+export const actionTypes = {
   LOGIN: {
     GOOGLE: 'types.LOGIN.GOOGLE',
     FB: 'types.LOGIN.FB',
@@ -34,7 +34,6 @@ export const types = {
     SYNC: 'types.USER.SYNC',
     START_SYNC: 'types.USER.SYNC',
     UPDATE: 'types.USER.UPDATE',
-    DELETE: 'types.USER.DELETE',
     GET: 'types.USER.GET',
   },
 };

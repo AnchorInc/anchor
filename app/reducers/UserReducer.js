@@ -1,4 +1,4 @@
-import { types } from '../config';
+import { actionTypes } from '../config';
 
 const INITIAL_STATE = {
   user: null,
@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case types.USER.SYNC:
+    case actionTypes.USER.SYNC:
       return { ...state, user: action.user };
     default:
       return state;
