@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Dimensions, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
+import firebase from 'react-native-firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { colors } from '../../config';

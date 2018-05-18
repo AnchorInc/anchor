@@ -9,7 +9,7 @@ import {
   StatusBar,
 } from 'react-native';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
+import firebase from 'react-native-firebase';
 import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
