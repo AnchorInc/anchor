@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Modal, Text, Dimensions, TouchableOpacity } from 'react-native';
+
 import { colors } from '../../config';
 
 const { width, height } = Dimensions.get('window');

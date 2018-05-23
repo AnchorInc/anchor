@@ -10,8 +10,9 @@ import {
   ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ListDetail } from '../common';
+
 import { colors } from '../../config';
+import { ListDetail } from '../common';
 
 const { width, height } = Dimensions.get('window');
 
@@ -76,7 +77,7 @@ class Profile extends Component {
             value={this.props.user.age}
           />
           <ListDetail
-            title={'User'}
+            title={'User Type'}
             value={this.props.user.userType}
           />
         </ScrollView>

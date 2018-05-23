@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
+import firebase from 'react-native-firebase';
 import SplashScreen from 'react-native-splash-screen';
-import { getUser, startSyncUser } from '../../actions';
+
+import { getUser, getUserType, startSyncUser } from '../../actions';
 
 class AppSetup extends Component {
   componentWillMount() {
@@ -27,6 +28,7 @@ class AppSetup extends Component {
 const mapFunctionsToProps = {
   getUser,
   startSyncUser,
+  getUserType,
 };
 
 export default connect(null, mapFunctionsToProps)(AppSetup);

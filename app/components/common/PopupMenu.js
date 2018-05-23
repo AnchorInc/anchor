@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
     }
 
     onError = () => {
-     console.log('Popup Error');
+     this.props.showErrorMessage('Enter error message here'); // TODO: implement error message in PopupMenu
    }
 
    onPress = () => {

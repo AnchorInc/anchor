@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, RefreshControl, Dimensions } from 'react-native';
+import { View, Text, Dimensions, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
+import firebase from 'react-native-firebase';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { ClassDetail } from './';
+
 import { colors } from '../../config';
+import { ClassDetail } from './';
 
 const { width, height } = Dimensions.get('window');
 
@@ -12,35 +13,38 @@ class ClassList extends Component {
   state = {
     teachers: [],
     refreshing: false,
-    noBatches: true,
+    initialRefresh: false,
   };
 
   componentWillReceiveProps(props) {
+    if (this.state.initialRefresh) return;
     this.refresh(props.batchList);
   }
 
   getTeachersFromBatchList = (batchList) => {
-    this.setState({ teachers: [], refreshing: true });
+    this.setState({ teachers: [] });
     batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
     .once('value')
     .then(Class => firebase.database().ref(`/users/teachers/${Class.val().teacher}`)
     .once('value')
     .then((teacher) => {
-      this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false, noBatches: false });
+      this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false });
     })));
   }
 
   refresh = (batchList) => {
-    this.setState({ refreshing: true, isConnected: true });
-    if (batchList) {
-      this.getTeachersFromBatchList(batchList);
+    const list = batchList || this.props.batchList;
+    this.setState({ refreshing: true });
+    if (list) {
+      this.getTeachersFromBatchList(list);
     } else {
-      this.setState({ refreshing: false, noBatches: true });
+      this.setState({ refreshing: false });
     }
+    if (!this.state.initialRefresh) this.setState({ initialRefresh: true });
   }
 
   renderNoBatchMessage = () => {
-    if (this.props.batchList === null) {
+    if (!this.props.batchList) {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
           <Icon size={85} name='library-books' color='black' />
@@ -56,26 +60,25 @@ class ClassList extends Component {
     return null;
   }
 
-  renderTeachers = () => {
-    return this.state.teachers.map(teacher => (
-      <ClassDetail key={teacher.UID} person={teacher} onPress={this.props.onPress} />
-    ));
+  renderTeachers = ({ item }) => {
+    return <ClassDetail person={item} onPress={this.props.onPress} />;
   }
 
   render() {
     return (
-      <ScrollView
+      <FlatList
+        data={this.state.teachers}
+        renderItem={this.renderTeachers}
+        keyExtractor={teacher => teacher.UID}
+        ListEmptyComponent={this.renderNoBatchMessage}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this.refresh.bind(this, this.props.batchList)}
+            onRefresh={this.refresh}
             colors={[colors.secondary.normal]}
           />
         }
-      >
-        {this.renderTeachers()}
-        {this.renderNoBatchMessage()}
-      </ScrollView>
+      />
     );
   }
 }

@@ -1,21 +1,21 @@
-import { types } from '../config';
+import { actionTypes } from '../config';
 
-export const googleLoginRequest = userType => {
-  return { type: types.LOGIN.GOOGLE, userType: userType };
+export const googleLoginRequest = (userType) => {
+  return { type: actionTypes.LOGIN.GOOGLE, userType };
 };
 
-export const fbLoginRequest = userType => {
-  return { type: types.LOGIN.FB, userType: userType };
+export const fbLoginRequest = (userType) => {
+  return { type: actionTypes.LOGIN.FB, userType };
 };
 
 export const loginUserFail = () => {
-  return { type: types.LOGIN.FAIL };
+  return { type: actionTypes.LOGIN.FAIL };
 };
 
 export const loginUserSuccess = () => {
-  return { type: types.LOGIN.SUCESS };
+  return { type: actionTypes.LOGIN.SUCESS };
 };
 
 export const showSpinner = () => {
-  return { type: types.LOGIN.SHOW_SPINNER };
+  return { type: actionTypes.LOGIN.SHOW_SPINNER };
 };

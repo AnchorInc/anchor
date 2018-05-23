@@ -3,6 +3,7 @@ import { View, Dimensions, ScrollView, TouchableOpacity, Image, Text, StatusBar,
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextField } from 'react-native-material-textfield';
+
 import { colors } from '../../config';
 import { updateUser } from '../../actions';
 
@@ -34,21 +35,23 @@ class TeacherSetup extends Component {
     price: this.props.user.price || 100,
     location: this.props.user.location || 'Student\'s Location',
     subject: this.props.user.subject || '',
-    firstName: this.props.user.displayName.substr(0, this.props.user.displayName.indexOf(' ')) || '',
-    lastName: this.props.user.displayName.substr(this.props.user.displayName.indexOf(' ') + 1, this.props.user.displayName.length) || '',
+    firstName: this.props.user.displayName
+    .substr(0, this.props.user.displayName.indexOf(' ')) || '',
+    lastName: this.props.user.displayName
+      .substr(this.props.user.displayName
+        .indexOf(' ') + 1, this.props.user.displayName.length) || '',
     email: this.props.user.email || '',
     phone: this.props.user.phone || '',
   };
 
   onFocus = () => {
     const { errors = {} } = this.state;
-    for (const name in errors) {
-      const ref = this[name];
-
+    Object.entries(errors).forEach(([key]) => {
+      const ref = this[key];
       if (ref && ref.isFocused()) {
-        delete errors[name];
+        delete errors[key];
       }
-    }
+    });
 
     ['firstName', 'lastName', 'email', 'phone', 'subject']
     .map(name => ({ name, ref: this[name] }))
@@ -70,7 +73,7 @@ class TeacherSetup extends Component {
      .map(name => ({ name, ref: this[name] }))
      .forEach(({ ref, name }) => {
        const value = ref.value();
-       const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
        ref.blur();
        if (!value) {
          this.state.errors[name] = 'Should not be empty';
