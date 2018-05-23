@@ -18,23 +18,29 @@ import { ListDetail, PopupMenu } from '../common';
 const { width, height } = Dimensions.get('window');
 
 class TeacherProfile extends Component {
-  state = {
-    teacher: this.props.navigation.state.params.person,
-    batches: [],
-    messages: [],
-    time: 'time',
-    place: 'place',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      teacher: this.props.navigation.state.params.person,
+      action: this.props.navigation.state.params.action,
+      batches: [],
+      messages: [],
+      time: '',
+      place: '',
+    };
+  }
 
   componentWillMount() {
     this.getBatches();
   }
 
   getBatches() {
-    this.state.teacher.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
-      .once('value')
-      .then(Batch => this.setState({ time: Batch.val().time, place: Batch.val().place })),
-    );
+    if (this.state.teacher.batchList) {
+      this.state.teacher.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
+        .once('value')
+        .then(Batch => this.setState({ time: Batch.val().time, place: Batch.val().place })),
+      );
+    }
   }
 
   render() {
@@ -49,7 +55,7 @@ class TeacherProfile extends Component {
             <Text style={styles.headerTextStyle}>
               {this.state.teacher.displayName}
             </Text>
-            <PopupMenu actions={['Contact']} color='white' onPress={() => console.log('contact')} />
+            <PopupMenu actions={[this.state.action]} color='white' onPress={() => console.log('contact')} />
           </View>
           <View style={styles.profileContainerStyle}>
             <Image source={{ uri: this.state.teacher.photoURL }} style={styles.profileStyle} />
@@ -94,7 +100,7 @@ class TeacherProfile extends Component {
           />
           <ListDetail
             title={'Timings'}
-            value={`From ${this.state.time} at ${this.state.place}`}
+            value={this.state.time && this.state.place ? `From ${this.state.time} at ${this.state.place}` : 'No registered classes'}
           >
             <TouchableOpacity>
               <Text>See More</Text>

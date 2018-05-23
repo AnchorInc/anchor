@@ -15,7 +15,8 @@ class Search extends Component {
   };
 
   onPress = (person) => {
-    this.props.navigation.navigate('TeacherProfile', { person });
+    const action = 'Contact';
+    this.props.navigation.navigate('TeacherProfile', { person, action });
   }
 
   requestData = (queryObj) => {

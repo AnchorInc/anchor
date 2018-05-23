@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Dimensions, AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
 import { Header } from '../common';
 import ClassList from '../common/ClassList';
 
@@ -7,15 +8,17 @@ const { width, height } = Dimensions.get('window');
 
 class Classes extends Component {
   onPress = (person) => {
-    this.props.navigation.navigate('TeacherProfile', { person });
+    const action = 'Contact';
+    this.props.navigation.navigate('TeacherProfile', { person, action });
   }
 
   navigate = () => {
-    const user = this.props.user;
+    const person = this.props.user;
+    const action = 'Edit Profile';
     if (AsyncStorage.getItem('userType') === 'student') {
       this.props.navigation.navigate('Profile');
     } else {
-      this.props.navigation.navigate('TeacherProfile', { user });
+      this.props.navigation.navigate('TeacherProfile', { person, action });
     }
   }
 
@@ -29,4 +32,12 @@ class Classes extends Component {
   }
 }
 
-export { Classes };
+const mapStateToProps = (state) => {
+  let user;
+  if (state.user.user) {
+    user = state.user.user;
+  }
+  return { user };
+};
+
+export default connect(mapStateToProps)(Classes);
