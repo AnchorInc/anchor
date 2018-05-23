@@ -114,6 +114,7 @@ class ProfileEditing extends Component {
 
   updateUser = () => {
     this.onSubmit();
+    this.updateDonePref();
     const user = {
       displayName: this.state.firstName.concat(' ', this.state.lastName),
       email: this.state.email,
@@ -126,7 +127,13 @@ class ProfileEditing extends Component {
     if (this.state.errors && Object.keys(this.state.errors).length === 0) {
         this.props.updateUser(user);
         this.props.navigation.goBack();
-      }
+    }
+  }
+
+  updateDonePref = () => {
+    if (!this.props.user.donePref) {
+      this.props.updateUser({ donePref: true });
+    }
   }
 
   clearText = () => {
