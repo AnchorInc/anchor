@@ -1,4 +1,4 @@
-import { types } from '../config';
+import { actionTypes } from '../config';
 
 const INITIAL_STATE = {
   error: false,
@@ -7,9 +7,9 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case types.ERROR.SHOW:
+    case actionTypes.ERROR.SHOW:
       return { ...state, error: true, errorMessage: action.payload };
-    case types.ERROR.CLOSE:
+    case actionTypes.ERROR.CLOSE:
       return { ...state, error: false, errorMessage: null };
     default:
       return state;

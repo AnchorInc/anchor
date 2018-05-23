@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions } from 'react-native';
+import algoliasearch from 'algoliasearch/reactnative';
 
 import { algoliaConfig } from '../../config';
 import { SearchBar, SearchDetail, SubjectDetail } from '../common';
-
-const algoliasearch = require('algoliasearch/reactnative');
 
 const { width, height } = Dimensions.get('window');
 
