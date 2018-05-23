@@ -110,7 +110,7 @@ const googlesignin = () => {
 
 export function* watchLoginRequests() {
   yield all([
-    takeLatest(actionTypes.LOGIN.GOOGLE, loginUserWithGoogle),
-    takeLatest(actionTypes.LOGIN.FB, loginUserWithFB),
+    takeLatest(actionTypes.AUTH.LOGIN.GOOGLE, loginUserWithGoogle),
+    takeLatest(actionTypes.AUTH.LOGIN.FB, loginUserWithFB),
   ]);
 }
