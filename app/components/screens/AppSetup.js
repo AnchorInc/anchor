@@ -5,11 +5,13 @@ import SplashScreen from 'react-native-splash-screen';
 
 import { getUser, getUserType, startSyncUser } from '../../actions';
 
+// used to setup everything beforet the main app loads
 class AppSetup extends Component {
-  componentWillMount() {
+  componentDidMount() {
     // splash screen is already showing
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        this.setupPushNotifications();
         this.props.startSyncUser();
         this.props.getUser();
         SplashScreen.hide();
@@ -18,6 +20,21 @@ class AppSetup extends Component {
       SplashScreen.hide();
       return this.props.navigation.navigate('Login');
     });
+  }
+
+  setupPushNotifications = () => {
+    const enabled = firebase.messaging().hasPermission();
+    if (!enabled) {
+      firebase.messaging().requestPermission()
+      .then(() => {
+        console.log('user granted permission');
+      })
+      .catch(() => {
+        console.log('user rejected permission');
+      });
+    } else {
+      console.log('user granted permission');
+    }
   }
 
   render() {
