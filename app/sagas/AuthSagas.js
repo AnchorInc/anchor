@@ -5,7 +5,7 @@ import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
 import { Promise } from 'es6-promise';
 
-import { showErrorMessage, showSpinner, loginUserSuccess, loginUserFail } from '../actions';
+import { showErrorMessage, showSpinner, loginSuccess, loginFail } from '../actions';
 import { actionTypes, firebasePaths, userTypes } from '../config';
 
 
@@ -24,12 +24,12 @@ function* loginUserWithGoogle(action) {
 
     yield call(initUser, action, userCred);
 
-    yield put(loginUserSuccess());
+    yield put(loginSuccess());
   } catch (error) {
     // Error handling for login cancellation by user
-    yield put(loginUserFail());
+    yield put(loginFail());
     if (error.code !== 12501) {
-      // yield put(showErrorMessage(error.message));
+      yield put(showErrorMessage(error.message));
     }
   }
 }
@@ -50,7 +50,7 @@ function* loginUserWithFB(action) {
 
     yield call(initUser, action, userCred);
   } catch (error) {
-    yield put(loginUserFail());
+    yield put(loginFail());
     yield put(showErrorMessage(error.message));
   }
 }
@@ -110,7 +110,7 @@ const googlesignin = () => {
 
 export function* watchLoginRequests() {
   yield all([
-    takeLatest(actionTypes.LOGIN.GOOGLE, loginUserWithGoogle),
-    takeLatest(actionTypes.LOGIN.FB, loginUserWithFB),
+    takeLatest(actionTypes.AUTH.LOGIN.GOOGLE, loginUserWithGoogle),
+    takeLatest(actionTypes.AUTH.LOGIN.FB, loginUserWithFB),
   ]);
 }

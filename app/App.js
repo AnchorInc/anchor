@@ -4,6 +4,7 @@ import { setCustomText, setCustomStatusBar } from 'react-native-global-props';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+
 import rootSaga from './sagas';
 import reducers from './reducers';
 import { MainStack } from './navigation/Router';

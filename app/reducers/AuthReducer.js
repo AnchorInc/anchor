@@ -6,11 +6,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case actionTypes.LOGIN.SUCESS:
+    case actionTypes.AUTH.LOGIN.SUCESS:
       return { ...state, loading: false };
-    case actionTypes.LOGIN.FAIL:
+    case actionTypes.AUTH.LOGIN.FAIL:
       return { ...state, loading: false };
-    case actionTypes.LOGIN.SHOW_SPINNER:
+    case actionTypes.AUTH.SHOW_SPINNER:
       return { ...state, loading: true };
     default:
       return state;

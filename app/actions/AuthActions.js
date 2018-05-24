@@ -22,5 +22,5 @@ export const loginSuccess = () => {
 
 // displays the authenticating spinner while user is logging in
 export const showSpinner = () => {
-  return { type: actionTypes.AUTH.LOGIN.SHOW_SPINNER };
+  return { type: actionTypes.AUTH.SHOW_SPINNER };
 };
