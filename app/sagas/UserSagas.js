@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import { eventChannel } from 'redux-saga';
-import { takeLatest, all, put, call, take } from 'redux-saga/effects';
+import { takeLatest, all, put, call, take, takeEvery } from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
 
 import { syncUser, getUser } from '../actions';
@@ -72,6 +72,6 @@ export function* watchUserRequests() {
   yield all([
     takeLatest(actionTypes.USER.START_SYNC, syncUserSaga),
     takeLatest(actionTypes.USER.GET, getUserSaga),
-    takeLatest(actionTypes.USER.UPDATE, updateUserSaga),
+    takeEvery(actionTypes.USER.UPDATE, updateUserSaga),
   ]);
 }

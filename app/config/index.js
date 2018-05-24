@@ -19,11 +19,14 @@ export const colors = {
 
 // action types
 export const actionTypes = {
-  LOGIN: {
-    GOOGLE: 'types.LOGIN.GOOGLE',
-    FB: 'types.LOGIN.FB',
-    SUCESS: 'types.LOGIN.SUCCESS',
-    FAIL: 'types.LOGIN.FAIL',
+  AUTH: {
+    LOGIN: {
+      GOOGLE: 'types.AUTH.LOGIN.GOOGLE',
+      FB: 'types.AUTH.LOGIN.FB',
+      SUCESS: 'types.AUTH.LOGIN.SUCCESS',
+      FAIL: 'types.AUTH.LOGIN.FAIL',
+    },
+    LOGOUT: 'typs.AUTH.LOGOUT',
     SHOW_SPINNER: 'types.LOGIN.SHOW_SPINNER',
   },
   ERROR: {
