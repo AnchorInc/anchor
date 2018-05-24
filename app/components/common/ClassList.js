@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Dimensions, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
 import { ClassDetail } from './';
@@ -47,12 +47,9 @@ class ClassList extends Component {
     if (!this.props.batchList) {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
-          <Icon size={85} name='library-books' color='black' />
-          <Text style={{ paddingTop: 10, paddingBottom: 0, color: 'black', fontSize: 20, fontFamily: 'avenir_medium' }}>
-            You Are Not Enrolled In Any Class
-          </Text>
-          <Text style={{ padding: 10, color: '#727272', fontSize: 17, fontFamily: 'avenir_book' }}>
-            Search For Tutors Near You
+          <Icon size={85} name='school' color='#727272' />
+          <Text style={{ padding: 10, color: '#727272', fontSize: 15, fontFamily: 'avenir_heavy' }}>
+            Sign Up For Classes, To See Them Here
           </Text>
         </View>
       );
