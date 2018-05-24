@@ -29,11 +29,7 @@ GoogleSignin.configure({
 
 // main notification channel
 const channel = new firebase.notifications.Android.Channel('main-channel', 'Main Channel', firebase.notifications.Android.Importance.Max)
-.setDescription('the default notifications channel for anchor');
-
-channel.vibrationEnabled = true;
 channel.showBadge = true;
-
 firebase.notifications().android.createChannel(channel);
 
 const middleware = createSagaMiddleware();
