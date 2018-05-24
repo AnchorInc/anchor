@@ -10,7 +10,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, loading: false };
     case actionTypes.AUTH.LOGIN.FAIL:
       return { ...state, loading: false };
-    case actionTypes.AUTH.LOGIN.SHOW_SPINNER:
+    case actionTypes.AUTH.SHOW_SPINNER:
       return { ...state, loading: true };
     default:
       return state;
