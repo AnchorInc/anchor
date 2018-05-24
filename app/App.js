@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from 'react-native-firebase';
 import { GoogleSignin } from 'react-native-google-signin';
 import { setCustomText, setCustomStatusBar } from 'react-native-global-props';
 import { Provider } from 'react-redux';
@@ -25,6 +26,15 @@ setCustomStatusBar({ backgroundColor: colors.primary.dark });
 GoogleSignin.configure({
   webClientId: gsigninConfig.webClientId,
 });
+
+// main notification channel
+const channel = new firebase.notifications.Android.Channel('main-channel', 'Main Channel', firebase.notifications.Android.Importance.Max)
+.setDescription('the default notifications channel for anchor');
+
+channel.vibrationEnabled = true;
+channel.showBadge = true;
+
+firebase.notifications().android.createChannel(channel);
 
 const middleware = createSagaMiddleware();
 const store = createStore(reducers, {}, applyMiddleware(middleware));
