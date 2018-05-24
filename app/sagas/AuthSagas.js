@@ -3,7 +3,6 @@ import { put, takeLatest, all, call } from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
-import { Promise } from 'es6-promise';
 
 import { showErrorMessage, showSpinner, loginUserSuccess, loginUserFail } from '../actions';
 import { actionTypes, firebasePaths, userTypes } from '../config';
