@@ -9,8 +9,6 @@ import { ClassesStack } from '../../navigation/Router';
 class Main extends Component {
   componentDidMount() {
     this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed(() => {
-        // Process your notification as required
-        // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
         console.log('notification displayed');
     });
     this.notificationListener = firebase.notifications().onNotification((notification) => {
