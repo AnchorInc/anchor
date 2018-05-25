@@ -19,10 +19,10 @@ class Header extends Component {
     }
     return (
       <View style={styles.buttonContainerStyle}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.props.onPressChat}>
           <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
         </TouchableOpacity>
-        <HeaderProfileButton onPress={this.props.onPress} />
+        <HeaderProfileButton onPress={this.props.onPressProfile} />
       </View>
     );
   }

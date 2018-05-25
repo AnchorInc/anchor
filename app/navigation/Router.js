@@ -2,7 +2,7 @@ import React from 'react';
 import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Settings, Search } from '../components/screens';
+import { Settings, Search, Chat } from '../components/screens';
 import Classes from '../components/screens/Classes';
 import AppSetup from '../components/screens/AppSetup';
 import Main from '../components/screens/Main';
@@ -11,6 +11,7 @@ import Profile from '../components/screens/Profile';
 import TeacherProfile from '../components/screens/TeacherProfile';
 import TeacherSetup from '../components/screens/TeacherSetup';
 import ProfileEditing from '../components/screens/ProfileEditing';
+import ChatsOverview from '../components/screens/ChatsOverview';
 
 import { colors } from '../config';
 
@@ -76,6 +77,8 @@ export const ClassesStack = StackNavigator({
   TeacherProfile: { screen: TeacherProfile },
   ProfileEditing: { screen: ProfileEditing },
   TeacherSetup: { screen: TeacherSetup },
+  ChatsOverview: { screen: ChatsOverview },
+  Chat: { screen: Chat },
 }, ClassesStackConfig);
 
 const MainStackConfig = {

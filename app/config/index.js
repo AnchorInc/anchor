@@ -14,6 +14,7 @@ export const colors = {
     bbIconNormal: '#858585',
     bbNormal: '#dfdfdf',
     bgColor: '#e9e9ef',
+    darkGray: '#515151',
   },
 };
 
