@@ -14,7 +14,7 @@ class Classes extends Component {
     this.props.navigation.navigate('TeacherProfile', { person, action });
   }
 
-  navigate = () => {
+  navigateProfile = () => {
     const person = this.props.user;
     if (this.props.userType === userTypes.STUDENT) {
       this.props.navigation.navigate('Profile');
@@ -23,10 +23,14 @@ class Classes extends Component {
     }
   }
 
+  navigateChat = () => {
+    this.props.navigation.navigate('ChatsOverview');
+  }
+
   render() {
     return (
       <View style={{ width, height }}>
-        <Header title='Home' onPress={() => this.navigate()} color='#01152d' mainButtons />
+        <Header title='Home' onPressProfile={() => this.navigateProfile()} onPressChat={() => this.navigateChat()} mainButtons />
         <ClassList onPress={person => this.onPress(person)} />
       </View>
     );

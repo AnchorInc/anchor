@@ -11,3 +11,5 @@ export * from './ListDetail';
 export * from './PopupMenu';
 export * from './SearchDetail';
 export * from './SubjectDetail';
+export * from './ChatDetail';
+export * from './NewChatButton';
