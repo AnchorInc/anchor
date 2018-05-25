@@ -8,19 +8,22 @@ import { ClassesStack } from '../../navigation/Router';
 
 class Main extends Component {
   componentDidMount() {
+    this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification) => {
+        console.log(notification.android);
+    });
     this.notificationListener = firebase.notifications().onNotification((notification) => {
         // display the notification
+        notification.android.setChannelId('main-channel');
         firebase.notifications().displayNotification(notification);
     });
     this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
-        // Get the action triggered by the notification being opened
-        const action = notificationOpen.action;
-        // Get information about the notification that was opened
-        const notification = notificationOpen.notification;
-        console.log(action);
-        console.log(notification);
+      const notification = notificationOpen.notification;
+      // console.log(notification.android.channelId);
+      console.log(notification.body);
+      console.log(notification.android);
+      console.log(notification.data);
+      console.log(notification.android.channelId);
     });
-    this.appOpenedByNotification();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,20 +39,7 @@ class Main extends Component {
   componentWillUnmount() {
     this.notificationListener();
     this.notificationOpenedListener();
-  }
-
-  appOpenedByNotification = () => {
-    firebase.notifications().getInitialNotification()
-    .then((notificationOpen) => {
-      if (notificationOpen) {
-        // App was opened by a notification
-        const action = notificationOpen.action;
-        const notification = notificationOpen.notification;
-
-        console.log(action);
-        console.log(notification);
-      }
-    });
+    this.notificationDisplayedListener();
   }
 
   render() {

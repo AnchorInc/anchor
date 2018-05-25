@@ -28,8 +28,10 @@ GoogleSignin.configure({
 });
 
 // main notification channel
-const channel = new firebase.notifications.Android.Channel('main-channel', 'Main Channel', firebase.notifications.Android.Importance.Max)
-channel.showBadge = true;
+const channel = new firebase.notifications.Android.Channel('main-channel', 'Main Channel', firebase.notifications.Android.Importance.Max);
+channel
+.setShowBadge(true)
+.setSound('5');
 firebase.notifications().android.createChannel(channel);
 
 const middleware = createSagaMiddleware();
