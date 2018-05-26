@@ -36,7 +36,7 @@ export const actionTypes = {
   },
   USER: {
     SYNC: 'types.USER.SYNC',
-    START_SYNC: 'types.USER.SYNC',
+    START_SYNC: 'types.USER.START_SYNC',
     UPDATE: 'types.USER.UPDATE',
     GET: 'types.USER.GET',
   },
