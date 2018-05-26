@@ -46,6 +46,12 @@ export const actionTypes = {
   },
 };
 
+// sign in methods
+export const signinMethods = {
+  GOOGLE: 'google',
+  FB: 'fb',
+};
+
 // user types
 export const userTypes = {
   STUDENT: 'student',

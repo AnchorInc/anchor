@@ -1,13 +1,13 @@
-import { actionTypes } from '../config';
+import { actionTypes, signinMethods } from '../config';
 
 // starts the login process through google
 export const googleLoginRequest = (userType) => {
-  return { type: actionTypes.AUTH.LOGIN.GOOGLE, userType };
+  return { type: actionTypes.AUTH.LOGIN.GOOGLE, userType, method: signinMethods.GOOGLE };
 };
 
 // starts the login process through fb
 export const fbLoginRequest = (userType) => {
-  return { type: actionTypes.AUTH.LOGIN.FB, userType };
+  return { type: actionTypes.AUTH.LOGIN.FB, userType, method: signinMethods.FB };
 };
 
 // action dispatched if the login fails

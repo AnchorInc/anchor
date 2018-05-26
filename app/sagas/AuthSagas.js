@@ -5,7 +5,7 @@ import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
 
 import { showErrorMessage, showSpinner, loginSuccess, loginFail } from '../actions';
-import { actionTypes, firebasePaths, userTypes } from '../config';
+import { actionTypes, firebasePaths, userTypes, signinMethods } from '../config';
 
 
 const auth = firebase.auth();
@@ -14,7 +14,7 @@ const auth = firebase.auth();
 function* loginUserWithGoogle(action) {
   try {
     // get the id token from google
-    const user = yield call(googlesignin);
+    const user = yield call([GoogleSignin, GoogleSignin.signIn]);
     yield put(showSpinner());
     // create a firebase credential using that
     const credential = firebase.auth.GoogleAuthProvider.credential(user.idToken);
@@ -59,6 +59,20 @@ function* loginUserWithFB(action) {
 // worker Saga: will be called on LOGOUT actions
 function* logoutUser() {
   try {
+    // get the sign in method
+    const method = JSON.parse(yield call([AsyncStorage, AsyncStorage.getItem], 'signin_method'));
+    // sign out using the same api used to sign in
+    switch (method) {
+      case signinMethods.GOOGLE:
+        yield call([GoogleSignin, GoogleSignin.signOut]);
+        break;
+      case signinMethods.FB:
+        yield call([LoginManager, LoginManager.logOut]);
+        break;
+      default:
+        break;
+    }
+    // sign out from firebase
     yield call([auth, auth.signOut]);
   } catch (error) {
     console.log(error);
@@ -94,8 +108,10 @@ function* initUser(action, userCred) {
   }
 
   // store the user path and user data in the cache
-  yield call([AsyncStorage, AsyncStorage.setItem], 'user_path', JSON.stringify(userPath));
-  yield call([AsyncStorage, AsyncStorage.setItem], 'user_data', JSON.stringify(userData));
+  yield call([AsyncStorage, AsyncStorage.multiSet],
+    [['user_path', JSON.stringify(userPath)],
+    ['user_data', JSON.stringify(userData)],
+    ['signin_method', JSON.stringify(action.method)]]);
 }
 
 const getUserPath = (action) => {
@@ -109,14 +125,6 @@ const getUserPath = (action) => {
     default:
       throw new Error('User is not student or teacher');
   }
-};
-
-const googlesignin = () => {
-  return new Promise((res, rej) => {
-    GoogleSignin.signIn()
-    .then((user) => { res(user); })
-    .catch(() => rej(new Error('Could not sign in. Please try again')));
-  });
 };
 
 export function* watchLoginRequests() {
