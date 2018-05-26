@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Button } from 'react-native';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions';
 
 import { Header } from '../common';
 
@@ -7,10 +9,6 @@ class Settings extends Component {
   state = {
     switchValue: false,
   };
-
-  toggleSwitch = (value) => {
-    this.setState({ switchValue: value });
-  }
 
   render() {
     return (
@@ -25,6 +23,7 @@ class Settings extends Component {
         <View style={styles.headerStyle}>
           <Text style={styles.textStyle}>Account</Text>
         </View>
+        <Button title='logout' onPress={this.props.logoutUser.bind(this)} />
       </View>
     );
   }
@@ -44,4 +43,4 @@ const styles = {
   },
 };
 
-export { Settings };
+export default connect(null, { logoutUser })(Settings);

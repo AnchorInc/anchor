@@ -2,8 +2,9 @@ import React from 'react';
 import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Settings, Search, Chat } from '../components/screens';
+import { Search, Chat } from '../components/screens';
 import Classes from '../components/screens/Classes';
+import Settings from '../components/screens/Settings';
 import AppSetup from '../components/screens/AppSetup';
 import Main from '../components/screens/Main';
 import Login from '../components/screens/Login';
