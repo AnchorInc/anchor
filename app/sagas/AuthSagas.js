@@ -55,18 +55,10 @@ function* loginUserWithFB(action) {
   }
 }
 
-const getUserPath = (action) => {
-  switch (action.userType) {
-    case userTypes.STUDENT:
-      // return '/students'
-      return firebasePaths.STUDENTS;
-    case userTypes.TEACHER:
-      // return '/teachers'
-      return firebasePaths.TEACHERS;
-    default:
-      throw new Error('User is not student or teacher');
-  }
-};
+// worker Saga: will be called on LOGOUT actions
+function* logoutUser() {
+  yield call([auth, auth.signOut]);
+}
 
 function* initUser(action, userCred) {
   // get a db reference to the user
@@ -101,6 +93,19 @@ function* initUser(action, userCred) {
   yield call([AsyncStorage, AsyncStorage.setItem], 'user_data', JSON.stringify(userData));
 }
 
+const getUserPath = (action) => {
+  switch (action.userType) {
+    case userTypes.STUDENT:
+      // return '/students'
+      return firebasePaths.STUDENTS;
+    case userTypes.TEACHER:
+      // return '/teachers'
+      return firebasePaths.TEACHERS;
+    default:
+      throw new Error('User is not student or teacher');
+  }
+};
+
 const googlesignin = () => {
   return new Promise((res, rej) => {
     GoogleSignin.signIn()
@@ -113,5 +118,6 @@ export function* watchLoginRequests() {
   yield all([
     takeLatest(actionTypes.AUTH.LOGIN.GOOGLE, loginUserWithGoogle),
     takeLatest(actionTypes.AUTH.LOGIN.FB, loginUserWithFB),
+    takeLatest(actionTypes.AUTH.LOGOUT, logoutUser),
   ]);
 }
