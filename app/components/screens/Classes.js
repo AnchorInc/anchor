@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { View, Dimensions } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { userTypes } from '../../config';
 import { Header } from '../common';
 import ClassList from '../common/ClassList';
-
-const { width, height } = Dimensions.get('window');
 
 class Classes extends Component {
   onPress = (person) => {
@@ -28,7 +26,7 @@ class Classes extends Component {
 
   render() {
     return (
-      <View style={{ width, height }}>
+      <View style={{ flex: 1 }}>
         <Header title='Home' onPressProfile={this.navigateProfile} onPressChat={() => this.navigateChat()} mainButtons />
         <ClassList onPress={person => this.onPress(person)} />
       </View>
