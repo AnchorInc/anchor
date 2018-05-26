@@ -82,6 +82,19 @@ export const ClassesStack = StackNavigator({
   Chat: { screen: Chat },
 }, ClassesStackConfig);
 
+const defaultGetStateForActionClassesStack = ClassesStack.router.getStateForAction;
+
+ClassesStack.router.getStateForAction = (action, state) => {
+  // prevent access to the 'goback' nav prop
+  if (
+    state &&
+    action.type === NavigationActions.BACK &&
+    state.routes[state.index].routeName === 'ProfileEditing'
+  ) { return null; }
+
+  return defaultGetStateForActionClassesStack(action, state);
+};
+
 const MainStackConfig = {
   navigationOptions: {
     header: null,
