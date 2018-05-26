@@ -10,16 +10,15 @@ const { width, height } = Dimensions.get('window');
 
 class Classes extends Component {
   onPress = (person) => {
-    const action = 'Contact';
-    this.props.navigation.navigate('TeacherProfile', { person, action });
+    this.props.navigation.navigate('TeacherProfile', { person, action: 'Contact' });
   }
 
   navigateProfile = () => {
-    const person = this.props.user;
+    console.log(this.props.batchList);
     if (this.props.userType === userTypes.STUDENT) {
       this.props.navigation.navigate('Profile');
     } else {
-      this.props.navigation.navigate('TeacherProfile', { person, action: 'Edit Profile' });
+      this.props.navigation.navigate('TeacherProfile', { person: this.props.user, action: 'Edit Profile' });
     }
   }
 
@@ -30,7 +29,7 @@ class Classes extends Component {
   render() {
     return (
       <View style={{ width, height }}>
-        <Header title='Home' onPressProfile={() => this.navigateProfile()} onPressChat={() => this.navigateChat()} mainButtons />
+        <Header title='Home' onPressProfile={this.navigateProfile} onPressChat={() => this.navigateChat()} mainButtons />
         <ClassList onPress={person => this.onPress(person)} />
       </View>
     );
@@ -39,10 +38,12 @@ class Classes extends Component {
 
 const mapStateToProps = (state) => {
   let userType;
+  let user;
   if (state.user.user) {
     userType = state.user.user.type;
+    user = state.user.user;
   }
-  return { userType };
+  return { userType, user };
 };
 
 export default connect(mapStateToProps)(Classes);
