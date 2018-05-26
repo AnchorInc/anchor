@@ -27,6 +27,7 @@ function* loginUserWithGoogle(action) {
   } catch (error) {
     // Error handling for login cancellation by user
     yield put(loginFail());
+    console.log(error);
     if (error.code !== 12501) {
       yield put(showErrorMessage(error.message));
     }
@@ -76,6 +77,7 @@ function* initUser(action, userCred) {
   let userData;
   // check if the user already exists
   if (userCred.additionalUserInfo.isNewUser) {
+    console.log('new user');
     // create a new user in firebase
     userData = {
       displayName: user.displayName,
@@ -87,7 +89,7 @@ function* initUser(action, userCred) {
       type: action.userType,
       donePref: false,
     };
-    yield call([ref, ref.push], userData);
+    yield call([ref, ref.set], userData);
   } else {
     // get the existing user data and store it
     const snapshot = yield call([ref, ref.once], 'value');
