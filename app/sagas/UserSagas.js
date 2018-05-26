@@ -32,7 +32,6 @@ function* syncUserSaga() {
       console.log(error);
     }
   }
-  console.log('no user');
   channel.close();
 }
 

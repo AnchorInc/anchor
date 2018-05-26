@@ -12,7 +12,6 @@ class Classes extends Component {
   }
 
   navigateProfile = () => {
-    console.log(this.props.batchList);
     if (this.props.user.type === userTypes.STUDENT) {
       this.props.navigation.navigate('Profile');
     } else {

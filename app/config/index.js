@@ -27,7 +27,11 @@ export const actionTypes = {
       SUCESS: 'types.AUTH.LOGIN.SUCCESS',
       FAIL: 'types.AUTH.LOGIN.FAIL',
     },
-    LOGOUT: 'types.AUTH.LOGOUT',
+    LOGOUT: {
+      REQUEST: 'types.AUTH.LOGOUT',
+      SUCCESS: 'types.AUTH.LOGOUT.SUCCESS',
+      FAIL: 'types.AUTH.LOGOUT.FAIL',
+    },
     SHOW_SPINNER: 'types.LOGIN.SHOW_SPINNER',
   },
   ERROR: {

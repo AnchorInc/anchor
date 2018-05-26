@@ -20,9 +20,9 @@ export const loginSuccess = () => {
   return { type: actionTypes.AUTH.LOGIN.SUCESS };
 };
 
-// action dispatcatched when the user wants to logout
+// action dispatched when the user wants to logout
 export const logoutUser = () => {
-  return { type: actionTypes.AUTH.LOGOUT };
+  return { type: actionTypes.AUTH.LOGOUT.REQUEST };
 };
 
 // displays the authenticating spinner while user is logging in

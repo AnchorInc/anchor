@@ -29,6 +29,7 @@ function* loginUserWithGoogle(action) {
     yield put(loginFail());
     console.log(error);
     if (error.code !== 12501) {
+      // error code 12501 is just when the user cancels the sign in by pressing outside the modal
       yield put(showErrorMessage(error.message));
     }
   }
@@ -57,7 +58,11 @@ function* loginUserWithFB(action) {
 
 // worker Saga: will be called on LOGOUT actions
 function* logoutUser() {
-  yield call([auth, auth.signOut]);
+  try {
+    yield call([auth, auth.signOut]);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function* initUser(action, userCred) {
@@ -118,6 +123,6 @@ export function* watchLoginRequests() {
   yield all([
     takeLatest(actionTypes.AUTH.LOGIN.GOOGLE, loginUserWithGoogle),
     takeLatest(actionTypes.AUTH.LOGIN.FB, loginUserWithFB),
-    takeLatest(actionTypes.AUTH.LOGOUT, logoutUser),
+    takeLatest(actionTypes.AUTH.LOGOUT.REQUEST, logoutUser),
   ]);
 }
