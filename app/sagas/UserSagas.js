@@ -1,4 +1,4 @@
-import { AsyncStorage } from'react-native';
+import { AsyncStorage } from 'react-native';
 import { eventChannel } from 'redux-saga';
 import { takeLatest, all, put, call, take, takeEvery } from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
@@ -12,7 +12,7 @@ function* updateUserSaga(action) {
   yield call([ref, ref.update], action.user);
 }
 
-  function* syncUserSaga() {
+function* syncUserSaga() {
   /* sync the user from the cloud and store it on the device
   also call the getUserSaga to update the user reducer state with the latest user data */
   const ref = yield call(getUserRef);
@@ -25,15 +25,14 @@ function* updateUserSaga(action) {
 
     try {
       // update the cached user data with the new user daya
-      await AsyncStorage.setItem('user_data', JSON.stringify(user));
-      let a = await AsyncStorage.getItem('user_data');
-      console.log("user_data", a);
+      yield call([AsyncStorage, AsyncStorage.setItem], 'user_data', JSON.stringify(user));
       // update the user reducer
       yield put(getUser());
     } catch (error) {
       console.log(error);
     }
   }
+  console.log('no user');
   channel.close();
 }
 
@@ -59,7 +58,7 @@ function* getUserRef() {
 
 const userEventListener = (ref) => {
   // create a redux saga event channel to listen for changes to the user data on the cloud
-  const channel = eventChannel(emitter => {
+  const channel = eventChannel((emitter) => {
     // store the ref.on listener function in the cb var
     const callback = ref.on('value', (dataSnapshot) => {
       // emit the user data back
