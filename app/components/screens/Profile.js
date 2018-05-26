@@ -32,13 +32,13 @@ class Profile extends Component {
         <StatusBar />
         <View style={headerContainerStyle}>
           <View style={headerStyle}>
-            <TouchableOpacity style={{ padding: 15, height: 30 }} onPress={() => this.props.navigation.goBack()}>
+            <TouchableOpacity style={{ padding: 15, height: 0.1 * height }} onPress={() => this.props.navigation.goBack()}>
               <Icon name='arrow-left' size={24} color='white' />
             </TouchableOpacity>
             <Text style={headerTextStyle}>
               Profile
             </Text>
-            <TouchableOpacity style={{ padding: 15, height: 30 }} onPress={() => this.props.navigation.navigate('ProfileEditing')}>
+            <TouchableOpacity style={{ padding: 15, height: 0.1 * height }} onPress={() => this.props.navigation.navigate('ProfileEditing')}>
               <Icon name='account-settings-variant' size={24} color='white' />
             </TouchableOpacity>
           </View>
