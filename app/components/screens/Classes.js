@@ -10,7 +10,7 @@ const { width, height } = Dimensions.get('window');
 
 class Classes extends Component {
   onPress = (person) => {
-    this.props.navigation.navigate('TeacherProfile', { person, action: 'Contact' });
+    this.props.navigation.navigate('TeacherProfile', { person, action: 'forum' });
   }
 
   navigateProfile = () => {
@@ -18,7 +18,7 @@ class Classes extends Component {
     if (this.props.userType === userTypes.STUDENT) {
       this.props.navigation.navigate('Profile');
     } else {
-      this.props.navigation.navigate('TeacherProfile', { person: this.props.user, action: 'Edit Profile' });
+      this.props.navigation.navigate('TeacherProfile', { person: this.props.user, action: 'account-settings-variant' });
     }
   }
 

@@ -14,7 +14,7 @@ import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
-import { ListDetail, PopupMenu } from '../common';
+import { ListDetail } from '../common';
 
 const { width, height } = Dimensions.get('window');
 
@@ -44,19 +44,29 @@ class TeacherProfile extends Component {
     }
   }
 
+  completeAction = () => {
+    if (this.state.action === 'account-settings-variant') {
+      this.props.navigation.navigate('TeacherSetup');
+    } else {
+      console.log('contacting');
+    }
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar />
         <View style={styles.headerContainerStyle}>
           <View style={styles.headerStyle}>
-            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+            <TouchableOpacity style={styles.iconStyle} onPress={() => this.props.navigation.goBack()}>
               <Icon name='arrow-left' size={24} color='white' />
             </TouchableOpacity>
             <Text style={styles.headerTextStyle}>
               {this.state.teacher.displayName}
             </Text>
-            <PopupMenu actions={[this.state.action]} color='white' onPress={() => console.log('contact')} />
+            <TouchableOpacity style={styles.iconStyle} onPress={() => this.completeAction()}>
+              <Icon name={this.state.action} size={24} color='white' />
+            </TouchableOpacity>
           </View>
           <View style={styles.profileContainerStyle}>
             <Image source={{ uri: this.state.teacher.photoURL }} style={styles.profileStyle} />
@@ -138,6 +148,9 @@ const styles = {
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  iconStyle: {
+    height: 30,
   },
   profileStyle: {
     width: width * 0.25,

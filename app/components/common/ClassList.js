@@ -68,6 +68,7 @@ class ClassList extends Component {
         renderItem={this.renderTeachers}
         keyExtractor={teacher => teacher.UID}
         ListEmptyComponent={this.renderNoBatchMessage}
+        style={{ paddingBottom: 50 }}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}

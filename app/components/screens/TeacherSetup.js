@@ -132,7 +132,7 @@ class TeacherSetup extends Component {
       userType: 'teacher',
     };
     this.props.updateUser(user);
-    this.props.navigation.navigate('Main');
+    this.props.navigation.goBack();
   }
 
   updateRef(name, ref) {
