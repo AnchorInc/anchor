@@ -25,9 +25,7 @@ function* updateUserSaga(action) {
 
     try {
       // update the cached user data with the new user daya
-      await AsyncStorage.setItem('user_data', JSON.stringify(user));
-      let a = await AsyncStorage.getItem('user_data');
-      console.log("user_data", a);
+      yield call([AsyncStorage, AsyncStorage.setItem], 'user_data', JSON.stringify(user));
       // update the user reducer
       yield put(getUser());
     } catch (error) {
