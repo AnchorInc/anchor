@@ -15,7 +15,7 @@ class Classes extends Component {
 
   navigateProfile = () => {
     console.log(this.props.batchList);
-    if (this.props.userType === userTypes.STUDENT) {
+    if (this.props.user.type === userTypes.STUDENT) {
       this.props.navigation.navigate('Profile');
     } else {
       this.props.navigation.navigate('TeacherProfile', { person: this.props.user, action: 'account-settings-variant' });
@@ -37,13 +37,11 @@ class Classes extends Component {
 }
 
 const mapStateToProps = (state) => {
-  let userType;
   let user;
   if (state.user.user) {
-    userType = state.user.user.type;
     user = state.user.user;
   }
-  return { userType, user };
+  return { user };
 };
 
 export default connect(mapStateToProps)(Classes);
