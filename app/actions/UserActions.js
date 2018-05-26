@@ -7,6 +7,7 @@ export const startSyncUser = () => {
 
 // syncs the local user data with the cloud user data
 export const syncUser = (user) => {
+  console.log(user);
   return { type: actionTypes.USER.SYNC, user };
 };
 
