@@ -6,7 +6,7 @@ import { colors, userTypes } from '../../config';
 import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
-const logo = require('../../res/images/logo.png');
+import logo from '../../res/images/logo.png';
 
 const { width, height } = Dimensions.get('window');
 
