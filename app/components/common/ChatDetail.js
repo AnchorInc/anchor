@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, Image, Dimensions } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { colors } from '../../config';
 
 const { width } = Dimensions.get('window');
 
-const ChatDetail = ({ displayName, imageURL, lastMessage, lastTimestamp, unread, onPress }) => {
+const ChatDetail = ({ displayName, imageURL, lastMessage, lastTimestamp, unread, onPress, person }) => {
   return (
-    <View onPress={onPress}>
+    <TouchableOpacity onPress={() => onPress(person)}>
       <View style={{ flexDirection: 'row', padding: 20, paddingRight: 10, alignItems: 'center' }}>
         <Image style={styles.profileStyle} source={{ uri: imageURL }} />
         <View style={{ flexDirection: 'column', width: 0.8 * width }}>
@@ -29,7 +29,7 @@ const ChatDetail = ({ displayName, imageURL, lastMessage, lastTimestamp, unread,
       <View style={{ paddingLeft: 20 }}>
         <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

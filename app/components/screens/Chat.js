@@ -8,8 +8,8 @@ class Chat extends Component {
 
   render() {
     return (
-      <View>
-        <Text>{this.state.chat.name}</Text>
+      <View style={{ flex: 1 }}>
+        <Text>{this.state.chat.displayName}</Text>
       </View>
     );
   }
