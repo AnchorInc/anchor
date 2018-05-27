@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native';
-import { put, takeLatest, all, call } from 'redux-saga/effects';
+import { put, takeLatest, all, call, cps } from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
@@ -18,6 +18,7 @@ function* loginUserWithGoogle(action) {
     yield put(showSpinner());
     // create a firebase credential using that
     const credential = firebase.auth.GoogleAuthProvider.credential(user.idToken);
+    console.log(credential);
     // sign in to firebase and get the user credentials
     const userCred = yield call([auth, auth.signInAndRetrieveDataWithCredential], credential);
 
@@ -41,9 +42,8 @@ function* loginUserWithFB(action) {
     // login to fb
     const result = LoginManager.logInWithReadPermissions(['public_profile', 'email']);
     if (result.isCancelled) return;
-    yield put(showSpinner());
     // get the user id token
-    const user = AccessToken.getCurrentAccessToken();
+    const user = yield cps([AccessToken, AccessToken.getCurrentAccessToken]);
     // get a firebase credential using the user id token
     const credential = firebase.auth.FacebookAuthProvider.credential(user.idToken);
     // sign in to firebase and get the user credentials
@@ -51,6 +51,7 @@ function* loginUserWithFB(action) {
 
     yield call(initUser, action, userCred);
   } catch (error) {
+    console.log(1);
     yield put(loginFail());
     yield put(showErrorMessage(error.message));
   }
