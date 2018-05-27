@@ -2,7 +2,7 @@ import { actionTypes } from '../config';
 
 // starts the user event listener in UserSagas.js
 export const startSyncUser = () => {
-  return { type: actionTypes.USER.START_SYNC };
+  return { type: actionTypes.USER.LISTEN };
 };
 
 // syncs the local user data with the cloud user data
