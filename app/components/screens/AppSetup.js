@@ -11,7 +11,7 @@ class AppSetup extends Component {
     // splash screen is already showing
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setupPushNotifications();
+        this.checkUserPermissions();
         this.props.startSyncUser();
         this.props.getUser();
         SplashScreen.hide();
@@ -22,7 +22,7 @@ class AppSetup extends Component {
     });
   }
 
-  setupPushNotifications = () => {
+  checkUserPermissions = () => {
     const enabled = firebase.messaging().hasPermission();
     if (!enabled) {
       firebase.messaging().requestPermission()

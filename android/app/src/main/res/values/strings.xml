@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Anchor</string>
     <string name="facebook_app_id">325194521243352</string>
-    <string name="default_notification_channel_id">rnfirebase_notification_channel_id</string>
+    <string name="default_notification_channel_id">main-channel</string>
 </resources>

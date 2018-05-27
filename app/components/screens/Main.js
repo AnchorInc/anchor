@@ -3,26 +3,21 @@ import firebase from 'react-native-firebase';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { userTypes } from '../../config';
+import { userTypes, colors } from '../../config';
 import { ClassesStack } from '../../navigation/Router';
 
 class Main extends Component {
   componentDidMount() {
-    this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification) => {
-        console.log(notification.android);
-    });
     this.notificationListener = firebase.notifications().onNotification((notification) => {
         // display the notification
-        notification.android.setChannelId('main-channel');
+        notification
+        .android.setChannelId('main-channel')
+        .android.setSmallIcon('@drawable/logo')
+        .android.setColorized(true)
+        .android.setColor(colors.primary.light)
+        .android.setAutoCancel(true);
+        console.log(notification.android);
         firebase.notifications().displayNotification(notification);
-    });
-    this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
-      const notification = notificationOpen.notification;
-      // console.log(notification.android.channelId);
-      console.log(notification.body);
-      console.log(notification.android);
-      console.log(notification.data);
-      console.log(notification.android.channelId);
     });
   }
 
@@ -38,8 +33,6 @@ class Main extends Component {
 
   componentWillUnmount() {
     this.notificationListener();
-    this.notificationOpenedListener();
-    this.notificationDisplayedListener();
   }
 
   render() {
