@@ -78,6 +78,8 @@ function* logoutUser() {
     }
     // sign out from firebase
     yield call([auth, auth.signOut]);
+    // clear the async storage to prevent mixup with future logins
+    yield call([AsyncStorage, AsyncStorage.clear]);
   } catch (error) {
     console.log(error);
   }
