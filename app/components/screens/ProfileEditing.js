@@ -185,7 +185,7 @@ class ProfileEditing extends Component {
               <Text style={headerTextStyle}>
                 Edit Profile
               </Text>
-              <TouchableOpacity style={{ padding: 15 }} onPress={this.updateUser}>
+              <TouchableOpacity style={{ padding: 15, height: 48 }} onPress={() => this.updateUser()}>
                 <Icon name='check' size={24} color='white' />
               </TouchableOpacity>
             </View>
