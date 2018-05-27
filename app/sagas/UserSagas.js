@@ -71,7 +71,7 @@ const userEventListener = (ref) => {
 
 export function* watchUserRequests() {
   yield all([
-    takeLatest(actionTypes.USER.START_SYNC, syncUserSaga),
+    takeLatest(actionTypes.USER.LISTEN, syncUserSaga),
     takeLatest(actionTypes.USER.GET, getUserSaga),
     takeEvery(actionTypes.USER.UPDATE, updateUserSaga),
   ]);

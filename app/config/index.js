@@ -40,9 +40,14 @@ export const actionTypes = {
   },
   USER: {
     SYNC: 'types.USER.SYNC',
-    START_SYNC: 'types.USER.START_SYNC',
+    LISTEN: 'types.USER.LISTEN',
     UPDATE: 'types.USER.UPDATE',
     GET: 'types.USER.GET',
+  },
+  NOTIFICATIONS: {
+    SYNC: 'types.NOTIFICATIONS.SYNC',
+    DISPLAY: 'types.NOTIFICATIONS.DISPLAY',
+    SEND: 'types.NOTIFICATIONS.SEND',
   },
 };
 
