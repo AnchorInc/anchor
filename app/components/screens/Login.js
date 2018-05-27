@@ -3,7 +3,7 @@ import { View, StatusBar, Dimensions, Image, Picker } from 'react-native';
 import { connect } from 'react-redux';
 
 import { colors, userTypes } from '../../config';
-import { googleLoginRequest, fbLoginRequest, closeErrorMessage } from '../../actions';
+import { googleLoginRequest, fbLoginRequest, closeErrorMessage, showErrorMessage, resetLogin } from '../../actions';
 import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
 
 import logo from '../../res/images/logo.png';
@@ -11,9 +11,18 @@ import logo from '../../res/images/logo.png';
 const { width, height } = Dimensions.get('window');
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { userType: userTypes.STUDENT };
+  state = { userType: userTypes.STUDENT };
+
+  showErrorMessage = () => {
+    console.log(this.props.loginFail);
+    if (this.props.loginFail) {
+      this.props.showErrorMessage(this.props.message);
+    }
+  }
+
+  closeErrorMessage = () => {
+    this.props.resetLogin();
+    this.props.closeErrorMessage();
   }
 
   render() {
@@ -24,6 +33,7 @@ class Login extends Component {
     } = styles;
     return (
       <View style={{ flex: 1 }}>
+        {this.showErrorMessage()}
         <StatusBar backgroundColor={colors.primary.dark} />
         <View style={containerStyle}>
         <Image
@@ -53,7 +63,7 @@ class Login extends Component {
           visible={this.props.error}
           message={this.props.errorMessage}
           button1Text='Ok'
-          onPress={this.props.closeErrorMessage}
+          onPress={this.closeErrorMessage}
         />
       </View>
     );
@@ -81,7 +91,9 @@ const mapStateToProps = (state) => {
     errorMessage: state.global.errorMessage,
     error: state.global.error,
     loading: state.auth.loading,
+    loginFail: state.auth.loginFail,
+    message: state.auth.message,
   };
 };
 
-export default connect(mapStateToProps, { googleLoginRequest, fbLoginRequest, closeErrorMessage })(Login);
+export default connect(mapStateToProps, { googleLoginRequest, fbLoginRequest, closeErrorMessage, showErrorMessage, resetLogin })(Login);

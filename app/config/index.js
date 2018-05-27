@@ -26,6 +26,7 @@ export const actionTypes = {
       FB: 'types.AUTH.LOGIN.FB',
       SUCESS: 'types.AUTH.LOGIN.SUCCESS',
       FAIL: 'types.AUTH.LOGIN.FAIL',
+      RESET: 'types.AUTH.LOGIN.RESET',
     },
     LOGOUT: {
       REQUEST: 'types.AUTH.LOGOUT',

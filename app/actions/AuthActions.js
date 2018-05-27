@@ -11,13 +11,17 @@ export const fbLoginRequest = (userType) => {
 };
 
 // action dispatched if the login fails
-export const loginFail = () => {
-  return { type: actionTypes.AUTH.LOGIN.FAIL };
+export const loginFail = (message) => {
+  return { type: actionTypes.AUTH.LOGIN.FAIL, message };
 };
 
 // action dispatched if the login succeeds
 export const loginSuccess = () => {
   return { type: actionTypes.AUTH.LOGIN.SUCESS };
+};
+
+export const resetLogin = () => {
+  return { type: actionTypes.AUTH.LOGIN.RESET };
 };
 
 // action dispatched when the user wants to logout
