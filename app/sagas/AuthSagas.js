@@ -18,6 +18,7 @@ function* loginUserWithGoogle(action) {
     yield put(showSpinner());
     // create a firebase credential using that
     const credential = firebase.auth.GoogleAuthProvider.credential(user.idToken);
+    console.log(credential);
     // sign in to firebase and get the user credentials
     const userCred = yield call([auth, auth.signInAndRetrieveDataWithCredential], credential);
 
@@ -41,7 +42,6 @@ function* loginUserWithFB(action) {
     // login to fb
     const result = yield call([LoginManager, LoginManager.logInWithReadPermissions], ['public_profile', 'email']);
     if (result.isCancelled) return;
-    yield put(showSpinner());
     // get the user id token
     const user = yield call([AccessToken, AccessToken.getCurrentAccessToken]);
     // get a firebase credential using the user id token
