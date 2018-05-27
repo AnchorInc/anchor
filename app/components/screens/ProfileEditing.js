@@ -114,7 +114,6 @@ class ProfileEditing extends Component {
 
   updateUser = () => {
     this.onSubmit();
-    this.updateDonePref();
     const user = {
       displayName: this.state.firstName.concat(' ', this.state.lastName),
       email: this.state.email,
@@ -125,8 +124,9 @@ class ProfileEditing extends Component {
       userType: 'student',
     };
     if (this.state.errors && Object.keys(this.state.errors).length === 0) {
-        this.props.updateUser(user);
-        this.props.navigation.goBack();
+      this.updateDonePref();
+      this.props.updateUser(user);
+      this.props.navigation.goBack();
     }
   }
 
@@ -179,13 +179,13 @@ class ProfileEditing extends Component {
         <View style={headerContainerStyle}>
           <View style={headerStyle}>
             <View style={buttonContainerStyle}>
-              {/* <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
+              <TouchableOpacity style={{ padding: 15, height: 0.08 * height }} onPress={() => this.props.navigation.goBack()}>
                 <Icon name='arrow-left' size={24} color='white' />
-              </TouchableOpacity> */}
+              </TouchableOpacity>
               <Text style={headerTextStyle}>
                 Edit Profile
               </Text>
-              <TouchableOpacity style={{ padding: 15, height: 48 }} onPress={() => this.updateUser()}>
+              <TouchableOpacity style={{ padding: 15, height: 0.08 * height }} onPress={() => this.updateUser()}>
                 <Icon name='check' size={24} color='white' />
               </TouchableOpacity>
             </View>
@@ -299,7 +299,7 @@ class ProfileEditing extends Component {
               <Text style={styles.titleTextStyle}>Age</Text>
               <Text style={styles.textStyle}>{this.state.age}</Text>
             </View>
-            <Slider style={{ width: 0.95 * width }} value={this.props.user.age} onValueChange={value => this.setState({ age: value })} maximumValue={99} minimumValue={5} step={1} maximumTrackTintColor={colors.primary.light} thumbTintColor={colors.primary.light} />
+            <Slider style={{ width: 0.95 * width }} value={this.props.user.age} onValueChange={value => this.setState({ age: value })} maximumValue={99} minimumValue={5} step={1} minimumTrackTintColor={colors.primary.light} thumbTintColor={colors.primary.light} />
           </View>
         </ScrollView>
       </View>
