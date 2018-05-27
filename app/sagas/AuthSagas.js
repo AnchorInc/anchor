@@ -39,18 +39,19 @@ function* loginUserWithGoogle(action) {
 function* loginUserWithFB(action) {
   try {
     // login to fb
-    const result = LoginManager.logInWithReadPermissions(['public_profile', 'email']);
+    const result = yield call([LoginManager, LoginManager.logInWithReadPermissions], ['public_profile', 'email']);
     if (result.isCancelled) return;
     yield put(showSpinner());
     // get the user id token
-    const user = AccessToken.getCurrentAccessToken();
+    const user = yield call([AccessToken, AccessToken.getCurrentAccessToken]);
     // get a firebase credential using the user id token
-    const credential = firebase.auth.FacebookAuthProvider.credential(user.idToken);
+    const credential = firebase.auth.FacebookAuthProvider.credential(user.accessToken);
     // sign in to firebase and get the user credentials
     const userCred = yield call([auth, auth.signInAndRetrieveDataWithCredential], credential);
 
     yield call(initUser, action, userCred);
   } catch (error) {
+    console.log(error);
     yield put(loginFail());
     yield put(showErrorMessage(error.message));
   }
@@ -59,8 +60,11 @@ function* loginUserWithFB(action) {
 // worker Saga: will be called on LOGOUT actions
 function* logoutUser() {
   try {
+    // delete cached daya
+    yield call([AsyncStorage, AsyncStorage.multiRemove], ['user_path', 'user_data']);
     // get the sign in method
     const method = JSON.parse(yield call([AsyncStorage, AsyncStorage.getItem], 'signin_method'));
+    yield call([AsyncStorage, AsyncStorage.removeItem], 'signin_method');
     // sign out using the same api used to sign in
     switch (method) {
       case signinMethods.GOOGLE:
