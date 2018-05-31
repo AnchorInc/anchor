@@ -17,7 +17,7 @@ class Main extends Component {
         .android.setAutoCancel(true);
 
         if (!notification.android.channelId) {
-          notification.android.setChannelId('main-channel');
+          notification.android.setChannelId('misc-channel');
         } else {
           const remoteInput = new firebase.notifications.Android.RemoteInput('input');
           remoteInput.setLabel('Reply');

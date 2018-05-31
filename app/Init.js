@@ -11,14 +11,15 @@ import reducers from './reducers';
 import { MainStack } from './navigation/Router';
 import { colors, gsigninConfig } from './config';
 
+// get rid of annoying yellow box
 console.disableYellowBox = true;
 
+// set default font family
 const customTextProps = {
   style: {
     fontFamily: 'avenir_book',
   },
 };
-
 setCustomText(customTextProps);
 setCustomStatusBar({ backgroundColor: colors.primary.dark });
 
@@ -27,25 +28,26 @@ GoogleSignin.configure({
   webClientId: gsigninConfig.webClientId,
 });
 
-// main notification channel
-const mainChannel = new firebase.notifications.Android.Channel('main-channel', 'Main Channel', firebase.notifications.Android.Importance.Max);
-mainChannel
+// setup channel for misc notifications
+const miscChannel = new firebase.notifications.Android.Channel('misc-channel', 'Misc Channel', firebase.notifications.Android.Importance.Max);
+miscChannel
 .setShowBadge(true)
 .setSound('5');
 
-// chat notification channel
+// setup channel for chat notifications
 const chatChannel = new firebase.notifications.Android.Channel('chat-channel', 'Chat Channel', firebase.notifications.Android.Importance.Max);
 chatChannel
 .setShowBadge(true)
 .setSound('10');
 
-firebase.notifications().android.createChannels([mainChannel, chatChannel]);
+// create the channels and connect to firebase
+firebase.notifications().android.createChannels([miscChannel, chatChannel]);
 
 const middleware = createSagaMiddleware();
 const store = createStore(reducers, {}, applyMiddleware(middleware));
 middleware.run(rootSaga);
 
-class App extends Component {
+class Init extends Component {
 
   render() {
     return (
@@ -56,4 +58,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Init;

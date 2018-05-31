@@ -14,7 +14,6 @@ class Login extends Component {
   state = { userType: userTypes.STUDENT };
 
   showErrorMessage = () => {
-    console.log(this.props.loginFail);
     if (this.props.loginFail) {
       this.props.showErrorMessage(this.props.message);
     }
@@ -36,11 +35,11 @@ class Login extends Component {
         {this.showErrorMessage()}
         <StatusBar backgroundColor={colors.primary.dark} />
         <View style={containerStyle}>
-        <Image
-          style={logoStyle}
-          source={logo}
-          resizeMode='contain'
-        />
+          <Image
+            style={logoStyle}
+            source={logo}
+            resizeMode='contain'
+          />
         </View>
         <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
