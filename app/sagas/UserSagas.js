@@ -50,7 +50,7 @@ function* getUserSaga() {
 function* getUserRef() {
   // get the user path string stored on the device
   const userPath = yield call([AsyncStorage, AsyncStorage.getItem], 'user_path');
-  // return a firestire reference
+  // return a firestore reference
   return firebase.firestore().collection(userPath).doc(firebase.auth().currentUser.uid);
 }
 
