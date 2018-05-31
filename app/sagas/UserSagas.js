@@ -12,7 +12,7 @@ function* updateUserSaga(action) {
   yield call([ref, ref.update], action.user);
 }
 
-function* syncUserSaga() {
+function* userListenerSaga() {
   /* sync the user from the cloud and store it on the device
   also call the getUserSaga to update the user reducer state with the latest user data */
   const ref = yield call(getUserRef);
@@ -71,7 +71,7 @@ const userEventListener = (ref) => {
 
 export function* watchUserRequests() {
   yield all([
-    takeLatest(actionTypes.USER.LISTEN, syncUserSaga),
+    takeLatest(actionTypes.USER.LISTEN, userListenerSaga),
     takeLatest(actionTypes.USER.GET, getUserSaga),
     takeEvery(actionTypes.USER.UPDATE, updateUserSaga),
   ]);
