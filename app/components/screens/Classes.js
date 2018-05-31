@@ -7,8 +7,8 @@ import { Header } from '../common';
 import ClassList from '../common/ClassList';
 
 class Classes extends Component {
-  onPress = (person) => {
-    this.props.navigation.navigate('TeacherProfile', { person, action: 'forum' });
+  onPress = () => {
+    this.props.navigation.navigate('TeacherProfile', { action: 'forum' });
   }
 
   navigateProfile = () => {
@@ -27,7 +27,7 @@ class Classes extends Component {
     return (
       <View style={{ flex: 1 }}>
         <Header title='Home' onPressProfile={this.navigateProfile} onPressChat={() => this.navigateChat()} mainButtons />
-        <ClassList onPress={person => this.onPress(person)} />
+        <ClassList onPress={this.onPress} />
       </View>
     );
   }

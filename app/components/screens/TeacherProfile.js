@@ -31,8 +31,16 @@ class TeacherProfile extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getBatches();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.props.navigation.state.params.person) {
+      this.setState({ teacher: nextProps.props.state.params.person });
+    } else if (nextProps.user) {
+      this.setState({ teacher: nextProps.user });
+    }
   }
 
   getBatches() {
@@ -177,4 +185,12 @@ const styles = {
   },
 };
 
-export default connect()(TeacherProfile);
+const mapStateToProps = (state) => {
+  let user;
+  if (state.user.user) {
+    user = state.user.user;
+  }
+  return { user };
+};
+
+export default connect(mapStateToProps)(TeacherProfile);
