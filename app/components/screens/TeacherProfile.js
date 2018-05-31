@@ -22,7 +22,7 @@ class TeacherProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teacher: this.props.navigation.state.params.person,
+      teacher: null,
       action: this.props.navigation.state.params.action,
       batches: [],
       messages: [],
