@@ -179,8 +179,13 @@ class ProfileEditing extends Component {
         <View style={headerContainerStyle}>
           <View style={headerStyle}>
             <View style={buttonContainerStyle}>
-              <TouchableOpacity style={{ padding: 15, height: 0.08 * height }} onPress={() => this.props.navigation.goBack()}>
-                <Icon name='arrow-left' size={24} color='white' />
+              <TouchableOpacity
+                disabled={!this.props.user.donePref}
+                style={{ padding: 15, height: 0.08 * height }}
+                onPress={() => this.props.navigation.goBack()}
+                visibility={this.props.user.donePref}
+              >
+                <Icon name='arrow-left' size={24} color={this.props.user.donePref ? 'white' : colors.primary.normal} />
               </TouchableOpacity>
               <Text style={headerTextStyle}>
                 Edit Profile
@@ -299,7 +304,16 @@ class ProfileEditing extends Component {
               <Text style={styles.titleTextStyle}>Age</Text>
               <Text style={styles.textStyle}>{this.state.age}</Text>
             </View>
-            <Slider style={{ width: 0.95 * width }} value={this.props.user.age} onValueChange={value => this.setState({ age: value })} maximumValue={99} minimumValue={5} step={1} minimumTrackTintColor={colors.primary.light} thumbTintColor={colors.primary.light} />
+            <Slider
+              style={{ width: 0.95 * width }}
+              value={this.props.user.age}
+              onValueChange={value => this.setState({ age: value })}
+              maximumValue={99}
+              minimumValue={5}
+              step={1}
+              minimumTrackTintColor={colors.primary.light}
+              thumbTintColor={colors.primary.light}
+            />
           </View>
         </ScrollView>
       </View>

@@ -16,7 +16,7 @@ function* userListenerSaga() {
   /* sync the user from the cloud and store it on the device
   also call the getUserSaga to update the user reducer state with the latest user data */
   const ref = yield call(getUserRef);
-  if(!ref) yield cancel();
+  if (!ref) yield cancel();
   // get the event channel
   const channel = yield call(userEventListener, ref);
   // while there is a user logged in...
@@ -51,7 +51,7 @@ function* getUserSaga() {
 function* getUserRef() {
   // get the user path string stored on the device
   const userCollection = yield call([AsyncStorage, AsyncStorage.getItem], 'user_collection');
-  if(!userCollection) {
+  if (!userCollection) {
       return undefined;
   }
   return firebase.firestore().collection(userCollection).doc(firebase.auth().currentUser.uid);
@@ -59,9 +59,9 @@ function* getUserRef() {
 
 const userEventListener = (ref) => {
   // create a redux saga event channel to listen for changes to the user data on the cloud
-  const channel = eventChannel(emitter => {
+  const channel = eventChannel((emitter) => {
     // call the onSnapshot listener function in firestore and emit the user data
-    const callback = ref.onSnapshot(doc => emitter(doc.data()))
+    ref.onSnapshot(doc => emitter(doc.data()));
     // return the unsubscribe function
     return () => ref.onSnapshot(() => {});
   });
