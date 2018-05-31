@@ -60,11 +60,8 @@ const userEventListener = (ref) => {
   // create a redux saga event channel to listen for changes to the user data on the cloud
   const channel = eventChannel((emitter) => {
     // call the onSnapshot listener function in firestore and emit the user data
-    ref.onSnapshot(doc => emitter({ user: doc.data() }));
-    // declare the unsubcribe function of the listener
-    const unsubscribe = ref.onSnapshot();
-    // return the unsubscribe function
-    return () => unsubscribe();
+    const callback = doc => emitter({ user: doc.data() });
+    return () => ref.onSnapshot(callback);
   });
   // return the event channel
   return channel;
