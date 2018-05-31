@@ -7,15 +7,15 @@ import { Header } from '../common';
 import ClassList from '../common/ClassList';
 
 class Classes extends Component {
-  onPress = () => {
-    this.props.navigation.navigate('TeacherProfile', { action: 'forum' });
+  onPress = (person) => {
+    this.props.navigation.navigate('TeacherProfile', { person, action: 'forum' });
   }
 
   navigateProfile = () => {
     if (this.props.user.type === userTypes.STUDENT) {
       this.props.navigation.navigate('Profile');
     } else {
-      this.props.navigation.navigate('TeacherProfile', { person: this.props.user, action: 'account-settings-variant' });
+      this.props.navigation.navigate('TeacherProfile', { action: 'account-settings-variant' });
     }
   }
 
@@ -27,7 +27,7 @@ class Classes extends Component {
     return (
       <View style={{ flex: 1 }}>
         <Header title='Home' onPressProfile={this.navigateProfile} onPressChat={() => this.navigateChat()} mainButtons />
-        <ClassList onPress={this.onPress} />
+        <ClassList onPress={person => this.onPress(person)} />
       </View>
     );
   }
