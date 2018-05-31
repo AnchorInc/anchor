@@ -1,14 +1,14 @@
 import React from 'react';
-import { Text, Image, View, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, Image, View, Dimensions } from 'react-native';
 
-import { PopupMenu } from './';
+import { PopupMenu, TouchableDebounce } from './';
 
 const { width } = Dimensions.get('window');
 
 const SearchDetail = ({ person, onPress }) => {
   return (
     <View style={styles.containerStyle}>
-      <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
+      <TouchableDebounce onPress={onPress} style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
         <View style={styles.profileContainerStyle}>
           <Image style={styles.profileStyle} source={{ uri: person.photoURL }} />
         </View>
@@ -16,7 +16,7 @@ const SearchDetail = ({ person, onPress }) => {
           <Text style={styles.nameStyle}>{person.displayName}</Text>
           <Text style={styles.classStyle}>{person.subject}</Text>
         </View>
-      </TouchableOpacity>
+      </TouchableDebounce>
       <PopupMenu actions={['Contact']} onPress={() => console.log('pressed')} color='#888' />
     </View>
   );
