@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, ScrollView, TouchableOpacity, Image, Text, StatusBar, Slider } from 'react-native';
+import { View, Dimensions, ScrollView, TouchableOpacity, Image, Text, StatusBar, Slider, KeyboardAvoidingView } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextField } from 'react-native-material-textfield';
@@ -174,7 +174,7 @@ class ProfileEditing extends Component {
       nameContainerStyle,
     } = styles;
     return (
-      <View style={{ flex: 1 }}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior="height" enabled>
         <StatusBar backgroundColor={colors.primary.dark} />
         <View style={headerContainerStyle}>
           <View style={headerStyle}>
@@ -316,7 +316,7 @@ class ProfileEditing extends Component {
             />
           </View>
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
