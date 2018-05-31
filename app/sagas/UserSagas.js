@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import { eventChannel } from 'redux-saga';
-import { takeLatest, all, put, call, take, takeEvery } from 'redux-saga/effects';
+import { takeLatest, all, put, call, take, takeEvery, cancel } from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
 
 import { syncUser, getUser } from '../actions';
@@ -16,6 +16,7 @@ function* userListenerSaga() {
   /* sync the user from the cloud and store it on the device
   also call the getUserSaga to update the user reducer state with the latest user data */
   const ref = yield call(getUserRef);
+  if(!ref) yield cancel();
   // get the event channel
   const channel = yield call(userEventListener, ref);
   // while there is a user logged in...
@@ -51,8 +52,7 @@ function* getUserRef() {
   // get the user path string stored on the device
   let userPath = yield call([AsyncStorage, AsyncStorage.getItem], 'user_path');
   if(!userPath) {
-      yield take(actionTypes.AUTH.LOGIN.SUCESS);
-      userPath = yield call([AsyncStorage, AsyncStorage.getItem], 'user_path');
+      return undefined;
   }
   const path = `${userPath}/${firebase.auth().currentUser.uid}`;
   const firestore = firebase.firestore();
@@ -73,7 +73,7 @@ const userEventListener = (ref) => {
 
 export function* watchUserRequests() {
   yield all([
-    takeLatest(actionTypes.USER.LISTEN, userListenerSaga),
+    takeLatest([actionTypes.USER.LISTEN, actionTypes.AUTH.LOGIN.SUCESS], userListenerSaga),
     takeLatest(actionTypes.USER.GET, getUserSaga),
     takeEvery(actionTypes.USER.UPDATE, updateUserSaga),
   ]);
