@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Dimensions, Image, View } from 'react-native';
+import { Dimensions, Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import { TouchableDebounce } from './';
 
 const { width } = Dimensions.get('window');
 
@@ -15,11 +17,11 @@ class HeaderProfileButton extends Component {
 
   render() {
     return (
-      <TouchableOpacity onPress={this.props.onPress}>
+      <TouchableDebounce onPress={this.props.onPress}>
         <View>
           {this.renderProfile()}
         </View>
-      </TouchableOpacity>
+      </TouchableDebounce>
     );
   }
 }

@@ -12,7 +12,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
-import { ListDetail } from '../common';
+import { ListDetail, TouchableDebounce } from '../common';
 
 const { width, height } = Dimensions.get('window');
 
@@ -38,9 +38,9 @@ class Profile extends Component {
             <Text style={headerTextStyle}>
               Profile
             </Text>
-            <TouchableOpacity style={{ padding: 15, height: 0.08 * height }} onPress={() => this.props.navigation.navigate('ProfileEditing')}>
+            <TouchableDebounce style={{ padding: 15, height: 0.08 * height }} onPress={() => this.props.navigation.navigate('ProfileEditing')}>
               <Icon name='account-settings-variant' size={24} color='white' />
-            </TouchableOpacity>
+            </TouchableDebounce>
           </View>
           <View style={profileContainerStyle}>
             <Image source={{ uri: this.props.user.photoURL }} style={profileStyle} />

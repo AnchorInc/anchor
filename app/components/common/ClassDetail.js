@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, Image, View, Dimensions, TouchableOpacity } from 'react-native';
 
 // import { colors } from '../../config';
-import { Card, CardSection } from './';
+import { Card, CardSection, TouchableDebounce } from './';
 
 const { width } = Dimensions.get('window');
 
@@ -15,9 +15,9 @@ const ClassDetail = ({ person, onPress }) => {
               <Text style={styles.nameStyle}>{person.displayName}</Text>
             </View>
             <View style={styles.headerStyle} />
-            <TouchableOpacity style={styles.containerStyle} onPress={onPress.bind(this, person)}>
+            <TouchableDebounce style={styles.containerStyle} onPress={onPress.bind(this, person)}>
               <Image style={styles.profileStyle} source={{ uri: person.photoURL }} />
-            </TouchableOpacity>
+            </TouchableDebounce>
             <View style={{ width: 0.93 * width, height: 0.09 * width }} />
           </CardSection>
           <CardSection>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StatusBar, Dimensions, Image, Picker } from 'react-native';
 import { connect } from 'react-redux';
-import DialogBox from 'react-native-dialogbox';
+// import DialogBox from 'react-native-dialogbox';
 
 import { colors, userTypes } from '../../config';
 import { googleLoginRequest, fbLoginRequest, closeErrorMessage, showErrorMessage, resetLogin } from '../../actions';
@@ -14,16 +14,16 @@ const { width, height } = Dimensions.get('window');
 class Login extends Component {
   state = { userType: userTypes.STUDENT };
 
-  showErrorMessage = () => {
-    if (this.props.loginFail) {
-      this.dialogbox.alert(this.props.message, { style: { backgroundColor: colors.primary.normal } });
-    }
-  }
+  // showErrorMessage = () => {
+  //   if (this.props.loginFail) {
+  //     this.dialogbox.alert(this.props.message, { style: { backgroundColor: colors.primary.normal } });
+  //   }
+  // }
 
-  closeErrorMessage = () => {
-    this.props.resetLogin();
-    this.props.closeErrorMessage();
-  }
+  // closeErrorMessage = () => {
+  //   this.props.resetLogin();
+  //   this.props.closeErrorMessage();
+  // }
 
   render() {
     const {
@@ -33,7 +33,7 @@ class Login extends Component {
     } = styles;
     return (
       <View style={{ flex: 1 }}>
-        {this.showErrorMessage()}
+        {/* this.showErrorMessage() */}
         <StatusBar backgroundColor={colors.primary.dark} />
         <View style={containerStyle}>
           <Image
@@ -59,7 +59,7 @@ class Login extends Component {
         </View>
 
         <LoginSpinner visible={this.props.loading} title='Authenticating' />
-        <DialogBox ref={(dialogbox) => { this.dialogbox = dialogbox; }} />
+        {/* <DialogBox ref={(dialogbox) => { this.dialogbox = dialogbox; }} /> */}
       </View>
     );
   }

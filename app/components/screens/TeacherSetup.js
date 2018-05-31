@@ -330,22 +330,6 @@ class TeacherSetup extends Component {
             </Picker>
           </View>
           <View style={styles.pillContainerStyle}>
-            <View style={{ width: 0.95 * width, justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
-              <Text style={styles.titleTextStyle}>Price per Class</Text>
-              <Text style={styles.textStyle}>₹{this.state.price}</Text>
-            </View>
-            <Slider
-              style={{ width: 0.95 * width }}
-              value={this.state.price}
-              onValueChange={value => this.setState({ price: value })}
-              maximumValue={200}
-              minimumValue={100}
-              step={5}
-              minimumTrackTintColor={colors.primary.light}
-              thumbTintColor={colors.primary.light}
-            />
-          </View>
-          <View style={styles.pillContainerStyle}>
             <Text style={styles.titleTextStyle}>Class Location</Text>
             <Picker
               selectedValue={this.state.location}
@@ -355,6 +339,22 @@ class TeacherSetup extends Component {
               <Picker.Item label="Student's Location" value="Student's Location" />
               <Picker.Item label="Custom Location" value="Custom Location" />
             </Picker>
+          </View>
+          <View style={styles.pillContainerStyle}>
+            <View style={{ width: 0.95 * width, justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
+              <Text style={styles.titleTextStyle}>Price Per Class</Text>
+              <Text style={styles.textStyle}>₹{this.state.price}</Text>
+            </View>
+            <Slider
+              style={{ width: 0.95 * width }}
+              value={this.props.user.price}
+              onValueChange={value => this.setState({ price: value })}
+              maximumValue={2500}
+              minimumValue={100}
+              step={5}
+              minimumTrackTintColor={colors.primary.light}
+              thumbTintColor={colors.primary.light}
+            />
           </View>
         </ScrollView>
       </View>

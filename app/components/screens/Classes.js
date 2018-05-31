@@ -6,6 +6,7 @@ import { userTypes } from '../../config';
 import { Header } from '../common';
 import ClassList from '../common/ClassList';
 
+
 class Classes extends Component {
   onPress = (person) => {
     this.props.navigation.navigate('TeacherProfile', { person, action: 'forum' });

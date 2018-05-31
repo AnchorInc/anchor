@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Platform, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, Dimensions, Platform, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config/';
 import HeaderProfileButton from './HeaderProfileButton';
+import { TouchableDebounce } from './';
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,9 +20,9 @@ class Header extends Component {
     }
     return (
       <View style={styles.buttonContainerStyle}>
-        <TouchableOpacity onPress={this.props.onPressChat}>
+        <TouchableDebounce onPress={this.props.onPressChat}>
           <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
-        </TouchableOpacity>
+        </TouchableDebounce>
         <HeaderProfileButton onPress={this.props.onPressProfile} />
       </View>
     );
