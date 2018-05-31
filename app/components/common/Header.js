@@ -61,7 +61,7 @@ class Header extends Component {
 const styles = {
   normalContainerStyle: {
     justifyContent: 'space-between',
-    height: 0.09 * height,
+    height: 64,
     paddingTop: (Platform.OS === 'ios') ? 15 : 0,
     flexDirection: 'row',
   },
