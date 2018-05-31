@@ -4,7 +4,7 @@ import firebase from 'react-native-firebase';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
 
-import { showErrorMessage, showSpinner, loginSuccess, loginFail } from '../actions';
+import { showSpinner, loginSuccess, loginFail } from '../actions';
 import { actionTypes, firebasePaths, userTypes, signinMethods } from '../config';
 
 
@@ -27,11 +27,10 @@ function* loginUserWithGoogle(action) {
     yield put(loginSuccess());
   } catch (error) {
     // Error handling for login cancellation by user
-    yield put(loginFail());
     console.log(error);
     if (error.code !== 12501) {
       // error code 12501 is just when the user cancels the sign in by pressing outside the modal
-      yield put(showErrorMessage(error.message));
+      yield put(loginFail(`There was an error logging you in, error code: ${error.code}.`));
     }
   }
 }
@@ -52,8 +51,7 @@ function* loginUserWithFB(action) {
     yield call(initUser, action, userCred);
   } catch (error) {
     console.log(error);
-    yield put(loginFail());
-    yield put(showErrorMessage(error.message));
+    yield put(loginFail(`There was an error logging you in, error code: ${error.code}.`));
   }
 }
 

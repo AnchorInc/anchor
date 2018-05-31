@@ -28,11 +28,18 @@ GoogleSignin.configure({
 });
 
 // main notification channel
-const channel = new firebase.notifications.Android.Channel('main-channel', 'Main Channel', firebase.notifications.Android.Importance.Max);
-channel
+const mainChannel = new firebase.notifications.Android.Channel('main-channel', 'Main Channel', firebase.notifications.Android.Importance.Max);
+mainChannel
 .setShowBadge(true)
 .setSound('5');
-firebase.notifications().android.createChannel(channel);
+
+// chat notification channel
+const chatChannel = new firebase.notifications.Android.Channel('chat-channel', 'Chat Channel', firebase.notifications.Android.Importance.Max);
+chatChannel
+.setShowBadge(true)
+.setSound('10');
+
+firebase.notifications().android.createChannels([mainChannel, chatChannel]);
 
 const middleware = createSagaMiddleware();
 const store = createStore(reducers, {}, applyMiddleware(middleware));

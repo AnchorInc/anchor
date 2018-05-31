@@ -26,6 +26,7 @@ export const actionTypes = {
       FB: 'types.AUTH.LOGIN.FB',
       SUCESS: 'types.AUTH.LOGIN.SUCCESS',
       FAIL: 'types.AUTH.LOGIN.FAIL',
+      RESET: 'types.AUTH.LOGIN.RESET',
     },
     LOGOUT: {
       REQUEST: 'types.AUTH.LOGOUT',
@@ -43,11 +44,6 @@ export const actionTypes = {
     LISTEN: 'types.USER.LISTEN',
     UPDATE: 'types.USER.UPDATE',
     GET: 'types.USER.GET',
-  },
-  NOTIFICATIONS: {
-    SYNC: 'types.NOTIFICATIONS.SYNC',
-    DISPLAY: 'types.NOTIFICATIONS.DISPLAY',
-    SEND: 'types.NOTIFICATIONS.SEND',
   },
 };
 
