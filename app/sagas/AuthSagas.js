@@ -85,7 +85,7 @@ function* initUser(action, userCred) {
   // get a db reference to the user
   const userPath = getUserPath(action);
   const user = userCred.user._user;
-  const ref = firebase.database().ref(userPath + user.uid);
+  const ref = firebase.firestore().collection(userPath).doc(user.uid);
 
   let userData;
   // check if the user already exists

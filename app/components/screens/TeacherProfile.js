@@ -22,7 +22,7 @@ class TeacherProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teacher: this.props.navigation.state.params.person,
+      teacher: null,
       action: this.props.navigation.state.params.action,
       batches: [],
       messages: [],
@@ -36,8 +36,8 @@ class TeacherProfile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.props.navigation.state.params.person) {
-      this.setState({ teacher: nextProps.props.state.params.person });
+    if (nextProps.navigation.state.params.person) {
+      this.setState({ teacher: nextProps.navigation.state.params.person });
     } else if (nextProps.user) {
       this.setState({ teacher: nextProps.user });
     }

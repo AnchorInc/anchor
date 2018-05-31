@@ -50,20 +50,19 @@ function* getUserSaga() {
 function* getUserRef() {
   // get the user path string stored on the device
   const userPath = yield call([AsyncStorage, AsyncStorage.getItem], 'user_path');
-  const path = `${JSON.parse(userPath)}${firebase.auth().currentUser.uid}`;
-  // return a firebase db reference
-  return firebase.database().ref(path);
+  // return a firestire reference
+  return firebase.firestore().collection(userPath).doc(firebase.auth().currentUser.uid);
 }
 
 const userEventListener = (ref) => {
   // create a redux saga event channel to listen for changes to the user data on the cloud
   const channel = eventChannel((emitter) => {
-    // store the ref.on listener function in the cb var
-    const callback = ref.on('value', (dataSnapshot) => {
-      // emit the user data back
-      emitter({ user: dataSnapshot.val() });
-    });
-    return () => ref.off('value', callback);
+    // call the onSnapshot listener function in firestore and emit the user data
+    ref.onSnapshot(doc => emitter({ user: doc.data() }));
+    // declare the unsubcribe function of the listener
+    const unsubscribe = ref.onSnapshot();
+    // return the unsubscribe function
+    return () => unsubscribe();
   });
   // return the event channel
   return channel;

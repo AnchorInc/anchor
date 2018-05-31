@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { View, StatusBar, Dimensions, Image, Picker } from 'react-native';
 import { connect } from 'react-redux';
+import DialogBox from 'react-native-dialogbox';
 
 import { colors, userTypes } from '../../config';
 import { googleLoginRequest, fbLoginRequest, closeErrorMessage, showErrorMessage, resetLogin } from '../../actions';
-import { LoginButton, LoginSpinner, ErrorMessage } from '../common';
+import { LoginButton, LoginSpinner } from '../common';
 
 import logo from '../../res/images/logo.png';
 
@@ -15,7 +16,7 @@ class Login extends Component {
 
   showErrorMessage = () => {
     if (this.props.loginFail) {
-      this.props.showErrorMessage(this.props.message);
+      this.dialogbox.alert(this.props.message, { style: { backgroundColor: colors.primary.normal } });
     }
   }
 
@@ -58,12 +59,7 @@ class Login extends Component {
         </View>
 
         <LoginSpinner visible={this.props.loading} title='Authenticating' />
-        <ErrorMessage
-          visible={this.props.error}
-          message={this.props.errorMessage}
-          button1Text='Ok'
-          onPress={this.closeErrorMessage}
-        />
+        <DialogBox ref={(dialogbox) => { this.dialogbox = dialogbox; }} />
       </View>
     );
   }
