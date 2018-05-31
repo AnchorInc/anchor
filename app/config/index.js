@@ -61,8 +61,8 @@ export const userTypes = {
 
 // firebase database constants
 export const firebasePaths = {
-  STUDENTS: '/users/students/',
-  TEACHERS: '/users/teachers/',
+  STUDENTS: 'students',
+  TEACHERS: 'teachers',
 };
 
 // algoliasearch config data
