@@ -27,7 +27,6 @@ function* loginUserWithGoogle(action) {
     yield put(loginSuccess());
   } catch (error) {
     // Error handling for login cancellation by user
-    console.log(error);
     if (error.code !== 12501) {
       // error code 12501 is just when the user cancels the sign in by pressing outside the modal
       yield put(loginFail(`There was an error logging you in, error code: ${error.code}.`));
@@ -50,7 +49,6 @@ function* loginUserWithFB(action) {
 
     yield call(initUser, action, userCred);
   } catch (error) {
-    console.log(error);
     yield put(loginFail(`There was an error logging you in, error code: ${error.code}.`));
   }
 }
@@ -92,7 +90,6 @@ function* initUser(action, userCred) {
   let userData;
   // check if the user already exists
   if (userCred.additionalUserInfo.isNewUser) {
-    console.log('new user');
     // create a new user in firebase
     userData = {
       displayName: user.displayName,
