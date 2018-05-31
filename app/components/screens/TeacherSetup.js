@@ -79,6 +79,8 @@ class TeacherSetup extends Component {
          this.state.errors[name] = 'Should not be empty';
        } else if (name === 'phone' && value.length < 10) {
          this.state.errors[name] = 'Needs a 10 digit phone number';
+       } else if (name === 'phone' && value.length > 10) {
+         this.state.errors[name] = 'Needs a 10 digit phone number';
        } else if (name === 'email' && !re.test(value)) {
          this.state.errors[name] = 'Enter a valid email address';
        }
@@ -131,8 +133,17 @@ class TeacherSetup extends Component {
       uid: this.props.user.uid,
       userType: 'teacher',
     };
-    this.props.updateUser(user);
-    this.props.navigation.goBack();
+    if (this.state.errors && Object.keys(this.state.errors).length === 0) {
+      this.updateDonePref();
+      this.props.updateUser(user);
+      this.props.navigation.goBack();
+    }
+  }
+
+  updateDonePref = () => {
+    if (!this.props.user.donePref) {
+      this.props.updateUser({ donePref: true });
+    }
   }
 
   updateRef(name, ref) {
@@ -276,7 +287,6 @@ class TeacherSetup extends Component {
               containerStyle={styles.textInputStyle}
               label='Phone'
               prefix='+91'
-              characterRestriction={10}
               keyboardType='numeric'
               returnKeyType='next'
               value={this.state.phone}
@@ -324,7 +334,16 @@ class TeacherSetup extends Component {
               <Text style={styles.titleTextStyle}>Price per Class</Text>
               <Text style={styles.textStyle}>₹{this.state.price}</Text>
             </View>
-            <Slider style={{ width: 0.95 * width }} value={this.state.price} onValueChange={value => this.setState({ price: value })} maximumValue={2500} minimumValue={100} step={25} maximumTrackTintColor={colors.primary.light} thumbTintColor={colors.primary.light} />
+            <Slider
+              style={{ width: 0.95 * width }}
+              value={this.state.price}
+              onValueChange={value => this.setState({ price: value })}
+              maximumValue={200}
+              minimumValue={100}
+              step={5}
+              minimumTrackTintColor={colors.primary.light}
+              thumbTintColor={colors.primary.light}
+            />
           </View>
           <View style={styles.pillContainerStyle}>
             <Text style={styles.titleTextStyle}>Class Location</Text>

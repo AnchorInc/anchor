@@ -73,6 +73,8 @@ class ProfileEditing extends Component {
          this.state.errors[name] = 'Should not be empty';
        } else if (name === 'phone' && value.length < 10) {
          this.state.errors[name] = 'Needs a 10 digit phone number';
+       } else if (name === 'phone' && value.length < 10) {
+         this.state.errors[name] = 'Needs a 10 digit phone number';
        } else if (name === 'location' && value.length < 6) {
          this.state.errors[name] = 'Requires a 6 digit zip code';
        } else if (name === 'email' && !re.test(value)) {
