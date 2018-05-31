@@ -18,9 +18,8 @@ function* loginUserWithGoogle(action) {
     yield put(showSpinner());
     // create a firebase credential using that
     const credential = firebase.auth.GoogleAuthProvider.credential(user.idToken);
-    console.log(credential);
-    // sign in to firebase and get the user credentials
     const userCred = yield call([auth, auth.signInAndRetrieveDataWithCredential], credential);
+    // sign in to firebase and get the user credentials
 
     yield call(initUser, action, userCred);
 
@@ -56,11 +55,8 @@ function* loginUserWithFB(action) {
 // worker Saga: will be called on LOGOUT actions
 function* logoutUser() {
   try {
-    // delete cached daya
-    yield call([AsyncStorage, AsyncStorage.multiRemove], ['user_path', 'user_data']);
     // get the sign in method
     const method = JSON.parse(yield call([AsyncStorage, AsyncStorage.getItem], 'signin_method'));
-    yield call([AsyncStorage, AsyncStorage.removeItem], 'signin_method');
     // sign out using the same api used to sign in
     switch (method) {
       case signinMethods.GOOGLE:
@@ -83,10 +79,9 @@ function* logoutUser() {
 
 function* initUser(action, userCred) {
   // get a db reference to the user
-  const userPath = getUserPath(action);
+  const userPath = getUserCollection(action);
   const user = userCred.user._user;
-  const path = `${userPath}/${user.uid}`;
-  const ref = firebase.firestore().doc(path);
+  const userRef = firebase.firestore().collection(userPath).doc(user.uid);
 
   let userData;
   // check if the user already exists
@@ -97,26 +92,25 @@ function* initUser(action, userCred) {
       email: user.email,
       photoURL: user.photoURL,
       uid: user.uid,
-      isDeleted: false,
       phoneNumber: user.phoneNumber,
       type: action.userType,
       donePref: false,
     };
-    yield call([ref, ref.set], userData);
+    yield call([userRef, userRef.set], userData);
   } else {
     // get the existing user data and store it
-    const doc = yield call([ref, ref.get]);
+    const doc = yield call([userRef, userRef.get]);
     userData = doc.data();
   }
 
   // store the user path and user data in the cache
   yield call([AsyncStorage, AsyncStorage.multiSet],
-    [['user_path', JSON.stringify(userPath)],
+    [['user_path', userPath],
     ['user_data', JSON.stringify(userData)],
     ['signin_method', JSON.stringify(action.method)]]);
 }
 
-const getUserPath = (action) => {
+const getUserCollection = (action) => {
   switch (action.userType) {
     case userTypes.STUDENT:
       // return '/students'
