@@ -51,8 +51,9 @@ function* getUserRef() {
   // get the user path string stored on the device
   const userPath = yield call([AsyncStorage, AsyncStorage.getItem], 'user_path');
   const path = `${userPath}/${firebase.auth().currentUser.uid}`;
+  const firestore = firebase.firestore();
   // return a firestore reference
-  return firebase.firestore().doc(path);
+  return yield call([firestore, firestore.doc], path);
 }
 
 const userEventListener = (ref) => {
