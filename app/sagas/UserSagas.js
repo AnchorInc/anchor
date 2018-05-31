@@ -15,13 +15,15 @@ function* updateUserSaga(action) {
 function* userListenerSaga() {
   /* sync the user from the cloud and store it on the device
   also call the getUserSaga to update the user reducer state with the latest user data */
+  console.log(11);
   const ref = yield call(getUserRef);
   if(!ref) yield cancel();
+  console.log(ref);
   // get the event channel
   const channel = yield call(userEventListener, ref);
   // while there is a user logged in...
   while (firebase.auth().currentUser) {
-    // get the data emitted from the channel
+    // get the data emitted from the action
     const { user } = yield take(channel);
 
     try {
@@ -50,14 +52,12 @@ function* getUserSaga() {
 
 function* getUserRef() {
   // get the user path string stored on the device
-  let userPath = yield call([AsyncStorage, AsyncStorage.getItem], 'user_path');
-  if(!userPath) {
+  const userCollection = yield call([AsyncStorage, AsyncStorage.getItem], 'user_collection');
+  console.log("User Condition", userCollection);
+  if(!userCollection) {
       return undefined;
   }
-  const path = `${userPath}/${firebase.auth().currentUser.uid}`;
-  const firestore = firebase.firestore();
-  // return a firestore reference
-  return yield call([firestore, firestore.doc], path);
+  return firebase.firestore().collection(userCollection).doc(firebase.auth().currentUser.uid);
 }
 
 const userEventListener = (ref) => {
@@ -73,7 +73,8 @@ const userEventListener = (ref) => {
 
 export function* watchUserRequests() {
   yield all([
-    takeLatest([actionTypes.USER.LISTEN, actionTypes.AUTH.LOGIN.SUCESS], userListenerSaga),
+    // Swapping SUCCESS and LISTEN like this makes this work - WHY?????
+    takeLatest([actionTypes.AUTH.LOGIN.SUCESS, actionTypes.USER.LISTEN], userListenerSaga),
     takeLatest(actionTypes.USER.GET, getUserSaga),
     takeEvery(actionTypes.USER.UPDATE, updateUserSaga),
   ]);

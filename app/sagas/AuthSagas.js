@@ -79,9 +79,9 @@ function* logoutUser() {
 
 function* initUser(action, userCred) {
   // get a db reference to the user
-  const userPath = getUserCollection(action);
+  const userCollection = getUserCollection(action);
   const user = userCred.user._user;
-  const userRef = firebase.firestore().collection(userPath).doc(user.uid);
+  const userRef = firebase.firestore().collection(userCollection).doc(user.uid);
 
   let userData;
   // check if the user already exists
@@ -105,7 +105,7 @@ function* initUser(action, userCred) {
 
   // store the user path and user data in the cache
   yield call([AsyncStorage, AsyncStorage.multiSet],
-    [['user_path', userPath],
+    [['user_collection', userCollection],
     ['user_data', JSON.stringify(userData)],
     ['signin_method', JSON.stringify(action.method)]]);
 }
