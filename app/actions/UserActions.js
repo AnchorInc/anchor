@@ -1,7 +1,7 @@
 import { actionTypes } from '../config';
 
 // starts the user event listener in UserSagas.js
-export const startSyncUser = () => {
+export const startUserListener = () => {
   return { type: actionTypes.USER.LISTEN };
 };
 
