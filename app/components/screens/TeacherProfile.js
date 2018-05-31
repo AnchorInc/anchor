@@ -22,7 +22,7 @@ class TeacherProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teacher: this.props.navigation.state.params.person,
+      teacher: this.props.navigation.state.params.person || this.props.user,
       action: this.props.navigation.state.params.action,
       batches: [],
       messages: [],
@@ -35,13 +35,13 @@ class TeacherProfile extends Component {
     this.getBatches();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.navigation.state.params.person) {
-      this.setState({ teacher: nextProps.navigation.state.params.person });
-    } else if (nextProps.user) {
-      this.setState({ teacher: nextProps.user });
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.navigation.state.params.person) {
+  //     this.setState({ teacher: nextProps.navigation.state.params.person });
+  //   } else if (nextProps.user) {
+  //     this.setState({ teacher: nextProps.user });
+  //   }
+  // }
 
   getBatches() {
     if (this.state.teacher.batchList) {
@@ -158,7 +158,9 @@ const styles = {
     alignItems: 'center',
   },
   iconStyle: {
-    height: 30,
+    height: 0.08 * width,
+    width: 0.08 * width,
+    alignItems: 'center',
   },
   profileStyle: {
     width: width * 0.25,

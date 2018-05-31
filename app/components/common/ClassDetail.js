@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, Image, View, Dimensions, TouchableOpacity } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 
 // import { colors } from '../../config';
 import { Card, CardSection } from './';
@@ -22,13 +21,7 @@ const ClassDetail = ({ person, onPress }) => {
             <View style={{ width: 0.93 * width, height: 0.09 * width }} />
           </CardSection>
           <CardSection>
-            <TouchableOpacity style={styles.detailButtonStyle}>
-              <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}>
-                <Text style={styles.detailsTextStyle}>
-                  See More
-                </Text>
-              </LinearGradient>
-            </TouchableOpacity>
+            <TouchableOpacity style={styles.detailButtonStyle} />
           </CardSection>
         </Card>
       </View>
