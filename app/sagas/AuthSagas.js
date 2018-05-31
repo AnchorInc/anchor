@@ -104,8 +104,8 @@ function* initUser(action, userCred) {
     yield call([ref, ref.set], userData);
   } else {
     // get the existing user data and store it
-    const snapshot = yield call([ref, ref.once], 'value');
-    userData = snapshot.val();
+    const doc = yield call([ref, ref.get]);
+    userData = doc.data();
   }
 
   // store the user path and user data in the cache
