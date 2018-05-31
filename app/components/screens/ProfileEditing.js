@@ -71,11 +71,9 @@ class ProfileEditing extends Component {
        ref.blur();
        if (!value) {
          this.state.errors[name] = 'Should not be empty';
-       } else if (name === 'phone' && value.length < 10) {
+       } else if (name === 'phone' && value.length !== 10) {
          this.state.errors[name] = 'Needs a 10 digit phone number';
-       } else if (name === 'phone' && value.length < 10) {
-         this.state.errors[name] = 'Needs a 10 digit phone number';
-       } else if (name === 'location' && value.length < 6) {
+       } else if (name === 'location' && value.length !== 6) {
          this.state.errors[name] = 'Requires a 6 digit zip code';
        } else if (name === 'email' && !re.test(value)) {
          this.state.errors[name] = 'Enter a valid email address';
@@ -92,15 +90,15 @@ class ProfileEditing extends Component {
    }
 
    onSubmitEmail() {
-     this.phone.focus();
-   }
-
-   onSubmitPhone() {
      this.location.focus();
    }
 
    onSubmitLocation() {
-     this.location.blur();
+     this.phone.focus();
+   }
+
+   onSubmitPhone() {
+     this.phone.focus();
    }
 
   onChangeText = (text) => {
@@ -176,40 +174,40 @@ class ProfileEditing extends Component {
       nameContainerStyle,
     } = styles;
     return (
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior="height" enabled>
+      <View style={{ flex: 1 }} behavior="height" enabled>
         <StatusBar backgroundColor={colors.primary.dark} />
-        <View style={headerContainerStyle}>
-          <View style={headerStyle}>
-            <View style={buttonContainerStyle}>
-              <TouchableOpacity
-                disabled={!this.props.user.donePref}
-                style={{ padding: 15, height: 0.08 * height }}
-                onPress={() => this.props.navigation.goBack()}
-                visibility={this.props.user.donePref}
-              >
-                <Icon name='arrow-left' size={24} color={this.props.user.donePref ? 'white' : colors.primary.normal} />
-              </TouchableOpacity>
-              <Text style={headerTextStyle}>
-                Edit Profile
-              </Text>
-              <TouchableOpacity style={{ padding: 15, height: 0.08 * height }} onPress={() => this.updateUser()}>
-                <Icon name='check' size={24} color='white' />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={profileContainerStyle}>
-            <Image source={{ uri: this.props.user.photoURL }} style={profileStyle} />
-          </View>
-        </View>
-        <View style={nameContainerStyle}>
-          <Text style={nameStyle}>
-            {this.props.user.displayName}
-          </Text>
-        </View>
         <ScrollView
           keyboardShouldPersistTaps='always'
           contentContainerStyle={{ paddingBottom: 15 }}
         >
+          <View style={headerContainerStyle}>
+            <View style={headerStyle}>
+              <View style={buttonContainerStyle}>
+                <TouchableOpacity
+                  disabled={!this.props.user.donePref}
+                  style={{ padding: 15, height: 0.08 * height }}
+                  onPress={() => this.props.navigation.goBack()}
+                  visibility={this.props.user.donePref}
+                >
+                  <Icon name='arrow-left' size={24} color={this.props.user.donePref ? 'white' : colors.primary.normal} />
+                </TouchableOpacity>
+                <Text style={headerTextStyle}>
+                  Edit Profile
+                </Text>
+                <TouchableOpacity style={{ padding: 15, height: 0.08 * height }} onPress={() => this.updateUser()}>
+                  <Icon name='check' size={24} color='white' />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={profileContainerStyle}>
+              <Image source={{ uri: this.props.user.photoURL }} style={profileStyle} />
+            </View>
+          </View>
+          <View style={nameContainerStyle}>
+            <Text style={nameStyle}>
+              {this.props.user.displayName}
+            </Text>
+          </View>
           <View style={styles.containerStyle}>
             <TextField
               containerStyle={styles.textInputStyle}
@@ -266,7 +264,6 @@ class ProfileEditing extends Component {
             <TextField
               containerStyle={styles.textInputStyle}
               label='Location/Zip Code'
-              characterRestriction={6}
               keyboardType='numeric'
               returnKeyType='next'
               value={this.state.location}
@@ -286,7 +283,6 @@ class ProfileEditing extends Component {
               containerStyle={styles.textInputStyle}
               label='Phone'
               prefix='+91'
-              characterRestriction={10}
               keyboardType='numeric'
               returnKeyType='next'
               value={this.state.phone}
@@ -318,7 +314,7 @@ class ProfileEditing extends Component {
             />
           </View>
         </ScrollView>
-      </KeyboardAvoidingView>
+      </View>
     );
   }
 }
