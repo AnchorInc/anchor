@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StatusBar, Dimensions, Image, Picker } from 'react-native';
 import { connect } from 'react-redux';
-// import DialogBox from 'react-native-dialogbox';
+import DialogBox from 'react-native-dialogbox';
 
 import { colors, userTypes } from '../../config';
 import { googleLoginRequest, fbLoginRequest, closeErrorMessage, showErrorMessage, resetLogin } from '../../actions';
@@ -39,7 +39,7 @@ class Login extends Component {
     } = styles;
     return (
       <View style={{ flex: 1 }}>
-        {/* this.showErrorMessage() */}
+        {this.showErrorMessage()}
         <StatusBar backgroundColor={colors.primary.dark} />
         <View style={containerStyle}>
           <Image
@@ -65,7 +65,7 @@ class Login extends Component {
         </View>
 
         <LoginSpinner visible={this.props.loading} title='Authenticating' />
-        {/* <DialogBox ref={(dialogbox) => { this.dialogbox = dialogbox; }} /> */}
+        <DialogBox ref={(dialogbox) => { this.dialogbox = dialogbox; }} />
       </View>
     );
   }
@@ -88,7 +88,6 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.auth.loginFail);
   return {
     errorMessage: state.global.errorMessage,
     error: state.global.error,
