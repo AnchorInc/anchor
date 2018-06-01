@@ -94,7 +94,7 @@ function* initUser(action, userCred) {
       email: user.email,
       photoURL: user.photoURL,
       uid: user.uid,
-      phoneNumber: user.phoneNumber,
+      phone: user.phone,
       type: action.userType,
       donePref: false,
     };
