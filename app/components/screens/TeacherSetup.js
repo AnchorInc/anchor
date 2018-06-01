@@ -77,7 +77,7 @@ class TeacherSetup extends Component {
        ref.blur();
        if (!value) {
          this.state.errors[name] = 'Should not be empty';
-       } else if (name === 'phone' && value.length < 10) {
+       } else if (name === 'phone' && value.length !== 10) {
          this.state.errors[name] = 'Needs a 10 digit phone number';
        } else if (name === 'email' && !re.test(value)) {
          this.state.errors[name] = 'Enter a valid email address';
@@ -131,8 +131,17 @@ class TeacherSetup extends Component {
       uid: this.props.user.uid,
       userType: 'teacher',
     };
-    this.props.updateUser(user);
-    this.props.navigation.goBack();
+    if (this.state.errors && Object.keys(this.state.errors).length === 0) {
+      this.updateDonePref();
+      this.props.updateUser(user);
+      this.props.navigation.goBack();
+    }
+  }
+
+  updateDonePref = () => {
+    if (!this.props.user.donePref) {
+      this.props.updateUser({ donePref: true });
+    }
   }
 
   updateRef(name, ref) {
@@ -175,33 +184,33 @@ class TeacherSetup extends Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor={colors.primary.dark} />
-        <View style={headerContainerStyle}>
-          <View style={headerStyle}>
-            <View style={buttonContainerStyle}>
-              <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
-                <Icon name='arrow-left' size={24} color='white' />
-              </TouchableOpacity>
-              <Text style={headerTextStyle}>
-                Tutor Signup
-              </Text>
-              <TouchableOpacity style={{ padding: 15 }} onPress={this.updateUser}>
-                <Icon name='check' size={24} color='white' />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={profileContainerStyle}>
-            <Image source={{ uri: this.props.user.photoURL }} style={profileStyle} />
-          </View>
-        </View>
-        <View style={nameContainerStyle}>
-          <Text style={nameStyle}>
-            {this.props.user.displayName}
-          </Text>
-        </View>
         <ScrollView
           keyboardShouldPersistTaps='always'
           contentContainerStyle={{ paddingBottom: 15 }}
         >
+          <View style={headerContainerStyle}>
+            <View style={headerStyle}>
+              <View style={buttonContainerStyle}>
+                <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
+                  <Icon name='arrow-left' size={24} color='white' />
+                </TouchableOpacity>
+                <Text style={headerTextStyle}>
+                  Tutor Signup
+                </Text>
+                <TouchableOpacity style={{ padding: 15 }} onPress={this.updateUser}>
+                  <Icon name='check' size={24} color='white' />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={profileContainerStyle}>
+              <Image source={{ uri: this.props.user.photoURL }} style={profileStyle} />
+            </View>
+          </View>
+          <View style={nameContainerStyle}>
+            <Text style={nameStyle}>
+              {this.props.user.displayName}
+            </Text>
+          </View>
           <View style={styles.containerStyle}>
             <TextField
               containerStyle={styles.textInputStyle}
@@ -276,7 +285,6 @@ class TeacherSetup extends Component {
               containerStyle={styles.textInputStyle}
               label='Phone'
               prefix='+91'
-              characterRestriction={10}
               keyboardType='numeric'
               returnKeyType='next'
               value={this.state.phone}
@@ -320,13 +328,6 @@ class TeacherSetup extends Component {
             </Picker>
           </View>
           <View style={styles.pillContainerStyle}>
-            <View style={{ width: 0.95 * width, justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
-              <Text style={styles.titleTextStyle}>Price per Class</Text>
-              <Text style={styles.textStyle}>₹{this.state.price}</Text>
-            </View>
-            <Slider style={{ width: 0.95 * width }} value={this.state.price} onValueChange={value => this.setState({ price: value })} maximumValue={2500} minimumValue={100} step={25} maximumTrackTintColor={colors.primary.light} thumbTintColor={colors.primary.light} />
-          </View>
-          <View style={styles.pillContainerStyle}>
             <Text style={styles.titleTextStyle}>Class Location</Text>
             <Picker
               selectedValue={this.state.location}
@@ -336,6 +337,22 @@ class TeacherSetup extends Component {
               <Picker.Item label="Student's Location" value="Student's Location" />
               <Picker.Item label="Custom Location" value="Custom Location" />
             </Picker>
+          </View>
+          <View style={styles.pillContainerStyle}>
+            <View style={{ width: 0.95 * width, justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
+              <Text style={styles.titleTextStyle}>Price Per Class</Text>
+              <Text style={styles.textStyle}>₹{this.state.price}</Text>
+            </View>
+            <Slider
+              style={{ width: 0.95 * width }}
+              value={this.props.user.price}
+              onValueChange={value => this.setState({ price: value })}
+              maximumValue={2500}
+              minimumValue={100}
+              step={5}
+              minimumTrackTintColor={colors.primary.light}
+              thumbTintColor={colors.primary.light}
+            />
           </View>
         </ScrollView>
       </View>

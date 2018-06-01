@@ -14,7 +14,7 @@ import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
-import { ListDetail } from '../common';
+import { ListDetail, TouchableDebounce } from '../common';
 
 const { width, height } = Dimensions.get('window');
 
@@ -72,9 +72,9 @@ class TeacherProfile extends Component {
             <Text style={styles.headerTextStyle}>
               {this.state.teacher.displayName}
             </Text>
-            <TouchableOpacity style={styles.iconStyle} onPress={() => this.completeAction()}>
+            <TouchableDebounce style={styles.iconStyle} onPress={() => this.completeAction()}>
               <Icon name={this.state.action} size={24} color='white' />
-            </TouchableOpacity>
+            </TouchableDebounce>
           </View>
           <View style={styles.profileContainerStyle}>
             <Image source={{ uri: this.state.teacher.photoURL }} style={styles.profileStyle} />
