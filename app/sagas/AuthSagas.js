@@ -47,6 +47,8 @@ function* loginUserWithFB(action) {
     const userCred = yield call([auth, auth.signInAndRetrieveDataWithCredential], credential);
 
     yield call(initUser, action, userCred);
+
+    yield put(loginSuccess());
   } catch (error) {
     yield put(loginFail(`There was an error logging you in, error code: ${error.code}.`));
   }

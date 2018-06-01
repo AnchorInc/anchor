@@ -71,7 +71,6 @@ const userEventListener = (ref) => {
 
 export function* watchUserRequests() {
   yield all([
-    // Swapping SUCCESS and LISTEN like this makes this work - WHY?????
     takeLatest([actionTypes.AUTH.LOGIN.SUCESS, actionTypes.USER.LISTEN], userListenerSaga),
     takeLatest(actionTypes.USER.GET, getUserSaga),
     takeEvery(actionTypes.USER.UPDATE, updateUserSaga),

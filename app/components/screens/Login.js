@@ -16,7 +16,13 @@ class Login extends Component {
 
   showErrorMessage = () => {
     if (this.props.loginFail) {
-      this.dialogbox.alert(this.props.message, { style: { backgroundColor: colors.primary.normal } });
+      this.dialogbox.tip({
+        title: 'Error',
+        content: this.props.message,
+        style: {
+            textColor: colors.primary.normal,
+        },
+      }).then(() => this.closeErrorMessage());
     }
   }
 
@@ -82,11 +88,12 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state.auth.loginFail);
   return {
     errorMessage: state.global.errorMessage,
     error: state.global.error,
-    loading: state.auth.loading,
     loginFail: state.auth.loginFail,
+    loading: state.auth.loading,
     message: state.auth.message,
   };
 };
