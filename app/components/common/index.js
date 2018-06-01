@@ -13,4 +13,5 @@ export * from './SearchDetail';
 export * from './SubjectDetail';
 export * from './ChatDetail';
 export * from './NewChatButton';
+// export * from './ChatBubble';
 export * from './TouchableDebounce';

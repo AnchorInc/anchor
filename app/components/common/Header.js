@@ -6,7 +6,7 @@ import { colors } from '../../config/';
 import HeaderProfileButton from './HeaderProfileButton';
 import { TouchableDebounce } from './';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class Header extends Component {
 
