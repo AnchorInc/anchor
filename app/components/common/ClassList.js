@@ -17,19 +17,21 @@ class ClassList extends Component {
   };
 
   componentWillReceiveProps(props) {
+    console.log(props.batchList);
     if (this.state.initialRefresh) return;
     this.refresh(props.batchList);
   }
 
   getTeachersFromBatchList = (batchList) => {
     this.setState({ teachers: [] });
-    batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
-    .once('value')
-    .then(Class => firebase.database().ref(`/users/teachers/${Class.val().teacher}`)
-    .once('value')
-    .then((teacher) => {
-      this.setState({ teachers: this.state.teachers.concat([teacher.val()]), refreshing: false });
-    })));
+    batchList.map((batch) => {
+      return firebase.firestore().collection('batches').doc(batch)
+      .get()
+      .then(Class => firebase.firestore().collection('teachers').doc(Class.data().teacher).get())
+      .then((teacher) => {
+        this.setState({ teachers: this.state.teachers.concat([teacher.data()]), refreshing: false });
+      });
+    });
   }
 
   refresh = (batchList) => {
