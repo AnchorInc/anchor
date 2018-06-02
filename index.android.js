@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import Init from './app/Init';
+import { App } from './app/index';
 
-AppRegistry.registerComponent('anchor', () => Init);
+AppRegistry.registerComponent('anchor', () => App);

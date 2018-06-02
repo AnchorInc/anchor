@@ -1,6 +1,8 @@
 import { AppRegistry } from 'react-native';
-import Init from './app/Init';
+import Buffer from 'buffer';
 
-global.Buffer = global.Buffer || require('buffer').Buffer;
+import { App } from './app/';
 
-AppRegistry.registerComponent('anchor', () => Init);
+global.Buffer = global.Buffer || Buffer.Buffer;
+
+AppRegistry.registerComponent('anchor', () => App);

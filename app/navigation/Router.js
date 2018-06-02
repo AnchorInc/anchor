@@ -2,17 +2,20 @@ import React from 'react';
 import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Search, Chat } from '../components/screens';
-import Classes from '../components/screens/Classes';
-import Settings from '../components/screens/Settings';
-import AppSetup from '../components/screens/AppSetup';
-import Main from '../components/screens/Main';
-import Login from '../components/screens/Login';
-import Profile from '../components/screens/Profile';
-import TeacherProfile from '../components/screens/TeacherProfile';
-import TeacherSetup from '../components/screens/TeacherSetup';
-import ProfileEditing from '../components/screens/ProfileEditing';
-import ChatsOverview from '../components/screens/ChatsOverview';
+import {
+  AppSetup,
+  Chat,
+  ChatsOverview,
+  Classes,
+  Login,
+  Main,
+  Profile,
+  ProfileEditing,
+  Search,
+  Settings,
+  TeacherProfile,
+  TeacherSetup,
+} from '../components';
 
 import { colors } from '../config';
 
