@@ -3,9 +3,6 @@ import { TouchableOpacity } from 'react-native';
 import debounce from '../../debounceFunction';
 
 class TouchableDebounce extends Component {
-  constructor (props) {
-    super(props);
-  }
   render() {
     return (
       <TouchableOpacity
@@ -14,7 +11,7 @@ class TouchableDebounce extends Component {
         onPress={
           debounce(() => {
           this.props.onPress();
-        }, 500)
+        }, 200)
         }
       >
         {this.props.children}
