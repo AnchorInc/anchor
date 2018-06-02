@@ -1,53 +1,104 @@
-import React from 'react';
-import { Text, Image, View, Dimensions, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { Text, Image, View, Dimensions, TouchableOpacity, NativeModules, LayoutAnimation } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import StarRating from 'react-native-star-rating';
 
 import { colors } from '../../config';
 import { Card, CardSection, TouchableDebounce, PopupMenu } from './';
 
 const { width } = Dimensions.get('window');
 
-const ClassDetail = ({ person, onPress }) => {
-    return (
-      <Card style={{ flex: 1, flexDirection: 'row' }}>
-        <CardSection style={{ borderRadius: 10 }}>
-          <View style={styles.textContainerStyle}>
-            <Icon style={{ paddingLeft: 10 }} name='more-vert' size={24} color='white' />
-            <Text style={styles.nameStyle}>{person.displayName}</Text>
-            <PopupMenu color='black' actions={['Contact']} onPress={() => console.log('contact pressed')} />
-          </View>
-          <View style={styles.headerStyle} />
-          <TouchableDebounce style={styles.containerStyle} onPress={onPress.bind(this, person)}>
-            <Image style={styles.profileStyle} source={{ uri: person.photoURL }} />
-          </TouchableDebounce>
-          <View style={{ width: 0.93 * width, height: 0.09 * width }} />
-        </CardSection>
-        <CardSection>
-          <TouchableOpacity activeOpacity={0.5}>
-            <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={styles.detailButtonStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
-              <Text style={styles.detailsTextStyle}>
-                See More
-              </Text>
-            </LinearGradient>
+const { UIManager } = NativeModules;
+
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+
+class ClassDetail extends Component {
+  state = {
+    buttonClicked: false,
+  };
+
+  _onPressMore = () => {
+    LayoutAnimation.spring();
+    this.setState({ buttonClicked: true });
+  }
+
+  _onPressBack = () => {
+    LayoutAnimation.spring();
+    this.setState({ buttonClicked: false });
+  }
+
+  render() {
+    if (!this.state.buttonClicked) {
+      return (
+        <Card style={{ flex: 1, flexDirection: 'row' }}>
+          <CardSection>
+            <View style={styles.textContainerStyle}>
+              <Icon style={{ paddingLeft: 10 }} name='more-vert' size={24} color='rgba(0,0,0,0)' />
+              <Text style={styles.nameStyle}>{this.props.person.displayName}</Text>
+              <PopupMenu color='black' actions={['Contact']} onPress={() => console.log('contact pressed')} />
+            </View>
+            <View style={styles.headerStyle} />
+            <TouchableDebounce style={styles.containerStyle} onPress={this.props.onPress.bind(this, this.props.person)}>
+              <Image style={styles.profileStyle} source={{ uri: this.props.person.photoURL }} />
+            </TouchableDebounce>
+            <View style={{ width: 0.93 * width, height: 0.09 * width }} />
+          </CardSection>
+          <TouchableOpacity activeOpacity={0.3} onPress={() => this._onPressMore()}>
+          <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={styles.detailButtonStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
+            <Text style={styles.moreTextStyle}>
+              See More
+            </Text>
+          </LinearGradient>
           </TouchableOpacity>
+        </Card>
+      );
+    } return (
+      <Card style={{ flex: 1, flexDirection: 'row' }}>
+        <CardSection>
+          <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={styles.seeMoreStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
+            <TouchableOpacity style={{ position: 'absolute', top: 0, left: 0, padding: 15 }} onPress={() => this._onPressBack()}>
+              <Icon name='arrow-left' size={24} color='white' />
+            </TouchableOpacity>
+            <Text style={styles.detailsTextStyle}>
+              {this.props.person.subject}
+            </Text>
+            <StarRating
+              disabled
+              halftarEnabled
+              iconSet='MaterialCommunityIcons'
+              emptyStar='star-outline'
+              halfStar='star-half'
+              starColor='white'
+              emptyStarColor='white'
+              starSize={25}
+              rating={this.props.person.rating}
+            />
+          </LinearGradient>
         </CardSection>
       </Card>
     );
-};
+  }
+}
 
 const styles = {
   profileStyle: {
-    height: 0.22 * width,
-    width: 0.22 * width,
+    height: 0.25 * width,
+    width: 0.25 * width,
     borderRadius: 100,
     alignSelf: 'center',
     resizeMode: 'cover',
-    elevation: 2,
+    elevation: 50,
+  },
+  seeMoreStyle: {
+    width: 0.96 * width,
+    height: (0.58 * width),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   containerStyle: {
-    width: 0.22 * width,
-    height: 0.22 * width,
+    width: 0.25 * width,
+    height: 0.25 * width,
     borderRadius: 100,
     backgroundColor: 'white',
     paddingLeft: 5,
@@ -55,9 +106,8 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    top: 65,
+    top: 60,
     position: 'absolute',
-    elevation: 50,
   },
   nameStyle: {
     fontSize: 18,
@@ -72,16 +122,21 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  detailsTextStyle: {
+  moreTextStyle: {
     fontSize: 14,
     color: 'white',
     fontFamily: 'avenir_medium',
     paddingBottom: 5,
   },
+  detailsTextStyle: {
+    fontSize: 16,
+    color: 'white',
+    fontFamily: 'avenir_heavy',
+    paddingBottom: 5,
+  },
   detailButtonStyle: {
     width: 0.96 * width,
     height: 45,
-    backgroundColor: '#056ae4',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -90,8 +145,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     flex: 1,
-    paddingTop: 20,
-    padding: 10,
+    padding: 15,
   },
 };
 
