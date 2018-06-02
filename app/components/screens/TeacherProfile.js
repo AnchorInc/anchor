@@ -19,43 +19,24 @@ import { ListDetail, TouchableDebounce, LoginSpinner } from '../common';
 const { width, height } = Dimensions.get('window');
 
 class TeacherProfile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      uid: this.props.navigation.state.params.uid,
-      teacher: null,
-      action: this.props.navigation.state.params.action,
-      batches: [],
-      messages: [],
-      time: '',
-      place: '',
-    };
+  state = {
+    uid: this.props.navigation.state.params.uid,
+    teacher: null,
+    action: this.props.navigation.state.params.action,
+    batches: [],
+    messages: [],
+    time: '',
+    place: '',
+  };
 
+  componentWillMount() {
     if (this.props.user.userType === userTypes.STUDENT) {
-      console.log(this.props.user.userType);
       this.getTeacher();
       this.setState({ teacher: this.props.user });
     } else {
       this.setState({ teacher: this.props.user });
     }
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.navigation.state.params.person) {
-  //     this.setState({ teacher: nextProps.navigation.state.params.person });
-  //   } else if (nextProps.user) {
-  //     this.setState({ teacher: nextProps.user });
-  //   }
-  // }
-
-  // getBatches() {
-  //   if (this.state.teacher.batchList) {
-  //     this.state.teacher.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
-  //       .once('value')
-  //       .then(Batch => this.setState({ time: Batch.val().time, place: Batch.val().place })),
-  //     );
-  //   }
-  // }
 
   getTeacher() {
     if (!this.state.teacher) {
