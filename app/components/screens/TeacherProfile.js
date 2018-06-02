@@ -13,8 +13,8 @@ import firebase from 'react-native-firebase';
 import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { colors } from '../../config';
-import { ListDetail, TouchableDebounce } from '../common';
+import { colors, userTypes } from '../../config';
+import { ListDetail, TouchableDebounce, LoginSpinner } from '../common';
 
 const { width, height } = Dimensions.get('window');
 
@@ -22,17 +22,22 @@ class TeacherProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teacher: this.props.navigation.state.params.person || this.props.user,
+      uid: this.props.navigation.state.params.uid,
+      teacher: null,
       action: this.props.navigation.state.params.action,
       batches: [],
       messages: [],
       time: '',
       place: '',
     };
-  }
 
-  componentDidMount() {
-    this.getBatches();
+    if (this.props.user.userType === userTypes.STUDENT) {
+      console.log(this.props.user.userType);
+      this.getTeacher();
+      this.setState({ teacher: this.props.user });
+    } else {
+      this.setState({ teacher: this.props.user });
+    }
   }
 
   // componentWillReceiveProps(nextProps) {
@@ -43,13 +48,22 @@ class TeacherProfile extends Component {
   //   }
   // }
 
-  getBatches() {
-    if (this.state.teacher.batchList) {
-      this.state.teacher.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
-        .once('value')
-        .then(Batch => this.setState({ time: Batch.val().time, place: Batch.val().place })),
-      );
-    }
+  // getBatches() {
+  //   if (this.state.teacher.batchList) {
+  //     this.state.teacher.batchList.map(batch => firebase.database().ref(`/batches/${batch}`)
+  //       .once('value')
+  //       .then(Batch => this.setState({ time: Batch.val().time, place: Batch.val().place })),
+  //     );
+  //   }
+  // }
+
+  getTeacher() {
+    if (!this.state.teacher) {
+      return firebase.firestore().collection('teachers').doc(this.state.uid).get()
+      .then((teacher) => {
+        this.setState({ teacher: teacher.data() });
+      });
+    } return null;
   }
 
   completeAction = () => {
@@ -61,72 +75,76 @@ class TeacherProfile extends Component {
   }
 
   render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <StatusBar />
-        <View style={styles.headerContainerStyle}>
-          <View style={styles.headerStyle}>
-            <TouchableOpacity style={styles.iconStyle} onPress={() => this.props.navigation.goBack()}>
-              <Icon name='arrow-left' size={24} color='white' />
-            </TouchableOpacity>
-            <Text style={styles.headerTextStyle}>
-              {this.state.teacher.displayName}
+    if (this.state.teacher) {
+      return (
+        <View style={{ flex: 1 }}>
+          <StatusBar />
+          <View style={styles.headerContainerStyle}>
+            <View style={styles.headerStyle}>
+              <TouchableOpacity style={styles.iconStyle} onPress={() => this.props.navigation.goBack()}>
+                <Icon name='arrow-left' size={24} color='white' />
+              </TouchableOpacity>
+              <Text style={styles.headerTextStyle}>
+                {this.state.teacher.displayName}
+              </Text>
+              <TouchableDebounce style={styles.iconStyle} onPress={() => this.completeAction()}>
+                <Icon name={this.state.action} size={24} color='white' />
+              </TouchableDebounce>
+            </View>
+            <View style={styles.profileContainerStyle}>
+              <Image source={{ uri: this.state.teacher.photoURL }} style={styles.profileStyle} />
+            </View>
+          </View>
+          <View style={styles.nameContainerStyle}>
+            <Text style={styles.nameStyle}>
+              {this.state.teacher.subject}
             </Text>
-            <TouchableDebounce style={styles.iconStyle} onPress={() => this.completeAction()}>
-              <Icon name={this.state.action} size={24} color='white' />
-            </TouchableDebounce>
+            <StarRating
+              disabled
+              halftarEnabled
+              iconSet='MaterialCommunityIcons'
+              emptyStar='star-outline'
+              halfStar='star-half'
+              starColor='#ffb300'
+              emptyStarColor='#ffb300'
+              starSize={25}
+              rating={this.state.teacher.rating}
+            />
           </View>
-          <View style={styles.profileContainerStyle}>
-            <Image source={{ uri: this.state.teacher.photoURL }} style={styles.profileStyle} />
-          </View>
+          <ScrollView>
+            <ListDetail
+              title={'Name'}
+              value={this.state.teacher.displayName}
+            />
+            <ListDetail
+              title={'Subject'}
+              value={this.state.teacher.subject}
+            />
+            <ListDetail
+              title={'Email'}
+              value={this.state.teacher.email}
+            />
+            <ListDetail
+              title={'Phone Number'}
+              value={`+91 ${this.state.teacher.phone}`}
+            />
+            <ListDetail
+              title={'Price'}
+              value={`\u20b9 ${this.state.teacher.price} Per Class`}
+            />
+            <ListDetail
+              title={'Timings'}
+              value={this.state.time && this.state.place ? `From ${this.state.time} at ${this.state.place}` : 'No registered classes'}
+            >
+              <TouchableOpacity>
+                <Text>See More</Text>
+              </TouchableOpacity>
+            </ListDetail>
+          </ScrollView>
         </View>
-        <View style={styles.nameContainerStyle}>
-          <Text style={styles.nameStyle}>
-            {this.state.teacher.subject}
-          </Text>
-          <StarRating
-            disabled
-            halftarEnabled
-            iconSet='MaterialCommunityIcons'
-            emptyStar='star-outline'
-            halfStar='star-half'
-            starColor='#ffb300'
-            emptyStarColor='#ffb300'
-            starSize={25}
-            rating={this.state.teacher.rating}
-          />
-        </View>
-        <ScrollView>
-          <ListDetail
-            title={'Name'}
-            value={this.state.teacher.displayName}
-          />
-          <ListDetail
-            title={'Subject'}
-            value={this.state.teacher.subject}
-          />
-          <ListDetail
-            title={'Email'}
-            value={this.state.teacher.email}
-          />
-          <ListDetail
-            title={'Phone Number'}
-            value={`+91 ${this.state.teacher.phone}`}
-          />
-          <ListDetail
-            title={'Price'}
-            value={`\u20b9 ${this.state.teacher.price} Per Class`}
-          />
-          <ListDetail
-            title={'Timings'}
-            value={this.state.time && this.state.place ? `From ${this.state.time} at ${this.state.place}` : 'No registered classes'}
-          >
-            <TouchableOpacity>
-              <Text>See More</Text>
-            </TouchableOpacity>
-          </ListDetail>
-        </ScrollView>
-      </View>
+      );
+    } return (
+      <LoginSpinner title='Loading' />
     );
   }
 }

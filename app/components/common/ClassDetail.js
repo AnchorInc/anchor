@@ -34,13 +34,13 @@ class ClassDetail extends Component {
         <Card style={{ flex: 1, flexDirection: 'row' }}>
           <CardSection>
             <View style={styles.textContainerStyle}>
-              <Icon style={{ paddingLeft: 10 }} name='more-vert' size={24} color='rgba(0,0,0,0)' />
-              <Text style={styles.nameStyle}>{this.props.person.displayName}</Text>
+              <Icon style={{ paddingLeft: 10 }} name='dots-vertical' size={24} color='rgba(0,0,0,0)' />
+              <Text style={styles.nameStyle}>{this.props.batch.teacherDetails.displayName}</Text>
               <PopupMenu color='black' actions={['Contact']} onPress={() => console.log('contact pressed')} />
             </View>
             <View style={styles.headerStyle} />
-            <TouchableDebounce style={styles.containerStyle} onPress={this.props.onPress.bind(this, this.props.person)}>
-              <Image style={styles.profileStyle} source={{ uri: this.props.person.photoURL }} />
+            <TouchableDebounce style={styles.containerStyle} onPress={this.props.onPress.bind(this, this.props.batch.teacherDetails.uid)}>
+              <Image style={styles.profileStyle} source={{ uri: this.props.batch.teacherDetails.photoURL }} />
             </TouchableDebounce>
             <View style={{ width: 0.93 * width, height: 0.09 * width }} />
           </CardSection>
@@ -61,7 +61,13 @@ class ClassDetail extends Component {
               <Icon name='arrow-left' size={24} color='white' />
             </TouchableOpacity>
             <Text style={styles.detailsTextStyle}>
-              {this.props.person.subject}
+              {this.props.batch.teacherDetails.subject}
+            </Text>
+            <Text style={styles.detailsTextStyle}>
+              {this.props.batch.time}
+            </Text>
+            <Text style={styles.detailsTextStyle}>
+              {this.props.batch.place}
             </Text>
             <StarRating
               disabled
@@ -72,7 +78,8 @@ class ClassDetail extends Component {
               starColor='white'
               emptyStarColor='white'
               starSize={25}
-              rating={this.props.person.rating}
+              style={{ padding: 5 }}
+              rating={this.props.batch.teacherDetails.rating}
             />
           </LinearGradient>
         </CardSection>
@@ -88,7 +95,6 @@ const styles = {
     borderRadius: 100,
     alignSelf: 'center',
     resizeMode: 'cover',
-    elevation: 50,
   },
   seeMoreStyle: {
     width: 0.96 * width,
@@ -132,7 +138,8 @@ const styles = {
     fontSize: 16,
     color: 'white',
     fontFamily: 'avenir_heavy',
-    paddingBottom: 5,
+    paddingBottom: 10,
+    textAlign: 'center',
   },
   detailButtonStyle: {
     width: 0.96 * width,

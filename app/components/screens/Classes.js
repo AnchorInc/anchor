@@ -8,8 +8,8 @@ import ClassList from '../common/ClassList';
 
 
 class Classes extends Component {
-  onPress = (person) => {
-    this.props.navigation.navigate('TeacherProfile', { person, action: 'forum' });
+  onPress = (uid) => {
+    this.props.navigation.navigate('TeacherProfile', { uid, action: 'forum' });
   }
 
   navigateProfile = () => {

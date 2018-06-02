@@ -15,8 +15,9 @@ class Search extends Component {
     showSearchVal: false,
   };
 
-  onPress = (person) => {
-    this.props.navigation.navigate('TeacherProfile', { person, action: 'forum' });
+  onPress = (uid) => {
+    console.log(uid);
+    this.props.navigation.navigate('TeacherProfile', { uid, action: 'forum' });
   }
 
   requestData = (queryObj) => {
@@ -54,7 +55,7 @@ class Search extends Component {
 
   renderTeachers = () => {
     if (this.state.teachers.length >= 1 && !this.state.showSearchVal) {
-      return this.state.teachers.map(teacher => <SearchDetail key={teacher.UID} onPress={() => this.onPress(teacher)} person={teacher} />);
+      return this.state.teachers.map(teacher => <SearchDetail key={teacher.uid} onPress={() => this.onPress(teacher.uid)} person={teacher} />);
     }
     return null;
   }
@@ -63,7 +64,7 @@ class Search extends Component {
     return (
       <View style={styles.containerStyle}>
         <SearchBar searchCallback={queryobj => this.requestData(queryobj)} rkt="search" />
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps='always'>
           <Text style={styles.topResultTextStyle}>
             {this.state.subjects.length >= 1 ? 'Subjects' : ''}
           </Text>

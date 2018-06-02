@@ -25,9 +25,8 @@ class ClassList extends Component {
   getTeachersFromBatchList = (batchList) => {
     this.setState({ teachers: [] });
     batchList.map((batch) => {
-      return firebase.firestore().collection('batches').doc(batch)
-      .get()
-      .then(Class => firebase.firestore().collection('teachers').doc(Class.data().teacher).get())
+      return firebase.firestore().collection('batches').doc(batch).get()
+      // .then(Class => firebase.firestore().collection('teachers').doc(Class.data().teacher).get())
       .then((teacher) => {
         this.setState({ teachers: this.state.teachers.concat([teacher.data()]), refreshing: false });
       });
@@ -60,7 +59,7 @@ class ClassList extends Component {
   }
 
   renderTeachers = ({ item }) => {
-    return <ClassDetail person={item} onPress={this.props.onPress} />;
+    return <ClassDetail batch={item} onPress={this.props.onPress} />;
   }
 
   render() {

@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class SearchBar extends Component {
 
@@ -119,7 +119,7 @@ const styles = {
   searchBoxStyle: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 0.07 * height,
+    height: 44,
     width: 0.96 * width,
     padding: 10,
     borderRadius: 4,
