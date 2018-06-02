@@ -6,7 +6,7 @@ import { colors } from '../../config/';
 import HeaderProfileButton from './HeaderProfileButton';
 import { TouchableDebounce } from './';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class Header extends Component {
 
@@ -61,7 +61,7 @@ class Header extends Component {
 const styles = {
   normalContainerStyle: {
     justifyContent: 'space-between',
-    height: 64,
+    height: 0.1 * height,
     paddingTop: (Platform.OS === 'ios') ? 15 : 0,
     flexDirection: 'row',
   },
