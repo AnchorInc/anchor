@@ -44,11 +44,10 @@ const TabNavigatorConfig = {
       );
     },
   }),
-  animationEnabled: false,
+  animationEnabled: true,
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
-  swipeEnabled: false,
-  lazy: true,
+  swipeEnabled: true,
   backBehavior: 'none',
   tabBarOptions: {
     showLabel: false,
