@@ -87,7 +87,7 @@ const styles = {
     flexDirection: 'row',
     backgroundColor: '#232fa8',
     width,
-    height: 0.1 * height,
+    height: 64,
   },
   inputStyle: {
     width: 0.75 * width,
@@ -118,7 +118,7 @@ const styles = {
   searchContainerStyle: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 0.1 * height,
+    height: 64,
     width,
   },
 };

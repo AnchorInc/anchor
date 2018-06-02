@@ -44,7 +44,7 @@ const TabNavigatorConfig = {
       );
     },
   }),
-  animationEnabled: true,
+  animationEnabled: false,
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
   swipeEnabled: false,
