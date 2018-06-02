@@ -3,7 +3,7 @@ import { setCustomText, setCustomStatusBar } from 'react-native-global-props';
 import { Provider } from 'react-redux';
 
 import { MainStack } from './navigation/Router';
-import { colors, store, setupNotifications } from './config';
+import { colors, store } from './config';
 
 // get rid of annoying yellow box
 console.disableYellowBox = true;
@@ -16,8 +16,6 @@ const customTextProps = {
 };
 setCustomText(customTextProps);
 setCustomStatusBar({ backgroundColor: colors.primary.dark });
-
-setupNotifications();
 
 class App extends Component {
 
