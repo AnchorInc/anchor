@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, View, Dimensions, TouchableOpacity, NativeModules, LayoutAnimation } from 'react-native';
+import { Text, Image, View, Dimensions, TouchableOpacity, LayoutAnimation, UIManager } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import StarRating from 'react-native-star-rating';
@@ -9,22 +9,22 @@ import { Card, CardSection, TouchableDebounce, PopupMenu } from './';
 
 const { width } = Dimensions.get('window');
 
-const { UIManager } = NativeModules;
-
-UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-
 class ClassDetail extends Component {
   state = {
     buttonClicked: false,
   };
 
+  componentDidMount() {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+
   _onPressMore = () => {
-    LayoutAnimation.spring();
+    LayoutAnimation.linear();
     this.setState({ buttonClicked: true });
   }
 
   _onPressBack = () => {
-    LayoutAnimation.spring();
+    LayoutAnimation.linear();
     this.setState({ buttonClicked: false });
   }
 

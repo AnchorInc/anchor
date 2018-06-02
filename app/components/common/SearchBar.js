@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput, TouchableWithoutFeedback, TouchableOpacity, View, Dimensions } from 'react-native';
+import { Text, TextInput, TouchableWithoutFeedback, TouchableOpacity, View, Dimensions, UIManager, LayoutAnimation } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
@@ -8,7 +8,11 @@ const { width, height } = Dimensions.get('window');
 
 class SearchBar extends Component {
 
-  state = { search: false, editingInput: false };
+  state = { search: false, editingInput: false, buttonClicked: false };
+
+  componentDidMount() {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
 
   componentWillReceiveProps() {
     this.searchBar.focus();
@@ -21,6 +25,17 @@ class SearchBar extends Component {
       this.setState({ editingInput: false });
     }
     this.props.searchCallback(input);
+  }
+
+  _onPressMore = () => {
+    LayoutAnimation.easeInEaseOut();
+    this.setState({ search: true });
+  }
+
+  _onPressBack = () => {
+    LayoutAnimation.easeInEaseOut();
+    this.setState({ search: false, editingInput: false });
+    this.props.searchCallback('');
   }
 
   showClearTextButton = () => {
@@ -43,7 +58,7 @@ class SearchBar extends Component {
     if (this.state.search) {
       return (
         <View style={styles.containerStyle}>
-          <TouchableOpacity onPress={() => { this.setState({ search: false, editingInput: false }); this.props.searchCallback(''); }}>
+          <TouchableOpacity onPress={() => this._onPressBack()}>
             <Icon size={24} name="keyboard-backspace" color='white' style={styles.iconStyle} />
           </TouchableOpacity>
           <TextInput
@@ -63,7 +78,7 @@ class SearchBar extends Component {
       );
     }
     return (
-      <TouchableWithoutFeedback onPress={() => this.setState({ search: true })}>
+      <TouchableWithoutFeedback onPress={() => this._onPressMore()}>
         <View style={styles.searchContainerStyle} backgroundColor={colors.primary.normal}>
           <View style={styles.searchBoxStyle} backgroundColor='#232fa8'>
             <Text style={styles.searchTextStyle}>
