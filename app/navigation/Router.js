@@ -47,7 +47,7 @@ const TabNavigatorConfig = {
   animationEnabled: true,
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
-  swipeEnabled: true,
+  swipeEnabled: false,
   backBehavior: 'none',
   tabBarOptions: {
     showLabel: false,
