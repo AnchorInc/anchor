@@ -17,7 +17,6 @@ class ClassList extends Component {
   };
 
   componentWillReceiveProps(props) {
-    console.log(props.batchList);
     if (this.state.initialRefresh) return;
     this.refresh(props.batchList);
   }
