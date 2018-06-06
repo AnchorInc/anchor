@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 import SplashScreen from 'react-native-splash-screen';
 
-import { getUser, getUserType, startUserListener } from '../../actions';
+import { getUserType, startUserListener } from '../../actions';
 
 // used to setup everything beforet the main app loads
 class AppSetup extends Component {
@@ -13,7 +13,6 @@ class AppSetup extends Component {
       if (user) {
         this.checkUserPermissions();
         this.props.startUserListener();
-        // this.props.getUser();
         SplashScreen.hide();
         return this.props.navigation.navigate('Main');
       }
@@ -42,10 +41,17 @@ class AppSetup extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  let user;
+  if (state.user.user) {
+    user = state.user.user;
+  }
+  return { user };
+};
+
 const mapFunctionsToProps = {
-  getUser,
   startUserListener,
   getUserType,
 };
 
-export default connect(null, mapFunctionsToProps)(AppSetup);
+export default connect(mapStateToProps, mapFunctionsToProps)(AppSetup);
