@@ -28,7 +28,7 @@ class Input extends Component {
             width: 0.8 * width,
             margin: 10,
             minHeight: 44,
-            maxHeight: 100,
+            maxHeight: 120,
             borderRadius: 22,
           }}
         >
