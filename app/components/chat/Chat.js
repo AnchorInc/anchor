@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { KeyboardAvoidingView, View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { ChatBubble, Input } from './';
 
@@ -63,7 +63,7 @@ class Chat extends Component {
         <FlatList
           keyboardShouldPersistTaps='always'
           data={this.state.messages}
-          contentContainerStyle={{ backgroundColor: 'white', paddingBottom: 65, justifyContent: 'flex-end', flexGrow: 1 }}
+          contentContainerStyle={{ backgroundColor: 'white', justifyContent: 'flex-end', flexGrow: 1 }}
           keyExtractor={message => message.id}
           renderItem={this.renderMessages}
           ref={(ref) => { this.list = ref; }}
