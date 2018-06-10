@@ -1,17 +1,86 @@
-// import React from 'react';
-// import { View, Text } from 'react-native';
-// import { Bubble } from
-//
-// import { colors } from '../../config';
-//
-// const ChatBubble = ({ message }) => {
-//   return (
-//     <View style={{ backgroundColor: colors.primary.light, borderRadius: 10, borderBottomLeftRadius: 0 }}>
-//       <Text style={{ color: 'white', fontSize: 18 }}>
-//         {message}
-//       </Text>
-//     </View>
-//   );
-// };
-//
-// export { ChatBubble };
+import React from 'react';
+import { View, Text } from 'react-native';
+import moment from 'moment';
+
+import { colors } from '../../config';
+
+const ChatBubble = ({ message }) => {
+  return (
+    <View style={styles[message.direction].container}>
+      <View style={styles.topContainerStyle}>
+        <Text style={styles[message.direction].infoStyle}>
+          {message.user.displayName}
+        </Text>
+        <Text style={styles[message.direction].infoStyle}>
+          {moment(message.timeStamp).format('LT')}
+        </Text>
+      </View>
+      <Text style={styles[message.direction].message}>
+        {message.text}
+      </Text>
+    </View>
+  );
+};
+
+const styles = {
+  left: {
+    container: {
+      borderRadius: 20,
+      borderBottomLeftRadius: 0,
+      marginTop: 8,
+      marginRight: 150,
+      marginLeft: 10,
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+      alignSelf: 'flex-start',
+      backgroundColor: colors.other.chatBubble,
+    },
+    message: {
+      color: 'black',
+      padding: 10,
+      paddingTop: 5,
+      fontFamily: 'avenir_roman',
+      fontSize: 16,
+    },
+    infoStyle: {
+      color: 'black',
+      padding: 10,
+      paddingBottom: 0,
+      fontSize: 12,
+      fontFamily: 'avenir_light',
+    },
+  },
+  right: {
+    container: {
+      borderRadius: 20,
+      borderBottomRightRadius: 0,
+      marginTop: 8,
+      marginRight: 10,
+      marginLeft: 150,
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+      alignSelf: 'flex-end',
+      backgroundColor: colors.secondary.blue,
+    },
+    message: {
+      color: 'white',
+      padding: 10,
+      paddingTop: 5,
+      fontFamily: 'avenir_roman',
+      fontSize: 16,
+    },
+    infoStyle: {
+      color: 'white',
+      padding: 10,
+      paddingBottom: 0,
+      fontSize: 12,
+      fontFamily: 'avenir_light',
+    },
+  },
+  topContainerStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+};
+
+export { ChatBubble };

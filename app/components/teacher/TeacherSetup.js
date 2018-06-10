@@ -129,7 +129,6 @@ class TeacherSetup extends Component {
       experience: this.state.experience,
       subject: this.state.subject,
       uid: this.props.user.uid,
-      userType: 'teacher',
     };
     if (this.state.errors && Object.keys(this.state.errors).length === 0) {
       this.updateDonePref();

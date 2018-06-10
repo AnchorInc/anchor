@@ -17,7 +17,7 @@ const ChatDetail = ({ displayName, imageURL, lastMessage, lastTimestamp, unread,
               <Text style={{ fontFamily: 'avenir_heavy', color: unread ? 'black' : '#7f7f7f', fontSize: 18, padding: 10, paddingBottom: 0 }}>
                 {displayName}
               </Text>
-              <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: unread ? colors.secondary.normal : 'white', top: 18 }} />
+              <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: unread ? colors.secondary.blue : 'white', top: 18 }} />
             </View>
             <Text style={styles.timeStyle}>
               {lastTimestamp}
@@ -54,15 +54,6 @@ const styles = {
     fontSize: 16,
     padding: 10,
     paddingTop: 5,
-  },
-  unreadDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: colors.secondary.normal,
-    position: 'absolute',
-    top: 17,
-    left: 115,
   },
 };
 

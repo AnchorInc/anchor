@@ -1,93 +1,85 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+import { View, FlatList } from 'react-native';
+import { connect } from 'react-redux';
+import { ChatBubble, Input } from './';
 
-import { colors } from '../../config';
 import { Header } from '../header';
 
 class Chat extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      messages: [],
-    };
-
-    this.renderBubble = this.renderBubble.bind(this);
-  }
+  state={
+    messages: [],
+  };
 
   componentWillMount() {
-    this.state = {
+    this.setState({
       messages: [
         {
-          _id: 1,
           text: this.props.navigation.state.params.chat.lastMessage,
-          createdAt: new Date(),
+          direction: 'left',
+          timeStamp: new Date().getTime(),
+          id: '666',
           user: {
-            _id: 1,
-            name: 'React Native',
-            avatar: this.props.navigation.state.params.chat.imageURL,
+            displayName: this.props.navigation.state.params.chat.displayName,
           },
         }, {
-          _id: 3,
-          text: this.props.navigation.state.params.chat.lastMessage,
-          createdAt: new Date(),
+          text: 'Thanks Nick!',
+          timeStamp: new Date().getTime(),
+          direction: 'right',
+          id: '589',
           user: {
-            _id: 1,
-            name: 'React Native',
-            avatar: this.props.navigation.state.params.chat.imageURL,
+            displayName: 'You',
           },
         },
       ],
+    });
+  }
+
+  onSend = (message) => {
+    const messageData = {
+      text: message,
+      timeStamp: new Date().getTime(),
+      direction: 'right',
+      id: Math.random(1000).toString(),
+      user: {
+        displayName: 'You',
+      },
     };
+    if (message !== '') {
+      this.setState({
+        messages: this.state.messages.concat([messageData]),
+      });
+    }
+    setTimeout(() => this.list.scrollToEnd(), 200);
   }
 
-  onSend(messages = []) {
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
-    }));
-  }
-
-  renderBubble(props) {
-    return (
-      <Bubble
-        {...props}
-        wrapperStyle={{
-          padding: 10,
-          left: {
-            padding: 10,
-            backgroundColor: '#F0F0F0',
-            borderBottomLeftRadius: 5,
-            borderRadius: 10,
-          },
-          right: {
-            backgroundColor: colors.secondary.normal,
-            borderBottomRightRadius: 5,
-            borderRadius: 10,
-          },
-          message: {
-            fontFamily: 'avenir_bold',
-          },
-        }}
-      />
-    );
+  renderMessages = ({ item }) => {
+    return <ChatBubble message={item} />;
   }
 
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <Header title='Chats' />
-        <GiftedChat
-          messages={this.state.messages}
-          onSend={messages => this.onSend(messages)}
-          renderBubble={this.renderBubble}
-          user={{
-            _id: 2,
-          }}
+        <Header title={this.props.navigation.state.params.chat.displayName} />
+        <FlatList
+          keyboardShouldPersistTaps='always'
+          data={this.state.messages}
+          contentContainerStyle={{ backgroundColor: 'white', paddingBottom: 65, justifyContent: 'flex-end', flexGrow: 1 }}
+          keyExtractor={message => message.id}
+          renderItem={this.renderMessages}
+          ref={(ref) => { this.list = ref; }}
         />
+        <Input onPress={this.onSend} />
       </View>
     );
   }
 }
 
-export { Chat };
+const mapStateToProps = (state) => {
+  let user;
+  if (state.user.user) {
+    user = state.user.user;
+  }
+  return { user };
+};
+
+export default connect(mapStateToProps)(Chat);

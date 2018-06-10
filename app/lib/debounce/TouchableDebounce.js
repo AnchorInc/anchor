@@ -11,7 +11,7 @@ class TouchableDebounce extends Component {
         onPress={
           debounce(() => {
           this.props.onPress();
-        }, 700)
+        }, 500)
         }
       >
         {this.props.children}

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Dimensions, Image, Picker } from 'react-native';
+import { View, Text, StatusBar, Dimensions, Image } from 'react-native';
 import { connect } from 'react-redux';
 import DialogBox from 'react-native-dialogbox';
+import Carousel from 'react-native-snap-carousel';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { colors, userTypes } from '../../config';
 import { googleLoginRequest, fbLoginRequest, closeErrorMessage, showErrorMessage, resetLogin } from '../../actions';
@@ -13,7 +15,13 @@ import logo from '../../images/logo.png';
 const { width, height } = Dimensions.get('window');
 
 class Login extends Component {
-  state = { userType: userTypes.STUDENT };
+  state = {
+    userType: userTypes.STUDENT,
+    userTypeOptions: [
+      userTypes.STUDENT,
+      userTypes.TEACHER,
+    ],
+  };
 
   showErrorMessage = () => {
     if (this.props.loginFail) {
@@ -30,6 +38,14 @@ class Login extends Component {
   closeErrorMessage = () => {
     this.props.resetLogin();
     this.props.closeErrorMessage();
+  }
+
+  renderPickerCarousel = ({ item }) => {
+    return (
+      <Text style={{ alignSelf: 'center', paddingTop: 10, textAlign: 'center', fontSize: 14, fontFamily: 'avenir_heavy', color: '#757575' }}>
+        {item.toUpperCase()}
+      </Text>
+    );
   }
 
   render() {
@@ -53,18 +69,30 @@ class Login extends Component {
           <View style={loginContainerStyle}>
             <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.props.fbLoginRequest.bind(this, this.state.userType)} />
             <LoginButton title='Sign in with Google' iconName='google' onPress={this.props.googleLoginRequest.bind(this, this.state.userType)} />
-            <Picker
-              style={{ width: 150 }}
-              selectedValue={this.state.userType}
-              mode='dropdown'
-              onValueChange={itemValue => this.setState({ userType: itemValue })}
+            <LinearGradient
+              colors={[
+                '#c0c0cB',
+                '#c0c0cB',
+              ]}
+              locations={[0.3, 1]}
+              style={{ justifyContent: 'center', alignItems: 'center', alignSelf: 'center', borderRadius: 20, width: 180, height: 40 }}
+              start={{ x: 1, y: 0 }}
+              end={{ x: 0, y: 1 }}
             >
-              <Picker.Item label='Student' value={userTypes.STUDENT} />
-              <Picker.Item label='Teacher' value={userTypes.TEACHER} />
-            </Picker>
+              <Carousel
+                sliderWidth={width}
+                itemWidth={90}
+                data={this.state.userTypeOptions}
+                renderItem={this.renderPickerCarousel}
+                inactiveSlideScale={1}
+                enableMomentum
+                showsHorizontalScrollIndicator={false}
+                removeClippedSubviews={false}
+                onSnapToItem={index => this.setState({ userType: this.state.userTypeOptions[index] })}
+              />
+            </LinearGradient>
           </View>
         </View>
-
         <Spinner visible={this.props.loading} title='Authenticating' />
         <DialogBox ref={(dialogbox) => { this.dialogbox = dialogbox; }} />
       </View>

@@ -121,7 +121,6 @@ class ProfileEditing extends Component {
       age: this.state.age,
       location: this.state.location,
       uid: this.props.user.uid,
-      userType: 'student',
     };
     if (this.state.errors && Object.keys(this.state.errors).length === 0) {
       this.updateDonePref();
