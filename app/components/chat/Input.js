@@ -27,13 +27,14 @@ class Input extends Component {
             elevation: 3,
             width: 0.8 * width,
             margin: 10,
-            borderRadius: (0.8 * width) / 2,
+            minHeight: 44,
+            maxHeight: 100,
+            borderRadius: 22,
           }}
-          onContentSizeChange={e => this.updateSize(e.nativeEvent.contentSize.height)}
         >
           <TextInput
             style={styles.inputStyle}
-            placeholder="Type a message"
+            placeholder="Type a message..."
             placeholderTextColor='gray'
             underlineColorAndroid='transparent'
             autoCapitalize='words'

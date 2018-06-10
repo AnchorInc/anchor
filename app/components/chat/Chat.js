@@ -49,7 +49,7 @@ class Chat extends Component {
         messages: this.state.messages.concat([messageData]),
       });
     }
-    setTimeout(() => this.list.scrollToEnd(), 200);
+    setTimeout(() => this.list.scrollToEnd({ animated: false }), 200);
   }
 
   renderMessages = ({ item }) => {
