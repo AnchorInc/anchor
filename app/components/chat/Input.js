@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, View, Dimensions, Keyboard, TouchableOpacity } from 'react-native';
+import { TextInput, View, Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
@@ -10,46 +10,11 @@ class Input extends Component {
   state={
     message: '',
     blank: true,
-    textBarHeight: 54,
-    position: 'absolute',
-    marginBottom: 0,
   };
-
-  componentWillMount() {
-   this.keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
-   this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
-  }
-
-  componentWillReceiveProps() {
-   this.input.focus();
-  }
-
-  componentWillUnmount() {
-    this.keyboardWillShowListener.remove();
-    this.keyboardWillHideListener.remove();
-  }
-
-  keyboardWillShow() {
-   if (this.state !== 'relative') {
-     this.setState({
-       position: 'relative',
-       marginBottom: 10,
-     });
-   }
-  }
-
-  keyboardWillHide() {
-   if (this.state !== 'absolute') {
-     this.setState({
-       position: 'absolute',
-       marginBottom: 0,
-     });
-   }
-  }
 
   render() {
     return (
-      <View style={{ bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'space-around', flexDirection: 'row', position: this.state.position }}>
+      <View style={{ verticalOffset: 10, alignItems: 'center', justifyContent: 'space-around', flexDirection: 'row' }}>
         <View
           style={{
             justifyContent: 'flex-start',
@@ -63,9 +28,8 @@ class Input extends Component {
             width: 0.8 * width,
             margin: 10,
             borderRadius: (0.8 * width) / 2,
-            minHeight: 44,
-            maxHeight: 100,
           }}
+          onContentSizeChange={e => this.updateSize(e.nativeEvent.contentSize.height)}
         >
           <TextInput
             style={styles.inputStyle}
