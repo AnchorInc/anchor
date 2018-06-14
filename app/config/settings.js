@@ -31,6 +31,11 @@ export const actionTypes = {
     UPDATE: 'types.CHAT.UPDATE',
     CREATE: 'types.CHAT.CREATE',
   },
+  MESSAGE: {
+    GET: 'types.MESSAGE.GET',
+    UPDATE: 'types.MESSAGE.UPDATE',
+    SYNC: 'types.MESSAGE.SYNC',
+  },
 };
 
 // user types used by auth

@@ -1,9 +1,9 @@
 import firebase from 'react-native-firebase';
 import { eventChannel } from 'redux-saga';
-import { put, takeLatest, all, call, select } from 'redux-saga/effects';
+import { put, takeLatest, all, call, select, take } from 'redux-saga/effects';
 
 import { actionTypes } from '../config';
-import { syncMessages, getMessages } from '../actions';
+import { syncMessages, getMessages, syncChats } from '../actions';
 
 function* getMessagesSaga() {
   // get all the messages for a chat
@@ -19,6 +19,23 @@ function* getMessagesSaga() {
   yield put(syncMessages(messages));
 }
 
+function* getChatsFromChatList() {
+  const getChatList = state => state.user.user.chatList;
+  const chatList = yield select(getChatList());
+
+  const ref = firebase.firestore().collection('chats');
+  const channel = yield call(chatEventListener, ref, chatList);
+
+  while (firebase.auth().currentUser) {
+    // get the data emitted from the channel
+    const messages = yield take(channel);
+    console.log(messages);
+
+    yield put(syncChats());
+  }
+  channel.close();
+}
+
 function* updateMessagesSaga(action) {
   const ref = firebase.firestore().collection('chats').doc(action.id).collection('messages')
   .doc();
@@ -27,9 +44,19 @@ function* updateMessagesSaga(action) {
   yield put(getMessages('test'));
 }
 
-const chatEventListener = (ref) => {
+// ref  = firestore().collections('chats);
+const chatEventListener = (ref, chatList) => {
   const channel = eventChannel((emitter) => {
-    ref.onSnapshot(doc => emitter(doc.data()));
+    chatList.forEach((cid) => {
+      const messages = [];
+      ref.where('cid', '==', cid)
+      .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          messages.concat(doc.data());
+          emitter(messages);
+        });
+      });
+    });
     return () => ref.onSnapshot(() => {});
   });
   return channel;
@@ -37,7 +64,8 @@ const chatEventListener = (ref) => {
 
 export function* watchChatRequests() {
   yield all([
-    takeLatest(actionTypes.CHAT.GET, getMessagesSaga),
-    takeLatest(actionTypes.CHAT.UPDATE, updateMessagesSaga),
+    takeLatest(actionTypes.MESSAGE.GET, getMessagesSaga),
+    takeLatest(actionTypes.MESSAGE.UPDATE, updateMessagesSaga),
+    takeLatest(actionTypes.CHAT.GET, getChatsFromChatList),
   ]);
 }

@@ -18,7 +18,7 @@ class Chat extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ messages: this.state.messages.concat(nextProps.chats) });
+    this.setState({ messages: this.state.messages.concat(nextProps.messages) });
     console.log(this.state.messages);
   }
 
@@ -65,14 +65,14 @@ class Chat extends Component {
 
 const mapStateToProps = (state) => {
   let user;
-  let chats;
+  let messages;
   if (state.user.user) {
     user = state.user.user;
   }
-  if (state.chat.chats) {
-    chats = state.chat.chats;
+  if (state.chat.messages) {
+    messages = state.chat.messages;
   }
-  return { user, chats };
+  return { user, messages };
 };
 
 export default connect(mapStateToProps, { updateMessages, getMessages })(Chat);

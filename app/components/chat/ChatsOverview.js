@@ -10,28 +10,33 @@ const { width, height } = Dimensions.get('window');
 
 class ChatsOverview extends Component {
   state={
-    chats: [
-      {
-        displayName: 'Nick Turner',
-        imageURL: 'https://cdn.dribbble.com/users/617797/avatars/normal/8d75f923578725de830d0f7ae41baa7d.jpg?1517246732',
-        unread: true,
-        lastTimestamp: '8:55 PM',
-        lastMessage: "This is the best app that I've ever used in my life",
-      }, {
-        displayName: 'Daniel Specter',
-        imageURL: 'https://cdn.dribbble.com/users/1392339/avatars/normal/895b232d3de6e33a5707c313397ec9ba.jpg?1509705769',
-        unread: false,
-        lastTimestamp: '7:25 PM',
-        lastMessage: 'This app is amazing!!',
-      }, {
-        displayName: 'Ted Wolfe',
-        imageURL: 'https://cdn.dribbble.com/users/108183/avatars/normal/1cdafba45e41c543c19c9f43b86cd2c7.jpg?1501240798',
-        unread: false,
-        lastTimestamp: '11:55 AM',
-        lastMessage: 'Great job on the app! Works very well. Keep it up!!',
-      },
-    ],
+    chats: [],
+    // chats: [
+    //   {
+    //     displayName: 'Nick Turner',
+    //     imageURL: 'https://cdn.dribbble.com/users/617797/avatars/normal/8d75f923578725de830d0f7ae41baa7d.jpg?1517246732',
+    //     unread: true,
+    //     lastTimestamp: '8:55 PM',
+    //     lastMessage: "This is the best app that I've ever used in my life",
+    //   }, {
+    //     displayName: 'Daniel Specter',
+    //     imageURL: 'https://cdn.dribbble.com/users/1392339/avatars/normal/895b232d3de6e33a5707c313397ec9ba.jpg?1509705769',
+    //     unread: false,
+    //     lastTimestamp: '7:25 PM',
+    //     lastMessage: 'This app is amazing!!',
+    //   }, {
+    //     displayName: 'Ted Wolfe',
+    //     imageURL: 'https://cdn.dribbble.com/users/108183/avatars/normal/1cdafba45e41c543c19c9f43b86cd2c7.jpg?1501240798',
+    //     unread: false,
+    //     lastTimestamp: '11:55 AM',
+    //     lastMessage: 'Great job on the app! Works very well. Keep it up!!',
+    //   },
+    // ],
   };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ chats: nextProps.chats });
+  }
 
   navigateChatScreen = (chat) => {
     this.props.navigation.navigate('Chat', { chat });
@@ -60,10 +65,14 @@ class ChatsOverview extends Component {
 
 const mapStateToProps = (state) => {
   let user;
+  let chats;
   if (state.user.user) {
     user = state.user.user;
   }
-  return { user };
+  if (state.chat.chats) {
+    chats = state.chat.chats;
+  }
+  return { user, chats };
 };
 
 export default connect(mapStateToProps)(ChatsOverview);
