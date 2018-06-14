@@ -21,7 +21,7 @@ function* getMessagesSaga() {
 
 function* getChatsFromChatList() {
   const getChatList = state => state.user.user.chatList;
-  const chatList = yield select(getChatList());
+  const chatList = yield select(getChatList);
 
   const ref = firebase.firestore().collection('chats');
   const channel = yield call(chatEventListener, ref, chatList);
