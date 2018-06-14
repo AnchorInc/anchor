@@ -39,7 +39,7 @@ class ChatsOverview extends Component {
 
   renderChats = () => {
     return this.state.chats.map((chat) => {
-      return <ChatDetail onPress={() => this.navigateChatScreen(chat)} displayName={chat.displayName} unread={chat.unread} imageURL={chat.imageURL} lastTimestamp={chat.lastTimestamp} lastMessage={chat.lastMessage} />;
+      return <ChatDetail key={(Math.floor((Math.random() * 1000) + 1)).toString()} onPress={() => this.navigateChatScreen(chat)} displayName={chat.displayName} unread={chat.unread} imageURL={chat.imageURL} lastTimestamp={chat.lastTimestamp} lastMessage={chat.lastMessage} />;
     });
   }
 

@@ -27,21 +27,20 @@ class Chat extends Component {
       text: message,
       timeStamp: new Date().getTime(),
       direction: 'right',
-      id: Math.random(1000).toString(),
+      id: (Math.floor((Math.random() * 1000) + 1)).toString(),
       user: {
         displayName: this.props.user.displayName,
       },
     };
-    if (message !== '') {
-      this.setState({
-        messages: this.state.messages.concat([messageData]),
-      });
-    }
+    this.setState({
+      messages: this.state.messages.concat([messageData]),
+    });
     setTimeout(() => this.list.scrollToEnd({ animated: false }), 200);
     this.props.updateMessages(messageData, 'test');
   }
 
   renderMessages = ({ item }) => {
+    console.log('Item', item);
     return <ChatBubble message={item} />;
   }
 
@@ -52,6 +51,7 @@ class Chat extends Component {
         <FlatList
           keyboardShouldPersistTaps='always'
           data={this.state.messages}
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={{ backgroundColor: 'white', justifyContent: 'flex-end', flexGrow: 1 }}
           keyExtractor={message => message.id}
           renderItem={this.renderMessages}

@@ -14,7 +14,7 @@ class Input extends Component {
 
   render() {
     return (
-      <View style={{ verticalOffset: 10, alignItems: 'center', justifyContent: 'space-around', flexDirection: 'row' }}>
+      <View style={{ alignItems: 'center', justifyContent: 'space-around', flexDirection: 'row' }}>
         <View
           style={{
             justifyContent: 'flex-start',
@@ -49,8 +49,7 @@ class Input extends Component {
             }}
             returnKeyType='send'
             ref={(ref) => { this.input = ref; }}
-            selectionColor='black'
-            autoFocus
+            selectionColor={colors.secondary.blue}
           />
         </View>
         <TouchableOpacity
