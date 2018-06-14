@@ -1,52 +1,43 @@
 import firebase from 'react-native-firebase';
+import { eventChannel } from 'redux-saga';
 import { put, takeLatest, all, call, select } from 'redux-saga/effects';
 
 import { actionTypes } from '../config';
-import { syncChats } from '../actions';
+import { syncMessages, getMessages } from '../actions';
 
-function* getChats() {
-  // get the user's chat list
-  const getUserChatList = state => state.user.user.chatList;
-  const chatList = yield select(getUserChatList);
+function* getMessagesSaga() {
+  // get all the messages for a chat
+  const messages = [];
 
-  // get all the chats from the firestore doc
-  const chats = {};
+  const ref = firebase.firestore().collection('chats').doc('test')
+              .collection('messages');
 
-  chatList.map((id) => {
-    return firebase.firestore().collection('chats').doc(id).get()
-    .then((doc) => {
-      chats[id] = doc.data();
-    });
-  });
-
-  console.log(chats);
+  const docs = yield call([ref, ref.get]);
+  docs.forEach(doc => messages.push(doc.data()));
 
   // update the redux store
-  yield put(syncChats(chats));
+  yield put(syncMessages(messages));
 }
 
-function* updateChat(action) {
-  // get user name
-  const getUserName = state => state.user.user.displayName;
-  const displayName = yield select(getUserName);
-
-  const ref = firebase.firestore().collection('chats').doc(action.id);
-   // create message object to push to the cloud
-  const message = {
-    text: action.chat.message,
-    timeStamp: action.chat.timeStamp,
-    id: action.chat.id,
-    user: {
-      displayName,
-    },
-  };
+function* updateMessagesSaga(action) {
+  const ref = firebase.firestore().collection('chats').doc(action.id).collection('messages')
+  .doc();
   // update the chat doc
-  yield call([ref, ref.update], message);
+  yield call([ref, ref.set], action.chat);
+  yield put(getMessages('test'));
 }
 
-export function* watchLoginRequests() {
+const chatEventListener = (ref) => {
+  const channel = eventChannel((emitter) => {
+    ref.onSnapshot(doc => emitter(doc.data()));
+    return () => ref.onSnapshot(() => {});
+  });
+  return channel;
+};
+
+export function* watchChatRequests() {
   yield all([
-    takeLatest(actionTypes.CHAT.GET, getChats),
-    takeLatest(actionTypes.CHAT.UPDATE, updateChat),
+    takeLatest(actionTypes.CHAT.GET, getMessagesSaga),
+    takeLatest(actionTypes.CHAT.UPDATE, updateMessagesSaga),
   ]);
 }

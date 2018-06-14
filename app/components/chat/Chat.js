@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, View, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { ChatBubble, Input } from './';
+
 
 import { Header } from '../header';
+import { updateMessages, getMessages } from '../../actions';
+import { ChatBubble, Input } from './';
+
 
 class Chat extends Component {
   state={
@@ -11,27 +14,12 @@ class Chat extends Component {
   };
 
   componentWillMount() {
-    this.setState({
-      messages: [
-        {
-          text: this.props.navigation.state.params.chat.lastMessage,
-          direction: 'left',
-          timeStamp: new Date().getTime(),
-          id: '666',
-          user: {
-            displayName: this.props.navigation.state.params.chat.displayName,
-          },
-        }, {
-          text: 'Thanks Nick!',
-          timeStamp: new Date().getTime(),
-          direction: 'right',
-          id: '589',
-          user: {
-            displayName: 'You',
-          },
-        },
-      ],
-    });
+    this.props.getMessages('test');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ messages: this.state.messages.concat(nextProps.chats) });
+    console.log(this.state.messages);
   }
 
   onSend = (message) => {
@@ -41,7 +29,7 @@ class Chat extends Component {
       direction: 'right',
       id: Math.random(1000).toString(),
       user: {
-        displayName: 'You',
+        displayName: this.props.user.displayName,
       },
     };
     if (message !== '') {
@@ -50,6 +38,7 @@ class Chat extends Component {
       });
     }
     setTimeout(() => this.list.scrollToEnd({ animated: false }), 200);
+    this.props.updateMessages(messageData, 'test');
   }
 
   renderMessages = ({ item }) => {
@@ -76,10 +65,14 @@ class Chat extends Component {
 
 const mapStateToProps = (state) => {
   let user;
+  let chats;
   if (state.user.user) {
     user = state.user.user;
   }
-  return { user };
+  if (state.chat.chats) {
+    chats = state.chat.chats;
+  }
+  return { user, chats };
 };
 
-export default connect(mapStateToProps)(Chat);
+export default connect(mapStateToProps, { updateMessages, getMessages })(Chat);

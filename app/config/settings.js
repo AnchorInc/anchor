@@ -26,9 +26,10 @@ export const actionTypes = {
     GET: 'types.USER.GET',
   },
   CHAT: {
-    SYNC: 'type.CHAT.SYNC',
-    GET: 'type.CHAT.GET',
+    SYNC: 'types.CHAT.SYNC',
+    GET: 'types.CHAT.GET',
     UPDATE: 'types.CHAT.UPDATE',
+    CREATE: 'types.CHAT.CREATE',
   },
 };
 

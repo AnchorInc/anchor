@@ -1,13 +1,14 @@
 import { actionTypes } from '../config';
 
-export const getChats = () => {
-  return { type: actionTypes.CHAT.GET };
+export const getMessages = (id) => {
+  return { type: actionTypes.CHAT.GET, id };
 };
 
-export const updateChats = (chat, id) => {
+export const updateMessages = (chat, id) => {
   return { type: actionTypes.CHAT.UPDATE, chat, id };
 };
 
-export const syncChats = (chats) => {
-  return { type: actionTypes.CHAT.SYNC, chats };
+export const syncMessages = (messages) => {
+  console.log(messages);
+  return { type: actionTypes.CHAT.SYNC, messages };
 };
