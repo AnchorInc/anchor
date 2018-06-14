@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // import firebase from 'react-native-firebase';
 
 import { ChatDetail, NewChatButton } from './';
+import { getChats } from '../../actions';
 import { Header } from '../header';
 
 const { width, height } = Dimensions.get('window');
@@ -33,6 +34,10 @@ class ChatsOverview extends Component {
     //   },
     // ],
   };
+
+  componentWillMount() {
+    this.props.getChats();
+  }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ chats: nextProps.chats });
@@ -75,4 +80,4 @@ const mapStateToProps = (state) => {
   return { user, chats };
 };
 
-export default connect(mapStateToProps)(ChatsOverview);
+export default connect(mapStateToProps, { getChats })(ChatsOverview);
