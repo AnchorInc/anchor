@@ -18,7 +18,7 @@ const styles = {
     width: 58,
     height: 58,
     borderRadius: 29,
-    elevation: 1,
+    elevation: 5,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-end',

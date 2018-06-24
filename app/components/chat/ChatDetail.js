@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, Text, Image, Dimensions } from 'react-native';
+import moment from 'moment';
+
 import { colors } from '../../config';
 
 import { TouchableDebounce } from '../../lib';
 
 const { width } = Dimensions.get('window');
 
-const ChatDetail = ({ displayName, imageURL, lastMessage, lastTimestamp, unread, onPress, person }) => {
+const ChatDetail = ({ displayName, imageURL, text, timeStamp, unread, onPress, person }) => {
+  console.log(timeStamp);
   return (
-    <TouchableDebounce onPress={() => onPress(person)}>
+    <TouchableDebounce onPress={() => onPress}>
       <View style={{ flexDirection: 'row', padding: 20, paddingRight: 10, alignItems: 'center' }}>
         <Image style={styles.profileStyle} source={{ uri: imageURL }} />
         <View style={{ flexDirection: 'column', width: 0.8 * width }}>
@@ -20,11 +23,11 @@ const ChatDetail = ({ displayName, imageURL, lastMessage, lastTimestamp, unread,
               <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: unread ? colors.secondary.blue : 'white', top: 18 }} />
             </View>
             <Text style={styles.timeStyle}>
-              {lastTimestamp}
+              {moment(timeStamp).format('h:mm A')}
             </Text>
           </View>
           <Text style={styles.messageStyle} numberOfLines={1}>
-            {lastMessage}
+            {text}
           </Text>
         </View>
       </View>
