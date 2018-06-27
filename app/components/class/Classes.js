@@ -12,7 +12,7 @@ class Classes extends Component {
   }
 
   navigateProfile = () => {
-      this.props.navigation.navigate('Profile');
+      this.props.navigation.navigate('StudentProfile');
   }
 
   navigateChat = () => {
