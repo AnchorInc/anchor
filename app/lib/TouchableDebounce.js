@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 class TouchableDebounce extends Component {
-  state = { disabled: false };
+  state = { disabled: false, interval: null };
   componentWillMount() {
     this.setState({ disabled: false });
+  }
+
+  componentWillUnmount() {
+    if (this.state.interval) {
+      clearInterval(this.state.interval);
+    }
   }
 
   render() {
@@ -15,8 +21,10 @@ class TouchableDebounce extends Component {
         disabled={this.state.disabled}
         onPress={() => {
             this.props.onPress();
-            this.setState({ disabled: true });
-            setInterval(() => { this.setState({ disabled: false }); }, 500);
+            this.setState({
+              disabled: true,
+              interval: setInterval(() => this.setState({ disabled: false }), 500),
+            });
           }
         }
       >
