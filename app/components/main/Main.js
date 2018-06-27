@@ -9,7 +9,7 @@ import { notificationListener, notificationOpenedListener } from './';
 class Main extends Component {
   componentWillReceiveProps(nextProps) {
     if (!nextProps.donePref) {
-      if (nextProps.userType === userTypes.STUDENT) {
+      if (nextProps.type === userTypes.STUDENT) {
         this.props.navigation.navigate('ProfileEditing');
       } else {
         this.props.navigation.navigate('TeacherSetup');
@@ -33,12 +33,12 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
   let donePref;
-  let userType;
+  let type;
   if (state.user.user) {
-    userType = state.user.user.type;
+    type = state.user.user.type;
     donePref = state.user.user.donePref;
   }
-  return { donePref, userType };
+  return { donePref, type };
 };
 
 export default connect(mapStateToProps)(Main);

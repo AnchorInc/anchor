@@ -16,7 +16,8 @@ class Search extends Component {
   };
 
   onPress = (uid) => {
-    console.log(uid);
+    console.log(uid);+
+    
     this.props.navigation.navigate('TeacherProfile', { uid, action: 'forum' });
   }
 

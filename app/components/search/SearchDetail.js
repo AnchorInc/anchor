@@ -17,7 +17,6 @@ const SearchDetail = ({ person, onPress }) => {
           <Text style={styles.classStyle}>{person.subject}</Text>
         </View>
       </TouchableDebounce>
-      <PopupMenu actions={['Contact']} onPress={() => console.log('pressed')} color='#888' />
     </View>
   );
 };

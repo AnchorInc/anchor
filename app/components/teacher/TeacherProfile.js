@@ -30,7 +30,8 @@ class TeacherProfile extends Component {
   };
 
   componentWillMount() {
-    if (this.props.user.userType === userTypes.STUDENT) {
+    console.log(this.props.user.type);
+    if (this.props.user.type === userTypes.STUDENT) {
       this.getTeacher();
     } else {
       this.setState({ teacher: this.props.user });
@@ -39,6 +40,7 @@ class TeacherProfile extends Component {
 
   getTeacher() {
     if (!this.state.teacher) {
+      console.log(this.state.uid);
       return firebase.firestore().collection('teachers').doc(this.state.uid).get()
       .then((teacher) => {
         this.setState({ teacher: teacher.data() });
@@ -50,7 +52,7 @@ class TeacherProfile extends Component {
     if (this.state.action === 'account-settings-variant') {
       this.props.navigation.navigate('TeacherSetup');
     } else {
-      console.log('contacting');
+      this.props.navigation.navigate('Chat');
     }
   }
 
@@ -61,9 +63,9 @@ class TeacherProfile extends Component {
           <StatusBar />
           <View style={styles.headerContainerStyle}>
             <View style={styles.headerStyle}>
-              <TouchableOpacity style={styles.iconStyle} onPress={() => this.props.navigation.goBack()}>
+              <TouchableDebounce style={styles.iconStyle} onPress={() => this.props.navigation.goBack()}>
                 <Icon name='arrow-left' size={24} color='white' />
-              </TouchableOpacity>
+              </TouchableDebounce>
               <Text style={styles.headerTextStyle}>
                 {this.state.teacher.displayName}
               </Text>
