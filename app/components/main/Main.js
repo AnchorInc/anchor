@@ -11,7 +11,7 @@ class Main extends Component {
     if (!nextProps.donePref) {
       if (nextProps.type === userTypes.STUDENT) {
         this.props.navigation.navigate('ProfileEditing');
-      } else {
+      } else if(nextProps.type === userTypes.TEACHER) {
         this.props.navigation.navigate('TeacherSetup');
       }
     }

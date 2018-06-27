@@ -4,7 +4,7 @@ import firebase from 'react-native-firebase';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
 
-import { showSpinner, loginSuccess, loginFail } from '../actions';
+import { showSpinner, loginSuccess, loginFail, syncUser } from '../actions';
 import { actionTypes, firebasePaths, userTypes, signinMethods } from '../config';
 
 
@@ -74,6 +74,8 @@ function* logoutUser() {
     yield call([auth, auth.signOut]);
     // clear the async storage to prevent mixup with future logins
     yield call([AsyncStorage, AsyncStorage.clear]);
+    // clear user state to prevent mixup with future login
+    yield put(syncUser(null));
   } catch (error) {
     console.log(error);
   }
