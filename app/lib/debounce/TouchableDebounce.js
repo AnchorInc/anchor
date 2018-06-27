@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
-import debounce from './debounceFunction';
 
 class TouchableDebounce extends Component {
+  state = { disabled : false};
   render() {
     return (
       <TouchableOpacity
         style={this.props.style}
         activeOpacity={this.props.activeOpacity}
-        onPress={
-          debounce(() => {
-          this.props.onPress();
-        }, 500)
+        disabled={this.state.disabled}
+        onPress={() => {
+            this.props.onPress()
+            this.setState({ disabled: true })
+          }
         }
       >
         {this.props.children}
