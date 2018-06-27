@@ -7,14 +7,15 @@ import {
   Chat,
   ChatsOverview,
   Classes,
+  Batches,
   Login,
   Main,
-  Profile,
-  ProfileEditing,
+  StudentProfile,
+  StudentProfileEditing,
+  TeacherProfile,
+  TeacherProfileEditing,
   Search,
   Settings,
-  TeacherProfile,
-  TeacherSetup,
 } from '../components';
 
 import { colors } from '../config';
@@ -26,6 +27,9 @@ const TabNavigatorConfig = {
       let iconName;
       switch (routeName) {
         case 'Classes':
+          iconName = 'home';
+          break;
+        case 'Batches':
           iconName = 'home';
           break;
         case 'Search':
@@ -60,29 +64,40 @@ const TabNavigatorConfig = {
   },
 };
 
-export const Tabs = TabNavigator({
+export const StudentTabs = TabNavigator({
   Classes: { screen: Classes },
   Search: { screen: Search },
   Settings: { screen: Settings },
 }, TabNavigatorConfig);
 
-const ClassesStackConfig = {
+export const TeacherTabs = TabNavigator({
+  Batches: { screen: Batches },
+  Settings: { screen: Settings },
+}, TabNavigatorConfig);
+
+const StackConfig = {
   navigationOptions: {
     header: null,
   },
   headerMode: 'none',
 };
 
-export const ClassesStack = StackNavigator({
-  Classes: { screen: Tabs },
-  Search: { screen: Tabs },
-  Profile: { screen: Profile },
-  TeacherProfile: { screen: TeacherProfile },
-  ProfileEditing: { screen: ProfileEditing },
-  TeacherSetup: { screen: TeacherSetup },
+export const StudentStack = StackNavigator({
+  Classes: { screen: StudentTabs },
+  Search: { screen: StudentTabs },
+  StudentProfile: { screen: StudentProfile },
+  StudentProfileEditing: { screen: StudentProfileEditing },
   ChatsOverview: { screen: ChatsOverview },
   Chat: { screen: Chat },
-}, ClassesStackConfig);
+}, StackConfig);
+
+export const TeacherStack = StackNavigator({
+  Batches: { screen: TeacherTabs },
+  TeacherProfile: { screen: TeacherProfile },
+  TeacherProfileEditing: { screen: TeacherProfileEditing },
+  ChatsOverview: { screen: ChatsOverview },
+  Chat: { screen: Chat },
+}, StackConfig);
 
 const MainStackConfig = {
   navigationOptions: {
@@ -95,8 +110,8 @@ export const MainStack = StackNavigator({
   AppSetup: { screen: AppSetup },
   Login: { screen: Login },
   Main: { screen: Main },
-  ProfileEditing: { screen: ProfileEditing },
-  TeacherSetup: { screen: TeacherSetup },
+  StudentProfileEditing: { screen: StudentProfileEditing },
+  TeacherProfileEditing: { screen: TeacherProfileEditing },
 }, MainStackConfig);
 
 const defaultGetStateForAction = MainStack.router.getStateForAction;

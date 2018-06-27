@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, ScrollView, TouchableOpacity, Image, Text, StatusBar, Slider } from 'react-native';
+import { View, Dimensions, ScrollView, TouchableOpacity, Image, Text, StatusBar, Picker, Slider } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextField } from 'react-native-material-textfield';
@@ -9,7 +9,7 @@ import { updateUser } from '../../actions';
 
 const { width, height } = Dimensions.get('window');
 
-class ProfileEditing extends Component {
+class TeacherProfileEditing extends Component {
   constructor(props) {
     super(props);
 
@@ -17,25 +17,31 @@ class ProfileEditing extends Component {
     this.onSubmitLastName = this.onSubmitLastName.bind(this);
     this.onSubmitEmail = this.onSubmitEmail.bind(this);
     this.onSubmitPhone = this.onSubmitPhone.bind(this);
-    this.onSubmitLocation = this.onSubmitLocation.bind(this);
+    this.onSubmitSubject = this.onSubmitSubject.bind(this);
 
     this.firstnameRef = this.updateRef.bind(this, 'firstName');
     this.lastnameRef = this.updateRef.bind(this, 'lastName');
     this.emailRef = this.updateRef.bind(this, 'email');
     this.phoneRef = this.updateRef.bind(this, 'phone');
-    this.locationRef = this.updateRef.bind(this, 'location');
+    this.subjectRef = this.updateRef.bind(this, 'subject');
   }
 
   state = {
-    errors: {},
-    editing: false,
     value: '',
-    firstName: this.props.user.displayName.substr(0, this.props.user.displayName.indexOf(' ')) || '',
-    lastName: this.props.user.displayName.substr(this.props.user.displayName.indexOf(' ') + 1, this.props.user.displayName.length) || '',
+    editing: false,
+    errors: {},
+    experience: this.props.user.experience || '0',
+    studentAge: this.props.user.studentAge || 'Elementary School',
+    price: this.props.user.price || 100,
+    location: this.props.user.location || 'Student\'s Location',
+    subject: this.props.user.subject || '',
+    firstName: this.props.user.displayName
+    .substr(0, this.props.user.displayName.indexOf(' ')) || '',
+    lastName: this.props.user.displayName
+      .substr(this.props.user.displayName
+        .indexOf(' ') + 1, this.props.user.displayName.length) || '',
     email: this.props.user.email || '',
     phone: this.props.user.phone || '',
-    age: this.props.user.age || 5,
-    location: this.props.user.location || '',
   };
 
   onFocus = () => {
@@ -47,7 +53,7 @@ class ProfileEditing extends Component {
       }
     });
 
-    ['firstName', 'lastName', 'email', 'phone', 'location']
+    ['firstName', 'lastName', 'email', 'phone', 'subject']
     .map(name => ({ name, ref: this[name] }))
     .forEach(({ ref }) => {
       if (ref.isFocused()) {
@@ -63,7 +69,7 @@ class ProfileEditing extends Component {
   }
 
   onSubmit() {
-     ['firstName', 'lastName', 'email', 'phone', 'location']
+     ['firstName', 'lastName', 'email', 'phone', 'subject']
      .map(name => ({ name, ref: this[name] }))
      .forEach(({ ref, name }) => {
        const value = ref.value();
@@ -73,8 +79,6 @@ class ProfileEditing extends Component {
          this.state.errors[name] = 'Should not be empty';
        } else if (name === 'phone' && value.length !== 10) {
          this.state.errors[name] = 'Needs a 10 digit phone number';
-       } else if (name === 'location' && value.length !== 6) {
-         this.state.errors[name] = 'Requires a 6 digit zip code';
        } else if (name === 'email' && !re.test(value)) {
          this.state.errors[name] = 'Enter a valid email address';
        }
@@ -90,19 +94,19 @@ class ProfileEditing extends Component {
    }
 
    onSubmitEmail() {
-     this.location.focus();
+     this.subject.focus();
    }
 
-   onSubmitLocation() {
+   onSubmitSubject() {
      this.phone.focus();
    }
 
    onSubmitPhone() {
-     this.phone.focus();
+     this.phone.blur();
    }
 
   onChangeText = (text) => {
-    ['firstName', 'lastName', 'email', 'phone', 'location']
+    ['firstName', 'lastName', 'email', 'phone', 'subject']
     .map(name => ({ name, ref: this[name] }))
     .forEach(({ name, ref }) => {
       if (ref.isFocused()) {
@@ -118,8 +122,12 @@ class ProfileEditing extends Component {
       displayName: this.state.firstName.concat(' ', this.state.lastName),
       email: this.state.email,
       phone: this.state.phone,
-      age: this.state.age,
+      photoURL: this.props.user.photoURL,
       location: this.state.location,
+      price: this.state.price,
+      studentAge: this.state.studentAge,
+      experience: this.state.experience,
+      subject: this.state.subject,
       uid: this.props.user.uid,
     };
     if (this.state.errors && Object.keys(this.state.errors).length === 0) {
@@ -135,8 +143,12 @@ class ProfileEditing extends Component {
     }
   }
 
+  updateRef(name, ref) {
+    this[name] = ref;
+  }
+
   clearText = () => {
-    ['firstName', 'lastName', 'email', 'phone', 'location']
+    ['firstName', 'lastName', 'email', 'phone', 'subject']
     .map(name => ({ name, ref: this[name] }))
     .forEach(({ ref }) => {
       if (ref.isFocused()) {
@@ -157,10 +169,6 @@ class ProfileEditing extends Component {
     return null;
   }
 
-  updateRef(name, ref) {
-    this[name] = ref;
-  }
-
   render() {
     const {
       headerContainerStyle,
@@ -173,7 +181,7 @@ class ProfileEditing extends Component {
       nameContainerStyle,
     } = styles;
     return (
-      <View style={{ flex: 1 }} behavior="height" enabled>
+      <View style={{ flex: 1 }}>
         <StatusBar backgroundColor={colors.primary.dark} />
         <ScrollView
           keyboardShouldPersistTaps='always'
@@ -182,18 +190,13 @@ class ProfileEditing extends Component {
           <View style={headerContainerStyle}>
             <View style={headerStyle}>
               <View style={buttonContainerStyle}>
-                <TouchableOpacity
-                  disabled={!this.props.user.donePref}
-                  style={{ padding: 15, height: 0.08 * height }}
-                  onPress={() => this.props.navigation.goBack()}
-                  visibility={this.props.user.donePref}
-                >
-                  <Icon name='arrow-left' size={24} color={this.props.user.donePref ? 'white' : colors.primary.normal} />
+                <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
+                  <Icon name='arrow-left' size={24} color='white' />
                 </TouchableOpacity>
                 <Text style={headerTextStyle}>
-                  Edit Profile
+                  Tutor Signup
                 </Text>
-                <TouchableOpacity style={{ padding: 15, height: 0.08 * height }} onPress={() => this.updateUser()}>
+                <TouchableOpacity style={{ padding: 15 }} onPress={this.updateUser}>
                   <Icon name='check' size={24} color='white' />
                 </TouchableOpacity>
               </View>
@@ -262,19 +265,18 @@ class ProfileEditing extends Component {
           <View style={styles.containerStyle}>
             <TextField
               containerStyle={styles.textInputStyle}
-              label='Location/Zip Code'
-              keyboardType='numeric'
+              label='Subject'
+              value={this.state.subject}
               returnKeyType='next'
-              value={this.state.location}
               titleFontSize={14}
               onChangeText={this.onChangeText}
               onFocus={this.onFocus}
               onBlur={this.onBlur}
-              onSubmitEditing={this.onSubmitLocation}
+              onSubmitEditing={this.onSubmitSubject}
               renderAccessory={this.showClearTextButton}
-              ref={this.locationRef}
+              ref={this.subjectRef}
               tintColor={colors.primary.light}
-              error={this.state.errors.location}
+              error={this.state.errors.subject}
             />
           </View>
           <View style={styles.containerStyle}>
@@ -297,17 +299,56 @@ class ProfileEditing extends Component {
             />
           </View>
           <View style={styles.pillContainerStyle}>
+            <Text style={styles.titleTextStyle}>Years of Experience</Text>
+            <Picker
+              selectedValue={this.state.experience}
+              onValueChange={itemValue => this.setState({ experience: itemValue })}
+              style={{ width: 0.95 * width, alignSelf: 'center' }}
+            >
+              <Picker.Item label="0" value="0" />
+              <Picker.Item label="1" value="1" />
+              <Picker.Item label="2-5" value="2-5" />
+              <Picker.Item label="5-10" value="5-10" />
+              <Picker.Item label="10+" value="10+" />
+            </Picker>
+          </View>
+          <View style={styles.pillContainerStyle}>
+            <Text style={styles.titleTextStyle}>Student Age Group</Text>
+            <Picker
+              selectedValue={this.state.studentAge}
+              onValueChange={itemValue => this.setState({ studentAge: itemValue })}
+              style={{ width: 0.95 * width, alignSelf: 'center' }}
+            >
+              <Picker.Item label="Elementary School" value="Elementary School" />
+              <Picker.Item label="Middle School" value="Middle School" />
+              <Picker.Item label="High School" value="High School" />
+              <Picker.Item label="College" value="College" />
+              <Picker.Item label="Adult" value="Adult" />
+            </Picker>
+          </View>
+          <View style={styles.pillContainerStyle}>
+            <Text style={styles.titleTextStyle}>Class Location</Text>
+            <Picker
+              selectedValue={this.state.location}
+              onValueChange={itemValue => this.setState({ location: itemValue })}
+              style={{ width: 0.95 * width, alignSelf: 'center' }}
+            >
+              <Picker.Item label="Student's Location" value="Student's Location" />
+              <Picker.Item label="Custom Location" value="Custom Location" />
+            </Picker>
+          </View>
+          <View style={styles.pillContainerStyle}>
             <View style={{ width: 0.95 * width, justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
-              <Text style={styles.titleTextStyle}>Age</Text>
-              <Text style={styles.textStyle}>{this.state.age}</Text>
+              <Text style={styles.titleTextStyle}>Price Per Class</Text>
+              <Text style={styles.textStyle}>₹{this.state.price}</Text>
             </View>
             <Slider
               style={{ width: 0.95 * width }}
-              value={this.props.user.age}
-              onValueChange={value => this.setState({ age: value })}
-              maximumValue={99}
-              minimumValue={5}
-              step={1}
+              value={this.props.user.price}
+              onValueChange={value => this.setState({ price: value })}
+              maximumValue={2500}
+              minimumValue={100}
+              step={5}
               minimumTrackTintColor={colors.primary.light}
               thumbTintColor={colors.primary.light}
             />
@@ -394,7 +435,7 @@ const styles = {
     color: colors.primary.light,
   },
   textInputStyle: {
-    width: 0.9 * width,
+    width: 0.85 * width,
     paddingBottom: 0,
   },
   pillContainerStyle: {
@@ -418,4 +459,4 @@ const mapStateToProps = (state) => {
   return { user };
 };
 
-export default connect(mapStateToProps, { updateUser })(ProfileEditing);
+export default connect(mapStateToProps, { updateUser })(TeacherProfileEditing);

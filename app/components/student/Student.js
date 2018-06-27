@@ -16,7 +16,7 @@ import { ListDetail, TouchableDebounce } from '../../lib';
 
 const { width, height } = Dimensions.get('window');
 
-class Profile extends Component {
+class StudentProfile extends Component {
   render() {
     const {
       headerContainerStyle,
@@ -135,4 +135,4 @@ const mapStateToProps = (state) => {
   return { user };
 };
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps)(StudentProfile);

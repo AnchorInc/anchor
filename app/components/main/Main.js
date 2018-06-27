@@ -3,16 +3,16 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { userTypes } from '../../config';
-import { ClassesStack } from '../../navigation/Router';
+import { StudentStack, TeacherStack } from '../../navigation/Router';
 import { notificationListener, notificationOpenedListener } from './';
 
 class Main extends Component {
   componentWillReceiveProps(nextProps) {
     if (!nextProps.donePref) {
       if (nextProps.type === userTypes.STUDENT) {
-        this.props.navigation.navigate('ProfileEditing');
-      } else if(nextProps.type === userTypes.TEACHER) {
-        this.props.navigation.navigate('TeacherSetup');
+        this.props.navigation.navigate('StudentProfileEditing');
+      } else if (nextProps.type === userTypes.TEACHER) {
+        this.props.navigation.navigate('TeacherProfileEditing');
       }
     }
   }
@@ -22,10 +22,19 @@ class Main extends Component {
     notificationOpenedListener();
   }
 
+  getStack() {
+    if (this.props.type === userTypes.STUDENT) {
+      return <StudentStack />;
+    } else if (this.props.type === userTypes.TEACHER) {
+      return <TeacherStack />;
+    }
+    return null;
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <ClassesStack />
+        { this.getStack() }
       </View>
     );
   }

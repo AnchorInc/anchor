@@ -1,2 +1,2 @@
 export { default as TeacherProfile } from './TeacherProfile';
-export { default as TeacherSetup } from './TeacherSetup';
+export { default as TeacherProfileEditing } from './TeacherProfileEditing';

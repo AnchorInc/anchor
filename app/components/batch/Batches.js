@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Header } from '../header';
-import { ClassList } from './';
 
 
-class Classes extends Component {
-  onPress = (uid) => {
-    this.props.navigation.navigate('TeacherProfile', { uid, action: 'forum' });
-  }
-
+class Batches extends Component {
   navigateProfile = () => {
-      this.props.navigation.navigate('Profile');
+    this.props.navigation.navigate('TeacherProfile', { action: 'account-settings-variant' });
   }
 
   navigateChat = () => {
@@ -23,7 +18,7 @@ class Classes extends Component {
     return (
       <View style={{ flex: 1 }}>
         <Header title='Home' onPressProfile={this.navigateProfile} onPressChat={() => this.navigateChat()} mainButtons />
-        <ClassList onPress={person => this.onPress(person)} />
+        <Text>Change</Text>
       </View>
     );
   }
@@ -37,4 +32,4 @@ const mapStateToProps = (state) => {
   return { user };
 };
 
-export default connect(mapStateToProps)(Classes);
+export default connect(mapStateToProps)(Batches);
