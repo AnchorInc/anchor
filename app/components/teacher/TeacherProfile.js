@@ -30,7 +30,6 @@ class TeacherProfile extends Component {
   };
 
   componentWillMount() {
-    console.log(this.props.user.type);
     if (this.props.user.type === userTypes.STUDENT) {
       this.getTeacher();
     } else {
@@ -40,7 +39,6 @@ class TeacherProfile extends Component {
 
   getTeacher() {
     if (!this.state.teacher) {
-      console.log(this.state.uid);
       return firebase.firestore().collection('teachers').doc(this.state.uid).get()
       .then((teacher) => {
         this.setState({ teacher: teacher.data() });

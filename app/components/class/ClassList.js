@@ -16,9 +16,9 @@ class ClassList extends Component {
     initialRefresh: false,
   };
 
-  componentWillReceiveProps(props) {
+  componentWillMount() {
     if (this.state.initialRefresh) return;
-    this.refresh(props.batchList);
+    this.refresh();
   }
 
   getTeachersFromBatchList = (batchList) => {
@@ -31,8 +31,8 @@ class ClassList extends Component {
     });
   }
 
-  refresh = (batchList) => {
-    const list = batchList || this.props.batchList;
+  refresh = () => {
+    const list = this.props.batchList;
     this.setState({ refreshing: true });
     if (list) {
       this.getTeachersFromBatchList(list);
@@ -43,17 +43,14 @@ class ClassList extends Component {
   }
 
   renderNoBatchMessage = () => {
-    if (!this.props.batchList) {
-      return (
-        <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
-          <Icon size={85} name='school' color='#727272' />
-          <Text style={{ padding: 10, color: '#727272', fontSize: 15, fontFamily: 'avenir_heavy' }}>
-            Sign Up For Classes, To See Them Here
-          </Text>
-        </View>
-      );
-    }
-    return null;
+    return (
+      <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
+        <Icon size={85} name='school' color='#727272' />
+        <Text style={{ padding: 10, color: '#727272', fontSize: 15, fontFamily: 'avenir_heavy' }}>
+          Sign Up For Classes, To See Them Here
+        </Text>
+      </View>
+    );
   }
 
   renderTeachers = ({ item }) => {

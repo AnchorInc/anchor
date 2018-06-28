@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, TextInput, FlatList, Modal } from 'react-native';
+import { View, Text, Button, Dimensions, TextInput, FlatList, Modal } from 'react-native';
 import { connect } from 'react-redux';
 
 
 import { Header } from '../header';
 import { updateMessages, getMessages } from '../../actions';
 import { ChatBubble, Input } from './';
-import { colors } from '../../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -15,8 +14,9 @@ class Chat extends Component {
 
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       messages: [],
+      firstTime: true,
     };
   }
 
@@ -47,7 +47,6 @@ class Chat extends Component {
   }
 
   renderMessages = ({ item }) => {
-    console.log('Item', item);
     return <ChatBubble message={item} />;
   }
 
@@ -66,20 +65,25 @@ class Chat extends Component {
         />
         <Modal
           animationType='slide'
-          transarent={false}
+          transparent
           visible={this.state.firstTime}
-          onRequestClose={() => {}}
-          style={{ width: 0.8 * width, height: 0.6 * height, margin: 10 }}
+          onRequestClose={() => this.setState({ firstTime: false })}
         >
-          <View style={{ margin: 10 }}>
-            <Text>Comments</Text>
-            <TextInput
-              placeholder='Type Here...'
-              returnKeyType='done'
-              multiline={true}
-              error={this.state.errors}
-              style={{ backgroundColor: 'green', borderRadius: 4 }}
-            />
+          <View style={{ backgroundColor: 'rgba(0,0,0,0.8)', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ width: 0.9 * width, height: 0.8 * height, backgroundColor: 'white' }}>
+              <View style={{ margin: 10 }}>
+                <Text>Comments</Text>
+                <TextInput
+                  placeholder='Type Here...'
+                  returnKeyType='done'
+                  multiline
+                  underlineColorAndroid='transparent'
+                  error={this.state.errors}
+                  style={{ backgroundColor: '#d5d5d5', borderRadius: 4 }}
+                />
+                <Button title='close' onPress={() => this.setState({ firstTime: false })} />
+              </View>
+            </View>
           </View>
         </Modal>
         <Input onPress={this.onSend} />

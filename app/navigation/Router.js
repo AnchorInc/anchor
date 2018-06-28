@@ -86,6 +86,7 @@ export const StudentStack = StackNavigator({
   Classes: { screen: StudentTabs },
   Search: { screen: StudentTabs },
   StudentProfile: { screen: StudentProfile },
+  TeacherProfile: { screen: TeacherProfile },
   StudentProfileEditing: { screen: StudentProfileEditing },
   ChatsOverview: { screen: ChatsOverview },
   Chat: { screen: Chat },
@@ -99,20 +100,13 @@ export const TeacherStack = StackNavigator({
   Chat: { screen: Chat },
 }, StackConfig);
 
-const MainStackConfig = {
-  navigationOptions: {
-    header: null,
-  },
-  headerMode: 'none',
-};
-
 export const MainStack = StackNavigator({
   AppSetup: { screen: AppSetup },
   Login: { screen: Login },
   Main: { screen: Main },
   StudentProfileEditing: { screen: StudentProfileEditing },
   TeacherProfileEditing: { screen: TeacherProfileEditing },
-}, MainStackConfig);
+}, StackConfig);
 
 const defaultGetStateForAction = MainStack.router.getStateForAction;
 

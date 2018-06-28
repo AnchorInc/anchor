@@ -28,14 +28,13 @@ class Main extends Component {
     } else if (this.props.type === userTypes.TEACHER) {
       return <TeacherStack />;
     }
-    console.log('No user logged in');
     return null;
   }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        { this.getStack() }
+        {this.getStack()}
       </View>
     );
   }

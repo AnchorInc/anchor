@@ -12,7 +12,7 @@ class Classes extends Component {
   }
 
   navigateProfile = () => {
-      this.props.navigation.navigate('StudentProfile');
+    this.props.navigation.navigate('StudentProfile');
   }
 
   navigateChat = () => {
@@ -22,7 +22,7 @@ class Classes extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header title='Home' onPressProfile={this.navigateProfile} onPressChat={() => this.navigateChat()} mainButtons />
+        <Header title='Home' onPressProfile={() => this.navigateProfile()} onPressChat={() => this.navigateChat()} mainButtons />
         <ClassList onPress={person => this.onPress(person)} />
       </View>
     );

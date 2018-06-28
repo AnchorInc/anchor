@@ -190,7 +190,12 @@ class TeacherProfileEditing extends Component {
           <View style={headerContainerStyle}>
             <View style={headerStyle}>
               <View style={buttonContainerStyle}>
-                <TouchableOpacity style={{ padding: 15 }} onPress={() => this.props.navigation.goBack()}>
+                <TouchableOpacity
+                  disabled={!this.props.user.donePref}
+                  style={{ padding: 15, height: 0.08 * height }}
+                  onPress={() => this.props.navigation.goBack()}
+                  visibility={this.props.user.donePref}
+                >
                   <Icon name='arrow-left' size={24} color='white' />
                 </TouchableOpacity>
                 <Text style={headerTextStyle}>

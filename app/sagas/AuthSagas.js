@@ -75,7 +75,7 @@ function* logoutUser() {
     // clear the async storage to prevent mixup with future logins
     yield call([AsyncStorage, AsyncStorage.clear]);
     // clear user state to prevent mixup with future login
-    yield put(syncUser(null));
+    // yield put(syncUser(null));
   } catch (error) {
     console.log(error);
   }
