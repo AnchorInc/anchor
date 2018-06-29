@@ -10,11 +10,14 @@ function* getMessagesSaga() {
   // get all the messages for a chat
   const messages = [];
 
-  const ref = firebase.firestore().collection('chats').doc('test')
-              .collection('messages');
+  const ref = firebase.firestore().collection('conversations').doc('SDjf09n23rjDSA0FAjs')
+              .collection('messages')
+              .orderBy('timeStamp');
 
   const docs = yield call([ref, ref.get]);
-  docs.forEach(doc => messages.push(doc.data()));
+  docs.forEach((doc) => {
+    messages.push(doc.data());
+  });
 
   // update the redux store
   yield put(syncMessages(messages));
@@ -36,11 +39,11 @@ function* chatListenerSaga() {
 }
 
 function* updateMessagesSaga(action) {
-  const ref = firebase.firestore().collection('chats').doc(action.id).collection('messages')
+  const ref = firebase.firestore().collection('conversations').doc(action.id).collection('messages')
   .doc();
   // update the chat doc
   yield call([ref, ref.set], action.chat);
-  yield put(getMessages('test'));
+  yield put(getMessages());
 }
 
 function* getUserRef() {

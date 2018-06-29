@@ -43,14 +43,16 @@ class ClassList extends Component {
   }
 
   renderNoBatchMessage = () => {
-    return (
-      <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
-        <Icon size={85} name='school' color='#727272' />
-        <Text style={{ padding: 10, color: '#727272', fontSize: 15, fontFamily: 'avenir_heavy' }}>
-          Sign Up For Classes, To See Them Here
-        </Text>
-      </View>
-    );
+    if (!this.props.batchList) {
+      return (
+        <View style={{ justifyContent: 'center', alignItems: 'center', width, height: 0.77 * height }}>
+          <Icon size={85} name='school' color='#727272' />
+          <Text style={{ padding: 10, color: '#727272', fontSize: 15, fontFamily: 'avenir_heavy' }}>
+            Sign Up For Classes, To See Them Here
+          </Text>
+        </View>
+      );
+    } return null;
   }
 
   renderTeachers = ({ item }) => {

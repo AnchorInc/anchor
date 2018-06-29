@@ -45,11 +45,11 @@ class ClassDetail extends Component {
             <View style={{ width: 0.93 * width, height: 0.09 * width }} />
           </CardSection>
           <TouchableOpacity activeOpacity={0.3} onPress={() => this._onPressMore()}>
-          <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={styles.detailButtonStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
-            <Text style={styles.moreTextStyle}>
-              See More
-            </Text>
-          </LinearGradient>
+            <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={styles.detailButtonStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
+              <Text style={styles.moreTextStyle}>
+                See More
+              </Text>
+            </LinearGradient>
           </TouchableOpacity>
         </Card>
       );

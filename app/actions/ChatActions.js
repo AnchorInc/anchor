@@ -9,7 +9,6 @@ export const updateMessages = (chat, id) => {
 };
 
 export const syncMessages = (messages) => {
-  console.log(messages);
   return { type: actionTypes.MESSAGE.SYNC, messages };
 };
 

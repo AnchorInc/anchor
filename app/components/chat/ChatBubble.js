@@ -1,28 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import moment from 'moment';
 
 import { colors } from '../../config';
 
-const ChatBubble = ({ message, onPress }) => {
-  return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <View style={styles[message.direction].container}>
-        <View style={styles.topContainerStyle}>
-          <Text style={styles[message.direction].infoStyle}>
-            {message.user.displayName}
-          </Text>
-          <Text style={styles[message.direction].infoStyle}>
-            {moment(message.timeStamp).format('LT')}
+class ChatBubble extends Component {
+  render() {
+    return (
+      <TouchableWithoutFeedback onPress={this.props.onPress}>
+        <View style={styles[this.props.message.direction].container}>
+          <View style={styles.topContainerStyle}>
+            <Text style={styles[this.props.message.direction].infoStyle}>
+              {this.props.message.user.displayName}
+            </Text>
+            <Text style={styles[this.props.message.direction].infoStyle}>
+              {moment(this.props.message.timeStamp).format('LT')}
+            </Text>
+          </View>
+          <Text style={styles[this.props.message.direction].message}>
+            {this.props.message.text}
           </Text>
         </View>
-        <Text style={styles[message.direction].message}>
-          {message.text}
-        </Text>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
+      </TouchableWithoutFeedback>
+    );
+  }
+}
 
 const styles = {
   left: {

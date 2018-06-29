@@ -1,33 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Dimensions, TextInput, FlatList, Modal } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
 
 import { Header } from '../header';
 import { updateMessages, getMessages } from '../../actions';
-import { ChatBubble, Input } from './';
-
-const { width, height } = Dimensions.get('window');
-
+import { ChatBubble, Input, StudentRequest, TeacherApproval } from './';
 
 class Chat extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      messages: [],
-      firstTime: true,
-    };
+  componentWillMount() {
+    this.props.getMessages('SDjf09n23rjDSA0FAjs');
   }
-
-  // componentWillMount() {
-  //   this.props.getMessages('test');
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({ messages: this.state.messages.concat(nextProps.messages) });
-  //   console.log(this.state.messages);
-  // }
 
   onSend = (message) => {
     const messageData = {
@@ -39,11 +22,8 @@ class Chat extends Component {
         displayName: this.props.user.displayName,
       },
     };
-    this.setState({
-      messages: this.state.messages.concat([messageData]),
-    });
+    this.props.updateMessages(messageData, 'SDjf09n23rjDSA0FAjs');
     setTimeout(() => this.list.scrollToEnd({ animated: false }), 200);
-    // this.props.updateMessages(messageData, 'test');
   }
 
   renderMessages = ({ item }) => {
@@ -56,36 +36,13 @@ class Chat extends Component {
         <Header title='Kobe Bryant' />
         <FlatList
           keyboardShouldPersistTaps='always'
-          data={this.state.messages}
+          data={this.props.messages}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ backgroundColor: 'white', justifyContent: 'flex-end', flexGrow: 1 }}
           keyExtractor={message => message.id}
           renderItem={this.renderMessages}
           ref={(ref) => { this.list = ref; }}
         />
-        <Modal
-          animationType='slide'
-          transparent
-          visible={this.state.firstTime}
-          onRequestClose={() => this.setState({ firstTime: false })}
-        >
-          <View style={{ backgroundColor: 'rgba(0,0,0,0.8)', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <View style={{ width: 0.9 * width, height: 0.8 * height, backgroundColor: 'white' }}>
-              <View style={{ margin: 10 }}>
-                <Text>Comments</Text>
-                <TextInput
-                  placeholder='Type Here...'
-                  returnKeyType='done'
-                  multiline
-                  underlineColorAndroid='transparent'
-                  error={this.state.errors}
-                  style={{ backgroundColor: '#d5d5d5', borderRadius: 4 }}
-                />
-                <Button title='close' onPress={() => this.setState({ firstTime: false })} />
-              </View>
-            </View>
-          </View>
-        </Modal>
         <Input onPress={this.onSend} />
       </View>
     );
