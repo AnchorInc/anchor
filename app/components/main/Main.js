@@ -13,6 +13,8 @@ class Main extends Component {
         this.props.navigation.navigate('StudentProfileEditing');
       } else if (nextProps.type === userTypes.TEACHER) {
         this.props.navigation.navigate('TeacherProfileEditing');
+      } else {
+        console.log('User is not student or teacher!');
       }
     }
   }

@@ -19,3 +19,7 @@ export const updateUser = (user) => {
 export const getUser = () => {
   return { type: actionTypes.USER.GET };
 };
+
+export const startFCMTokenListener = () => {
+  return { type: actionTypes.USER.START_FCM_TOKEN_LISTENER };
+};

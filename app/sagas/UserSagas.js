@@ -69,10 +69,32 @@ const userEventListener = (ref) => {
   return channel;
 };
 
+function* fcmTokenSaga() {
+  let token = yield call([firebase.messaging(), firebase.messaging().getToken]);
+  yield call(updateUserSaga, { user: { fcmToken: token } });
+
+  const channel = yield call(fcmTokenRefreshListener);
+  while (firebase.auth().currentUser) {
+    token = yield take(channel);
+    yield call(updateUserSaga, { user: { fcmToken: token } });
+  }
+  channel.close();
+}
+
+const fcmTokenRefreshListener = () => {
+  const channel = eventChannel((emitter) => {
+    return firebase.messaging().onTokenRefresh((token) => {
+      emitter(token);
+    });
+  });
+  return channel;
+};
+
 export function* watchUserRequests() {
   yield all([
     takeLatest([actionTypes.AUTH.LOGIN.SUCESS, actionTypes.USER.LISTEN], userListenerSaga),
     takeLatest(actionTypes.USER.GET, getUserSaga),
+    takeLatest(actionTypes.USER.START_FCM_TOKEN_LISTENER, fcmTokenSaga),
     takeEvery(actionTypes.USER.UPDATE, updateUserSaga),
   ]);
 }

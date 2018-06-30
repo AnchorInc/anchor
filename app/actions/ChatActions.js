@@ -16,10 +16,6 @@ export const getChats = () => {
   return { type: actionTypes.CHAT.GET };
 };
 
-export const startFCMTokenListener = () => {
-  return { type: actionTypes.CHAT.GET_TOKEN };
-};
-
 export const syncChats = (chats) => {
   return { type: actionTypes.CHAT.SYNC, chats };
 };
