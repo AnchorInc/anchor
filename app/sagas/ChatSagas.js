@@ -68,10 +68,38 @@ const chatEventListener = (ref) => {
   return channel;
 };
 
+// const messagesEventListener = (ref) => {
+//   const channel = eventChannel((emitter) => {
+//     const messages = [];
+//     return ref.collection('conversations').doc('SDjf09n23rjDSA0FAjs').collection('messages')
+//               .onSnapshot()
+//   }
+// }
+
+function* fcmTokenRefreshSaga() {
+  const channel = yield call(fcmTokenRefreshListener);
+  while (firebase.auth().currentUser) {
+    const token = yield take(channel);
+    console.log(`Changed FCM Token: ${token}`);
+  }
+  channel.close();
+}
+
+const fcmTokenRefreshListener = () => {
+  const channel = eventChannel((emitter) => {
+    return firebase.messaging().onTokenRefresh((token) => {
+      console.log(token);
+      emitter(token);
+    });
+  });
+  return channel;
+};
+
 export function* watchChatRequests() {
   yield all([
     takeLatest(actionTypes.MESSAGE.GET, getMessagesSaga),
     takeLatest(actionTypes.MESSAGE.UPDATE, updateMessagesSaga),
     takeLatest(actionTypes.CHAT.GET, chatListenerSaga),
+    takeLatest(actionTypes.CHAT.GET_TOKEN, fcmTokenRefreshSaga),
   ]);
 }

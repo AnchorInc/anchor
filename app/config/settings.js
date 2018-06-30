@@ -30,6 +30,7 @@ export const actionTypes = {
     GET: 'types.CHAT.GET',
     UPDATE: 'types.CHAT.UPDATE',
     CREATE: 'types.CHAT.CREATE',
+    GET_TOKEN: 'types.CHAT.GET_TOKEN',
   },
   MESSAGE: {
     GET: 'types.MESSAGE.GET',
