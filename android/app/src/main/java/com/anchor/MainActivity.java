@@ -35,7 +35,7 @@ public class MainActivity extends ReactActivity {
     public void onCreate(Bundle savedInstanceState) {
         SplashScreen.show(this);
         super.onCreate(savedInstanceState);
-        Bitmap Icon = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+        Bitmap Icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
         ActivityManager.TaskDescription taskDescription = new ActivityManager.TaskDescription(getResources().getString(R.string.app_name), Icon, getResources().getColor(R.color.colorPrimary));
         this.setTaskDescription(taskDescription);
     }

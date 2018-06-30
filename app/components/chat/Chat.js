@@ -18,9 +18,9 @@ class Chat extends Component {
       timeStamp: new Date().getTime(),
       direction: 'right',
       id: (Math.floor((Math.random() * 1000) + 1)).toString(),
-      user: {
-        displayName: this.props.user.displayName,
-      },
+      senderName: this.props.user.displayName,
+      senderImageURL: this.props.user.photoURL,
+      recipientID: this.props.user.uid,
     };
     this.props.updateMessages(messageData, 'SDjf09n23rjDSA0FAjs');
     setTimeout(() => this.list.scrollToEnd({ animated: false }), 200);
