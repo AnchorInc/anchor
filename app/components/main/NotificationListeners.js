@@ -4,8 +4,6 @@ import { colors } from '../../config';
 export const onNotifications = firebase.notifications().onNotification((notification) => {
   // set up the notification
   notification
-  .android.setSmallIcon('@drawable/notification')
-  .android.setColorized(true)
   .android.setColor(colors.primary.normal)
   .android.setAutoCancel(true)
   .android.setLargeIcon(notification.data.icon)
@@ -17,7 +15,7 @@ export const onNotifications = firebase.notifications().onNotification((notifica
     const remoteInput = new firebase.notifications.Android.RemoteInput('input');
     remoteInput.setLabel('Reply');
 
-    const action = new firebase.notifications.Android.Action('reply', 'check-mark', 'Reply');
+    const action = new firebase.notifications.Android.Action('reply', 'check-mark', `Reply to ${notification.title}`);
     action
     .setSemanticAction(firebase.notifications.Android.SemanticAction.Reply)
     .addRemoteInput(remoteInput);
