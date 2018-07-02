@@ -1,4 +1,3 @@
-import { AsyncStorage } from 'react-native';
 import firebase from 'react-native-firebase';
 import { eventChannel } from 'redux-saga';
 import { put, takeLatest, all, call, cancel, take } from 'redux-saga/effects';
@@ -24,7 +23,7 @@ function* getMessagesSaga() {
 }
 
 function* chatListenerSaga() {
-  const ref = yield call(getUserRef);
+  const ref = firebase.firestore();
   if (!ref) yield cancel();
 
   const channel = yield call(chatEventListener, ref);
@@ -46,24 +45,17 @@ function* updateMessagesSaga(action) {
   yield put(getMessages());
 }
 
-function* getUserRef() {
-  // get the user path string stored on the device
-  const userCollection = yield call([AsyncStorage, AsyncStorage.getItem], 'user_collection');
-  if (!userCollection) {
-      return undefined;
-  }
-  return firebase.firestore().collection(userCollection).doc(firebase.auth().currentUser.uid);
-}
-
 const chatEventListener = (ref) => {
   const channel = eventChannel((emitter) => {
     const chats = [];
-    return ref.collection('conversations').onSnapshot((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        chats.push(doc.data());
+
+    return ref.collection('conversations')
+    .onSnapshot((snapshot) => {
+      snapshot.docChanges.forEach((change) => {
+        chats.push(change.doc.data());
       });
       emitter(chats);
-    }, null, error => console.log(error));
+    });
   });
   return channel;
 };

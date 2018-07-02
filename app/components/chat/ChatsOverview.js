@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, Dimensions } from 'react-native';
+import { View, FlatList, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 
 import { ChatDetail, NewChatButton } from './';
@@ -18,7 +18,13 @@ class ChatsOverview extends Component {
   // }
 
   renderChats = ({ item }) => {
-    return <ChatDetail displayName={item.user.displayName} imageURL={item.user.imageURL} text={item.latestMessage.text} timeStamp={item.latestMessage.timestamp} unread={item.latestMessage.unread} />
+    return (<ChatDetail
+      displayName={item.user.displayName}
+      imageURL={item.user.imageURL}
+      text={item.latestMessage.text}
+      timeStamp={item.latestMessage.timestamp}
+      unread={item.latestMessage.unread}
+    />);
   }
 
   render() {
@@ -48,6 +54,7 @@ const mapStateToProps = (state) => {
   if (state.chat.chats) {
     chats = state.chat.chats;
   }
+  console.log(chats);
   return { user, chats };
 };
 
