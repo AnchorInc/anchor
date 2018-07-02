@@ -58,16 +58,17 @@ function* updateMessagesSaga(action) {
 }
 
 function* getChatId(action) {
-  firebase.firestore().collection('conversations')
-  .where('teacherId', '==', action.teacherUID)
-  .where('studentId', '==', action.studentUID)
-  .get()
-  .then((doc) => {
-    doc.forEach((chat) => {
-      console.log(chat.id);
-      return chat.id;
-    });
+  const ref = firebase.firestore().collection('conversations').where('teacherId', '==', action.teacherUID)
+  .where('studentId', '==', action.studentUID);
+
+  const docs = yield call([ref, ref.get]);
+  let chatId;
+  docs.forEach((doc) => {
+    chatId = doc.id;
   });
+
+  console.log(chatId);
+  return chatId;
 }
 
 const chatEventListener = (ref, id, type) => {
