@@ -4,23 +4,27 @@ import { eventChannel } from 'redux-saga';
 import { put, takeLatest, all, call, cancel, take } from 'redux-saga/effects';
 
 import { actionTypes } from '../config';
-import { syncMessages, getMessages, syncChats } from '../actions';
+import { syncMessages, syncChats } from '../actions';
 
-function* getMessagesSaga() {
-  // get all the messages for a chat
-  const messages = [];
-
-  const ref = firebase.firestore().collection('conversations').doc('SDjf09n23rjDSA0FAjs')
-              .collection('messages')
-              .orderBy('timeStamp');
+function* messageListenerSaga(action) {
+  const initialMessages = [];
+  const ref = firebase.firestore().collection('conversations').doc(action.id).collection('messages')
+                      .orderBy('timeStamp');
 
   const docs = yield call([ref, ref.get]);
   docs.forEach((doc) => {
-    messages.push(doc.data());
+    initialMessages.push(doc.data());
   });
+  yield put(syncMessages(initialMessages));
 
-  // update the redux store
-  yield put(syncMessages(messages));
+  const channel = yield call(messagesEventListener, ref, initialMessages);
+  while (firebase.auth().currentUser) {
+    const messages = yield take(channel);
+
+    // update the redux store
+    yield put(syncMessages(messages));
+  }
+  channel.close();
 }
 
 function* chatListenerSaga() {
@@ -43,7 +47,6 @@ function* updateMessagesSaga(action) {
   .doc();
   // update the chat doc
   yield call([ref, ref.set], action.chat);
-  yield put(getMessages());
 }
 
 function* getUserRef() {
@@ -60,7 +63,7 @@ const chatEventListener = (ref) => {
     const chats = [];
     return ref.collection('conversations').onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        chats.push(doc.data());
+        doc.ref.onSnapshot(chat => chats.push(chat.data()));
       });
       emitter(chats);
     }, null, error => console.log(error));
@@ -68,17 +71,26 @@ const chatEventListener = (ref) => {
   return channel;
 };
 
-// const messagesEventListener = (ref) => {
-//   const channel = eventChannel((emitter) => {
-//     const messages = [];
-//     return ref.collection('conversations').doc('SDjf09n23rjDSA0FAjs').collection('messages')
-//               .onSnapshot()
-//   }
-// }
+const messagesEventListener = (ref, initialMessages) => {
+  const channel = eventChannel((emitter) => {
+    const messages = [];
+    return ref.onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((message) => {
+        if (!initialMessages.some(initialMessage => initialMessage.timeStamp === message.data().timeStamp)) {
+          console.log(initialMessages.indexOf(message.data()));
+          messages.concat([message.data()]);
+        }
+      });
+      console.log(messages);
+      emitter(messages);
+    }, null, error => console.log(error));
+  });
+  return channel;
+};
 
 export function* watchChatRequests() {
   yield all([
-    takeLatest(actionTypes.MESSAGE.GET, getMessagesSaga),
+    takeLatest(actionTypes.MESSAGE.GET, messageListenerSaga),
     takeLatest(actionTypes.MESSAGE.UPDATE, updateMessagesSaga),
     takeLatest(actionTypes.CHAT.GET, chatListenerSaga),
   ]);

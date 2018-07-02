@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 
 
 import { Header } from '../header';
@@ -8,8 +9,22 @@ import { updateMessages, getMessages } from '../../actions';
 import { ChatBubble, Input, StudentRequest, TeacherApproval } from './';
 
 class Chat extends Component {
-  componentWillMount() {
-    this.props.getMessages('SDjf09n23rjDSA0FAjs');
+  state = {
+    messages: [],
+    chatId: '',
+  };
+
+  componentDidMount() {
+    return firebase.firestore().collection('conversations')
+    .where('teacherId', '==', this.props.navigation.state.params.chat.uid)
+    .where('studentId', '==', this.props.user.uid)
+    .get()
+    .then((doc) => {
+      doc.forEach((chat) => {
+        this.props.getMessages(chat.id);
+        this.setState({ chatId: chat.id });
+      });
+    });
   }
 
   onSend = (message) => {
@@ -17,13 +32,13 @@ class Chat extends Component {
       text: message,
       timeStamp: new Date().getTime(),
       direction: 'right',
-      id: (Math.floor((Math.random() * 1000) + 1)).toString(),
       senderName: this.props.user.displayName,
       senderImageURL: this.props.user.photoURL,
+      senderID: this.props.user.uid,
       recipientID: this.props.user.uid,
     };
-    this.props.updateMessages(messageData, 'SDjf09n23rjDSA0FAjs');
-    setTimeout(() => this.list.scrollToEnd({ animated: false }), 200);
+    this.props.updateMessages(messageData, this.state.chatId);
+    setTimeout(() => this.list.scrollToEnd({ animated: false }), 500);
   }
 
   renderMessages = ({ item }) => {
@@ -33,13 +48,13 @@ class Chat extends Component {
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <Header title='Kobe Bryant' />
+        <Header title={this.props.navigation.state.params.chat.title} />
         <FlatList
           keyboardShouldPersistTaps='always'
           data={this.props.messages}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ backgroundColor: 'white', justifyContent: 'flex-end', flexGrow: 1 }}
-          keyExtractor={message => message.id}
+          keyExtractor={() => (Math.floor((Math.random() * 100000000) + 1)).toString()}
           renderItem={this.renderMessages}
           ref={(ref) => { this.list = ref; }}
         />

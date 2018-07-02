@@ -51,6 +51,7 @@ function* getUserSaga() {
 function* getUserRef() {
   // get the user path string stored on the device
   const userCollection = yield call([AsyncStorage, AsyncStorage.getItem], 'user_collection');
+  console.log(userCollection);
   if (!userCollection) {
       return undefined;
   }
