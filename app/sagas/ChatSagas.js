@@ -12,9 +12,9 @@ function* messageListenerSaga(action) {
   while (firebase.auth().currentUser) {
     const messages = yield take(channel);
 
-    if (!messages) {
-      yield put(createChat(action));
-    }
+    // if (!messages) {
+    //   yield put(createChat(action));
+    // }
 
     // update the redux store
     yield put(syncMessages(messages));
@@ -65,7 +65,6 @@ const chatEventListener = (ref, id, type) => {
       snapshot.docChanges.forEach((change) => {
         chats.push(change.doc.data());
       });
-      console.log(chats);
       emitter(chats);
     });
   });
@@ -77,15 +76,11 @@ const messagesEventListener = (ref) => {
     const messages = [];
 
     return ref.onSnapshot((snapshot) => {
-      if (snapshot.exists) {
-        snapshot.docChanges.forEach((change) => {
-          messages.concat(change.doc.data());
-          console.log(messages);
-          emitter(messages);
-        });
-      } else {
-        emitter(false);
-      }
+      snapshot.docChanges.forEach((change) => {
+        messages.concat(change.doc.data());
+      });
+      console.log(messages);
+      emitter(messages);
     });
   });
   return channel;
@@ -100,7 +95,6 @@ const getChatRef = (action) => {
   .get()
   .then((doc) => {
     doc.forEach((chat) => {
-      console.log(chat);
       chatId = chat;
     });
   });

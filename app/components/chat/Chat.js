@@ -15,6 +15,10 @@ class Chat extends Component {
     studentUID: (this.props.user.type === userTypes.STUDENT) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
   };
 
+  componentWillMount() {
+    this.props.getMessages(this.state.teacherUID, this.state.studentUID);
+  }
+
   onSend = (message) => {
     const messageData = {
       text: message,
@@ -34,6 +38,7 @@ class Chat extends Component {
   }
 
   render() {
+    console.log(this.props.messages);
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header title={this.props.navigation.state.params.chat.title} />

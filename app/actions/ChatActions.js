@@ -1,7 +1,7 @@
 import { actionTypes } from '../config';
 
-export const getMessages = (id) => {
-  return { type: actionTypes.MESSAGE.GET, id };
+export const getMessages = (teacherUID, studentUID) => {
+  return { type: actionTypes.MESSAGE.GET, teacherUID, studentUID };
 };
 
 export const updateMessages = (chat, teacherUID, studentUID) => {

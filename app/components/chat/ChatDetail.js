@@ -8,9 +8,9 @@ import { TouchableDebounce } from '../../lib';
 
 const { width } = Dimensions.get('window');
 
-const ChatDetail = ({ displayName, imageURL, text, timeStamp, unread, onPress, person }) => {
+const ChatDetail = ({ displayName, imageURL, text, timeStamp, unread, onPress }) => {
   return (
-    <TouchableDebounce onPress={() => onPress}>
+    <TouchableDebounce onPress={onPress}>
       <View style={{ flexDirection: 'row', padding: 20, paddingRight: 10, alignItems: 'center' }}>
         <Image style={styles.profileStyle} source={{ uri: imageURL }} />
         <View style={{ flexDirection: 'column', width: 0.8 * width }}>

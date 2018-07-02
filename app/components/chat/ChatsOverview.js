@@ -14,9 +14,9 @@ class ChatsOverview extends Component {
     this.props.getChats(this.props.user.uid);
   }
 
-  // navigateChatScreen = (chat) => {
-  //   this.props.navigation.navigate('Chat', { chat });
-  // }
+  navigateChatScreen = (chat) => {
+    this.props.navigation.navigate('Chat', { chat });
+  }
 
   renderChats = ({ item }) => {
     return (
@@ -26,6 +26,13 @@ class ChatsOverview extends Component {
         text={'hello'}
         timeStamp={Date.now()}
         unread
+        onPress={() => {
+          const chat = {
+            uid: (this.props.user.type === userTypes.STUDENT) ? item.teacherId : item.studentUID,
+            title: (this.props.user.type === userTypes.STUDENT) ? item.teacherName : item.studentName,
+          };
+          this.navigateChatScreen(chat);
+        }}
       />
     );
   }
@@ -37,7 +44,7 @@ class ChatsOverview extends Component {
         <FlatList
           data={this.props.chats}
           renderItem={this.renderChats}
-          keyExtractor={chat => chat.id}
+          keyExtractor={() => (Math.floor((Math.random() * 100000000) + 1)).toString()}
           contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
         />
         <NewChatButton icon='plus' />
@@ -57,7 +64,6 @@ const mapStateToProps = (state) => {
   if (state.chat.chats) {
     chats = state.chat.chats;
   }
-  console.log(chats);
   return { user, chats };
 };
 
