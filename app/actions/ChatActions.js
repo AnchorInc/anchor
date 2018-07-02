@@ -12,8 +12,8 @@ export const syncMessages = (messages) => {
   return { type: actionTypes.MESSAGE.SYNC, messages };
 };
 
-export const getChats = () => {
-  return { type: actionTypes.CHAT.GET };
+export const getChats = (id) => {
+  return { type: actionTypes.CHAT.GET, id };
 };
 
 export const syncChats = (chats) => {

@@ -9,7 +9,6 @@ import { TouchableDebounce } from '../../lib';
 const { width } = Dimensions.get('window');
 
 const ChatDetail = ({ displayName, imageURL, text, timeStamp, unread, onPress, person }) => {
-  console.log(timeStamp);
   return (
     <TouchableDebounce onPress={() => onPress}>
       <View style={{ flexDirection: 'row', padding: 20, paddingRight: 10, alignItems: 'center' }}>

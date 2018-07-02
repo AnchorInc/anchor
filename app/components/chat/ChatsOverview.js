@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 
 import { ChatDetail, NewChatButton } from './';
 import { getChats } from '../../actions';
+import { userTypes } from '../../config';
 import { Header } from '../header';
 
 const { width, height } = Dimensions.get('window');
 
 class ChatsOverview extends Component {
   componentWillMount() {
-    this.props.getChats();
+    this.props.getChats(this.props.user.uid);
   }
 
   // navigateChatScreen = (chat) => {
@@ -18,13 +19,15 @@ class ChatsOverview extends Component {
   // }
 
   renderChats = ({ item }) => {
-    return (<ChatDetail
-      displayName={item.user.displayName}
-      imageURL={item.user.imageURL}
-      text={item.latestMessage.text}
-      timeStamp={item.latestMessage.timestamp}
-      unread={item.latestMessage.unread}
-    />);
+    return (
+      <ChatDetail
+        displayName={(this.props.user.type === userTypes.STUDENT) ? item.teacherName : item.studentName}
+        imageURL={(this.props.user.type === userTypes.STUDENT) ? item.teacherPhotoURL : item.studentPhotoURL}
+        text={'hello'}
+        timeStamp={Date.now()}
+        unread
+      />
+    );
   }
 
   render() {
