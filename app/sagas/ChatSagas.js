@@ -6,17 +6,9 @@ import { actionTypes } from '../config';
 import { syncMessages, syncChats } from '../actions';
 
 function* messageListenerSaga(action) {
-  const initialMessages = [];
-  const ref = firebase.firestore().collection('conversations').doc(action.id).collection('messages')
-                      .orderBy('timeStamp');
+  const ref = yield call(getChatRef, action);
 
-  const docs = yield call([ref, ref.get]);
-  docs.forEach((doc) => {
-    initialMessages.push(doc.data());
-  });
-  yield put(syncMessages(initialMessages));
-
-  const channel = yield call(messagesEventListener, ref, initialMessages);
+  const channel = yield call(messagesEventListener, ref);
   while (firebase.auth().currentUser) {
     const messages = yield take(channel);
 
@@ -63,21 +55,37 @@ const chatEventListener = (ref) => {
   return channel;
 };
 
-const messagesEventListener = (ref, initialMessages) => {
+const messagesEventListener = (ref) => {
   const channel = eventChannel((emitter) => {
     const messages = [];
-    return ref.onSnapshot((querySnapshot) => {
-      querySnapshot.forEach((message) => {
-        if (!initialMessages.some(initialMessage => initialMessage.timeStamp === message.data().timeStamp)) {
-          console.log(initialMessages.indexOf(message.data()));
-          messages.concat([message.data()]);
-        }
+
+    return ref.onSnapshot((snapshot) => {
+      snapshot.docChanges.forEach((change) => {
+        messages.concat(change.doc.data());
+        console.log(messages);
+        emitter(messages);
       });
-      console.log(messages);
-      emitter(messages);
-    }, null, error => console.log(error));
+    });
   });
   return channel;
+};
+
+const getChatRef = (action) => {
+  let chatId;
+
+  firebase.firestore().collection('conversations')
+  .where('teacherId', '==', action.teacherUID)
+  .where('studentId', '==', action.studentUID)
+  .get()
+  .then((doc) => {
+    doc.forEach((chat) => {
+      console.log(chat);
+      chatId = chat;
+    });
+  });
+
+  return firebase.firestore().collection('conversations').doc(chatId).collection('messages')
+  .orderBy('timeStamp');
 };
 
 export function* watchChatRequests() {

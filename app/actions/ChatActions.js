@@ -4,8 +4,8 @@ export const getMessages = (id) => {
   return { type: actionTypes.MESSAGE.GET, id };
 };
 
-export const updateMessages = (chat, id) => {
-  return { type: actionTypes.MESSAGE.UPDATE, chat, id };
+export const updateMessages = (chat, teacherUID, studentUID) => {
+  return { type: actionTypes.MESSAGE.UPDATE, chat, teacherUID, studentUID };
 };
 
 export const syncMessages = (messages) => {

@@ -1,31 +1,19 @@
 import React, { Component } from 'react';
 import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import firebase from 'react-native-firebase';
 
 
 import { Header } from '../header';
 import { updateMessages, getMessages } from '../../actions';
 import { ChatBubble, Input, StudentRequest, TeacherApproval } from './';
+import { userTypes } from '../../config';
 
 class Chat extends Component {
   state = {
     messages: [],
-    chatId: '',
+    teacherUID: (this.props.user.uid === userTypes.TEACHER) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
+    studentUID: (this.props.user.type === userTypes.STUDENT) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
   };
-
-  componentDidMount() {
-    return firebase.firestore().collection('conversations')
-    .where('teacherId', '==', this.props.navigation.state.params.chat.uid)
-    .where('studentId', '==', this.props.user.uid)
-    .get()
-    .then((doc) => {
-      doc.forEach((chat) => {
-        this.props.getMessages(chat.id);
-        this.setState({ chatId: chat.id });
-      });
-    });
-  }
 
   onSend = (message) => {
     const messageData = {
@@ -37,7 +25,7 @@ class Chat extends Component {
       senderID: this.props.user.uid,
       recipientID: this.props.user.uid,
     };
-    this.props.updateMessages(messageData, this.state.chatId);
+    this.props.updateMessages(messageData, this.state.teacherUID, this.state.studentUID);
     setTimeout(() => this.list.scrollToEnd({ animated: false }), 500);
   }
 
