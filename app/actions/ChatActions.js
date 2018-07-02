@@ -19,3 +19,7 @@ export const getChats = () => {
 export const syncChats = (chats) => {
   return { type: actionTypes.CHAT.SYNC, chats };
 };
+
+export const createChat = () => {
+  return { type: actionTypes.CHAT.CREATE };
+};

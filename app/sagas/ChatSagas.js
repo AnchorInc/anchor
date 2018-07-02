@@ -1,9 +1,9 @@
 import firebase from 'react-native-firebase';
 import { eventChannel } from 'redux-saga';
-import { put, takeLatest, all, call, cancel, take } from 'redux-saga/effects';
+import { put, takeLatest, all, call, cancel, take, takeEvery } from 'redux-saga/effects';
 
 import { actionTypes } from '../config';
-import { syncMessages, syncChats } from '../actions';
+import { syncMessages, syncChats, createChat } from '../actions';
 
 function* messageListenerSaga(action) {
   const ref = yield call(getChatRef, action);
@@ -11,6 +11,10 @@ function* messageListenerSaga(action) {
   const channel = yield call(messagesEventListener, ref);
   while (firebase.auth().currentUser) {
     const messages = yield take(channel);
+
+    if (!messages) {
+      yield put(createChat(action));
+    }
 
     // update the redux store
     yield put(syncMessages(messages));
@@ -33,10 +37,16 @@ function* chatListenerSaga() {
   channel.close();
 }
 
+function* createChatSaga(action) {
+  const ref = firebase.firestore().collection('conversations');
+
+  yield call([ref, ref.add], { teacherId: action.teacherUID, studentId: action.studentId });
+}
+
 function* updateMessagesSaga(action) {
   const ref = firebase.firestore().collection('conversations').doc(action.id).collection('messages')
   .doc();
-  // update the chat doc
+  // update the chat docs
   yield call([ref, ref.set], action.chat);
 }
 
@@ -60,11 +70,15 @@ const messagesEventListener = (ref) => {
     const messages = [];
 
     return ref.onSnapshot((snapshot) => {
-      snapshot.docChanges.forEach((change) => {
-        messages.concat(change.doc.data());
-        console.log(messages);
-        emitter(messages);
-      });
+      if (snapshot.exists) {
+        snapshot.docChanges.forEach((change) => {
+          messages.concat(change.doc.data());
+          console.log(messages);
+          emitter(messages);
+        });
+      } else {
+        emitter(false);
+      }
     });
   });
   return channel;
@@ -91,7 +105,8 @@ const getChatRef = (action) => {
 export function* watchChatRequests() {
   yield all([
     takeLatest(actionTypes.MESSAGE.GET, messageListenerSaga),
-    takeLatest(actionTypes.MESSAGE.UPDATE, updateMessagesSaga),
+    takeEvery(actionTypes.MESSAGE.UPDATE, updateMessagesSaga),
     takeLatest(actionTypes.CHAT.GET, chatListenerSaga),
+    takeEvery(actionTypes.CHAT.CREATE, createChatSaga),
   ]);
 }
