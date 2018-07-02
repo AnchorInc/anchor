@@ -11,7 +11,7 @@ import { userTypes } from '../../config';
 class Chat extends Component {
   state = {
     messages: [],
-    teacherUID: (this.props.user.uid === userTypes.TEACHER) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
+    teacherUID: (this.props.user.type === userTypes.TEACHER) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
     studentUID: (this.props.user.type === userTypes.STUDENT) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
   };
 
