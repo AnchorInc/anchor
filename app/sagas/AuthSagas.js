@@ -3,9 +3,8 @@ import { put, takeLatest, all, call } from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
-import { eventChannel } from 'redux-saga';
 
-import { showSpinner, loginSuccess, loginFail, syncUser } from '../actions';
+import { showSpinner, loginSuccess, loginFail } from '../actions';
 import { actionTypes, firebasePaths, userTypes, signinMethods } from '../config';
 
 
@@ -23,8 +22,6 @@ function* loginUserWithGoogle(action) {
     // sign in to firebase and get the user credentials
 
     yield call(initUser, action, userCred);
-
-    yield put(loginSuccess());
   } catch (error) {
     // Error handling for login cancellation by user
     if (error.code !== 12501) {
@@ -83,6 +80,7 @@ function* logoutUser() {
 }
 
 function* initUser(action, userCred) {
+  console.log('init');
   // get a db reference to the user
   const userCollection = getUserCollection(action);
   const user = userCred.user._user;
@@ -113,6 +111,11 @@ function* initUser(action, userCred) {
     [['user_collection', userCollection],
     ['user_data', JSON.stringify(userData)],
     ['signin_method', JSON.stringify(action.method)]]);
+
+  const collection = yield call([AsyncStorage, AsyncStorage.getItem], 'user_collection');
+  console.log(JSON.parse(collection));
+
+  yield put(loginSuccess());
 }
 
 const getUserCollection = (action) => {
