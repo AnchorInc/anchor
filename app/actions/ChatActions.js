@@ -23,3 +23,7 @@ export const syncChats = (chats) => {
 export const createChat = () => {
   return { type: actionTypes.CHAT.CREATE };
 };
+
+export const deleteChat = () => {
+  return { type: actionTypes.CHAT.DELETE };
+};

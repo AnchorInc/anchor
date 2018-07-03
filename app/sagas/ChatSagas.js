@@ -15,9 +15,10 @@ function* messageListenerSaga(action) {
   while (firebase.auth().currentUser) {
     const messages = yield take(channel);
 
-    // if (!messages) {
-    //   yield put(createChat(action));
-    // }
+    // if there are no messages then create a new chat
+    if (!messages) {
+      yield put(createChat(action));
+    }
 
     // update the redux store
     yield put(syncMessages(messages));
@@ -46,7 +47,16 @@ function* chatListenerSaga(action) {
 function* createChatSaga(action) {
   const ref = firebase.firestore().collection('conversations');
 
-  yield call([ref, ref.add], { teacherId: action.teacherUID, studentId: action.studentId });
+  yield call([ref, ref.add], { teacherId: action.teacherUID, studentId: action.studentUID });
+}
+
+function* deleteChatSaga(action) {
+  console.log('init');
+
+  const chatId = yield call(getChatId, action);
+  const ref = firebase.firestore().collection('conversations').doc(chatId);
+
+  yield call([ref, ref.delete]);
 }
 
 function* updateMessagesSaga(action) {
@@ -63,6 +73,7 @@ function* getChatId(action) {
 
   const docs = yield call([ref, ref.get]);
   let chatId;
+
   docs.forEach((doc) => {
     chatId = doc.id;
   });
@@ -109,5 +120,6 @@ export function* watchChatRequests() {
     takeEvery(actionTypes.MESSAGE.UPDATE, updateMessagesSaga),
     takeLatest(actionTypes.CHAT.GET, chatListenerSaga),
     takeEvery(actionTypes.CHAT.CREATE, createChatSaga),
+    takeEvery(actionTypes.CHAT.DELETE, deleteChatSaga),
   ]);
 }

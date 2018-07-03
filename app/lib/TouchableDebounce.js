@@ -27,6 +27,7 @@ class TouchableDebounce extends Component {
             });
           }
         }
+        onLongPress={this.props.onLongPress}
       >
         {this.props.children}
       </TouchableOpacity>

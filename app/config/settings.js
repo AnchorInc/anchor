@@ -31,6 +31,7 @@ export const actionTypes = {
     GET: 'types.CHAT.GET',
     UPDATE: 'types.CHAT.UPDATE',
     CREATE: 'types.CHAT.CREATE',
+    DELETE: 'types.CHAT.DELETE',
   },
   MESSAGE: {
     GET: 'types.MESSAGE.GET',

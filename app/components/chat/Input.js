@@ -37,7 +37,6 @@ class Input extends Component {
             placeholder="Type a message..."
             placeholderTextColor='gray'
             underlineColorAndroid='transparent'
-            autoCapitalize='words'
             multiline
             value={this.state.message}
             onChangeText={(message) => {

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, FlatList, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
+import DialogBox from 'react-native-dialogbox';
 
-import { ChatDetail, NewChatButton } from './';
+import { ChatDetail } from './';
 import { getChats } from '../../actions';
 import { userTypes } from '../../config';
 import { Header } from '../header';
@@ -22,10 +23,12 @@ class ChatsOverview extends Component {
     return (
       <ChatDetail
         displayName={(this.props.user.type === userTypes.STUDENT) ? item.teacherName : item.studentName}
+        dialogbox={this.dialogbox}
         imageURL={(this.props.user.type === userTypes.STUDENT) ? item.teacherPhotoURL : item.studentPhotoURL}
         text={item.latestMessage.text}
         timeStamp={item.latestMessage.timeStamp}
         unread={item.latestMessage.unread}
+        uid={item.uid}
         onPress={() => {
           const chat = {
             uid: (this.props.user.type === userTypes.STUDENT) ? item.teacherId : item.studentId,
@@ -47,7 +50,7 @@ class ChatsOverview extends Component {
           keyExtractor={() => (Math.floor((Math.random() * 100000000) + 1)).toString()}
           contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
         />
-        <NewChatButton icon='plus' />
+        <DialogBox ref={(dialogbox) => { this.dialogbox = dialogbox; }} />
       </View>
     );
   }

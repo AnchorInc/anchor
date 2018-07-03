@@ -71,7 +71,7 @@ const userEventListener = (ref) => {
 };
 
 function* fcmTokenSaga() {
-  const channel = yield call(fcmTokenRefreshListener);
+  const channel = yield call(fcmTokenListener);
   while (firebase.auth().currentUser) {
     const token = yield take(channel);
     yield call(updateUserSaga, { user: { fcmToken: token } });
@@ -79,7 +79,7 @@ function* fcmTokenSaga() {
   channel.close();
 }
 
-const fcmTokenRefreshListener = () => {
+const fcmTokenListener = () => {
   const channel = eventChannel((emitter) => {
     return firebase.messaging().onTokenRefresh((token) => {
       emitter(token);
