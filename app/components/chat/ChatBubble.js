@@ -1,23 +1,34 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { connect } from 'react-redux';
 import moment from 'moment';
 
 import { colors } from '../../config';
 
 class ChatBubble extends Component {
+  state = { direction: '' };
+
+  componentWillMount() {
+    if (this.props.message.senderID === this.props.user.uid) {
+      this.setState({ direction: 'right' });
+    } else {
+      this.setState({ direction: 'left' });
+    }
+  }
+
   render() {
     return (
       <TouchableWithoutFeedback onPress={this.props.onPress}>
-        <View style={styles[this.props.message.direction].container}>
+        <View style={styles[this.state.direction].container}>
           <View style={styles.topContainerStyle}>
-            <Text style={styles[this.props.message.direction].infoStyle}>
+            <Text style={styles[this.state.direction].infoStyle}>
               {this.props.message.senderName}
             </Text>
-            <Text style={styles[this.props.message.direction].infoStyle}>
+            <Text style={styles[this.state.direction].infoStyle}>
               {moment(this.props.message.timeStamp).format('LT')}
             </Text>
           </View>
-          <Text style={styles[this.props.message.direction].message}>
+          <Text style={styles[this.state.direction].message}>
             {this.props.message.text}
           </Text>
         </View>
@@ -87,4 +98,12 @@ const styles = {
   },
 };
 
-export { ChatBubble };
+const mapStateToProps = (state) => {
+  let user;
+  if (state.user.user) {
+    user = state.user.user;
+  }
+  return { user };
+};
+
+export default connect(mapStateToProps)(ChatBubble);

@@ -19,11 +19,14 @@ class Chat extends Component {
     this.props.getMessages(this.state.teacherUID, this.state.studentUID);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ messages: nextProps.messages });
+  }
+
   onSend = (message) => {
     const messageData = {
       text: message,
       timeStamp: new Date().getTime(),
-      direction: 'right',
       senderName: this.props.user.displayName,
       senderImageURL: this.props.user.photoURL,
       senderID: this.props.user.uid,
@@ -38,13 +41,13 @@ class Chat extends Component {
   }
 
   render() {
-    console.log(this.props.messages);
+    console.log(this.state.messages);
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header title={this.props.navigation.state.params.chat.title} />
         <FlatList
           keyboardShouldPersistTaps='always'
-          data={this.props.messages}
+          data={this.state.messages}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ backgroundColor: 'white', justifyContent: 'flex-end', flexGrow: 1 }}
           keyExtractor={() => (Math.floor((Math.random() * 100000000) + 1)).toString()}
