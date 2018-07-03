@@ -1,5 +1,5 @@
 export { default as Chat } from './Chat';
-export * from './ChatBubble';
+export { default as ChatBubble } from './ChatBubble';
 export * from './ChatDetail';
 export { default as ChatsOverview } from './ChatsOverview';
 export * from './NewChatButton';

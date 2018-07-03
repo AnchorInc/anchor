@@ -23,12 +23,12 @@ class ChatsOverview extends Component {
       <ChatDetail
         displayName={(this.props.user.type === userTypes.STUDENT) ? item.teacherName : item.studentName}
         imageURL={(this.props.user.type === userTypes.STUDENT) ? item.teacherPhotoURL : item.studentPhotoURL}
-        text={'hello'}
-        timeStamp={Date.now()}
-        unread
+        text={item.latestMessage.text}
+        timeStamp={item.latestMessage.timeStamp}
+        unread={item.latestMessage.unread}
         onPress={() => {
           const chat = {
-            uid: (this.props.user.type === userTypes.STUDENT) ? item.teacherId : item.studentUID,
+            uid: (this.props.user.type === userTypes.STUDENT) ? item.teacherId : item.studentId,
             title: (this.props.user.type === userTypes.STUDENT) ? item.teacherName : item.studentName,
           };
           this.navigateChatScreen(chat);

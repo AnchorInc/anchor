@@ -58,7 +58,8 @@ function* updateMessagesSaga(action) {
 }
 
 function* getChatId(action) {
-  const ref = firebase.firestore().collection('conversations').where('teacherId', '==', action.teacherUID)
+  const ref = firebase.firestore().collection('conversations')
+  .where('teacherId', '==', action.teacherUID)
   .where('studentId', '==', action.studentUID);
 
   const docs = yield call([ref, ref.get]);
