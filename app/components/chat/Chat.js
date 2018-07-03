@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
-
 import { Header } from '../header';
 import { updateMessages, getMessages } from '../../actions';
 import { ChatBubble, Input, StudentRequest, TeacherApproval } from './';
@@ -42,7 +41,7 @@ class Chat extends Component {
   }
 
   render() {
-    console.log(this.props.messages);
+    console.log(this.state.messages);
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header title={this.props.navigation.state.params.chat.title} />
