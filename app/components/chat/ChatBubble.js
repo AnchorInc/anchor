@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { connect } from 'react-redux';
 
 import { colors } from '../../config';
 

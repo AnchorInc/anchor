@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Header } from '../header';
 import { updateMessages, getMessages } from '../../actions';
-import { ChatBubble, Input, StudentRequest, TeacherApproval } from './';
+import { ChatBubble, Input } from './';
 import { userTypes } from '../../config';
 
 class Chat extends Component {
@@ -33,7 +33,6 @@ class Chat extends Component {
     };
     this.setState({ messages: this.state.messages.concat([messageData]) });
     this.props.updateMessages(messageData, this.state.teacherUID, this.state.studentUID);
-    setTimeout(() => this.list.scrollToEnd({ animated: false }), 500);
   }
 
   renderMessages = ({ item }) => {
@@ -41,18 +40,20 @@ class Chat extends Component {
   }
 
   render() {
-    console.log(this.state.messages);
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header title={this.props.navigation.state.params.chat.title} />
         <FlatList
+          enableEmptySections
           keyboardShouldPersistTaps='always'
           data={this.state.messages}
+          onContentSizeChange={() => this.messages.scrollToEnd({ animated: false })}
+          onLayout={() => this.messages.scrollToEnd({ animated: false })}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ backgroundColor: 'white', justifyContent: 'flex-end', flexGrow: 1 }}
           keyExtractor={() => (Math.floor((Math.random() * 100000000) + 1)).toString()}
           renderItem={this.renderMessages}
-          ref={(ref) => { this.list = ref; }}
+          ref={(ref) => { this.messages = ref; }}
         />
         <Input onPress={this.onSend} />
       </View>
