@@ -51,7 +51,6 @@ function* createChatSaga(action) {
 
 function* updateMessagesSaga(action) {
   const chatId = yield call(getChatId, action);
-  console.log(chatId);
   const ref = firebase.firestore().collection('conversations').doc(chatId).collection('messages');
   // update the chat docs
   yield call([ref, ref.add], action.chat);
@@ -68,7 +67,6 @@ function* getChatId(action) {
     chatId = doc.id;
   });
 
-  console.log(chatId);
   return chatId;
 }
 
