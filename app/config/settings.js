@@ -24,7 +24,6 @@ export const actionTypes = {
     LISTEN: 'types.USER.LISTEN',
     UPDATE: 'types.USER.UPDATE',
     GET: 'types.USER.GET',
-    START_FCM_TOKEN_LISTENER: 'types.USER.STAR_FCM_TOKEN_LISTENER',
   },
   CHAT: {
     SYNC: 'types.CHAT.SYNC',

@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import { eventChannel } from 'redux-saga';
-import { takeLatest, all, put, call, take, takeEvery, cancel } from 'redux-saga/effects';
+import { takeLatest, all, put, call, fork, take, takeEvery, cancel } from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
 
 import { syncUser, getUser } from '../actions';
@@ -17,6 +17,8 @@ function* userListenerSaga() {
   also call the getUserSaga to update the user reducer state with the latest user data */
   const ref = yield call(getUserRef);
   if (!ref) yield cancel();
+  // Start FCM Token Saga if ref is not null
+  yield fork(fcmTokenSaga);
   // get the event channel
   const channel = yield call(userEventListener, ref);
   // while there is a user logged in...
@@ -51,7 +53,6 @@ function* getUserSaga() {
 function* getUserRef() {
   // get the user path string stored on the device
   const userCollection = yield call([AsyncStorage, AsyncStorage.getItem], 'user_collection');
-  console.log(userCollection);
   if (!userCollection) {
       return undefined;
   }
@@ -96,7 +97,6 @@ export function* watchUserRequests() {
   yield all([
     takeLatest([actionTypes.AUTH.LOGIN.SUCESS, actionTypes.USER.LISTEN], userListenerSaga),
     takeLatest(actionTypes.USER.GET, getUserSaga),
-    takeLatest(actionTypes.USER.START_FCM_TOKEN_LISTENER, fcmTokenSaga),
     takeEvery(actionTypes.USER.UPDATE, updateUserSaga),
   ]);
 }
