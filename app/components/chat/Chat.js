@@ -29,7 +29,7 @@ class Chat extends Component {
       senderName: this.props.user.displayName,
       senderImageURL: this.props.user.photoURL,
       senderID: this.props.user.uid,
-      recipientID: this.props.navigation.state.params.chat.uid,
+      recipientID: this.props.user.uid,
     };
     this.setState({ messages: this.state.messages.concat([messageData]) });
     this.props.updateMessages(messageData, this.state.teacherUID, this.state.studentUID);

@@ -82,6 +82,7 @@ function* fcmTokenSaga() {
 const fcmTokenListener = () => {
   const channel = eventChannel((emitter) => {
     return firebase.messaging().onTokenRefresh((token) => {
+      console.log(token);
       emitter(token);
     });
   });

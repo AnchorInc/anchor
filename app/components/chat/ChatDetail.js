@@ -42,7 +42,7 @@ class ChatDetail extends Component {
 
   render() {
     return (
-        <TouchableDebounce onPress={this.props.onPress} onLongPress={this.onLongPress}>
+        <TouchableDebounce onPress={this.props.onPress} onLongPress={() => this.onLongPress()}>
           {this.showDeleteChatModal()}
           <View style={{ flexDirection: 'row', padding: 20, paddingRight: 10, alignItems: 'center' }}>
             <Image style={styles.profileStyle} source={{ uri: this.props.imageURL }} />
