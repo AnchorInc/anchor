@@ -51,12 +51,12 @@ function* createChatSaga(action) {
 }
 
 function* deleteChatSaga(action) {
-  console.log('init');
+  const ref = firebase.firestore().collection('conversations')
+  .where('teacherId', '==', action.teacherUID)
+  .where('studentId', '==', action.studentUID);
+  const docs = (yield call([ref, ref.get])).docs;
 
-  const chatId = yield call(getChatId, action);
-  const ref = firebase.firestore().collection('conversations').doc(chatId);
-
-  yield call([ref, ref.delete]);
+  yield all(docs.map(doc => call([doc.ref, doc.ref.delete])));
 }
 
 function* updateMessagesSaga(action) {
@@ -91,7 +91,8 @@ const chatEventListener = (ref, id, type) => {
     .where(idType, '==', id)
     .onSnapshot((snapshot) => {
       snapshot.docChanges.forEach((change) => {
-        chats.push(change.doc.data());
+        const chat = change.doc.data();
+        chats.push(chat);
       });
       emitter(chats);
     });
@@ -107,7 +108,6 @@ const messagesEventListener = (ref) => {
       snapshot.docChanges.forEach((change) => {
         messages.push(change.doc.data());
       });
-      console.log(messages);
       emitter(messages);
     });
   });
