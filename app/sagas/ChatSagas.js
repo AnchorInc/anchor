@@ -61,9 +61,20 @@ function* deleteChatSaga(action) {
 
 function* updateMessagesSaga(action) {
   const chatId = yield call(getChatId, action);
-  const ref = firebase.firestore().collection('conversations').doc(chatId).collection('messages');
-  // update the chat docs
-  yield call([ref, ref.add], action.chat);
+
+  if (chatId) {
+    const ref = firebase.firestore().collection('conversations').doc(chatId).collection('messages');
+    yield call([ref, ref.add], action.chat);
+  } else {
+    const ref = firebase.firestore().collection('conversations').doc();
+    yield call([firebase.firestore(), firebase.firestore().runTransaction], async (transaction) => {
+      transaction.set(ref, {
+        studentId: action.studentUID,
+        teacherId: action.teacherUID,
+      });
+      transaction.set(ref.collection('messages').doc(), action.chat);
+    });
+  }
 }
 
 function* getChatId(action) {
