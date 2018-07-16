@@ -5,21 +5,26 @@ import { connect } from 'react-redux';
 import { Header } from '../header';
 import { updateMessages, getMessages } from '../../actions';
 import { ChatBubble, Input } from './';
-import { userTypes } from '../../config';
+import { userTypes, firebasePaths } from '../../config';
 
 class Chat extends Component {
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   console.log(nextProps, prevState);
+  //   return {
+  //     messages: nextProps.messages || [],
+  //     teacherUID: prevState.teacherUID,
+  //     studentUID: prevState.studentUID,
+  //   };
+  // }
+
   state = {
     messages: [],
     teacherUID: (this.props.user.type === userTypes.TEACHER) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
     studentUID: (this.props.user.type === userTypes.STUDENT) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getMessages(this.state.teacherUID, this.state.studentUID);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ messages: nextProps.messages });
   }
 
   onSend = (message) => {
@@ -29,9 +34,11 @@ class Chat extends Component {
       senderName: this.props.user.displayName,
       senderImageURL: this.props.user.photoURL,
       senderID: this.props.user.uid,
-      recipientID: this.props.user.uid,
+      recipientID: this.props.navigation.state.params.chat.uid,
+      recipientType: (this.props.user.type === userTypes.STUDENT) ? firebasePaths.TEACHERS : firebasePaths.STUDENTS,
     };
-    this.setState({ messages: this.state.messages.concat([messageData]) });
+    console.log(messageData);
+    // this.setState({ messages: this.state.messages.concat([messageData]) });
     this.props.updateMessages(messageData, this.state.teacherUID, this.state.studentUID);
   }
 
@@ -40,13 +47,14 @@ class Chat extends Component {
   }
 
   render() {
+    console.log(this.props.messages);
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header title={this.props.navigation.state.params.chat.title} />
         <FlatList
           enableEmptySections
           keyboardShouldPersistTaps='always'
-          data={this.state.messages}
+          data={this.props.messages}
           onContentSizeChange={() => this.messages.scrollToEnd({ animated: false })}
           onLayout={() => this.messages.scrollToEnd({ animated: false })}
           showsVerticalScrollIndicator={false}

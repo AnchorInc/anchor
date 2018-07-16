@@ -106,9 +106,8 @@ const messagesEventListener = (ref) => {
     return ref.onSnapshot((snapshot) => {
       snapshot.docChanges.forEach((change) => {
         messages.push(change.doc.data());
+        emitter(messages);
       });
-      console.log(messages);
-      emitter(messages);
     });
   });
   return channel;
