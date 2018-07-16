@@ -24,6 +24,6 @@ export const createChat = () => {
   return { type: actionTypes.CHAT.CREATE };
 };
 
-export const deleteChat = () => {
-  return { type: actionTypes.CHAT.DELETE };
+export const deleteChat = (studentUID, teacherUID) => {
+  return { type: actionTypes.CHAT.DELETE, studentUID, teacherUID };
 };

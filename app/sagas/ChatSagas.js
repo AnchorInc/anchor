@@ -51,19 +51,30 @@ function* createChatSaga(action) {
 }
 
 function* deleteChatSaga(action) {
-  console.log('init');
+  const ref = firebase.firestore().collection('conversations')
+  .where('teacherId', '==', action.teacherUID)
+  .where('studentId', '==', action.studentUID);
+  const docs = (yield call([ref, ref.get])).docs;
 
-  const chatId = yield call(getChatId, action);
-  const ref = firebase.firestore().collection('conversations').doc(chatId);
-
-  yield call([ref, ref.delete]);
+  yield all(docs.map(doc => call([doc.ref, doc.ref.delete])));
 }
 
 function* updateMessagesSaga(action) {
   const chatId = yield call(getChatId, action);
-  const ref = firebase.firestore().collection('conversations').doc(chatId).collection('messages');
-  // update the chat docs
-  yield call([ref, ref.add], action.chat);
+
+  if (chatId) {
+    const ref = firebase.firestore().collection('conversations').doc(chatId).collection('messages');
+    yield call([ref, ref.add], action.chat);
+  } else {
+    const ref = firebase.firestore().collection('conversations').doc();
+    yield call([firebase.firestore(), firebase.firestore().runTransaction], async (transaction) => {
+      transaction.set(ref, {
+        studentId: action.studentUID,
+        teacherId: action.teacherUID,
+      });
+      transaction.set(ref.collection('messages').doc(), action.chat);
+    });
+  }
 }
 
 function* getChatId(action) {
@@ -91,7 +102,8 @@ const chatEventListener = (ref, id, type) => {
     .where(idType, '==', id)
     .onSnapshot((snapshot) => {
       snapshot.docChanges.forEach((change) => {
-        chats.push(change.doc.data());
+        const chat = change.doc.data();
+        chats.push(chat);
       });
       emitter(chats);
     });
@@ -106,8 +118,8 @@ const messagesEventListener = (ref) => {
     return ref.onSnapshot((snapshot) => {
       snapshot.docChanges.forEach((change) => {
         messages.push(change.doc.data());
-        emitter(messages);
       });
+      emitter(messages);
     });
   });
   return channel;

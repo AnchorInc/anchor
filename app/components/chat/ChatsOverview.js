@@ -28,7 +28,8 @@ class ChatsOverview extends Component {
         text={item.latestMessage.text}
         timeStamp={item.latestMessage.timeStamp}
         unread={item.latestMessage.unread}
-        uid={item.uid}
+        teacherUID={item.teacherId}
+        studentUID={item.studentId}
         onPress={() => {
           const chat = {
             uid: (this.props.user.type === userTypes.STUDENT) ? item.teacherId : item.studentId,
