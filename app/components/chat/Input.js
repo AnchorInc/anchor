@@ -62,7 +62,7 @@ class Input extends Component {
             height: 44,
             width: 44,
             borderRadius: 22,
-            backgroundColor: (this.state.blank) ? colors.other.darkGray : colors.secondary.blue,
+            backgroundColor: (this.state.blank) ? colors.other.darkGray : colors.primary.normal,
             elevation: 3,
             justifyContent: 'center',
             alignItems: 'center',

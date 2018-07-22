@@ -8,14 +8,13 @@ import { ChatBubble, Input } from './';
 import { userTypes, firebasePaths } from '../../config';
 
 class Chat extends Component {
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   console.log(nextProps, prevState);
-  //   return {
-  //     messages: nextProps.messages || [],
-  //     teacherUID: prevState.teacherUID,
-  //     studentUID: prevState.studentUID,
-  //   };
-  // }
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      messages: nextProps.messages || [],
+      teacherUID: (nextProps.user.type === userTypes.TEACHER) ? nextProps.user.uid : nextProps.navigation.state.params.chat.uid,
+      studentUID: (nextProps.user.type === userTypes.STUDENT) ? nextProps.user.uid : nextProps.navigation.state.params.chat.uid,
+    };
+  }
 
   state = {
     messages: [],
@@ -38,7 +37,7 @@ class Chat extends Component {
       recipientType: (this.props.user.type === userTypes.STUDENT) ? firebasePaths.TEACHERS : firebasePaths.STUDENTS,
     };
     console.log(messageData);
-    // this.setState({ messages: this.state.messages.concat([messageData]) });
+    this.setState({ messages: this.state.messages.concat([messageData]) });
     this.props.updateMessages(messageData, this.state.teacherUID, this.state.studentUID);
   }
 
@@ -47,14 +46,13 @@ class Chat extends Component {
   }
 
   render() {
-    console.log(this.props.messages);
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header title={this.props.navigation.state.params.chat.title} />
         <FlatList
           enableEmptySections
           keyboardShouldPersistTaps='always'
-          data={this.props.messages}
+          data={this.state.messages}
           onContentSizeChange={() => this.messages.scrollToEnd({ animated: false })}
           onLayout={() => this.messages.scrollToEnd({ animated: false })}
           showsVerticalScrollIndicator={false}

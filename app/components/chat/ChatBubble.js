@@ -68,7 +68,7 @@ const styles = {
       paddingHorizontal: 10,
       paddingVertical: 5,
       alignSelf: 'flex-end',
-      backgroundColor: colors.secondary.blue,
+      backgroundColor: colors.primary.light,
     },
     message: {
       color: 'white',
