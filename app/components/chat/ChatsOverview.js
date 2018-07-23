@@ -19,12 +19,16 @@ class ChatsOverview extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.state.chats.forEach((chat) => {
-      if (this.state.chats.indexOf(chat.teacherId) === this.state.chats.indexOf(nextProps.chats[0].teacherId)) {
-        const index = this.state.chats.indexOf(chat);
-        this.state.chats[index] = nextProps.chat[0];
-      }
-    });
+    if (this.state.chats.length === 0) {
+      this.setState({ chats: nextProps.chats });
+    } else {
+      this.state.chats.forEach((chat) => {
+        if (this.state.chats.indexOf(chat.teacherId) === this.state.chats.indexOf(nextProps.chats[0].teacherId)) {
+          const index = this.state.chats.indexOf(chat);
+          this.state.chats[index] = nextProps.chats[0];
+        }
+      });
+    }
   }
 
   navigateChatScreen = (chat) => {
