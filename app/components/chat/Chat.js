@@ -32,7 +32,7 @@ class Chat extends Component {
   onSend = (message) => {
     const messageData = {
       text: message,
-      timeStamp: new Date().getTime(),
+      timeStamp: new Date(),
       senderName: this.props.user.displayName,
       senderImageURL: this.props.user.photoURL,
       senderID: this.props.user.uid,
