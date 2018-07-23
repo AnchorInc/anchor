@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { userTypes } from '../../config';
 import { StudentStack, TeacherStack } from '../../navigation/Router';
-import { notificationListener, notificationOpenedListener } from './';
+import { onNotifications, notificationOpenedListener, getInitialNotification } from './';
 
 class Main extends Component {
   componentWillReceiveProps(nextProps) {
@@ -20,8 +20,9 @@ class Main extends Component {
   }
 
   componentWillUnmount() {
-    notificationListener();
-    notificationOpenedListener();
+    onNotifications();
+    notificationOpenedListener(this.props.navigation);
+    getInitialNotification(this.props.navigation);
   }
 
   getStack() {
