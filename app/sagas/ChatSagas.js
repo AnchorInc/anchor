@@ -94,13 +94,12 @@ function* getChatId(action) {
 
 const chatEventListener = (ref, id, type) => {
   const channel = eventChannel((emitter) => {
-    const chats = [];
-
     const idType = (type === userTypes.STUDENT) ? 'studentId' : 'teacherId';
 
     return ref.collection('conversations')
     .where(idType, '==', id)
     .onSnapshot((snapshot) => {
+      const chats = [];
       snapshot.docChanges.forEach((change) => {
         const chat = change.doc.data();
         chats.push(chat);

@@ -11,8 +11,15 @@ import { Header } from '../header';
 const { width, height } = Dimensions.get('window');
 
 class ChatsOverview extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props);
+    this.state = { chats: [] };
+
     this.props.getChats(this.props.user.uid);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ chats: nextProps.chats });
   }
 
   navigateChatScreen = (chat) => {
@@ -42,11 +49,12 @@ class ChatsOverview extends Component {
   }
 
   render() {
+    console.log(this.state.chats);
     return (
       <View style={{ backgroundColor: 'white', width, height }}>
         <Header title='Chats' />
         <FlatList
-          data={this.props.chats}
+          data={this.state.chats}
           renderItem={this.renderChats}
           keyExtractor={() => (Math.floor((Math.random() * 100000000) + 1)).toString()}
           contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}
