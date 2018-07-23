@@ -24,7 +24,7 @@ class ChatsOverview extends Component {
     } else {
       this.state.chats.forEach((chat) => {
         const idType = (this.props.user.type === userTypes.STUDENT) ? 'teacherId' : 'studentId';
-        if (this.state.chats.indexOf(chat[idType]) === this.state.chats.indexOf(nextProps.chats[0][idType])) {
+        if (chat[idType] === nextProps.chats[0][idType]) {
           const index = this.state.chats.indexOf(chat);
           this.state.chats[index] = nextProps.chats[0];
         }
