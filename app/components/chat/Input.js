@@ -48,7 +48,7 @@ class Input extends Component {
             }}
             returnKeyType='send'
             ref={(ref) => { this.input = ref; }}
-            selectionColor={colors.secondary.blue}
+            selectionColor={colors.primary.light}
           />
         </View>
         <TouchableOpacity
