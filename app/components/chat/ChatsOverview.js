@@ -19,7 +19,7 @@ class ChatsOverview extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ chats: nextProps.chats });
+    this.setState({ chats: this.state.chats.concat(nextProps.chats) });
   }
 
   navigateChatScreen = (chat) => {
