@@ -20,13 +20,17 @@ class Chat extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    nextProps.messages.forEach((message) => {
-      if (this.state.myLatestMessage) {
-        if (message.timeStamp !== this.state.myLatestMessage.timeStamp) {
-          this.setState({ messages: this.state.messages.concat(nextProps.messages) });
+    if (this.state.messages.length === 0) {
+      this.setState({ messages: this.state.messages.concat(nextProps.messages) });
+    } else {
+      nextProps.messages.forEach((message) => {
+        if (this.state.myLatestMessage) {
+          if (new Date().getTime(message.timeStamp) !== new Date().getTime(this.state.myLatestMessage.timeStamp)) {
+            this.setState({ messages: this.state.messages.concat(nextProps.messages) });
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   onSend = (message) => {
@@ -48,7 +52,6 @@ class Chat extends Component {
   }
 
   render() {
-    console.log(this.state.messages);
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header title={this.props.navigation.state.params.chat.title} />

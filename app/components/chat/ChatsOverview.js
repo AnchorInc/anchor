@@ -61,7 +61,6 @@ class ChatsOverview extends Component {
   }
 
   render() {
-    console.log(this.state.chats);
     return (
       <View style={{ backgroundColor: 'white', width, height }}>
         <Header title='Chats' />
