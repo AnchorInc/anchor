@@ -113,9 +113,8 @@ const chatEventListener = (ref, id, type) => {
 
 const messagesEventListener = (ref) => {
   const channel = eventChannel((emitter) => {
-    const messages = [];
-
     return ref.onSnapshot((snapshot) => {
+      const messages = [];
       snapshot.docChanges.forEach((change) => {
         messages.push(change.doc.data());
       });

@@ -8,14 +8,6 @@ import { ChatBubble, Input } from './';
 import { userTypes, firebasePaths } from '../../config';
 
 class Chat extends Component {
-  static getDerivedStateFromProps(nextProps) {
-    return {
-      messages: nextProps.messages || [],
-      teacherUID: (nextProps.user.type === userTypes.TEACHER) ? nextProps.user.uid : nextProps.navigation.state.params.chat.uid,
-      studentUID: (nextProps.user.type === userTypes.STUDENT) ? nextProps.user.uid : nextProps.navigation.state.params.chat.uid,
-    };
-  }
-
   state = {
     messages: [],
     teacherUID: (this.props.user.type === userTypes.TEACHER) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
@@ -24,6 +16,10 @@ class Chat extends Component {
 
   componentDidMount() {
     this.props.getMessages(this.state.teacherUID, this.state.studentUID);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ messages: this.state.messages.concat(nextProps.messages) });
   }
 
   onSend = (message) => {
@@ -36,8 +32,7 @@ class Chat extends Component {
       recipientID: this.props.navigation.state.params.chat.uid,
       recipientType: (this.props.user.type === userTypes.STUDENT) ? firebasePaths.TEACHERS : firebasePaths.STUDENTS,
     };
-    console.log(messageData);
-    this.setState({ messages: this.state.messages.concat([messageData]) });
+    // this.setState({ messages: this.state.messages.concat(messageData) });
     this.props.updateMessages(messageData, this.state.teacherUID, this.state.studentUID);
   }
 
@@ -46,6 +41,7 @@ class Chat extends Component {
   }
 
   render() {
+    console.log(this.state.messages);
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header title={this.props.navigation.state.params.chat.title} />
