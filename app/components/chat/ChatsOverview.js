@@ -20,13 +20,15 @@ class ChatsOverview extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.state.chats.length === 0) {
-      this.setState({ chats: nextProps.chats });
+      this.state.chats = nextProps.chats;
+      this.state.chats.sort((x, y) => { return y.latestMessage.timeStamp - x.latestMessage.timeStamp; });
     } else {
       this.state.chats.forEach((chat) => {
         const idType = (this.props.user.type === userTypes.STUDENT) ? 'teacherId' : 'studentId';
         if (chat[idType] === nextProps.chats[0][idType]) {
           const index = this.state.chats.indexOf(chat);
           this.state.chats[index] = nextProps.chats[0];
+          this.state.chats.sort((x, y) => { return y.latestMessage.timeStamp - x.latestMessage.timeStamp; });
         }
       });
     }
