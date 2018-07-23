@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Header } from '../header';
+import { FAB } from '../../lib/FAB';
 
 
 class Batches extends Component {
@@ -14,11 +15,15 @@ class Batches extends Component {
     this.props.navigation.navigate('ChatsOverview');
   }
 
+  addBatch = () => {
+    console.log("Adding Batch!");
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
         <Header title='Home' onPressProfile={this.navigateProfile} onPressChat={() => this.navigateChat()} mainButtons />
-        <Text>Change</Text>
+        <FAB icon='add' onPress={this.addBatch} />
       </View>
     );
   }
