@@ -19,7 +19,12 @@ class ChatsOverview extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ chats: this.state.chats.concat(nextProps.chats) });
+    this.state.chats.forEach((chat) => {
+      if (this.state.chats.indexOf(chat.teacherId) === this.state.chats.indexOf(nextProps.chats[0].teacherId)) {
+        const index = this.state.chats.indexOf(chat);
+        this.state.chats[index] = nextProps.chat[0];
+      }
+    });
   }
 
   navigateChatScreen = (chat) => {
