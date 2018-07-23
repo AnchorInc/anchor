@@ -25,7 +25,7 @@ class Chat extends Component {
     } else {
       nextProps.messages.forEach((message) => {
         if (this.state.myLatestMessage) {
-          if (new Date().getTime(message.timeStamp) !== new Date().getTime(this.state.myLatestMessage.timeStamp)) {
+          if (message.timeStamp.getTime() !== this.state.myLatestMessage.timeStamp.getTime()) {
             this.setState({ messages: this.state.messages.concat(nextProps.messages) });
           }
         }
