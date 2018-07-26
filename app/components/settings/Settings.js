@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Dimensions, Switch } from 'react-native';
+import { Text, View, TouchableOpacity, Dimensions, Switch, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -13,8 +13,19 @@ const { width } = Dimensions.get('window');
 
 class Settings extends Component {
   state = {
-    switchValue: false,
+    chatSwitchValue: true,
+    classSwitchValue: false,
   };
+
+  openUrl = (url) => {
+    Linking.canOpenURL(url)
+    .then((supported) => {
+      if (!supported) {
+        return console.log('cant open url');
+      }
+      return Linking.openURL(url);
+    }).catch(err => console.error('An error occurred', err));
+  }
 
   render() {
     return (
@@ -36,7 +47,10 @@ class Settings extends Component {
                   Receive notfications for incoming chat messages
                 </Text>
               </View>
-              <Switch />
+              <Switch
+                value={this.state.chatSwitchValue}
+                onValueChange={value => this.setState({ chatSwitchValue: value })}
+              />
             </View>
             <View style={{ paddingLeft: 15 }}>
               <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
@@ -52,7 +66,10 @@ class Settings extends Component {
                   Receive notfications for upcoming classes
                 </Text>
               </View>
-              <Switch />
+              <Switch
+                value={this.state.classSwitchValue}
+                onValueChange={value => this.setState({ classSwitchValue: value })}
+              />
             </View>
             <View style={{ paddingLeft: 50 }}>
               <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
@@ -67,7 +84,7 @@ class Settings extends Component {
             </Text>
           </CardSection>
           <CardSection>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.openUrl('mailto:learnwithanchor@gmail.com')}>
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <View>
                   <Text style={styles.settingTitleStyle}>
@@ -85,7 +102,7 @@ class Settings extends Component {
             </TouchableOpacity>
           </CardSection>
           <CardSection>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.openUrl('tel:+919849315206')}>
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <View>
                   <Text style={styles.settingTitleStyle}>
