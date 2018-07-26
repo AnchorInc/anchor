@@ -102,7 +102,7 @@ class Settings extends Component {
             </TouchableOpacity>
           </CardSection>
           <CardSection>
-            <TouchableOpacity onPress={() => this.openUrl('tel:+919849315206')}>
+            <TouchableOpacity onPress={() => this.openUrl('https://learnwithanchor.squarespace.com')}>
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <View>
                   <Text style={styles.settingTitleStyle}>
