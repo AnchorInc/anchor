@@ -36,7 +36,9 @@ class ClassDetail extends Component {
             <View style={styles.textContainerStyle}>
               <Icon style={{ paddingLeft: 10 }} name='dots-vertical' size={24} color='rgba(0,0,0,0)' />
               <Text style={styles.nameStyle}>{this.props.batch.teacherDetails.displayName}</Text>
-              <PopupMenu color='black' actions={['Contact']} onPress={() => console.log('contact pressed')} />
+              <TouchableDebounce onPress={this.props.onPressContact.bind(this, this.props.batch.teacherDetails.uid, this.props.batch.teacherDetails.displayName)}>
+                <Icon name='dots-vertical' size={24} color='black' />
+              </TouchableDebounce>
             </View>
             <View style={styles.headerStyle} />
             <TouchableDebounce style={styles.containerStyle} onPress={this.props.onPress.bind(this, this.props.batch.teacherDetails.uid)}>

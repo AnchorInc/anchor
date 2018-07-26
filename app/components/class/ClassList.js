@@ -56,7 +56,7 @@ class ClassList extends Component {
   }
 
   renderTeachers = ({ item }) => {
-    return <ClassDetail batch={item} onPress={this.props.onPress} />;
+    return <ClassDetail batch={item} onPress={this.props.onPress} onPressContact={this.props.onPressContact} />;
   }
 
   render() {

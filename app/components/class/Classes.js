@@ -11,6 +11,14 @@ class Classes extends Component {
     this.props.navigation.navigate('TeacherProfile', { uid, action: 'forum' });
   }
 
+  onPressContact = (uid, title) => {
+    const chat = {
+      uid,
+      title,
+    };
+    this.props.navigation.navigate('Chat', { chat });
+  }
+
   navigateProfile = () => {
     this.props.navigation.navigate('StudentProfile');
   }
@@ -23,7 +31,7 @@ class Classes extends Component {
     return (
       <View style={{ flex: 1 }}>
         <Header title='Home' onPressProfile={() => this.navigateProfile()} onPressChat={() => this.navigateChat()} mainButtons />
-        <ClassList onPress={person => this.onPress(person)} />
+        <ClassList onPress={uid => this.onPress(uid)} onPressContact={(uid, title) => this.onPressContact(uid, title)} />
       </View>
     );
   }
