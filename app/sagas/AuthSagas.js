@@ -97,6 +97,8 @@ function* initUser(action, userCred) {
       uid: user.uid,
       phone: user.phone,
       type: action.userType,
+      showChatNotification: true,
+      showClassNotification: false,
       donePref: false,
     };
     yield call([userRef, userRef.set], userData);
