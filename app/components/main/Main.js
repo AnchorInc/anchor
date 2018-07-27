@@ -14,7 +14,8 @@ class Main extends Component {
       this.openScreen(screen, { uid: senderID, title });
     });
 
-    this.getInitialNotification = firebase.notifications().getInitialNotification((notificationOpen) => {
+    firebase.notifications().getInitialNotification()
+    .then((notificationOpen) => {
       const { title, senderID, screen } = notificationOpen.notification.data;
       this.openScreen(screen, { uid: senderID, title });
     });
@@ -34,7 +35,6 @@ class Main extends Component {
 
   componentWillUnmount() {
     this.onNotificationOpened();
-    this.getInitialNotification();
   }
 
   getStack() {
