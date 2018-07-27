@@ -32,6 +32,7 @@ module.exports = {
         "no-console": 0,
         "max-len": 0,
         "camelcase": 0,
-        "no-underscore-dangle": 0
+        "no-underscore-dangle": 0,
+        "jsx-a11y/href-no-hash": 0,
     }
 };
