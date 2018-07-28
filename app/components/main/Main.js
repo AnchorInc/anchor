@@ -14,10 +14,18 @@ class Main extends Component {
       this.openScreen(screen, { uid: senderID, title });
     });
 
+    // called when the app is opened by a notification tap
     firebase.notifications().getInitialNotification()
     .then((notificationOpen) => {
       const { title, senderID, screen } = notificationOpen.notification.data;
       this.openScreen(screen, { uid: senderID, title });
+      firebase.notifications().removeAllDeliveredNotifications();
+    });
+
+    // listens for messages when app is active
+    this.onMessage = firebase.messaging().onMessage((message) => {
+      console.log(message);
+      // TODO: add badge update functionality here
     });
   }
 
