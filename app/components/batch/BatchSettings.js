@@ -19,7 +19,7 @@ import { FAB } from '../../lib/FAB';
 import { TouchableDebounce } from '../../lib';
 import { colors, userTypes } from '../../config';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class BatchSettings extends Component {
   state = {
@@ -46,7 +46,7 @@ class BatchSettings extends Component {
   setLocation = () => {
     RNGooglePlaces.openPlacePickerModal().then((place) => {
       this.setState((prevState, props) => {
-        let newState = prevState;
+        const newState = prevState;
         newState.batch.location = place;
         return newState;
       });
@@ -57,7 +57,7 @@ class BatchSettings extends Component {
     TimePickerAndroid.open().then((data) => {
       if (data.action === 'timeSetAction') {
         this.setState((prevState, props) => {
-          let newState = prevState;
+          const newState = prevState;
           newState.batch.startTime = new Date(1970, 1, 1, data.hour, data.minute) ;
           return newState;
         });
@@ -71,7 +71,7 @@ class BatchSettings extends Component {
     TimePickerAndroid.open().then((data) => {
         if (data.action === 'timeSetAction') {
           this.setState((prevState, props) => {
-            let newState = prevState;
+            const newState = prevState;
             newState.batch.endTime = new Date(1970, 1, 1, data.hour, data.minute) ;
             return newState;
           });
@@ -151,7 +151,7 @@ class BatchSettings extends Component {
               selectedValue={this.state.batch.day}
               style={{ height: 50, width: 200 }}
               onValueChange={(itemValue, itemIndex) => this.setState((prevState, props) => {
-                let newState = prevState;
+                const newState = prevState;
                 newState.batch.day = itemValue;
                 return newState;
               })}
