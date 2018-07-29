@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions } from 'react-native';
 import algoliasearch from 'algoliasearch/reactnative';
+import AndroidKeyboardAdjust from 'react-native-android-keyboard-adjust';
 
 import { algoliaConfig } from '../../config';
 import { SearchBar, SearchDetail, SubjectDetail } from './';
@@ -15,9 +16,12 @@ class Search extends Component {
     showSearchVal: false,
   };
 
+  componentWillMount() {
+    AndroidKeyboardAdjust.setAdjustNothing();
+  }
+
   onPress = (uid) => {
     console.log(uid);
-    
     this.props.navigation.navigate('TeacherProfile', { uid, action: 'forum' });
   }
 

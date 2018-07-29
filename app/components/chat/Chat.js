@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
+import AndroidKeyboardAdjust from 'react-native-android-keyboard-adjust';
 
 import { Header } from '../header';
 import { updateMessages, getMessages } from '../../actions';
@@ -17,6 +18,10 @@ class Chat extends Component {
       studentUID: (this.props.user.type === userTypes.STUDENT) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
     };
     this.props.getMessages(this.state.teacherUID, this.state.studentUID);
+  }
+
+  componentWillMount() {
+    AndroidKeyboardAdjust.setAdjustResize();
   }
 
   componentWillReceiveProps(nextProps) {

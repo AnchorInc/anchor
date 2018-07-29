@@ -18,6 +18,7 @@ import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 
+import net.zubricky.AndroidKeyboardAdjust.AndroidKeyboardAdjustPackage;
 
 import com.oblador.vectoricons.VectorIconsPackage;
 
@@ -63,7 +64,9 @@ public class MainApplication extends Application implements ReactApplication {
           new SplashScreenReactPackage(),
 
           new VectorIconsPackage(),
-          new FBSDKPackage(mCallbackManager)
+          new FBSDKPackage(mCallbackManager),
+
+          new AndroidKeyboardAdjustPackage()
       );
     }
   };
