@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Dimensions, Switch, Linking } from 'react-native';
+import { Text, View, TouchableOpacity, Dimensions, Switch, Linking, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -29,7 +29,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <View>
+      <ScrollView>
         <Header title='Settings' />
         <Card>
           <CardSection>
@@ -153,7 +153,7 @@ class Settings extends Component {
             </Text>
           </LinearGradient>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   }
 }
