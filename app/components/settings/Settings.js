@@ -80,7 +80,6 @@ class Settings extends Component {
                   style={{ padding: 10 }}
                 />
               </View>
-              <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
             </View>
           </CardSection>
         </Card>
@@ -105,8 +104,8 @@ class Settings extends Component {
                   </View>
                   <Icon style={{ padding: 15 }} name='arrow-top-right' size={24} />
                 </View>
-                <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
               </TouchableOpacity>
+              <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
             </View>
           </CardSection>
           <CardSection>
@@ -123,8 +122,8 @@ class Settings extends Component {
                   </View>
                   <Icon style={{ padding: 15 }} name='headset' size={24} />
                 </View>
-                <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
               </TouchableOpacity>
+              <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
             </View>
           </CardSection>
           <CardSection>
@@ -141,8 +140,8 @@ class Settings extends Component {
                   </View>
                   <Icon style={{ padding: 15 }} name='star' size={24} />
                 </View>
-                <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
               </TouchableOpacity>
+              <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
             </View>
           </CardSection>
         </Card>
@@ -183,10 +182,10 @@ const styles = {
     color: 'black',
     paddingBottom: 5,
     fontFamily: 'avenir_medium',
-    fontSize: 14,
+    fontSize: 15,
   },
   settingInfoStyle: {
-    fontSize: 12,
+    fontSize: 13,
   },
 };
 

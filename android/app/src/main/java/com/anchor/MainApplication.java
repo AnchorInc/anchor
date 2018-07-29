@@ -12,12 +12,15 @@ import com.BV.LinearGradient.LinearGradientPackage;
 
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 
+import com.arttitude360.reactnative.rngoogleplaces.RNGooglePlacesPackage;
+
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 
+import net.zubricky.AndroidKeyboardAdjust.AndroidKeyboardAdjustPackage;
 
 import com.oblador.vectoricons.VectorIconsPackage;
 
@@ -63,7 +66,11 @@ public class MainApplication extends Application implements ReactApplication {
           new SplashScreenReactPackage(),
 
           new VectorIconsPackage(),
-          new FBSDKPackage(mCallbackManager)
+          new FBSDKPackage(mCallbackManager),
+
+          new AndroidKeyboardAdjustPackage(),
+
+          new RNGooglePlacesPackage()
       );
     }
   };

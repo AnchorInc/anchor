@@ -75,9 +75,9 @@ class Login extends Component {
                 '#c0c0cB',
               ]}
               locations={[0.3, 1]}
-              style={{ justifyContent: 'center', alignItems: 'center', alignSelf: 'center', borderRadius: 20, width: 180, height: 40 }}
               start={{ x: 1, y: 0 }}
               end={{ x: 0, y: 1 }}
+              style={{ justifyContent: 'center', alignItems: 'center', alignSelf: 'center', borderRadius: 8, width: 180, height: 40 }}
             >
               <Carousel
                 sliderWidth={width}

@@ -1,35 +1,37 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { colors } from '../../config';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const LoginButton = (props) => {
-  const { containerStyle, textStyle, iconStyle } = styles;
+  const { logoutButtonStyle, textStyle, iconStyle } = styles;
 
   return (
-    <TouchableOpacity style={containerStyle} onPress={props.onPress} activeOpacity={0.5}>
+    <TouchableOpacity activeOpacity={0.3} style={{ alignSelf: 'center', elevation: 10, paddingTop: 0, paddingBottom: 20 }} onPress={props.onPress}>
+      <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={logoutButtonStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
       <View style={{ flex: 1, justifyContent: 'center' }}>
         <Icon name={props.iconName} style={iconStyle} />
       </View>
-
       <View style={{ flex: 2, justifyContent: 'center' }}>
         <Text style={textStyle}>{props.title}</Text>
       </View>
+      </LinearGradient>
     </TouchableOpacity>
   );
 };
 
 const styles = {
-  containerStyle: {
-    backgroundColor: colors.secondary.normal,
-    marginBottom: 0.1 * 0.4 * height,
-    width: 0.88 * width,
-    height: 0.2 * 0.4 * height,
+  logoutButtonStyle: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    width: 0.96 * width,
+    height: 55,
+    borderRadius: 37.5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textStyle: {
     color: 'white',
