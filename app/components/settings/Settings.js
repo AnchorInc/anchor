@@ -127,6 +127,24 @@ class Settings extends Component {
               </TouchableOpacity>
             </View>
           </CardSection>
+          <CardSection>
+            <View style={{ padding: 15, paddingBottom: 0 }}>
+              <TouchableOpacity onPress={() => this.openUrl('http://play.google.com/store/apps/details?id=com.google.android.apps.maps')}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <View>
+                    <Text style={styles.settingTitleStyle}>
+                      Rate Us
+                    </Text>
+                    <Text style={styles.settingInfoStyle}>
+                      Help us out by rating us on the play store!
+                    </Text>
+                  </View>
+                  <Icon style={{ padding: 15 }} name='star' size={24} />
+                </View>
+                <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
+              </TouchableOpacity>
+            </View>
+          </CardSection>
         </Card>
         <View style={{ height: 20 }} />
         <TouchableOpacity activeOpacity={0.3} style={{ alignSelf: 'center', elevation: 10, padding: 10 }} onPress={this.props.logoutUser.bind(this)}>

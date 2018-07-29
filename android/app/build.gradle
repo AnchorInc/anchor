@@ -145,7 +145,6 @@ dependencies {
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-fbsdk')
     implementation project(':react-native-vector-icons')
-    implementation project(':react-native-google-places')
     
     implementation 'com.google.android.gms:play-services-auth:15.0.1' //should at least be 9.0.0
 
