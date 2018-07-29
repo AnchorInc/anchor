@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { TextInput, View, Dimensions, TouchableOpacity } from 'react-native';
+import {
+  TextInput,
+  View,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';

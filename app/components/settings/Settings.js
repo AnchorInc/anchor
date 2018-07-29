@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Dimensions, Switch } from 'react-native';
+import { Text, View, TouchableOpacity, Dimensions, Switch, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { logoutUser } from '../../actions';
+import { logoutUser, updateUser } from '../../actions';
 import { Header } from '../header';
 import { Card, CardSection } from '../../lib';
 import { colors } from '../../config';
@@ -13,8 +13,19 @@ const { width } = Dimensions.get('window');
 
 class Settings extends Component {
   state = {
-    switchValue: false,
+    chatSwitchValue: this.props.user.showChatNotification,
+    classSwitchValue: this.props.user.showClassNotification,
   };
+
+  openUrl = (url) => {
+    Linking.canOpenURL(url)
+    .then((supported) => {
+      if (!supported) {
+        return console.log('cant open url');
+      }
+      return Linking.openURL(url);
+    }).catch(err => console.error('An error occurred', err));
+  }
 
   render() {
     return (
@@ -27,34 +38,48 @@ class Settings extends Component {
             </Text>
           </CardSection>
           <CardSection>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-              <View>
-                <Text style={styles.settingTitleStyle}>
-                  Chat Notification
-                </Text>
-                <Text style={styles.settingInfoStyle}>
-                  Receive notfications for incoming chat messages
-                </Text>
+            <View style={{ padding: 15, paddingBottom: 0 }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <View>
+                  <Text style={styles.settingTitleStyle}>
+                    Chat Notification
+                  </Text>
+                  <Text style={styles.settingInfoStyle}>
+                    Receive notfications for incoming chat messages
+                  </Text>
+                </View>
+                <Switch
+                  value={this.state.chatSwitchValue}
+                  onValueChange={(value) => {
+                    this.setState({ chatSwitchValue: value });
+                    this.props.updateUser({ showChatNotification: value });
+                  }}
+                  style={{ padding: 10 }}
+                />
               </View>
-              <Switch />
-            </View>
-            <View style={{ paddingLeft: 15 }}>
               <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
             </View>
           </CardSection>
           <CardSection>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-              <View>
-                <Text style={styles.settingTitleStyle}>
-                  Class Notification
-                </Text>
-                <Text style={styles.settingInfoStyle}>
-                  Receive notfications for upcoming classes
-                </Text>
+            <View style={{ padding: 15, paddingBottom: 0 }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <View>
+                  <Text style={styles.settingTitleStyle}>
+                    Class Notification
+                  </Text>
+                  <Text style={styles.settingInfoStyle}>
+                    Receive notfications for upcoming classes
+                  </Text>
+                </View>
+                <Switch
+                  value={this.state.classSwitchValue}
+                  onValueChange={(value) => {
+                    this.setState({ classSwitchValue: value });
+                    this.props.updateUser({ showClassNotification: value });
+                  }}
+                  style={{ padding: 10 }}
+                />
               </View>
-              <Switch />
-            </View>
-            <View style={{ paddingLeft: 50 }}>
               <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
             </View>
           </CardSection>
@@ -67,40 +92,40 @@ class Settings extends Component {
             </Text>
           </CardSection>
           <CardSection>
-            <TouchableOpacity>
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <View>
-                  <Text style={styles.settingTitleStyle}>
-                    Contact Us
-                  </Text>
-                  <Text style={styles.settingInfoStyle}>
-                    learnwithanchor@gmail.com
-                  </Text>
+            <View style={{ padding: 15, paddingBottom: 0 }}>
+              <TouchableOpacity onPress={() => this.openUrl('mailto:learnwithanchor@gmail.com')}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <View>
+                    <Text style={styles.settingTitleStyle}>
+                      Contact Us
+                    </Text>
+                    <Text style={styles.settingInfoStyle}>
+                      learnwithanchor@gmail.com
+                    </Text>
+                  </View>
+                  <Icon style={{ padding: 15 }} name='arrow-top-right' size={24} />
                 </View>
-                <Icon style={{ padding: 15 }} name='arrow-top-right' size={24} />
-              </View>
-              <View style={{ paddingLeft: 15 }}>
                 <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
           </CardSection>
           <CardSection>
-            <TouchableOpacity>
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <View>
-                  <Text style={styles.settingTitleStyle}>
-                    Help
-                  </Text>
-                  <Text style={styles.settingInfoStyle}>
-                    Need any help? We got your back
-                  </Text>
+            <View style={{ padding: 15, paddingBottom: 0 }}>
+              <TouchableOpacity onPress={() => this.openUrl('https://learnwithanchor.squarespace.com')}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <View>
+                    <Text style={styles.settingTitleStyle}>
+                      Help
+                    </Text>
+                    <Text style={styles.settingInfoStyle}>
+                      Need any help? We got your back
+                    </Text>
+                  </View>
+                  <Icon style={{ padding: 15 }} name='headset' size={24} />
                 </View>
-                <Icon style={{ padding: 15 }} name='headset' size={24} />
-              </View>
-              <View style={{ paddingLeft: 15 }}>
                 <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
           </CardSection>
         </Card>
         <View style={{ height: 20 }} />
@@ -138,16 +163,21 @@ const styles = {
   },
   settingTitleStyle: {
     color: 'black',
-    padding: 15,
     paddingBottom: 5,
     fontFamily: 'avenir_medium',
     fontSize: 14,
   },
   settingInfoStyle: {
-    paddingTop: 0,
-    padding: 15,
     fontSize: 12,
   },
 };
 
-export default connect(null, { logoutUser })(Settings);
+const mapStateToProps = (state) => {
+  let user;
+  if (state.user.user) {
+    user = state.user.user;
+  }
+  return { user };
+};
+
+export default connect(mapStateToProps, { logoutUser, updateUser })(Settings);

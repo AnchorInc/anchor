@@ -109,6 +109,7 @@ export const MainStack = StackNavigator({
   Main: { screen: Main },
   StudentProfileEditing: { screen: StudentProfileEditing },
   TeacherProfileEditing: { screen: TeacherProfileEditing },
+  Chat: { screen: Chat },
 }, StackConfig);
 
 const defaultGetStateForAction = MainStack.router.getStateForAction;

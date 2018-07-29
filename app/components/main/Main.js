@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 
 import { userTypes } from '../../config';
 import { StudentStack, TeacherStack } from '../../navigation/Router';
-import { onNotifications, notificationOpenedListener, getInitialNotification } from './';
 
 class Main extends Component {
+  componentDidMount() {
+    // called when the notification is tapped and the app is in the background
+    this.onNotificationOpened = firebase.notifications().onNotificationOpened((notificationOpen) => {
+      const { title, senderID, screen } = notificationOpen.notification.data;
+      this.openScreen(screen, { uid: senderID, title });
+    });
+
+    // called when the app is opened by a notification tap
+    firebase.notifications().getInitialNotification()
+    .then((notificationOpen) => {
+      const { title, senderID, screen } = notificationOpen.notification.data;
+      this.openScreen(screen, { uid: senderID, title });
+      firebase.notifications().removeAllDeliveredNotifications();
+    });
+
+    // listens for messages when app is active
+    this.onMessage = firebase.messaging().onMessage((message) => {
+      console.log(message);
+      // TODO: add badge update functionality here
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!nextProps.donePref) {
       if (nextProps.type === userTypes.STUDENT) {
@@ -20,9 +42,7 @@ class Main extends Component {
   }
 
   componentWillUnmount() {
-    onNotifications();
-    notificationOpenedListener(this.props.navigation);
-    getInitialNotification(this.props.navigation);
+    this.onNotificationOpened();
   }
 
   getStack() {
@@ -32,6 +52,14 @@ class Main extends Component {
       return <TeacherStack />;
     }
     return null;
+  }
+
+  openScreen = (screen, data = null) => {
+    console.log(data);
+    if (data) {
+      return this.props.navigation.navigate(screen, { chat: data });
+    }
+    return this.props.navigation.navigate(screen);
   }
 
   render() {

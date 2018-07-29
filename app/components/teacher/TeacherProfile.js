@@ -48,7 +48,7 @@ class TeacherProfile extends Component {
 
   completeAction = () => {
     if (this.state.action === 'account-settings-variant') {
-      this.props.navigation.navigate('TeacherSetup');
+      this.props.navigation.navigate('TeacherProfileEditing');
     } else {
       const chat = {
         uid: this.state.uid,

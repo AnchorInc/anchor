@@ -9,6 +9,7 @@ import { updateUser } from '../../actions';
 
 const { width, height } = Dimensions.get('window');
 
+// TODO: add change profile picture functionality
 class TeacherProfileEditing extends Component {
   constructor(props) {
     super(props);

@@ -21,12 +21,13 @@ class Chat extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.state.messages.length === 0) {
-      this.setState({ messages: this.state.messages.concat(nextProps.messages) });
+      const messages = nextProps.messages.reverse();
+      this.setState({ messages });
     } else {
       nextProps.messages.forEach((message) => {
         if (this.state.myLatestMessage) {
-          if (message.timeStamp.getTime() !== this.state.myLatestMessage.timeStamp.getTime()) {
-            this.setState({ messages: this.state.messages.concat(nextProps.messages) });
+          if (new Date(message.timeStamp).getTime() !== new Date(this.state.myLatestMessage.timeStamp).getTime()) {
+            this.setState({ messages: nextProps.messages.concat(this.state.messages) });
           }
         }
       });
@@ -43,7 +44,8 @@ class Chat extends Component {
       recipientID: this.props.navigation.state.params.chat.uid,
       recipientType: (this.props.user.type === userTypes.STUDENT) ? firebasePaths.TEACHERS : firebasePaths.STUDENTS,
     };
-    this.setState({ messages: this.state.messages.concat(messageData), myLatestMessage: messageData });
+    const messages = [messageData, ...this.state.messages];
+    this.setState({ messages, myLatestMessage: messageData });
     this.props.updateMessages(messageData, this.state.teacherUID, this.state.studentUID);
   }
 
@@ -58,8 +60,7 @@ class Chat extends Component {
         <FlatList
           keyboardShouldPersistTaps='always'
           data={this.state.messages}
-          onContentSizeChange={() => this.messages.scrollToEnd({ animated: true })}
-          onLayout={() => this.messages.scrollToEnd({ animated: false })}
+          inverted
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ backgroundColor: 'white', justifyContent: 'flex-end', flexGrow: 1 }}
           keyExtractor={() => (Math.floor((Math.random() * 100000000) + 1)).toString()}
