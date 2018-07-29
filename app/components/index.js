@@ -1,6 +1,6 @@
 export { Chat, ChatsOverview } from './chat';
 export { Classes } from './class';
-export { Batches } from './batch';
+export { Batches, BatchSettings } from './batch';
 export { Login } from './login';
 export { Main } from './main';
 export { StudentProfile, StudentProfileEditing } from './student';

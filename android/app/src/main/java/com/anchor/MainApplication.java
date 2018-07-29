@@ -8,6 +8,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 
 import com.facebook.react.ReactApplication;
+import com.arttitude360.reactnative.rngoogleplaces.RNGooglePlacesPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
@@ -63,7 +64,8 @@ public class MainApplication extends Application implements ReactApplication {
           new SplashScreenReactPackage(),
 
           new VectorIconsPackage(),
-          new FBSDKPackage(mCallbackManager)
+          new FBSDKPackage(mCallbackManager),
+          new RNGooglePlacesPackage()
       );
     }
   };

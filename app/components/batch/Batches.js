@@ -16,7 +16,7 @@ class Batches extends Component {
   }
 
   addBatch = () => {
-    console.log('Adding Batch!');
+    this.props.navigation.navigate('BatchSettings');
   }
 
   render() {

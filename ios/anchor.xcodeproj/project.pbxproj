@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -69,6 +68,12 @@
 		E243B4C026F34F7CA6C3CCF0 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D048A74492804FBD8D39F709 /* Entypo.ttf */; };
 		E3553BB773A44477ADC49C96 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C36A4BF4BF674BD4B782DBBA /* libBVLinearGradient.a */; };
 		EBC3528BC7A34DCB94D5FB17 /* avenir_heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1106B372D8AB4C028C84A86E /* avenir_heavy.ttf */; };
+		EC31921D6AAA462C9195930E /* avenir_book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 232441AF6E8A4D7791252B32 /* avenir_book.otf */; };
+		F9AB8036AAF74304A5287FB3 /* avenir_heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A378E47A19846758AFEE6C9 /* avenir_heavy.ttf */; };
+		28CF036892C643B19A5A19BF /* avenir_light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 534771DCC5A7404FAC6DC4D2 /* avenir_light.otf */; };
+		FDA76C37FA7640879C6B3E9A /* avenir_medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8006459F41424B829E6CE09B /* avenir_medium.otf */; };
+		A6D2CFAD3E4C466282AE1429 /* avenir_roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F824261F3014C4EBC2BB475 /* avenir_roman.otf */; };
+		26070045F39941CE803038C1 /* libRNGooglePlaces.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E484B6BF57234B5897EB6F8E /* libRNGooglePlaces.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -462,6 +467,13 @@
 		EEB36CDB8991421B9B1B7387 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		F3CF530559EC4965AAE3E575 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		F472991D343F4F6A90F968C5 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		232441AF6E8A4D7791252B32 /* avenir_book.otf */ = {isa = PBXFileReference; name = "avenir_book.otf"; path = "../app/fonts/avenir_book.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7A378E47A19846758AFEE6C9 /* avenir_heavy.ttf */ = {isa = PBXFileReference; name = "avenir_heavy.ttf"; path = "../app/fonts/avenir_heavy.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		534771DCC5A7404FAC6DC4D2 /* avenir_light.otf */ = {isa = PBXFileReference; name = "avenir_light.otf"; path = "../app/fonts/avenir_light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8006459F41424B829E6CE09B /* avenir_medium.otf */ = {isa = PBXFileReference; name = "avenir_medium.otf"; path = "../app/fonts/avenir_medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6F824261F3014C4EBC2BB475 /* avenir_roman.otf */ = {isa = PBXFileReference; name = "avenir_roman.otf"; path = "../app/fonts/avenir_roman.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5D154FD0579740DDA8B2FFA6 /* RNGooglePlaces.xcodeproj */ = {isa = PBXFileReference; name = "RNGooglePlaces.xcodeproj"; path = "../node_modules/react-native-google-places/ios/RNGooglePlaces.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		E484B6BF57234B5897EB6F8E /* libRNGooglePlaces.a */ = {isa = PBXFileReference; name = "libRNGooglePlaces.a"; path = "libRNGooglePlaces.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -500,6 +512,7 @@
 				06743950338C478794B15698 /* libRNVectorIcons.a in Frameworks */,
 				4E69ECD7639144DBBA755030 /* libRNFirebase.a in Frameworks */,
 				E3553BB773A44477ADC49C96 /* libBVLinearGradient.a in Frameworks */,
+				26070045F39941CE803038C1 /* libRNGooglePlaces.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,6 +697,7 @@
 				BE5940BCF0FB4405B0C4F617 /* RNVectorIcons.xcodeproj */,
 				41111D01008645478A487431 /* RNFirebase.xcodeproj */,
 				6CEFADAF92C641249645DBAE /* BVLinearGradient.xcodeproj */,
+				5D154FD0579740DDA8B2FFA6 /* RNGooglePlaces.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -820,6 +834,11 @@
 				F472991D343F4F6A90F968C5 /* Octicons.ttf */,
 				C703143B77FF498EB6DCAA81 /* SimpleLineIcons.ttf */,
 				3C1F28D3B5634A55B4876574 /* Zocial.ttf */,
+				232441AF6E8A4D7791252B32 /* avenir_book.otf */,
+				7A378E47A19846758AFEE6C9 /* avenir_heavy.ttf */,
+				534771DCC5A7404FAC6DC4D2 /* avenir_light.otf */,
+				8006459F41424B829E6CE09B /* avenir_medium.otf */,
+				6F824261F3014C4EBC2BB475 /* avenir_roman.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1375,6 +1394,11 @@
 				2E10730BC62C490381A8F425 /* Octicons.ttf in Resources */,
 				A5FC1374121B438294CADAF2 /* SimpleLineIcons.ttf in Resources */,
 				8734FBE6D0B4483BB0A66468 /* Zocial.ttf in Resources */,
+				EC31921D6AAA462C9195930E /* avenir_book.otf in Resources */,
+				F9AB8036AAF74304A5287FB3 /* avenir_heavy.ttf in Resources */,
+				28CF036892C643B19A5A19BF /* avenir_light.otf in Resources */,
+				FDA76C37FA7640879C6B3E9A /* avenir_medium.otf in Resources */,
+				A6D2CFAD3E4C466282AE1429 /* avenir_roman.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1507,12 +1531,14 @@
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-google-places\ios",
 				);
 				INFOPLIST_FILE = anchorTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1546,12 +1572,14 @@
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-google-places\ios",
 				);
 				INFOPLIST_FILE = anchorTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1586,6 +1614,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-google-places\ios",
 				);
 				INFOPLIST_FILE = anchor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1614,6 +1643,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-google-places\ios",
 				);
 				INFOPLIST_FILE = anchor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1649,11 +1679,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-google-places\ios",
 				);
 				INFOPLIST_FILE = "anchor-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1697,11 +1729,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)..\node_modules\neact-native-linear-gradientBVLinearGradient",
+					"$(SRCROOT)\..\node_modules\react-native-google-places\ios",
 				);
 				INFOPLIST_FILE = "anchor-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1746,6 +1780,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.anchor-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1770,6 +1805,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

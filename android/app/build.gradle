@@ -141,11 +141,13 @@ dependencies {
     implementation (project(":react-native-google-signin")){
         exclude group: "com.google.android.gms", module: 'play-services-auth' // very important
     }
+    // From node_modules
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-fbsdk')
     implementation project(':react-native-vector-icons')
+    implementation project(':react-native-google-places')
+    
     implementation 'com.google.android.gms:play-services-auth:15.0.1' //should at least be 9.0.0
-    // From node_modules
 
     // This should be here already
     implementation (project(':react-native-firebase')) {
@@ -165,7 +167,6 @@ dependencies {
     // Firebase cloud messaging dependency
     implementation "com.google.firebase:firebase-messaging:17.0.0"
     implementation 'me.leolin:ShortcutBadger:1.1.21@aar' // to enable android 8 badge feature
-
 }
 
 // Run this once to be able to run the application with BUCK

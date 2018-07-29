@@ -16,6 +16,7 @@ import {
   TeacherProfileEditing,
   Search,
   Settings,
+  BatchSettings,
 } from '../components';
 
 import { colors } from '../config';
@@ -90,6 +91,7 @@ export const StudentStack = StackNavigator({
   StudentProfileEditing: { screen: StudentProfileEditing },
   ChatsOverview: { screen: ChatsOverview },
   Chat: { screen: Chat },
+  BatchSettings: { screen: BatchSettings },
 }, StackConfig);
 
 export const TeacherStack = StackNavigator({
@@ -98,6 +100,7 @@ export const TeacherStack = StackNavigator({
   TeacherProfileEditing: { screen: TeacherProfileEditing },
   ChatsOverview: { screen: ChatsOverview },
   Chat: { screen: Chat },
+  BatchSettings: { screen: BatchSettings },
 }, StackConfig);
 
 export const MainStack = StackNavigator({
