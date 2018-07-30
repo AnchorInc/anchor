@@ -5,6 +5,7 @@
 	};
 	objectVersion = 48;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -293,6 +294,34 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNGooglePlaces;
+		};
+		8D80AA2F210FB00000616D14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DEDC81D210F683600132757 /* anchor.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13B07F961A680F5B00A75B9A;
+			remoteInfo = anchor;
+		};
+		8D80AA31210FB00000616D14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DEDC81D210F683600132757 /* anchor.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00E356EE1AD99517003FC87E;
+			remoteInfo = anchorTests;
+		};
+		8D80AA33210FB00000616D14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DEDC81D210F683600132757 /* anchor.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D02E47B1E0B4A5D006451C7;
+			remoteInfo = "anchor-tvOS";
+		};
+		8D80AA35210FB00000616D14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DEDC81D210F683600132757 /* anchor.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D02E4901E0B4A5D006451C7;
+			remoteInfo = "anchor-tvOSTests";
 		};
 		8DA5619921047111008FFE06 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1002,6 +1031,10 @@
 		8DEDC81E210F683600132757 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				8D80AA30210FB00000616D14,
+				8D80AA32210FB00000616D14,
+				8D80AA34210FB00000616D14,
+				8D80AA36210FB00000616D14,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1181,7 +1214,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "anchor" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Anchor" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1484,6 +1517,22 @@
 			path = libRNGooglePlaces.a;
 			remoteRef = 8D5FCC90210F423B00C5D40C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8D80AA30210FB00000616D14 = {
+			isa = PBXReferenceProxy;
+			remoteRef = 8D80AA2F210FB00000616D14 /* PBXContainerItemProxy */;
+		};
+		8D80AA32210FB00000616D14 = {
+			isa = PBXReferenceProxy;
+			remoteRef = 8D80AA31210FB00000616D14 /* PBXContainerItemProxy */;
+		};
+		8D80AA34210FB00000616D14 = {
+			isa = PBXReferenceProxy;
+			remoteRef = 8D80AA33210FB00000616D14 /* PBXContainerItemProxy */;
+		};
+		8D80AA36210FB00000616D14 = {
+			isa = PBXReferenceProxy;
+			remoteRef = 8D80AA35210FB00000616D14 /* PBXContainerItemProxy */;
 		};
 		8DA5619A21047111008FFE06 /* libfishhook.a */ = {
 			isa = PBXReferenceProxy;
@@ -2408,7 +2457,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "anchor" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Anchor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
