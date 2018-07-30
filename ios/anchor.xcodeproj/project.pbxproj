@@ -53,7 +53,6 @@
 		8734FBE6D0B4483BB0A66468 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C1F28D3B5634A55B4876574 /* Zocial.ttf */; };
 		8798FFB40FCF4F87874F1064 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5A3B601221468FB408222A /* AddressBook.framework */; };
 		8D4D6085210F7F82006ACB36 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4D6084210F7F81006ACB36 /* FBSDKCoreKit.framework */; };
-		8D5FCCB0210F4FD700C5D40C /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		8DBD17CF210F7C7100843684 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBD177E210F7C7000843684 /* Bolts.framework */; };
 		8DBD17D0210F7C7100843684 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBD17CD210F7C7000843684 /* FBSDKLoginKit.framework */; };
 		8DBD17D1210F7C7100843684 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBD17CE210F7C7000843684 /* FBSDKShareKit.framework */; };
@@ -564,7 +563,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
@@ -807,7 +805,6 @@
 			children = (
 				8D1333B9210F6BBA0057490D /* anchor.entitlements */,
 				8DEDC6DC210F584E00132757 /* GoogleService-Info.plist */,
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -1214,7 +1211,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Anchor" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "anchor" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1521,18 +1518,22 @@
 		8D80AA30210FB00000616D14 = {
 			isa = PBXReferenceProxy;
 			remoteRef = 8D80AA2F210FB00000616D14 /* PBXContainerItemProxy */;
+			sourceTree = "<unknown>";
 		};
 		8D80AA32210FB00000616D14 = {
 			isa = PBXReferenceProxy;
 			remoteRef = 8D80AA31210FB00000616D14 /* PBXContainerItemProxy */;
+			sourceTree = "<unknown>";
 		};
 		8D80AA34210FB00000616D14 = {
 			isa = PBXReferenceProxy;
 			remoteRef = 8D80AA33210FB00000616D14 /* PBXContainerItemProxy */;
+			sourceTree = "<unknown>";
 		};
 		8D80AA36210FB00000616D14 = {
 			isa = PBXReferenceProxy;
 			remoteRef = 8D80AA35210FB00000616D14 /* PBXContainerItemProxy */;
+			sourceTree = "<unknown>";
 		};
 		8DA5619A21047111008FFE06 /* libfishhook.a */ = {
 			isa = PBXReferenceProxy;
@@ -1792,7 +1793,6 @@
 				EBC3528BC7A34DCB94D5FB17 /* avenir_heavy.ttf in Resources */,
 				9B17EFD1EDAD469A8A70DF46 /* avenir_light.otf in Resources */,
 				CBBEDDEE589C416ABC081AC1 /* avenir_medium.otf in Resources */,
-				8D5FCCB0210F4FD700C5D40C /* main.jsbundle in Resources */,
 				C3A66C2F087E4183B291DA71 /* avenir_roman.otf in Resources */,
 				D18AE89A6B0D4EB88558C280 /* avenir_book.otf in Resources */,
 				A1001CCA88764C55A5FCF1C0 /* avenir_heavy.ttf in Resources */,
@@ -2457,7 +2457,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Anchor" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "anchor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
