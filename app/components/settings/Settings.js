@@ -102,7 +102,7 @@ class Settings extends Component {
                       learnwithanchor@gmail.com
                     </Text>
                   </View>
-                  <Icon style={{ padding: 15 }} name='arrow-top-right' size={24} />
+                  <Icon style={{ padding: 15 }} name='exit-to-app' size={24} />
                 </View>
               </TouchableOpacity>
               <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
