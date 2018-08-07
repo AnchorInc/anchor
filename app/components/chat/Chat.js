@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import AndroidKeyboardAdjust from 'react-native-android-keyboard-adjust';
 
 import { Header } from '../header';
-import { updateMessages, getMessages } from '../../actions';
+import { updateMessages, getMessages, hideChatBadge } from '../../actions';
 import { ChatBubble, Input } from './';
 import { userTypes, firebasePaths } from '../../config';
 
@@ -22,6 +22,12 @@ class Chat extends Component {
 
   componentWillMount() {
     AndroidKeyboardAdjust.setAdjustResize();
+  }
+
+  componentDidMount() {
+    if (this.props.showChatBadge) {
+      this.props.hideChatBadge();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -87,7 +93,7 @@ const mapStateToProps = (state) => {
   if (state.chat.messages) {
     messages = state.chat.messages;
   }
-  return { user, messages };
+  return { user, messages, showChatBadge: state.global.showChatBadge };
 };
 
-export default connect(mapStateToProps, { updateMessages, getMessages })(Chat);
+export default connect(mapStateToProps, { updateMessages, getMessages, hideChatBadge })(Chat);

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 
 import { userTypes } from '../../config';
+import { showChatBadge } from '../../actions';
 import { StudentStack, TeacherStack } from '../../navigation/Router';
 
 class Main extends Component {
@@ -22,10 +23,10 @@ class Main extends Component {
       firebase.notifications().removeAllDeliveredNotifications();
     });
 
-    // listens for messages when app is active
+    // listens for messages
     this.onMessage = firebase.messaging().onMessage((message) => {
       console.log(message);
-      // TODO: add badge update functionality here
+      this.props.showChatBadge();
     });
   }
 
@@ -81,4 +82,4 @@ const mapStateToProps = (state) => {
   return { donePref, type };
 };
 
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, { showChatBadge })(Main);

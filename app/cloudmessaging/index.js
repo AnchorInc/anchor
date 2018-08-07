@@ -1,5 +1,6 @@
 import firebase from 'react-native-firebase';
-import { colors } from '../config';
+import { colors, store } from '../config';
+import { showChatBadge } from '../actions';
 
 export const backgroundMessageListener = async (message) => {
   console.log(message);
@@ -36,6 +37,9 @@ export const backgroundMessageListener = async (message) => {
 
   // display the notification
   firebase.notifications().displayNotification(notification);
+
+  // set showChatBadge to true
+  store.dispatch(showChatBadge());
 
   return Promise.resolve();
 };

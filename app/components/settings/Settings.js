@@ -45,7 +45,7 @@ class Settings extends Component {
                     Chat Notification
                   </Text>
                   <Text style={styles.settingInfoStyle}>
-                    Receive notfications for incoming chat messages
+                    Receive notfications for incoming chats
                   </Text>
                 </View>
                 <Switch

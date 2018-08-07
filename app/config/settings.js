@@ -19,6 +19,10 @@ export const actionTypes = {
     SHOW: 'types.ERROR.SHOW',
     CLOSE: 'types.ERROR.CLOSE',
   },
+  BADGE: {
+    SHOW: 'types.BADGE.SHOW',
+    HIDE: 'types.BADGE.HIDE',
+  },
   USER: {
     SYNC: 'types.USER.SYNC',
     LISTEN: 'types.USER.LISTEN',

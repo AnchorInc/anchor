@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import DialogBox from 'react-native-dialogbox';
 
 import { ChatDetail } from './';
-import { getChats } from '../../actions';
+import { getChats, hideChatBadge } from '../../actions';
 import { userTypes } from '../../config';
 import { Header } from '../header';
 
@@ -16,6 +16,12 @@ class ChatsOverview extends Component {
     this.state = { chats: [] };
 
     this.props.getChats(this.props.user.uid);
+  }
+
+  componentDidMount() {
+    if (this.props.showChatBadge) {
+      this.props.hideChatBadge();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -87,7 +93,7 @@ const mapStateToProps = (state) => {
   if (state.chat.chats) {
     chats = state.chat.chats;
   }
-  return { user, chats };
+  return { user, chats, showChatBadge: state.global.showChatBadge };
 };
 
 export default connect(mapStateToProps, { getChats })(ChatsOverview);
