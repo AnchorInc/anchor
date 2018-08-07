@@ -96,4 +96,4 @@ const mapStateToProps = (state) => {
   return { user, chats, showChatBadge: state.global.showChatBadge };
 };
 
-export default connect(mapStateToProps, { getChats })(ChatsOverview);
+export default connect(mapStateToProps, { getChats, hideChatBadge })(ChatsOverview);
