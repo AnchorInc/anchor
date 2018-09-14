@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import StarRating from 'react-native-star-rating';
 
 import { colors } from '../../config';
-import { Card, CardSection, TouchableDebounce, PopupMenu } from '../../lib';
+import { Card, CardSection, TouchableDebounce } from '../../lib';
 
 const { width } = Dimensions.get('window');
 
