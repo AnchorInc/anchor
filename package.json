@@ -9,9 +9,9 @@
   "dependencies": {
     "algoliasearch": "^3.24.3",
     "moment": "^2.22.2",
-    "npm": "^6.1.0",
+    "npm": "^6.4.1",
     "react": "16.0.0-alpha.12",
-    "react-native": "^0.55.4",
+    "react-native": "^0.57.2",
     "react-native-android-keyboard-adjust": "^1.1.1",
     "react-native-dialogbox": "^0.6.9",
     "react-native-fbsdk": "^0.7.0",
@@ -26,7 +26,7 @@
     "react-native-splash-screen": "^3.0.6",
     "react-native-star-rating": "^1.0.7",
     "react-native-vector-icons": "^4.6.0",
-    "react-navigation": "^1.0.0-beta.11",
+    "react-navigation": "^2.17.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.0",
     "redux-saga": "^0.15.6"
