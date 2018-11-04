@@ -34,7 +34,7 @@ class ClassDetail extends Component {
         <Card style={{ flex: 1, flexDirection: 'row' }}>
           <CardSection>
             <View style={styles.textContainerStyle}>
-              <Icon style={{ paddingLeft: 10 }} name='dots-vertical' size={24} color='rgba(0,0,0,0)' />
+              <Icon style={{ paddingLeft: 10 }} name='dots-vertical' size={0} />
               <Text style={styles.nameStyle}>{this.props.batch.teacherDetails.displayName}</Text>
               <TouchableDebounce onPress={this.props.onPressContact.bind(this, this.props.batch.teacherDetails.uid, this.props.batch.teacherDetails.displayName)}>
                 <Icon name='dots-vertical' size={24} color='black' />

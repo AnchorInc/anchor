@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabNavigator, StackNavigator, NavigationActions, TabBarBottom } from 'react-navigation';
+import { NavigationActions, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -53,7 +53,6 @@ const TabNavigatorConfig = {
     },
   }),
   animationEnabled: false,
-  tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
   swipeEnabled: false,
   backBehavior: 'none',
@@ -65,13 +64,13 @@ const TabNavigatorConfig = {
   },
 };
 
-export const StudentTabs = TabNavigator({
+export const StudentTabs = createBottomTabNavigator({
   Classes: { screen: Classes },
   Search: { screen: Search },
   Settings: { screen: Settings },
 }, TabNavigatorConfig);
 
-export const TeacherTabs = TabNavigator({
+export const TeacherTabs = createBottomTabNavigator({
   Batches: { screen: Batches },
   Settings: { screen: Settings },
 }, TabNavigatorConfig);
@@ -83,7 +82,7 @@ const StackConfig = {
   headerMode: 'none',
 };
 
-export const StudentStack = StackNavigator({
+export const StudentStack = createStackNavigator({
   Classes: { screen: StudentTabs },
   Search: { screen: StudentTabs },
   StudentProfile: { screen: StudentProfile },
@@ -94,7 +93,7 @@ export const StudentStack = StackNavigator({
   BatchSettings: { screen: BatchSettings },
 }, StackConfig);
 
-export const TeacherStack = StackNavigator({
+export const TeacherStack = createStackNavigator({
   Batches: { screen: TeacherTabs },
   TeacherProfile: { screen: TeacherProfile },
   TeacherProfileEditing: { screen: TeacherProfileEditing },
@@ -103,7 +102,7 @@ export const TeacherStack = StackNavigator({
   BatchSettings: { screen: BatchSettings },
 }, StackConfig);
 
-export const MainStack = StackNavigator({
+export const MainStack = createStackNavigator({
   AppSetup: { screen: AppSetup },
   Login: { screen: Login },
   Main: { screen: Main },
