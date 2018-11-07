@@ -11,7 +11,7 @@
     "moment": "^2.22.2",
     "npm": "^6.4.1",
     "prop-types": "^15.6.2",
-    "react": "^16.6.0-alpha.8af6728",
+    "react": "^16.6.1",
     "react-native": "^0.57.4",
     "react-native-android-keyboard-adjust": "^1.2.0",
     "react-native-dialogbox": "^0.6.10",
