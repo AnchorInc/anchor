@@ -17,13 +17,13 @@ target 'anchor' do
   pod 'FBSDKMessengerShareKit'
     
   # Required by RNFirebase
-  pod 'Firebase/Core'
+  pod 'Firebase/Core', '~> 5.11.0'
   
   #RNFirebase Auth Package
-  pod 'Firebase/Auth'
+  pod 'Firebase/Auth', '~> 5.11.0'
   
   #RNFirebase Cloud Messaging Package
-  pod 'Firebase/Messaging'
+  pod 'Firebase/Messaging', '~> 5.11.0'
   
   #RNFirebase Firestore Package
   pod 'Firebase/Firestore'

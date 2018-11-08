@@ -13,6 +13,7 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* anchorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* anchorTests.m */; };
+		050734788679428DACC1AA35 /* avenir_light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 76A4FF439B2C4401B20EF87C /* avenir_light.otf */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -31,12 +32,33 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* anchorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* anchorTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		35CB0D47649B4D2D98C3285F /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47AC764189EF4E39BA7FD88D /* libRNFirebase.a */; };
+		5F6787DF9BA442508A0659B1 /* avenir_heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 259AB06E7E1445EE8180EBA3 /* avenir_heavy.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8D1E394721690F81006DC605 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		8D95BF152194189300158174 /* gRPCCertificates.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF142194189300158174 /* gRPCCertificates.bundle */; };
+		8D95BF3C219418C500158174 /* libBolts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF3B219418C500158174 /* libBolts.a */; };
+		8D95BF3E219418C500158174 /* libBoringSSL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF3D219418C500158174 /* libBoringSSL.a */; };
+		8D95BF40219418C500158174 /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF3F219418C500158174 /* libFBSDKCoreKit.a */; };
+		8D95BF42219418C500158174 /* libFBSDKLoginKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF41219418C500158174 /* libFBSDKLoginKit.a */; };
+		8D95BF44219418C500158174 /* libFBSDKMessengerShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF43219418C500158174 /* libFBSDKMessengerShareKit.a */; };
+		8D95BF46219418C500158174 /* libFBSDKPlacesKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF45219418C500158174 /* libFBSDKPlacesKit.a */; };
+		8D95BF48219418C500158174 /* libFBSDKShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF47219418C500158174 /* libFBSDKShareKit.a */; };
+		8D95BF4A219418C500158174 /* libFirebaseAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF49219418C500158174 /* libFirebaseAuth.a */; };
+		8D95BF4C219418C500158174 /* libFirebaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF4B219418C500158174 /* libFirebaseCore.a */; };
+		8D95BF4E219418C500158174 /* libFirebaseFirestore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF4D219418C500158174 /* libFirebaseFirestore.a */; };
+		8D95BF50219418C500158174 /* libFirebaseMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D95BF4F219418C500158174 /* libFirebaseMessaging.a */; };
+		8D95BF51219418C500158174 /* libcxxreact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA91DF850E9000B6D8A /* libcxxreact.a */; };
+		8D95BF52219418C500158174 /* libcxxreact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EAB1DF850E9000B6D8A /* libcxxreact.a */; };
+		8D95BF53219418C500158174 /* libdouble-conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF0FFE72056DD460020B375 /* libdouble-conversion.a */; };
+		8D95BF54219418C500158174 /* libdouble-conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF0FFE92056DD460020B375 /* libdouble-conversion.a */; };
 		8DA8A04A217CBF050031441F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		8DA8A070217CBF430031441F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		AC2CA24766C044EF99A4F6F7 /* avenir_medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CADBBF718FCF4B37851B3D5B /* avenir_medium.otf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		B5A3B99D61494E219F475C62 /* avenir_book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27460FD87F674B149E05659A /* avenir_book.otf */; };
 		C0F20B0DE2FC5ABC59934E99 /* libPods-anchor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85757C4FDA7886A2C420D8FC /* libPods-anchor.a */; };
+		E4BEAC4D985C4B0B8C976EE3 /* avenir_roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4E9EBCB5EA3A40F3BCEB718B /* avenir_roman.otf */; };
 		EB84CAF7CBCC586B63F5436B /* libPods-anchorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D799EB897488E5C253149DF2 /* libPods-anchorTests.a */; };
 /* End PBXBuildFile section */
 
@@ -307,6 +329,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		8D95BF8A21941AA300158174 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96AFF5B9B3E04E11B7BE595D /* RNFirebase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFirebase;
+		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -335,18 +364,37 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = anchor/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = anchor/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		259AB06E7E1445EE8180EBA3 /* avenir_heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = avenir_heavy.ttf; path = ../app/fonts/avenir_heavy.ttf; sourceTree = "<group>"; };
+		27460FD87F674B149E05659A /* avenir_book.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = avenir_book.otf; path = ../app/fonts/avenir_book.otf; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* anchor-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "anchor-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* anchor-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "anchor-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		47AC764189EF4E39BA7FD88D /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
+		4E9EBCB5EA3A40F3BCEB718B /* avenir_roman.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = avenir_roman.otf; path = ../app/fonts/avenir_roman.otf; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		5FA75C4C4C45471777B5CA45 /* Pods-anchorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anchorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-anchorTests/Pods-anchorTests.debug.xcconfig"; sourceTree = "<group>"; };
+		76A4FF439B2C4401B20EF87C /* avenir_light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = avenir_light.otf; path = ../app/fonts/avenir_light.otf; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		85757C4FDA7886A2C420D8FC /* libPods-anchor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-anchor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF142194189300158174 /* gRPCCertificates.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = gRPCCertificates.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF3B219418C500158174 /* libBolts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBolts.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF3D219418C500158174 /* libBoringSSL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBoringSSL.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF3F219418C500158174 /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKCoreKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF41219418C500158174 /* libFBSDKLoginKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKLoginKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF43219418C500158174 /* libFBSDKMessengerShareKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKMessengerShareKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF45219418C500158174 /* libFBSDKPlacesKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKPlacesKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF47219418C500158174 /* libFBSDKShareKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKShareKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF49219418C500158174 /* libFirebaseAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF4B219418C500158174 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF4D219418C500158174 /* libFirebaseFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D95BF4F219418C500158174 /* libFirebaseMessaging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseMessaging.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		964476F4B8998045BD2D1F39 /* Pods-anchor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anchor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-anchor/Pods-anchor.debug.xcconfig"; sourceTree = "<group>"; };
+		96AFF5B9B3E04E11B7BE595D /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		A2C4E04AE082876DCDC85DBC /* Pods-anchor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anchor.release.xcconfig"; path = "Pods/Target Support Files/Pods-anchor/Pods-anchor.release.xcconfig"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		C20F735B1EC8B11B60816F1E /* Pods-anchorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anchorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-anchorTests/Pods-anchorTests.release.xcconfig"; sourceTree = "<group>"; };
+		CADBBF718FCF4B37851B3D5B /* avenir_medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = avenir_medium.otf; path = ../app/fonts/avenir_medium.otf; sourceTree = "<group>"; };
 		D799EB897488E5C253149DF2 /* libPods-anchorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-anchorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -364,6 +412,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D95BF3C219418C500158174 /* libBolts.a in Frameworks */,
+				8D95BF3E219418C500158174 /* libBoringSSL.a in Frameworks */,
+				8D95BF51219418C500158174 /* libcxxreact.a in Frameworks */,
+				8D95BF52219418C500158174 /* libcxxreact.a in Frameworks */,
+				8D95BF53219418C500158174 /* libdouble-conversion.a in Frameworks */,
+				8D95BF54219418C500158174 /* libdouble-conversion.a in Frameworks */,
+				8D95BF40219418C500158174 /* libFBSDKCoreKit.a in Frameworks */,
+				8D95BF42219418C500158174 /* libFBSDKLoginKit.a in Frameworks */,
+				8D95BF44219418C500158174 /* libFBSDKMessengerShareKit.a in Frameworks */,
+				8D95BF46219418C500158174 /* libFBSDKPlacesKit.a in Frameworks */,
+				8D95BF48219418C500158174 /* libFBSDKShareKit.a in Frameworks */,
+				8D95BF4A219418C500158174 /* libFirebaseAuth.a in Frameworks */,
+				8D95BF4C219418C500158174 /* libFirebaseCore.a in Frameworks */,
+				8D95BF4E219418C500158174 /* libFirebaseFirestore.a in Frameworks */,
+				8D95BF50219418C500158174 /* libFirebaseMessaging.a in Frameworks */,
+				8D95BF152194189300158174 /* gRPCCertificates.bundle in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				8D1E394721690F81006DC605 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -377,6 +441,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				C0F20B0DE2FC5ABC59934E99 /* libPods-anchor.a in Frameworks */,
+				35CB0D47649B4D2D98C3285F /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +589,18 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D95BF3B219418C500158174 /* libBolts.a */,
+				8D95BF3D219418C500158174 /* libBoringSSL.a */,
+				8D95BF3F219418C500158174 /* libFBSDKCoreKit.a */,
+				8D95BF41219418C500158174 /* libFBSDKLoginKit.a */,
+				8D95BF43219418C500158174 /* libFBSDKMessengerShareKit.a */,
+				8D95BF45219418C500158174 /* libFBSDKPlacesKit.a */,
+				8D95BF47219418C500158174 /* libFBSDKShareKit.a */,
+				8D95BF49219418C500158174 /* libFirebaseAuth.a */,
+				8D95BF4B219418C500158174 /* libFirebaseCore.a */,
+				8D95BF4D219418C500158174 /* libFirebaseFirestore.a */,
+				8D95BF4F219418C500158174 /* libFirebaseMessaging.a */,
+				8D95BF142194189300158174 /* gRPCCertificates.bundle */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				85757C4FDA7886A2C420D8FC /* libPods-anchor.a */,
 				D799EB897488E5C253149DF2 /* libPods-anchorTests.a */,
@@ -560,6 +637,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7F0EEDFA61884C3BBF4FA7BC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				27460FD87F674B149E05659A /* avenir_book.otf */,
+				259AB06E7E1445EE8180EBA3 /* avenir_heavy.ttf */,
+				76A4FF439B2C4401B20EF87C /* avenir_light.otf */,
+				CADBBF718FCF4B37851B3D5B /* avenir_medium.otf */,
+				4E9EBCB5EA3A40F3BCEB718B /* avenir_roman.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -575,6 +664,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				96AFF5B9B3E04E11B7BE595D /* RNFirebase.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -597,6 +687,8 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				564ED0A2D55EDFD89974AF64 /* Pods */,
+				7F0EEDFA61884C3BBF4FA7BC /* Resources */,
+				8D95BF6121941AA200158174 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -610,6 +702,22 @@
 				00E356EE1AD99517003FC87E /* anchorTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* anchor-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* anchor-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8D95BF6121941AA200158174 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				47AC764189EF4E39BA7FD88D /* libRNFirebase.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		8D95BF8721941AA300158174 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D95BF8B21941AA300158174 /* libRNFirebase.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -787,6 +895,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = 8D95BF8721941AA300158174 /* Products */;
+					ProjectRef = 96AFF5B9B3E04E11B7BE595D /* RNFirebase.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1052,6 +1164,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		8D95BF8B21941AA300158174 /* libRNFirebase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFirebase.a;
+			remoteRef = 8D95BF8A21941AA300158174 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1075,6 +1194,11 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				B5A3B99D61494E219F475C62 /* avenir_book.otf in Resources */,
+				5F6787DF9BA442508A0659B1 /* avenir_heavy.ttf in Resources */,
+				050734788679428DACC1AA35 /* avenir_light.otf in Resources */,
+				AC2CA24766C044EF99A4F6F7 /* avenir_medium.otf in Resources */,
+				E4BEAC4D985C4B0B8C976EE3 /* avenir_roman.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1264,12 +1388,20 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+				);
 				INFOPLIST_FILE = anchorTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/${TARGET_NAME}\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1287,6 +1419,10 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+				);
 				INFOPLIST_FILE = anchorTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1313,6 +1449,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+				);
 				INFOPLIST_FILE = anchor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1339,6 +1479,10 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+				);
 				INFOPLIST_FILE = anchor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1368,6 +1512,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+				);
 				INFOPLIST_FILE = "anchor-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1397,6 +1545,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+				);
 				INFOPLIST_FILE = "anchor-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1425,6 +1577,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+				);
 				INFOPLIST_FILE = "anchor-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1454,6 +1610,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+				);
 				INFOPLIST_FILE = "anchor-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
