@@ -20,16 +20,9 @@ target 'anchor' do
   'DevSupport', # Devmenu
   'RCTWebSocket', # needed for debugging
   'RCTLinkingIOS',
-  'CxxBridge',
-  'RCTGeolocation',
   'RCTNetwork',
   'RCTPushNotification',
-  'RCTImage',
-  'RCTText',
   'RCTAnimation',
-  'RCTActionSheet',
-  'RCTVibration',
-  'RCTCameraRoll'
   ]
 
   # Pods for FBSDK
