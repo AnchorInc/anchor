@@ -58,6 +58,7 @@ export const algoliaConfig = {
 // google signin configdata
 export const gsigninConfig = {
   webClientId: '489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com',
+  iosClientId: '489771714033-uskl634f838u27m0a01vsq7ea2uv6r9b.apps.googleusercontent.com',
 };
 
 // sign in methods
