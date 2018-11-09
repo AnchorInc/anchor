@@ -8,10 +8,29 @@ target 'anchor' do
   node_modules_path = '../node_modules'
   react_path = File.join(node_modules_path, 'react-native')
   yoga_path = File.join(react_path, 'ReactCommon/yoga')
+  
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   # Pods for anchor
   pod 'yoga', path: yoga_path
-  pod 'React', path: react_path
+  pod 'React', path: react_path, :subspecs => [
+  'Core',
+  'DevSupport', # Devmenu
+  'RCTWebSocket', # needed for debugging
+  'RCTLinkingIOS',
+  'CxxBridge',
+  'RCTGeolocation',
+  'RCTNetwork',
+  'RCTPushNotification',
+  'RCTImage',
+  'RCTText',
+  'RCTAnimation',
+  'RCTActionSheet',
+  'RCTVibration',
+  'RCTCameraRoll'
+  ]
 
   # Pods for FBSDK
   pod 'FBSDKCoreKit'
