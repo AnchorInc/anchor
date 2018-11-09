@@ -34,4 +34,11 @@ target 'anchor' do
   
   #RNFirebase Firestore Package
   pod 'Firebase/Firestore', '~> 5.11.0'
+
+  #RN Linear Gradient Package
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
+  #RN Vector Icons package
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 end
