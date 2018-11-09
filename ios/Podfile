@@ -40,5 +40,10 @@ target 'anchor' do
 
   #RN Vector Icons package
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  
+  #RN Google Places package
+  pod 'GooglePlaces'
+  pod 'GoogleMaps'
+  pod 'GooglePlacePicker'
 
 end

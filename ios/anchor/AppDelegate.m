@@ -15,12 +15,15 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #import <Firebase.h>
-#import "RNFirebaseNotifications.h"
-#import "RNFirebaseMessaging.h"
+#import "notifications/RNFirebaseNotifications.h"
+#import "messaging/RNFirebaseMessaging.h"
 
 #import "RNSplashScreen.h"
 
 #import <RNGoogleSignin/RNGoogleSignin.h>
+
+@import GooglePlaces;
+@import GoogleMaps;
 
 @implementation AppDelegate
 
@@ -50,6 +53,10 @@
   [self.window makeKeyAndVisible];
   
   [RNSplashScreen show];
+  
+  [GMSPlacesClient provideAPIKey:@"AIzaSyC-zseoR6xl3gB9Xh3cNlpHOsiA0GIEb_4"];
+  [GMSServices provideAPIKey:@"AIzaSyC-zseoR6xl3gB9Xh3cNlpHOsiA0GIEb_4"];
+  
   return YES;
 }
   
