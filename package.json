@@ -49,7 +49,7 @@
   },
   "rnpm": {
     "assets": [
-      "app/fonts"
+      "./app/fonts"
     ]
   },
   "react-native": {
