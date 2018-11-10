@@ -336,7 +336,7 @@ const styles = {
     width,
   },
   headerTextStyle: {
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     fontSize: 20,
     color: 'white',
     padding: 15,
@@ -364,7 +364,7 @@ const styles = {
   },
   nameStyle: {
     fontSize: 20,
-    fontFamily: 'avenir_medium',
+    fontFamily: 'AvenirLTStd-Medium',
     color: 'black',
     padding: 5,
   },
@@ -380,7 +380,7 @@ const styles = {
     padding: 5,
   },
   textStyle: {
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     paddingTop: 10,
     paddingRight: 15,
     fontSize: 14,
@@ -389,7 +389,7 @@ const styles = {
   titleTextStyle: {
     paddingTop: 10,
     paddingLeft: 15,
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     fontSize: 14,
     paddingBottom: 5,
     color: colors.primary.light,

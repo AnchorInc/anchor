@@ -15,7 +15,7 @@ class ClassDetail extends Component {
   };
 
   componentDidMount() {
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === 'android') {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
   }
@@ -122,7 +122,7 @@ const styles = {
   nameStyle: {
     fontSize: 18,
     color: 'black',
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
   },
   headerStyle: {
     width: 0.936 * width,
@@ -135,13 +135,13 @@ const styles = {
   moreTextStyle: {
     fontSize: 14,
     color: 'white',
-    fontFamily: 'avenir_medium',
+    fontFamily: 'AvenirLTStd-Medium',
     paddingBottom: 5,
   },
   detailsTextStyle: {
     fontSize: 16,
     color: 'white',
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     paddingBottom: 10,
     textAlign: 'center',
   },

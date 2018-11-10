@@ -11,7 +11,7 @@ console.disableYellowBox = true;
 // set default font family
 const customTextProps = {
   style: {
-    fontFamily: 'avenir_book',
+    fontFamily: 'AvenirLTStd-Book',
   },
 };
 setCustomText(customTextProps);

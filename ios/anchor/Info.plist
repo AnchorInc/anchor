@@ -49,13 +49,9 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>avenir_book.otf</string>
-		<string>avenir_heavy.ttf</string>
-		<string>avenir_light.otf</string>
-		<string>avenir_medium.otf</string>
 		<string>avenir_roman.otf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
@@ -68,6 +64,11 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>AvenirLTStd-Heavy.otf</string>
+		<string>AvenirLTStd-Book.otf</string>
+		<string>AvenirLTStd-Light.otf</string>
+		<string>AvenirLTStd-Medium.otf</string>
+		<string>AvenirLTStd-Roman.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

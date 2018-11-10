@@ -162,7 +162,7 @@ const styles = {
   logoutTextStyle: {
     fontSize: 17,
     color: 'white',
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     paddingBottom: 5,
   },
   logoutButtonStyle: {
@@ -174,14 +174,14 @@ const styles = {
   },
   cardHeaderStyle: {
     padding: 15,
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     fontSize: 17,
     color: 'black',
   },
   settingTitleStyle: {
     color: 'black',
     paddingBottom: 5,
-    fontFamily: 'avenir_medium',
+    fontFamily: 'AvenirLTStd-Medium',
     fontSize: 15,
   },
   settingInfoStyle: {

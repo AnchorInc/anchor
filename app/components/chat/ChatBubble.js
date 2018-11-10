@@ -47,7 +47,7 @@ const styles = {
       color: 'black',
       padding: 10,
       paddingTop: 5,
-      fontFamily: 'avenir_roman',
+      fontFamily: 'AvenirLTStd-Roman',
       fontSize: 16,
     },
     infoStyle: {
@@ -55,7 +55,7 @@ const styles = {
       padding: 10,
       paddingBottom: 0,
       fontSize: 12,
-      fontFamily: 'avenir_light',
+      fontFamily: 'AvenirLTStd-Light',
     },
   },
   right: {
@@ -74,7 +74,7 @@ const styles = {
       color: 'white',
       padding: 10,
       paddingTop: 5,
-      fontFamily: 'avenir_roman',
+      fontFamily: 'AvenirLTStd-Roman',
       fontSize: 16,
     },
     infoStyle: {
@@ -82,7 +82,7 @@ const styles = {
       padding: 10,
       paddingBottom: 0,
       fontSize: 12,
-      fontFamily: 'avenir_light',
+      fontFamily: 'AvenirLTStd-Light',
     },
   },
   topContainerStyle: {

@@ -39,14 +39,14 @@ const styles = {
   requestHeaderStyle: {
     fontSize: 14,
     color: 'black',
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     paddingLeft: 10,
     paddingRight: 10,
   },
   requestBodyStyle: {
     fontSize: 14,
     color: 'black',
-    fontFamily: 'avenir_medium',
+    fontFamily: 'AvenirLTStd-Medium',
     paddingLeft: 10,
     paddingRight: 10,
     textAlign: 'center',

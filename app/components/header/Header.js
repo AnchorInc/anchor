@@ -87,7 +87,7 @@ const styles = {
   },
   headerStyle: {
     fontSize: 20,
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     color: 'white',
     paddingLeft: 0.05 * width,
     alignSelf: 'center',

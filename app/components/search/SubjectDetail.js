@@ -28,7 +28,7 @@ const styles = {
   },
   subjectStyle: {
     fontSize: 16,
-    fontFamily: 'avenir_roman',
+    fontFamily: 'AvenirLTStd-Roman',
     color: '#000',
     paddingBottom: 5,
   },

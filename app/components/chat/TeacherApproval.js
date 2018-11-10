@@ -25,7 +25,7 @@ const styles = {
   approvalStyle: {
     fontSize: 14,
     color: 'black',
-    fontFamily: 'avenir_medium',
+    fontFamily: 'AvenirLTStd-Medium',
     paddingLeft: 10,
     paddingRight: 10,
   },

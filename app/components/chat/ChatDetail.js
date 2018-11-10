@@ -49,7 +49,7 @@ class ChatDetail extends Component {
             <View style={{ flexDirection: 'column', width: 0.8 * width }}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: 0.8 * width }}>
                 <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ fontFamily: 'avenir_heavy', color: this.props.unread ? 'black' : '#7f7f7f', fontSize: 18, padding: 10, paddingBottom: 0 }}>
+                  <Text style={{ fontFamily: 'AvenirLTStd-Heavy', color: this.props.unread ? 'black' : '#7f7f7f', fontSize: 18, padding: 10, paddingBottom: 0 }}>
                     {this.props.displayName}
                   </Text>
                   <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: this.props.unread ? colors.secondary.blue : 'white', top: 18 }} />
@@ -78,14 +78,14 @@ const styles = {
     borderRadius: (0.13 * width) / 2,
   },
   timeStyle: {
-    fontFamily: 'avenir_light',
+    fontFamily: 'AvenirLTStd-Light',
     color: colors.other.darkGray,
     fontSize: 14,
     padding: 10,
     paddingBottom: 0,
   },
   messageStyle: {
-    fontFamily: 'avenir_book',
+    fontFamily: 'AvenirLTStd-Book',
     color: 'black',
     fontSize: 16,
     padding: 10,
