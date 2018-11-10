@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, View, Dimensions, TouchableOpacity, LayoutAnimation, UIManager } from 'react-native';
+import { Text, Image, View, Dimensions, TouchableOpacity, LayoutAnimation, UIManager, Platform } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import StarRating from 'react-native-star-rating';
@@ -15,7 +15,9 @@ class ClassDetail extends Component {
   };
 
   componentDidMount() {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
+    if (Platform.OS === 'ios') {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
   }
 
   _onPressMore = () => {
