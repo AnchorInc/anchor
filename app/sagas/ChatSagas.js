@@ -5,6 +5,7 @@ import { put, takeLatest, all, call, cancel, take, takeEvery, select } from 'red
 import { actionTypes, userTypes } from '../config';
 import { syncMessages, syncChats, createChat } from '../actions';
 
+
 function* messageListenerSaga(action) {
   const chatId = yield call(getChatId, action);
 
@@ -16,7 +17,7 @@ function* messageListenerSaga(action) {
     const messages = yield take(channel);
 
     // if there are no messages then create a new chat
-    if (!messages) {
+    if (messages.length === 0) {
       yield put(createChat(action));
     }
 
@@ -26,6 +27,7 @@ function* messageListenerSaga(action) {
   channel.close();
 }
 
+// gets all the chats for the user
 function* chatListenerSaga(action) {
   const ref = firebase.firestore();
   if (!ref) yield cancel();
@@ -38,7 +40,6 @@ function* chatListenerSaga(action) {
   while (firebase.auth().currentUser) {
     // get the data emitted from the channel
     const chats = yield take(channel);
-
     yield put(syncChats(chats));
   }
   channel.close();
