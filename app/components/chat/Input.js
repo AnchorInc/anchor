@@ -86,7 +86,7 @@ const styles = {
     width: 0.75 * width,
     alignSelf: 'center',
     padding: 10,
-    fontFamily: 'avenir_bold',
+    fontFamily: 'AvenirLTStd-Heavy',
     fontSize: 16,
     color: 'black',
     paddingLeft: 20,

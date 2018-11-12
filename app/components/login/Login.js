@@ -42,7 +42,7 @@ class Login extends Component {
 
   renderPickerCarousel = ({ item }) => {
     return (
-      <Text style={{ alignSelf: 'center', paddingTop: 10, textAlign: 'center', fontSize: 14, fontFamily: 'avenir_heavy', color: '#757575' }}>
+      <Text style={{ alignSelf: 'center', paddingTop: 10, textAlign: 'center', fontSize: 14, fontFamily: 'AvenirLTStd-Heavy', color: '#757575' }}>
         {item.toUpperCase()}
       </Text>
     );

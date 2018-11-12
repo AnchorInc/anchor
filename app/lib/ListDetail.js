@@ -22,13 +22,13 @@ const ListDetail = ({ title, value, children }) => {
 
 const styles = {
   titleTextStyle: {
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     fontSize: 14,
     paddingBottom: 5,
     color: colors.primary.light,
   },
   valueTextStyle: {
-    fontFamily: 'avenir_medium',
+    fontFamily: 'AvenirLTStd-Medium',
     fontSize: 16,
     color: 'black',
     paddingBottom: 4,

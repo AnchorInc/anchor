@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Image, View, Dimensions } from 'react-native';
 
-import { PopupMenu, TouchableDebounce } from '../../lib';
+import { TouchableDebounce } from '../../lib';
 
 const { width } = Dimensions.get('window');
 
@@ -41,7 +41,7 @@ const styles = {
   },
   nameStyle: {
     fontSize: 16,
-    fontFamily: 'avenir_roman',
+    fontFamily: 'AvenirLTStd-Roman',
     color: '#000',
     paddingBottom: 5,
   },

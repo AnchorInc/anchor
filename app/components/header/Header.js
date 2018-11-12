@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Dimensions, Platform, StatusBar } from 'react-native';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config/';
@@ -14,15 +15,34 @@ class Header extends Component {
     this.props.handleChangeText(this.searchBar.getValue());
   }
 
+  renderChatButton() {
+    if (this.props.showChatBadge) {
+      return (
+        <TouchableDebounce onPress={this.props.onPressChat}>
+          <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
+          <Icon
+            name='circle'
+            color={colors.secondary.normal}
+            size={12}
+            style={{ position: 'absolute', paddingLeft: 15, paddingTop: 12 }}
+          />
+        </TouchableDebounce>
+      );
+    }
+    return (
+      <TouchableDebounce onPress={this.props.onPressChat}>
+        <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
+      </TouchableDebounce>
+    );
+  }
+
   renderButtons = () => {
     if (!this.props.mainButtons) {
       return null;
     }
     return (
       <View style={styles.buttonContainerStyle}>
-        <TouchableDebounce onPress={this.props.onPressChat}>
-          <Icon name='forum' color='white' size={24} style={{ paddingRight: 20 }} />
-        </TouchableDebounce>
+        {this.renderChatButton()}
         <HeaderProfileButton onPress={this.props.onPressProfile} />
       </View>
     );
@@ -67,7 +87,7 @@ const styles = {
   },
   headerStyle: {
     fontSize: 20,
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     color: 'white',
     paddingLeft: 0.05 * width,
     alignSelf: 'center',
@@ -80,4 +100,8 @@ const styles = {
   },
 };
 
-export { Header };
+const mapStateToProps = (state) => {
+  return { showChatBadge: state.global.showChatBadge };
+};
+
+export default connect(mapStateToProps)(Header);

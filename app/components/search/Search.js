@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions } from 'react-native';
+import { View, Text, ScrollView, Dimensions, Platform } from 'react-native';
 import algoliasearch from 'algoliasearch/reactnative';
 import AndroidKeyboardAdjust from 'react-native-android-keyboard-adjust';
 
@@ -17,7 +17,9 @@ class Search extends Component {
   };
 
   componentWillMount() {
-    AndroidKeyboardAdjust.setAdjustNothing();
+    if (Platform.OS === 'android') {
+      AndroidKeyboardAdjust.setAdjustNothing();
+    }
   }
 
   onPress = (uid) => {
@@ -96,7 +98,7 @@ const styles = {
     padding: 10,
     color: 'black',
     alignSelf: 'center',
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
   },
 };
 

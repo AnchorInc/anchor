@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Text, Image, View, Dimensions, TouchableOpacity, LayoutAnimation, UIManager } from 'react-native';
+import { Text, Image, View, Dimensions, TouchableOpacity, LayoutAnimation, UIManager, Platform } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import StarRating from 'react-native-star-rating';
 
 import { colors } from '../../config';
-import { Card, CardSection, TouchableDebounce, PopupMenu } from '../../lib';
+import { Card, CardSection, TouchableDebounce } from '../../lib';
 
 const { width } = Dimensions.get('window');
 
@@ -15,7 +15,9 @@ class ClassDetail extends Component {
   };
 
   componentDidMount() {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
+    if (Platform.OS === 'android') {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
   }
 
   _onPressMore = () => {
@@ -34,7 +36,7 @@ class ClassDetail extends Component {
         <Card style={{ flex: 1, flexDirection: 'row' }}>
           <CardSection>
             <View style={styles.textContainerStyle}>
-              <Icon style={{ paddingLeft: 10 }} name='dots-vertical' size={24} color='rgba(0,0,0,0)' />
+              <Icon style={{ paddingLeft: 10 }} name='dots-vertical' size={0} />
               <Text style={styles.nameStyle}>{this.props.batch.teacherDetails.displayName}</Text>
               <TouchableDebounce onPress={this.props.onPressContact.bind(this, this.props.batch.teacherDetails.uid, this.props.batch.teacherDetails.displayName)}>
                 <Icon name='dots-vertical' size={24} color='black' />
@@ -120,7 +122,7 @@ const styles = {
   nameStyle: {
     fontSize: 18,
     color: 'black',
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
   },
   headerStyle: {
     width: 0.936 * width,
@@ -133,13 +135,13 @@ const styles = {
   moreTextStyle: {
     fontSize: 14,
     color: 'white',
-    fontFamily: 'avenir_medium',
+    fontFamily: 'AvenirLTStd-Medium',
     paddingBottom: 5,
   },
   detailsTextStyle: {
     fontSize: 16,
     color: 'white',
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     paddingBottom: 10,
     textAlign: 'center',
   },

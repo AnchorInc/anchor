@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { TextField } from 'react-native-material-textfield';
 import RNGooglePlaces from 'react-native-google-places';
 import moment from 'moment';
-import { TextCheckbox } from './';
+import TextCheckbox from './';
 // import firebase from 'react-native-firebase';
 
 import { Header } from '../header';

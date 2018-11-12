@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput, TouchableWithoutFeedback, TouchableOpacity, View, Dimensions, UIManager, LayoutAnimation } from 'react-native';
+import { Text, TextInput, TouchableWithoutFeedback, TouchableOpacity, View, Dimensions, UIManager, LayoutAnimation, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
@@ -11,7 +11,9 @@ class SearchBar extends Component {
   state = { search: false, editingInput: false, buttonClicked: false };
 
   componentDidMount() {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
+    if (Platform.OS === 'android') {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
   }
 
   componentWillReceiveProps() {
@@ -97,6 +99,7 @@ class SearchBar extends Component {
 
 const styles = {
   containerStyle: {
+    paddingTop: (Platform.OS === 'ios') ? 15 : 0,
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',
@@ -108,7 +111,7 @@ const styles = {
     width: 0.75 * width,
     alignSelf: 'center',
     padding: 10,
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     fontSize: 20,
     color: 'white',
   },
@@ -126,7 +129,7 @@ const styles = {
     flexDirection: 'row',
   },
   searchTextStyle: {
-    fontFamily: 'avenir_heavy',
+    fontFamily: 'AvenirLTStd-Heavy',
     fontSize: 20,
     color: 'white',
   },
