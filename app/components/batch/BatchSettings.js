@@ -6,16 +6,17 @@ import {
   StatusBar,
   Text,
   Button,
-  Picker,
   TimePickerAndroid,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { TextField } from 'react-native-material-textfield';
 import RNGooglePlaces from 'react-native-google-places';
 import moment from 'moment';
+import { TextCheckbox } from './';
+// import firebase from 'react-native-firebase';
 
-import { FAB } from '../../lib/FAB';
-import { TouchableDebounce } from '../../lib';
+import { Header } from '../header';
+import { FAB } from '../../lib';
 import { colors, userTypes } from '../../config';
 
 const { width } = Dimensions.get('window');
@@ -27,7 +28,15 @@ class BatchSettings extends Component {
       location: null,
       size: null,
       maxSize: null,
-      day: 'Sunday',
+      days: {
+        Monday: false,
+        Tuesday: false,
+        Wednesday: false,
+        Thursday: false,
+        Friday: false,
+        Saturday: false,
+        Sunday: false,
+      },
       startTime: null,
       endTime: null,
     },
@@ -36,7 +45,6 @@ class BatchSettings extends Component {
   componentWillMount() {
     if (this.props.user.type === userTypes.STUDENT) {
       console.log('Student Batch Settings not yet implemented');
-      // this.getTeacher();
     } else {
       this.setState({ teacher: this.props.user });
     }
@@ -113,23 +121,18 @@ class BatchSettings extends Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar />
+        <Header title='Add a Batch' />
         <ScrollView
           keyboardShouldPersistTaps='always'
           contentContainerStyle={{ paddingBottom: 15 }}
         >
           {this.displayLocation()}
           <View style={{ ...styles.containerStyle, margin: 15 }}>
-            <TouchableDebounce
-              containerStyle={styles.textInputStyle}
-              style={styles.iconStyle}
+            <Button
+              style={styles.containerStyle}
               onPress={this.setLocation}
-            >
-              <Button
-                style={styles.containerStyle}
-                onPress={this.setLocation}
-                title="Set Location"
-              />
-            </TouchableDebounce>
+              title="Set Location"
+            />
             <TextField
               containerStyle={styles.textInputStyle}
               label='Maximum Size'
@@ -137,32 +140,20 @@ class BatchSettings extends Component {
               keyboardType='numeric'
               returnKeyType='next'
               titleFontSize={14}
-              // onChangeText={this.onChangeText}
-              // onFocus={this.onFocus}
-              // onBlur={this.onBlur}
-              // onSubmitEditing={this.onSubmitFirstName}
               renderAccessory={this.showClearTextButton}
               ref={this.maxSizeRef}
               tintColor={colors.primary.light}
-              // error={this.state.errors.firstName}
             />
-            <Picker
-              selectedValue={this.state.batch.day}
-              style={{ height: 50, width: 200 }}
-              onValueChange={itemValue => this.setState((prevState) => {
-                const newState = prevState;
-                newState.batch.day = itemValue;
-                return newState;
-              })}
-            >
-              <Picker.Item label="Sunday" value="Sunday" />
-              <Picker.Item label="Monday" value="Monday" />
-              <Picker.Item label="Tuesday" value="Tuesday" />
-              <Picker.Item label="Wednesday" value="Wednesday" />
-              <Picker.Item label="Thursday" value="Thursday" />
-              <Picker.Item label="Saturday" value="Friday" />
-              <Picker.Item label="Saturday" value="Saturday" />
-            </Picker>
+            <TextCheckbox
+              text='Sunday'
+              value={this.state.batch.days.Sunday}
+              onValueChange={value => this.setState((prevState) => {
+                  const newState = prevState;
+                  newState.batch.days.Sunday = value;
+                  return newState;
+                })
+              }
+            />
             <Button
               style={styles.containerStyle}
               onPress={this.pickStartTime}

@@ -94,6 +94,7 @@ const styles = {
   },
   topResultTextStyle: {
     fontSize: 22,
+    padding: 10,
     color: 'black',
     alignSelf: 'center',
     fontFamily: 'AvenirLTStd-Heavy',

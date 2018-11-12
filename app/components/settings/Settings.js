@@ -57,6 +57,7 @@ class Settings extends Component {
                     }}
                     style={{ padding: 10 }}
                   />
+                  <Icon style={{ padding: 15 }} name='exit-to-app' size={24} />
                 </View>
                 <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
               </View>
