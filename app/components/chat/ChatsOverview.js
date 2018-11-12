@@ -25,7 +25,7 @@ class ChatsOverview extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.chats.length === 0) {
+    if ((this.state.chats.length === 0) && nextProps.chats) {
       this.state.chats = nextProps.chats;
       this.state.chats.sort((x, y) => { return y.latestMessage.timeStamp - x.latestMessage.timeStamp; });
     } else {

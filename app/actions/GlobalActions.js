@@ -13,5 +13,5 @@ export const showErrorMessage = (payload) => {
   };
 
   export const hideChatBadge = () => {
-    return { type: actionTypes.BADGE.CLOSE };
+    return { type: actionTypes.BADGE.HIDE };
   };
