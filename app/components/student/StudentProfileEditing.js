@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { View, Dimensions, ScrollView, TouchableOpacity, Image, Text, StatusBar, Slider } from 'react-native';
+import {
+  View,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  Text,
+  StatusBar,
+  Slider,
+  Platform,
+} from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextField } from 'react-native-material-textfield';
@@ -175,7 +185,7 @@ class StudentProfileEditing extends Component {
     } = styles;
     return (
       <View style={{ flex: 1 }} behavior="height" enabled>
-        <StatusBar backgroundColor={colors.primary.dark} />
+        <StatusBar />
         <ScrollView
           keyboardShouldPersistTaps='always'
           contentContainerStyle={{ paddingBottom: 15 }}
@@ -322,6 +332,7 @@ class StudentProfileEditing extends Component {
 const styles = {
   headerContainerStyle: {
     alignItems: 'center',
+    marginTop: (Platform.OS === 'ios') ? height * 0.03 : 0,
   },
   buttonContainerStyle: {
     flexDirection: 'row',
@@ -354,7 +365,7 @@ const styles = {
   profileStyle: {
     width: width * 0.25,
     height: width * 0.25,
-    borderRadius: 100,
+    borderRadius: (width * 0.25) / 2,
   },
   nameContainerStyle: {
     paddingTop: 0.125 * width,

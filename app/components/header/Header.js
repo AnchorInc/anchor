@@ -7,7 +7,7 @@ import { colors } from '../../config/';
 import { HeaderProfileButton } from './';
 import { TouchableDebounce } from '../../lib';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class Header extends Component {
 
@@ -71,7 +71,7 @@ class Header extends Component {
   render() {
     return (
       <View>
-        <StatusBar backgroundColor={colors.primary.dark} />
+        <StatusBar />
         {this.renderHeader()}
       </View>
     );
@@ -82,7 +82,7 @@ const styles = {
   normalContainerStyle: {
     justifyContent: 'space-between',
     height: 64,
-    paddingTop: (Platform.OS === 'ios') ? 15 : 0,
+    marginTop: (Platform.OS === 'ios') ? height * 0.03 : 0,
     flexDirection: 'row',
   },
   headerStyle: {

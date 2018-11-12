@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Text, TextInput, TouchableWithoutFeedback, TouchableOpacity, View, Dimensions, UIManager, LayoutAnimation, Platform } from 'react-native';
+import { StatusBar, Text, TextInput, TouchableWithoutFeedback, TouchableOpacity, View, Dimensions, UIManager, LayoutAnimation, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class SearchBar extends Component {
 
@@ -60,6 +60,7 @@ class SearchBar extends Component {
     if (this.state.search) {
       return (
         <View style={styles.containerStyle}>
+          <StatusBar />
           <TouchableOpacity onPress={() => this._onPressBack()}>
             <Icon size={24} name="keyboard-backspace" color='white' style={styles.iconStyle} />
           </TouchableOpacity>
@@ -80,7 +81,9 @@ class SearchBar extends Component {
       );
     }
     return (
-      <TouchableWithoutFeedback onPress={() => this._onPressMore()}>
+      <View>
+        <StatusBar />
+        <TouchableWithoutFeedback onPress={() => this._onPressMore()}>
         <View style={styles.searchContainerStyle} backgroundColor={colors.primary.normal}>
           <View style={styles.searchBoxStyle} backgroundColor='#232fa8'>
             <Text style={styles.searchTextStyle}>
@@ -89,6 +92,7 @@ class SearchBar extends Component {
           </View>
         </View>
       </TouchableWithoutFeedback>
+      </View>
     );
   }
 
@@ -99,7 +103,6 @@ class SearchBar extends Component {
 
 const styles = {
   containerStyle: {
-    paddingTop: (Platform.OS === 'ios') ? 15 : 0,
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',

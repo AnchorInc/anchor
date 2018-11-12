@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Modal, Text, ActivityIndicator, Dimensions } from 'react-native';
+import { Platform, View, Modal, Text, ActivityIndicator, Dimensions } from 'react-native';
 
 import { colors } from '../config';
 
@@ -10,7 +10,7 @@ const Spinner = (props) => {
     <Modal visible={props.visible} transparent animationType='fade' onRequestClose={() => {}}>
       <View style={styles.modalStyle}>
         <View style={styles.containerStyle}>
-          <ActivityIndicator color='white' size={35} />
+          <ActivityIndicator color='white' size={(Platform.OS === 'ios') ? 0 : 35} />
           <Text style={styles.textStyle}>{props.title}</Text>
         </View>
       </View>

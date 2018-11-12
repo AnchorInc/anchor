@@ -36,7 +36,7 @@ class ClassDetail extends Component {
         <Card style={{ flex: 1, flexDirection: 'row' }}>
           <CardSection>
             <View style={styles.textContainerStyle}>
-              <Icon style={{ paddingLeft: 10 }} name='dots-vertical' size={0} />
+              <Icon style={{ paddingLeft: 10 }} color='white' name='dots-vertical' size={0} />
               <Text style={styles.nameStyle}>{this.props.batch.teacherDetails.displayName}</Text>
               <TouchableDebounce onPress={this.props.onPressContact.bind(this, this.props.batch.teacherDetails.uid, this.props.batch.teacherDetails.displayName)}>
                 <Icon name='dots-vertical' size={24} color='black' />
@@ -96,7 +96,7 @@ const styles = {
   profileStyle: {
     height: 0.25 * width,
     width: 0.25 * width,
-    borderRadius: 100,
+    borderRadius: (0.25 * width) / 2,
     alignSelf: 'center',
     resizeMode: 'cover',
   },
@@ -136,7 +136,7 @@ const styles = {
     fontSize: 14,
     color: 'white',
     fontFamily: 'AvenirLTStd-Medium',
-    paddingBottom: 5,
+    paddingBottom: 0,
   },
   detailsTextStyle: {
     fontSize: 16,

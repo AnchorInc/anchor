@@ -17,9 +17,7 @@ class Search extends Component {
   };
 
   componentWillMount() {
-    if (Platform.OS === 'android') {
-      AndroidKeyboardAdjust.setAdjustNothing();
-    }
+    if (Platform.OS === 'android') AndroidKeyboardAdjust.setAdjustNothing();
   }
 
   onPress = (uid) => {
@@ -92,6 +90,7 @@ const styles = {
     height,
     alignItems: 'center',
     flex: 1,
+    marginTop: (Platform.OS === 'ios') ? height * 0.03 : 0,
   },
   topResultTextStyle: {
     fontSize: 22,

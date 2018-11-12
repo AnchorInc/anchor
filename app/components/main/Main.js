@@ -18,6 +18,7 @@ class Main extends Component {
     // called when the app is opened by a notification tap
     firebase.notifications().getInitialNotification()
     .then((notificationOpen) => {
+      console.log('opened by a notification');
       const { title, senderID, screen } = notificationOpen.notification.data;
       this.openScreen(screen, { uid: senderID, title });
       firebase.notifications().removeAllDeliveredNotifications();
@@ -44,6 +45,7 @@ class Main extends Component {
 
   componentWillUnmount() {
     this.onNotificationOpened();
+    this.onMessage();
   }
 
   getStack() {

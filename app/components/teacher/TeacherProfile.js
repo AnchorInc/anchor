@@ -7,6 +7,7 @@ import {
   Text,
   View,
   StatusBar,
+  Platform,
 } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
@@ -135,6 +136,7 @@ class TeacherProfile extends Component {
 const styles = {
   headerContainerStyle: {
     alignItems: 'center',
+    marginTop: (Platform.OS === 'ios') ? height * 0.03 : 0,
   },
   headerStyle: {
     height: 0.3 * height,
@@ -167,7 +169,7 @@ const styles = {
   profileStyle: {
     width: width * 0.25,
     height: width * 0.25,
-    borderRadius: 100,
+    borderRadius: (width * 0.25) / 2,
   },
   nameContainerStyle: {
     paddingTop: 0.125 * width,

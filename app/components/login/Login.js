@@ -6,7 +6,13 @@ import Carousel from 'react-native-snap-carousel';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { colors, userTypes } from '../../config';
-import { googleLoginRequest, fbLoginRequest, closeErrorMessage, showErrorMessage, resetLogin } from '../../actions';
+import {
+  googleLoginRequest,
+  fbLoginRequest,
+  closeErrorMessage,
+  showErrorMessage,
+  resetLogin,
+} from '../../actions';
 import { LoginButton } from './';
 import { Spinner } from '../../lib';
 
@@ -57,7 +63,7 @@ class Login extends Component {
     return (
       <View style={{ flex: 1 }}>
         {this.showErrorMessage()}
-        <StatusBar backgroundColor={colors.primary.dark} />
+        <StatusBar />
         <View style={containerStyle}>
           <Image
             style={logoStyle}
@@ -87,7 +93,7 @@ class Login extends Component {
                 inactiveSlideScale={1}
                 enableMomentum
                 showsHorizontalScrollIndicator={false}
-                removeClippedSubviews={false}
+                removeClippedSubviews
                 onSnapToItem={index => this.setState({ userType: this.state.userTypeOptions[index] })}
               />
             </LinearGradient>

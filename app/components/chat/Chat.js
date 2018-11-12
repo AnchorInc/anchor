@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import AndroidKeyboardAdjust from 'react-native-android-keyboard-adjust';
 
@@ -21,7 +21,7 @@ class Chat extends Component {
   }
 
   componentWillMount() {
-    AndroidKeyboardAdjust.setAdjustResize();
+    if (Platform.OS === 'android') AndroidKeyboardAdjust.setAdjustResize();
   }
 
   componentDidMount() {

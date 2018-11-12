@@ -29,131 +29,133 @@ class Settings extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <View>
         <Header title='Settings' />
-        <Card>
-          <CardSection>
-            <Text style={styles.cardHeaderStyle}>
-              Notification Settings
-            </Text>
-          </CardSection>
-          <CardSection>
-            <View style={{ padding: 15, paddingBottom: 0 }}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <View>
-                  <Text style={styles.settingTitleStyle}>
-                    Chat Notification
-                  </Text>
-                  <Text style={styles.settingInfoStyle}>
-                    Receive notfications for incoming chats
-                  </Text>
+        <ScrollView>
+          <Card>
+            <CardSection>
+              <Text style={styles.cardHeaderStyle}>
+                Notification Settings
+              </Text>
+            </CardSection>
+            <CardSection>
+              <View style={{ padding: 15, paddingBottom: 0 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <View>
+                    <Text style={styles.settingTitleStyle}>
+                      Chat Notification
+                    </Text>
+                    <Text style={styles.settingInfoStyle}>
+                      Receive notfications for incoming chats
+                    </Text>
+                  </View>
+                  <Switch
+                    value={this.state.chatSwitchValue}
+                    onValueChange={(value) => {
+                      this.setState({ chatSwitchValue: value });
+                      this.props.updateUser({ showChatNotification: value });
+                    }}
+                    style={{ padding: 10 }}
+                  />
                 </View>
-                <Switch
-                  value={this.state.chatSwitchValue}
-                  onValueChange={(value) => {
-                    this.setState({ chatSwitchValue: value });
-                    this.props.updateUser({ showChatNotification: value });
-                  }}
-                  style={{ padding: 10 }}
-                />
+                <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
               </View>
-              <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
-            </View>
-          </CardSection>
-          <CardSection>
-            <View style={{ padding: 15, paddingBottom: 0 }}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <View>
-                  <Text style={styles.settingTitleStyle}>
-                    Class Notification
-                  </Text>
-                  <Text style={styles.settingInfoStyle}>
-                    Receive notfications for upcoming classes
-                  </Text>
+            </CardSection>
+            <CardSection>
+              <View style={{ padding: 15, paddingBottom: 0 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <View>
+                    <Text style={styles.settingTitleStyle}>
+                      Class Notification
+                    </Text>
+                    <Text style={styles.settingInfoStyle}>
+                      Receive notfications for upcoming classes
+                    </Text>
+                  </View>
+                  <Switch
+                    value={this.state.classSwitchValue}
+                    onValueChange={(value) => {
+                      this.setState({ classSwitchValue: value });
+                      this.props.updateUser({ showClassNotification: value });
+                    }}
+                    style={{ padding: 10 }}
+                  />
                 </View>
-                <Switch
-                  value={this.state.classSwitchValue}
-                  onValueChange={(value) => {
-                    this.setState({ classSwitchValue: value });
-                    this.props.updateUser({ showClassNotification: value });
-                  }}
-                  style={{ padding: 10 }}
-                />
               </View>
-            </View>
-          </CardSection>
-        </Card>
-        <View style={{ height: 20 }} />
-        <Card>
-          <CardSection>
-            <Text style={styles.cardHeaderStyle}>
-              Support
-            </Text>
-          </CardSection>
-          <CardSection>
-            <View style={{ padding: 15, paddingBottom: 0 }}>
-              <TouchableOpacity onPress={() => this.openUrl('mailto:learnwithanchor@gmail.com')}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <View>
-                    <Text style={styles.settingTitleStyle}>
-                      Contact Us
-                    </Text>
-                    <Text style={styles.settingInfoStyle}>
-                      learnwithanchor@gmail.com
-                    </Text>
+            </CardSection>
+          </Card>
+          <View style={{ height: 20 }} />
+          <Card>
+            <CardSection>
+              <Text style={styles.cardHeaderStyle}>
+                Support
+              </Text>
+            </CardSection>
+            <CardSection>
+              <View style={{ padding: 15, paddingBottom: 0 }}>
+                <TouchableOpacity onPress={() => this.openUrl('mailto:learnwithanchor@gmail.com')}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <View>
+                      <Text style={styles.settingTitleStyle}>
+                        Contact Us
+                      </Text>
+                      <Text style={styles.settingInfoStyle}>
+                        learnwithanchor@gmail.com
+                      </Text>
+                    </View>
+                    <Icon style={{ padding: 15 }} name='arrow-top-right' size={24} />
                   </View>
-                  <Icon style={{ padding: 15 }} name='arrow-top-right' size={24} />
-                </View>
-              </TouchableOpacity>
-              <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
-            </View>
-          </CardSection>
-          <CardSection>
-            <View style={{ padding: 15, paddingBottom: 0 }}>
-              <TouchableOpacity onPress={() => this.openUrl('https://learnwithanchor.squarespace.com')}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <View>
-                    <Text style={styles.settingTitleStyle}>
-                      Help
-                    </Text>
-                    <Text style={styles.settingInfoStyle}>
-                      Need any help? We got your back
-                    </Text>
+                </TouchableOpacity>
+                <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
+              </View>
+            </CardSection>
+            <CardSection>
+              <View style={{ padding: 15, paddingBottom: 0 }}>
+                <TouchableOpacity onPress={() => this.openUrl('https://learnwithanchor.squarespace.com')}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <View>
+                      <Text style={styles.settingTitleStyle}>
+                        Help
+                      </Text>
+                      <Text style={styles.settingInfoStyle}>
+                        Need any help? We got your back
+                      </Text>
+                    </View>
+                    <Icon style={{ padding: 15 }} name='headset' size={24} />
                   </View>
-                  <Icon style={{ padding: 15 }} name='headset' size={24} />
-                </View>
-              </TouchableOpacity>
-              <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
-            </View>
-          </CardSection>
-          <CardSection>
-            <View style={{ padding: 15, paddingBottom: 0 }}>
-              <TouchableOpacity onPress={() => this.openUrl('http://play.google.com/store/apps/details?id=com.google.android.apps.maps')}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <View>
-                    <Text style={styles.settingTitleStyle}>
-                      Rate Us
-                    </Text>
-                    <Text style={styles.settingInfoStyle}>
-                      Help us out by rating us on the play store!
-                    </Text>
+                </TouchableOpacity>
+                <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
+              </View>
+            </CardSection>
+            <CardSection>
+              <View style={{ padding: 15, paddingBottom: 0 }}>
+                <TouchableOpacity onPress={() => this.openUrl('http://play.google.com/store/apps/details?id=com.google.android.apps.maps')}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <View>
+                      <Text style={styles.settingTitleStyle}>
+                        Rate Us
+                      </Text>
+                      <Text style={styles.settingInfoStyle}>
+                        Help us out by rating us on the play store!
+                      </Text>
+                    </View>
+                    <Icon style={{ padding: 15 }} name='star' size={24} />
                   </View>
-                  <Icon style={{ padding: 15 }} name='star' size={24} />
-                </View>
-              </TouchableOpacity>
-              <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
-            </View>
-          </CardSection>
-        </Card>
-        <View style={{ height: 20 }} />
-        <TouchableOpacity activeOpacity={0.3} style={{ alignSelf: 'center', elevation: 10, padding: 10 }} onPress={this.props.logoutUser.bind(this)}>
-          <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={styles.logoutButtonStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
-            <Text style={styles.logoutTextStyle}>
-              Logout
-            </Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </ScrollView>
+                </TouchableOpacity>
+                <View style={{ width, height: 0.5, backgroundColor: '#eeeeee' }} />
+              </View>
+            </CardSection>
+          </Card>
+          <View style={{ height: 20 }} />
+          <TouchableOpacity activeOpacity={0.3} style={{ alignSelf: 'center', elevation: 10, padding: 10 }} onPress={this.props.logoutUser.bind(this)}>
+            <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={styles.logoutButtonStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
+              <Text style={styles.logoutTextStyle}>
+                Logout
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
     );
   }
 }

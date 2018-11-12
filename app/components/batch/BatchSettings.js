@@ -112,7 +112,7 @@ class BatchSettings extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <StatusBar backgroundColor={colors.primary.dark} />
+        <StatusBar />
         <ScrollView
           keyboardShouldPersistTaps='always'
           contentContainerStyle={{ paddingBottom: 15 }}
