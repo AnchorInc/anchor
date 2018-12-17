@@ -18,6 +18,8 @@ class Main extends Component {
     // called when the app is opened by a notification tap
     firebase.notifications().getInitialNotification()
     .then((notificationOpen) => {
+      if (!notificationOpen) return;
+
       console.log('opened by a notification');
       const { title, senderID, screen } = notificationOpen.notification.data;
       this.openScreen(screen, { uid: senderID, title });
