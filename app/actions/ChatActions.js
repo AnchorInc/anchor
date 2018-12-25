@@ -1,19 +1,19 @@
 import { actionTypes } from '../config';
 
-export const getMessages = (teacherUID, studentUID) => {
-  return { type: actionTypes.MESSAGE.GET, teacherUID, studentUID };
+export const getMessages = (teacherUID) => {
+  return { type: actionTypes.MESSAGE.GET, teacherUID };
 };
 
-export const updateMessages = (chat, teacherUID, studentUID) => {
-  return { type: actionTypes.MESSAGE.UPDATE, chat, teacherUID, studentUID };
+export const updateMessages = (chat, teacherUID) => {
+  return { type: actionTypes.MESSAGE.UPDATE, chat, teacherUID };
 };
 
 export const syncMessages = (messages) => {
   return { type: actionTypes.MESSAGE.SYNC, messages };
 };
 
-export const getChats = (id) => {
-  return { type: actionTypes.CHAT.GET, id };
+export const getChats = () => {
+  return { type: actionTypes.CHAT.GET };
 };
 
 export const syncChats = (chats) => {
@@ -24,6 +24,6 @@ export const createChat = () => {
   return { type: actionTypes.CHAT.CREATE };
 };
 
-export const deleteChat = (studentUID, teacherUID) => {
-  return { type: actionTypes.CHAT.DELETE, studentUID, teacherUID };
+export const deleteChat = (teacherUID) => {
+  return { type: actionTypes.CHAT.DELETE, teacherUID };
 };

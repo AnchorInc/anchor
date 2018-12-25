@@ -3,9 +3,8 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 
-import { userTypes } from '../../config';
 import { showChatBadge } from '../../actions';
-import { StudentStack, TeacherStack } from '../../navigation/Router';
+import { NavStack } from '../../navigation/Router';
 
 class Main extends Component {
   componentDidMount() {
@@ -35,28 +34,13 @@ class Main extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.donePref) {
-      if (nextProps.type === userTypes.STUDENT) {
-        this.props.navigation.navigate('StudentProfileEditing');
-      } else if (nextProps.type === userTypes.TEACHER) {
-        this.props.navigation.navigate('TeacherProfileEditing');
-      } else {
-        console.log('User is not student or teacher!');
-      }
+      this.props.navigation.navigate('StudentProfileEditing');
     }
   }
 
   componentWillUnmount() {
     this.onNotificationOpened();
     this.onMessage();
-  }
-
-  getStack() {
-    if (this.props.type === userTypes.STUDENT) {
-      return <StudentStack />;
-    } else if (this.props.type === userTypes.TEACHER) {
-      return <TeacherStack />;
-    }
-    return null;
   }
 
   openScreen = (screen, data = null) => {
@@ -70,7 +54,7 @@ class Main extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        {this.getStack()}
+        <NavStack />
       </View>
     );
   }

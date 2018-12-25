@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, StatusBar, Dimensions, Image } from 'react-native';
 import { connect } from 'react-redux';
 import DialogBox from 'react-native-dialogbox';
-import Carousel from 'react-native-snap-carousel';
-import LinearGradient from 'react-native-linear-gradient';
 
-import { colors, userTypes } from '../../config';
+
+import { colors } from '../../config';
 import {
   googleLoginRequest,
   fbLoginRequest,
@@ -21,14 +20,6 @@ import logo from '../../images/logo.png';
 const { width, height } = Dimensions.get('window');
 
 class Login extends Component {
-  state = {
-    userType: userTypes.STUDENT,
-    userTypeOptions: [
-      userTypes.STUDENT,
-      userTypes.TEACHER,
-    ],
-  };
-
   showErrorMessage = () => {
     if (this.props.loginFail) {
       this.dialogbox.tip({
@@ -73,30 +64,8 @@ class Login extends Component {
         </View>
         <View style={{ backgroundColor: 'white', flex: 1.5, justifyContent: 'space-around' }}>
           <View style={loginContainerStyle}>
-            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.props.fbLoginRequest.bind(this, this.state.userType)} />
-            <LoginButton title='Sign in with Google' iconName='google' onPress={this.props.googleLoginRequest.bind(this, this.state.userType)} />
-            <LinearGradient
-              colors={[
-                '#c0c0cB',
-                '#c0c0cB',
-              ]}
-              locations={[0.3, 1]}
-              start={{ x: 1, y: 0 }}
-              end={{ x: 0, y: 1 }}
-              style={{ justifyContent: 'center', alignItems: 'center', alignSelf: 'center', borderRadius: 8, width: 180, height: 40 }}
-            >
-              <Carousel
-                sliderWidth={width}
-                itemWidth={90}
-                data={this.state.userTypeOptions}
-                renderItem={this.renderPickerCarousel}
-                inactiveSlideScale={1}
-                enableMomentum
-                showsHorizontalScrollIndicator={false}
-                removeClippedSubviews
-                onSnapToItem={index => this.setState({ userType: this.state.userTypeOptions[index] })}
-              />
-            </LinearGradient>
+            <LoginButton title='Sign in with Facebook' iconName='facebook' onPress={this.props.fbLoginRequest} />
+            <LoginButton title='Sign in with Google' iconName='google' onPress={this.props.googleLoginRequest} />
           </View>
         </View>
         <Spinner visible={this.props.loading} title='Authenticating' />

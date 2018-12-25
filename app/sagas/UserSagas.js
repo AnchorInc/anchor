@@ -50,13 +50,9 @@ function* getUserSaga() {
   }
 }
 
-function* getUserRef() {
+function getUserRef() {
   // get the user path string stored on the device
-  const userCollection = yield call([AsyncStorage, AsyncStorage.getItem], 'user_collection');
-  if (!userCollection) {
-      return undefined;
-  }
-  return firebase.firestore().collection(userCollection).doc(firebase.auth().currentUser.uid);
+  return firebase.firestore().collection('students').doc(firebase.auth().currentUser.uid);
 }
 
 const userEventListener = (ref) => {

@@ -5,7 +5,7 @@ import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
 
 import { showSpinner, loginSuccess, loginFail, syncUser } from '../actions';
-import { actionTypes, firebasePaths, userTypes, signinMethods } from '../config';
+import { actionTypes, signinMethods } from '../config';
 
 
 const auth = firebase.auth();
@@ -82,9 +82,8 @@ function* logoutUser() {
 function* initUser(action, userCred) {
   console.log('init');
   // get a db reference to the user
-  const userCollection = getUserCollection(action);
   const user = userCred.user._user;
-  const userRef = firebase.firestore().collection(userCollection).doc(user.uid);
+  const userRef = firebase.firestore().collection('students').doc(user.uid);
 
   let userData;
   // check if the user already exists
@@ -96,7 +95,6 @@ function* initUser(action, userCred) {
       photoURL: user.photoURL,
       uid: user.uid,
       phone: user.phone,
-      type: action.userType,
       showChatNotification: true,
       showClassNotification: false,
       donePref: false,
@@ -109,26 +107,13 @@ function* initUser(action, userCred) {
   }
 
   // store the user path and user data in the cache
-  yield call([AsyncStorage, AsyncStorage.multiSet],
-    [['user_collection', userCollection],
-    ['user_data', JSON.stringify(userData)],
-    ['signin_method', JSON.stringify(action.method)]]);
+  yield call([AsyncStorage, AsyncStorage.setItem], 'user_data', JSON.stringify(userData));
+  yield call([AsyncStorage, AsyncStorage.setItem], 'signin_method', JSON.stringify(action.method));
+  console.log('ioenor');
 
   yield put(loginSuccess());
+  console.log('done');
 }
-
-const getUserCollection = (action) => {
-  switch (action.userType) {
-    case userTypes.STUDENT:
-      // return '/students'
-      return firebasePaths.STUDENTS;
-    case userTypes.TEACHER:
-      // return '/teachers'
-      return firebasePaths.TEACHERS;
-    default:
-      throw new Error('User is not student or teacher');
-  }
-};
 
 export function* watchLoginRequests() {
   yield all([

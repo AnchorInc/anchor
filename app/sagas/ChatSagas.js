@@ -2,9 +2,10 @@ import firebase from 'react-native-firebase';
 import { eventChannel } from 'redux-saga';
 import { put, takeLatest, all, call, cancel, take, takeEvery, select } from 'redux-saga/effects';
 
-import { actionTypes, userTypes } from '../config';
+import { actionTypes } from '../config';
 import { syncMessages, syncChats, createChat } from '../actions';
 
+// const uid = firebase.auth().currentUser.uid;
 
 function* messageListenerSaga(action) {
   const chatId = yield call(getChatId, action);
@@ -48,13 +49,13 @@ function* chatListenerSaga(action) {
 function* createChatSaga(action) {
   const ref = firebase.firestore().collection('conversations');
 
-  yield call([ref, ref.add], { teacherId: action.teacherUID, studentId: action.studentUID });
+  yield call([ref, ref.add], { teacherId: action.id });
 }
 
 function* deleteChatSaga(action) {
   const ref = firebase.firestore().collection('conversations')
   .where('teacherId', '==', action.teacherUID)
-  .where('studentId', '==', action.studentUID);
+  .where('studentId', '==', firebase.auth().currentUser.uid);
   const docs = (yield call([ref, ref.get])).docs;
 
   yield all(docs.map(doc => call([doc.ref, doc.ref.delete])));
@@ -70,7 +71,7 @@ function* updateMessagesSaga(action) {
     const ref = firebase.firestore().collection('conversations').doc();
     yield call([firebase.firestore(), firebase.firestore().runTransaction], async (transaction) => {
       transaction.set(ref, {
-        studentId: action.studentUID,
+        studentId: firebase.auth().currentUser.uid,
         teacherId: action.teacherUID,
       });
       transaction.set(ref.collection('messages').doc(), action.chat);
@@ -81,7 +82,7 @@ function* updateMessagesSaga(action) {
 function* getChatId(action) {
   const ref = firebase.firestore().collection('conversations')
   .where('teacherId', '==', action.teacherUID)
-  .where('studentId', '==', action.studentUID);
+  .where('studentId', '==', firebase.auth().currentUser.uid);
 
   const docs = yield call([ref, ref.get]);
   let chatId;
@@ -93,12 +94,10 @@ function* getChatId(action) {
   return chatId;
 }
 
-const chatEventListener = (ref, id, type) => {
+const chatEventListener = (ref) => {
   const channel = eventChannel((emitter) => {
-    const idType = (type === userTypes.STUDENT) ? 'studentId' : 'teacherId';
-
     return ref.collection('conversations')
-    .where(idType, '==', id)
+    .where('studentId', '==', firebase.auth().currentUser.uid)
     .onSnapshot((snapshot) => {
       const chats = [];
       snapshot.docChanges.forEach((change) => {

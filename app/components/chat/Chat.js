@@ -6,7 +6,6 @@ import AndroidKeyboardAdjust from 'react-native-android-keyboard-adjust';
 import { Header } from '../header';
 import { updateMessages, getMessages, hideChatBadge } from '../../actions';
 import { ChatBubble, Input } from './';
-import { userTypes, firebasePaths } from '../../config';
 
 class Chat extends Component {
   constructor(props) {
@@ -14,10 +13,9 @@ class Chat extends Component {
     this.state = {
       messages: [],
       myLatestMessage: {},
-      teacherUID: (this.props.user.type === userTypes.TEACHER) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
-      studentUID: (this.props.user.type === userTypes.STUDENT) ? this.props.user.uid : this.props.navigation.state.params.chat.uid,
+      teacherUID: this.props.navigation.state.params.chat.uid,
     };
-    this.props.getMessages(this.state.teacherUID, this.state.studentUID);
+    this.props.getMessages(this.state.teacherUID, this.props.user.uid);
   }
 
   componentWillMount() {
@@ -53,11 +51,11 @@ class Chat extends Component {
       senderImageURL: this.props.user.photoURL,
       senderID: this.props.user.uid,
       recipientID: this.props.navigation.state.params.chat.uid,
-      recipientType: (this.props.user.type === userTypes.STUDENT) ? firebasePaths.TEACHERS : firebasePaths.STUDENTS,
+      recipientType: 'teachers',
     };
     const messages = [messageData, ...this.state.messages];
     this.setState({ messages, myLatestMessage: messageData });
-    this.props.updateMessages(messageData, this.state.teacherUID, this.state.studentUID);
+    this.props.updateMessages(messageData, this.state.teacherUID, this.props.user.uid);
   }
 
   renderMessages = ({ item }) => {

@@ -7,16 +7,13 @@ import {
   Chat,
   ChatsOverview,
   Classes,
-  Batches,
   Login,
   Main,
   StudentProfile,
   StudentProfileEditing,
   TeacherProfile,
-  TeacherProfileEditing,
   Search,
   Settings,
-  BatchSettings,
 } from '../components';
 
 import { colors } from '../config';
@@ -64,14 +61,9 @@ const TabNavigatorConfig = {
   },
 };
 
-export const StudentTabs = createBottomTabNavigator({
+export const Tabs = createBottomTabNavigator({
   Classes: { screen: Classes },
   Search: { screen: Search },
-  Settings: { screen: Settings },
-}, TabNavigatorConfig);
-
-export const TeacherTabs = createBottomTabNavigator({
-  Batches: { screen: Batches },
   Settings: { screen: Settings },
 }, TabNavigatorConfig);
 
@@ -82,24 +74,14 @@ const StackConfig = {
   headerMode: 'none',
 };
 
-export const StudentStack = createStackNavigator({
-  Classes: { screen: StudentTabs },
-  Search: { screen: StudentTabs },
+export const NavStack = createStackNavigator({
+  Classes: { screen: Tabs },
+  Search: { screen: Tabs },
   StudentProfile: { screen: StudentProfile },
   TeacherProfile: { screen: TeacherProfile },
   StudentProfileEditing: { screen: StudentProfileEditing },
   ChatsOverview: { screen: ChatsOverview },
   Chat: { screen: Chat },
-  BatchSettings: { screen: BatchSettings },
-}, StackConfig);
-
-export const TeacherStack = createStackNavigator({
-  Batches: { screen: TeacherTabs },
-  TeacherProfile: { screen: TeacherProfile },
-  TeacherProfileEditing: { screen: TeacherProfileEditing },
-  ChatsOverview: { screen: ChatsOverview },
-  Chat: { screen: Chat },
-  BatchSettings: { screen: BatchSettings },
 }, StackConfig);
 
 export const MainStack = createStackNavigator({
@@ -107,7 +89,6 @@ export const MainStack = createStackNavigator({
   Login: { screen: Login },
   Main: { screen: Main },
   StudentProfileEditing: { screen: StudentProfileEditing },
-  TeacherProfileEditing: { screen: TeacherProfileEditing },
   Chat: { screen: Chat },
 }, StackConfig);
 

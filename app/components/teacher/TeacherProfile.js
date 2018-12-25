@@ -14,7 +14,7 @@ import firebase from 'react-native-firebase';
 import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { colors, userTypes } from '../../config';
+import { colors } from '../../config';
 import { ListDetail, TouchableDebounce, Spinner } from '../../lib';
 
 const { width, height } = Dimensions.get('window');
@@ -23,7 +23,6 @@ class TeacherProfile extends Component {
   state = {
     uid: this.props.navigation.state.params.uid,
     teacher: null,
-    action: this.props.navigation.state.params.action,
     batches: [],
     messages: [],
     time: '',
@@ -31,11 +30,7 @@ class TeacherProfile extends Component {
   };
 
   componentWillMount() {
-    if (this.props.user.type === userTypes.STUDENT) {
-      this.getTeacher();
-    } else {
-      this.setState({ teacher: this.props.user });
-    }
+    this.getTeacher();
   }
 
   getTeacher() {
@@ -48,15 +43,11 @@ class TeacherProfile extends Component {
   }
 
   completeAction = () => {
-    if (this.state.action === 'account-settings-variant') {
-      this.props.navigation.navigate('TeacherProfileEditing');
-    } else {
-      const chat = {
-        uid: this.state.uid,
-        title: this.state.teacher.displayName,
-      };
-      this.props.navigation.navigate('Chat', { chat });
-    }
+    const chat = {
+      uid: this.state.uid,
+      title: this.state.teacher.displayName,
+    };
+    this.props.navigation.navigate('Chat', { chat });
   }
 
   render() {
@@ -73,7 +64,7 @@ class TeacherProfile extends Component {
                 {this.state.teacher.displayName}
               </Text>
               <TouchableDebounce style={styles.iconStyle} onPress={() => this.completeAction()}>
-                <Icon name={this.state.action} size={24} color='white' />
+                <Icon name="forum" size={24} color='white' />
               </TouchableDebounce>
             </View>
             <View style={styles.profileContainerStyle}>

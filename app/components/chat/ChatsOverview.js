@@ -5,7 +5,6 @@ import DialogBox from 'react-native-dialogbox';
 
 import { ChatDetail } from './';
 import { getChats, hideChatBadge } from '../../actions';
-import { userTypes } from '../../config';
 import { Header } from '../header';
 
 const { width, height } = Dimensions.get('window');
@@ -30,8 +29,7 @@ class ChatsOverview extends Component {
       this.state.chats.sort((x, y) => { return y.latestMessage.timeStamp - x.latestMessage.timeStamp; });
     } else {
       this.state.chats.forEach((chat) => {
-        const idType = (this.props.user.type === userTypes.STUDENT) ? 'teacherId' : 'studentId';
-        if (chat[idType] === nextProps.chats[0][idType]) {
+        if (chat.teacherId === nextProps.chats[0].teacherId) {
           const index = this.state.chats.indexOf(chat);
           this.state.chats[index] = nextProps.chats[0];
           this.state.chats.sort((x, y) => { return y.latestMessage.timeStamp - x.latestMessage.timeStamp; });
@@ -47,9 +45,9 @@ class ChatsOverview extends Component {
   renderChats = ({ item }) => {
     return (
       <ChatDetail
-        displayName={(this.props.user.type === userTypes.STUDENT) ? item.teacherName : item.studentName}
+        displayName={item.teacherName}
         dialogbox={this.dialogbox}
-        imageURL={(this.props.user.type === userTypes.STUDENT) ? item.teacherPhotoURL : item.studentPhotoURL}
+        imageURL={item.teacherPhotoURL}
         text={item.latestMessage.text}
         timeStamp={item.latestMessage.timeStamp}
         unread={item.latestMessage.unread}
@@ -57,8 +55,8 @@ class ChatsOverview extends Component {
         studentUID={item.studentId}
         onPress={() => {
           const chat = {
-            uid: (this.props.user.type === userTypes.STUDENT) ? item.teacherId : item.studentId,
-            title: (this.props.user.type === userTypes.STUDENT) ? item.teacherName : item.studentName,
+            uid: item.teacherId,
+            title: item.teacherName,
           };
           this.navigateChatScreen(chat);
         }}

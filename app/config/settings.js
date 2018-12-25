@@ -43,12 +43,6 @@ export const actionTypes = {
   },
 };
 
-// user types used by auth
-export const userTypes = {
-  STUDENT: 'student',
-  TEACHER: 'teacher',
-};
-
 // algoliasearch config data
 export const algoliaConfig = {
   adminID: 'HZZZN58AJ0',
@@ -65,10 +59,4 @@ export const gsigninConfig = {
 export const signinMethods = {
   GOOGLE: 'google',
   FB: 'fb',
-};
-
-// firebase database constants
-export const firebasePaths = {
-  STUDENTS: 'students',
-  TEACHERS: 'teachers',
 };
