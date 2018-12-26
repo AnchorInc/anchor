@@ -16,9 +16,8 @@ class ClassList extends Component {
     initialRefresh: false,
   };
 
-  componentWillMount() {
-    if (this.state.initialRefresh) return;
-    this.refresh();
+  componentWillReceiveProps(nextProps) {
+    this.refresh(nextProps);
   }
 
   getTeachersFromBatchList = (batchList) => {
@@ -31,8 +30,8 @@ class ClassList extends Component {
     });
   }
 
-  refresh = () => {
-    const list = this.props.batchList;
+  refresh = (props) => {
+    const list = (props) ? props.batchList : this.props.batchList;
     this.setState({ refreshing: true });
     if (list) {
       this.getTeachersFromBatchList(list);

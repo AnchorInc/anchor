@@ -3,12 +3,12 @@ import { StatusBar, Text, TextInput, TouchableWithoutFeedback, TouchableOpacity,
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
+import { FilterComponent } from './';
 
-const { width, height } = Dimensions.get('window');
-
+const { width } = Dimensions.get('window');
 class SearchBar extends Component {
 
-  state = { search: false, editingInput: false, buttonClicked: false };
+  state = { search: false, editingInput: false, buttonClicked: false, containerHeight: 64, renderFilterMenu: false };
 
   componentDidMount() {
     if (Platform.OS === 'android') {
@@ -36,7 +36,7 @@ class SearchBar extends Component {
 
   _onPressBack = () => {
     LayoutAnimation.easeInEaseOut();
-    this.setState({ search: false, editingInput: false });
+    this.setState({ search: false, editingInput: false, containerHeight: 64, renderFilterMenu: false });
     this.props.searchCallback('');
   }
 
@@ -45,7 +45,7 @@ class SearchBar extends Component {
       return (
         <TouchableOpacity onPress={() => {
           this.searchBar.clear();
-          this.setState({ editingInput: false });
+          this.setState({ editingInput: false, containerHeight: 64, renderFilterMenu: false });
           this.props.searchCallback('');
           }}
         >
@@ -56,27 +56,47 @@ class SearchBar extends Component {
     return null;
   }
 
+  showFilterButton = () => {
+    if (this.state.editingInput) {
+      return (
+        <TouchableOpacity onPress={() => {
+          LayoutAnimation.linear();
+          const toggleHeight = (this.state.containerHeight === 64) ? 200 : 64;
+          this.setState({ containerHeight: toggleHeight, renderFilterMenu: !this.state.renderFilterMenu });
+        }}
+        >
+          <Icon size={24} name="filter-variant" color='white' style={styles.iconStyle} />
+        </TouchableOpacity>
+      );
+    }
+    return null;
+  }
+
   showSearchBar = () => {
     if (this.state.search) {
       return (
-        <View style={styles.containerStyle}>
+        <View style={[styles.containerStyle, { height: this.state.containerHeight }]}>
           <StatusBar />
-          <TouchableOpacity onPress={() => this._onPressBack()}>
-            <Icon size={24} name="keyboard-backspace" color='white' style={styles.iconStyle} />
-          </TouchableOpacity>
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Search"
-            placeholderTextColor='white'
-            underlineColorAndroid='transparent'
-            autoCapitalize='words'
-            onChangeText={this.onChangeText}
-            returnKeyType={this.props.rkt}
-            ref={(ref) => { this.searchBar = ref; }}
-            selectionColor={'white'}
-            autoFocus
-          />
-          {this.showClearTextButton()}
+          <View style={{ alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row', paddingTop: 5, paddingLeft: 2 }}>
+            <TouchableOpacity onPress={() => this._onPressBack()}>
+              <Icon size={24} name="keyboard-backspace" color='white' style={styles.iconStyle} />
+            </TouchableOpacity>
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="Search"
+              placeholderTextColor='white'
+              underlineColorAndroid='transparent'
+              autoCapitalize='words'
+              onChangeText={this.onChangeText}
+              returnKeyType={this.props.rkt}
+              ref={(ref) => { this.searchBar = ref; }}
+              selectionColor={'white'}
+              autoFocus
+            />
+            {this.showFilterButton()}
+            {this.showClearTextButton()}
+          </View>
+          {this.renderFilterMenu()}
         </View>
       );
     }
@@ -96,6 +116,12 @@ class SearchBar extends Component {
     );
   }
 
+  renderFilterMenu = () => {
+    if (this.state.renderFilterMenu) {
+      return <FilterComponent rating={this.props.rating} multiSliderValue={this.props.multiSliderValue} multiSliderValuesChange={this.props.multiSliderValuesChange} updateRating={this.props.updateRating} />;
+    } return null;
+  }
+
   render() {
     return this.showSearchBar();
   }
@@ -104,15 +130,13 @@ class SearchBar extends Component {
 const styles = {
   containerStyle: {
     justifyContent: 'flex-start',
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: 'flex-start',
+    flexDirection: 'column',
     backgroundColor: '#232fa8',
     width,
-    height: 64,
   },
   inputStyle: {
-    width: 0.75 * width,
-    alignSelf: 'center',
+    width: 0.65 * width,
     padding: 10,
     fontFamily: 'AvenirLTStd-Heavy',
     fontSize: 20,

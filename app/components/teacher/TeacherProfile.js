@@ -81,7 +81,7 @@ class TeacherProfile extends Component {
               iconSet='MaterialCommunityIcons'
               emptyStar='star-outline'
               halfStar='star-half'
-              starColor='#ffb300'
+              fullStarColor='#ffb300'
               emptyStarColor='#ffb300'
               starSize={25}
               rating={this.state.teacher.rating}

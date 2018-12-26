@@ -4,15 +4,16 @@ import algoliasearch from 'algoliasearch/reactnative';
 import AndroidKeyboardAdjust from 'react-native-android-keyboard-adjust';
 
 import { algoliaConfig } from '../../config';
-import { SearchBar, SearchDetail, SubjectDetail } from './';
+import { SearchBar, SearchDetail } from './';
 
 const { width, height } = Dimensions.get('window');
 
 class Search extends Component {
   state = {
+    queryObj: '',
     teachers: [],
-    subjects: [],
     rating: 3.5,
+    multiSliderValue: [250, 1250],
     showSearchVal: false,
   };
 
@@ -25,21 +26,18 @@ class Search extends Component {
     this.props.navigation.navigate('TeacherProfile', { uid, action: 'forum' });
   }
 
-  requestData = (queryObj) => {
-    // this.setState({ teachers: [], subjects: [] });
+  requestData = (queryObj, rating, multiSliderValue) => {
+    this.setState({ queryObj });
     const client = algoliasearch(algoliaConfig.adminID, algoliaConfig.apiKey);
-    const queries = [{
-      indexName: 'teachers',
+    const index = client.initIndex('teachers');
+    const query = {
       query: queryObj,
-      filters: 'Rating >= 3.5',
-    }, {
-      indexName: 'subjects',
-      query: queryObj,
-    }];
+      filters: `rating >= ${rating} AND (price:${multiSliderValue[0]} TO ${multiSliderValue[1]})`,
+    };
     if (queryObj === '') {
-      this.setState({ showSearchVal: false, teachers: [], subjects: [] });
+      this.setState({ showSearchVal: false, teachers: [] });
     } else {
-      client.search(queries, this.searchCallback.bind(this));
+      index.search(query, this.searchCallback.bind(this));
     }
   }
 
@@ -48,15 +46,30 @@ class Search extends Component {
       console.error(err);
       return;
     }
-    this.setState({ teachers: content.results[0].hits, subjects: content.results[1].hits });
+    if (this.state.teachers !== content.hits) {
+      this.setState({ teachers: content.hits });
+    }
+    console.log(content.hits);
   }
 
-  renderSubjects = () => {
-    if (this.state.subjects.length >= 1 && !this.state.showSearchVal) {
-      return this.state.subjects.map(subject => <SubjectDetail key={subject.objectID} subject={subject} />);
-    }
-    return null;
+  updateRating = (rating) => {
+    this.setState({ rating });
+    this.requestData(this.state.queryObj, rating, this.state.multiSliderValue);
   }
+
+  // renderSubjects = () => {
+  //   if (this.state.subjects.length >= 1 && !this.state.showSearchVal) {
+  //     return this.state.subjects.map(subject => <SubjectDetail key={subject.objectID} subject={subject} />);
+  //   }
+  //   return null;
+  // }
+
+  multiSliderValuesChange = (values) => {
+    this.setState({
+      multiSliderValue: values,
+    });
+    this.requestData(this.state.queryObj, this.state.rating, values);
+  };
 
   renderTeachers = () => {
     if (this.state.teachers.length >= 1 && !this.state.showSearchVal) {
@@ -68,12 +81,15 @@ class Search extends Component {
   render() {
     return (
       <View style={styles.containerStyle}>
-        <SearchBar searchCallback={queryobj => this.requestData(queryobj)} rkt="search" />
+        <SearchBar
+          searchCallback={queryobj => this.requestData(queryobj, this.state.rating, this.state.multiSliderValue)}
+          rkt="search"
+          rating={this.state.rating}
+          multiSliderValue={this.state.multiSliderValue}
+          multiSliderValuesChange={this.multiSliderValuesChange}
+          updateRating={this.updateRating}
+        />
         <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps='always'>
-          <Text style={styles.topResultTextStyle}>
-            {this.state.subjects.length >= 1 ? 'Subjects' : ''}
-          </Text>
-          {this.renderSubjects()}
           <Text style={styles.topResultTextStyle}>
             {this.state.teachers.length >= 1 ? 'Teachers' : ''}
           </Text>
