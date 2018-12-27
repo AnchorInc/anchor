@@ -1,6 +1,6 @@
 import firebase from 'react-native-firebase';
 import { eventChannel } from 'redux-saga';
-import { put, takeLatest, all, call, cancel, take, takeEvery, select } from 'redux-saga/effects';
+import { put, takeLatest, all, call, cancel, take, takeEvery } from 'redux-saga/effects';
 
 import { actionTypes } from '../config';
 import { syncMessages, syncChats, createChat } from '../actions';
@@ -33,10 +33,7 @@ function* chatListenerSaga(action) {
   const ref = firebase.firestore();
   if (!ref) yield cancel();
 
-  const getUserType = state => state.user.user.type;
-  const userType = yield select(getUserType);
-
-  const channel = yield call(chatEventListener, ref, action.id, userType);
+  const channel = yield call(chatEventListener, ref, action.id);
 
   while (firebase.auth().currentUser) {
     // get the data emitted from the channel
