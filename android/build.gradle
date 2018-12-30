@@ -16,7 +16,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath 'com.google.gms:google-services:4.0.1'
-
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -44,14 +43,17 @@ allprojects {
 
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
 
-      def overrideVersion = versionOverrides[details.requested.group + ":" + details.requested.name]
+        def overrideVersion = versionOverrides[details.requested.group + ":" + details.requested.name]
 
-      if (overrideVersion != null && details.requested.version != overrideVersion) {
-        println("********************************************************")
-        println("Overriding dependency ${details.requested.group}:${details.requested.name} version ${details.requested.version} --> $overrideVersion")
-        details.useVersion overrideVersion
-        println("********************************************************")
-      }
+        if (overrideVersion != null && details.requested.version != overrideVersion) {
+            println("********************************************************")
+            println("Overriding dependency ${details.requested.group}:${details.requested.name} version ${details.requested.version} --> $overrideVersion")
+            details.useVersion overrideVersion
+            println("********************************************************")
+        }
+    }
+    resolutionStrategy {
+        force 'com.android.support:appcompat-v7:28.0.0'
     }
   }
 }
