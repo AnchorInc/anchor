@@ -147,11 +147,7 @@ dependencies {
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-fbsdk')
     implementation project(':react-native-vector-icons')
-    implementation(project(':react-native-google-places')) {
-        exclude group: 'com.google.android.gms', module: 'play-services-base'
-        exclude group: 'com.google.android.gms', module: 'play-services-places'
-        exclude group: 'com.google.android.gms', module: 'play-services-location'
-    }
+    implementation project(':react-native-google-places')
 
     implementation project(":react-native-android-keyboard-adjust")
 
@@ -174,11 +170,7 @@ dependencies {
 
     // Firebase cloud messaging dependency
     implementation "com.google.firebase:firebase-messaging:17.3.4"
-    implementation 'me.leolin:ShortcutBadger:1.1.21@aar' // to enable android 8 badge feature
-
-    // Google Places Dependencies
-    implementation 'com.google.android.gms:play-services-places:16.0.0'
-    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'me.leolin:ShortcutBadger:1.1.21@aar' // to enable android 8 badge features
 }
 
 // Run this once to be able to run the application with BUCK
