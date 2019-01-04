@@ -73,6 +73,11 @@ public class MainApplication extends Application implements ReactApplication {
           new RNGooglePlacesPackage()
       );
     }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
+    }
   };
 
   @Override
