@@ -46,7 +46,7 @@ function* chatListenerSaga(action) {
 function* createChatSaga(action) {
   const ref = firebase.firestore().collection('conversations');
 
-  yield call([ref, ref.add], { teacherId: action.id });
+  yield call([ref, ref.add], { teacherId: action.id, studentId: firebase.auth().currentUser.uid });
 }
 
 function* deleteChatSaga(action) {
