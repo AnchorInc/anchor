@@ -3,7 +3,6 @@ import { View, Text, StatusBar, Dimensions, Image } from 'react-native';
 import { connect } from 'react-redux';
 import DialogBox from 'react-native-dialogbox';
 
-
 import { colors } from '../../config';
 import {
   googleLoginRequest,
