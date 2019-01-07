@@ -29,11 +29,11 @@ function* messageListenerSaga(action) {
 }
 
 // gets all the chats for the user
-function* chatListenerSaga(action) {
+function* chatListenerSaga() {
   const ref = firebase.firestore();
   if (!ref) yield cancel();
 
-  const channel = yield call(chatEventListener, ref, action.id);
+  const channel = yield call(chatEventListener, ref);
 
   while (firebase.auth().currentUser) {
     // get the data emitted from the channel
