@@ -27,9 +27,6 @@ const TabNavigatorConfig = {
         case 'Classes':
           iconName = 'home';
           break;
-        case 'Batches':
-          iconName = 'home';
-          break;
         case 'Search':
           iconName = 'search';
           break;
