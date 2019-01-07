@@ -13,11 +13,10 @@ class ClassList extends Component {
   state = {
     teachers: [],
     refreshing: false,
-    initialRefresh: false,
   };
 
   componentWillReceiveProps(nextProps) {
-    this.refresh(nextProps);
+      this.refresh(nextProps);
   }
 
   getTeachersFromBatchList = (batchList) => {
@@ -32,13 +31,13 @@ class ClassList extends Component {
 
   refresh = (props) => {
     const list = (props) ? props.batchList : this.props.batchList;
+    console.log(list);
     this.setState({ refreshing: true });
     if (list) {
       this.getTeachersFromBatchList(list);
     } else {
       this.setState({ refreshing: false });
     }
-    if (!this.state.initialRefresh) this.setState({ initialRefresh: true });
   }
 
   renderNoBatchMessage = () => {
