@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "489771714033-sh4c66k741hctc2vrvlfn4bsviiretii.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.anchor",
-            "certificate_hash": "cb2c7f1322ad514099f572c22a577f9229632e3f"
-          }
-        },
-        {
           "client_id": "489771714033-po2rcm35q30h1vvo6ns2kac1fib1q96d.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -39,11 +31,30 @@
           }
         },
         {
+          "client_id": "489771714033-sh4c66k741hctc2vrvlfn4bsviiretii.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anchor",
+            "certificate_hash": "cb2c7f1322ad514099f572c22a577f9229632e3f"
+          }
+        },
+        {
+          "client_id": "489771714033-h8rcam0eaf0p38ee8n30l4a0hfqieskf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anchor",
+            "certificate_hash": "1dfc3ec81414ad99cfdbcf65bc4e83eb75d3643e"
+          }
+        },
+        {
           "client_id": "489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
+        {
+          "current_key": "AIzaSyC2oUTuJYshRVPV4TJ_zjn7OBi55sm0MbQ"
+        },
         {
           "current_key": "AIzaSyCGttWR24ng1Y87ruWfjAcGCISGLKz8jUE"
         }
@@ -60,10 +71,64 @@
               "client_type": 3
             },
             {
-              "client_id": "489771714033-o80on4jv2118hof9eophticmao8mj7j0.apps.googleusercontent.com",
+              "client_id": "489771714033-uskl634f838u27m0a01vsq7ea2uv6r9b.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.anchor"
+                "bundle_id": "com.anchorinc.anchor"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489771714033:android:63933f8a831d172d",
+        "android_client_info": {
+          "package_name": "com.anchor_teacher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489771714033-dqsv4qgl14ihnqsstdiief63rabkq5oh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anchor_teacher",
+            "certificate_hash": "1dfc3ec81414ad99cfdbcf65bc4e83eb75d3643e"
+          }
+        },
+        {
+          "client_id": "489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2oUTuJYshRVPV4TJ_zjn7OBi55sm0MbQ"
+        },
+        {
+          "current_key": "AIzaSyCGttWR24ng1Y87ruWfjAcGCISGLKz8jUE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489771714033-ej9vlft4gfm6enq8fsosh135vac9vnu7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "489771714033-uskl634f838u27m0a01vsq7ea2uv6r9b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anchorinc.anchor"
               }
             }
           ]
