@@ -52,7 +52,7 @@ class ChatsOverview extends Component {
         timeStamp={item.latestMessage.timeStamp}
         unread={item.latestMessage.unread}
         teacherUID={item.teacherId}
-        studentUID={item.studentId}
+        studentUID={this.props.user.uid}
         onPress={() => {
           const chat = {
             uid: item.teacherId,
@@ -78,9 +78,7 @@ class ChatsOverview extends Component {
       </View>
     );
   }
-
 }
-
 
 const mapStateToProps = (state) => {
   let user;

@@ -1,6 +1,14 @@
 import firebase from 'react-native-firebase';
 import { eventChannel } from 'redux-saga';
-import { put, takeLatest, all, call, cancel, take, takeEvery } from 'redux-saga/effects';
+import {
+  put,
+  takeLatest,
+  all,
+  call,
+  cancel,
+  take,
+  takeEvery,
+} from 'redux-saga/effects';
 
 import { actionTypes } from '../config';
 import { syncMessages, syncChats, createChat } from '../actions';
@@ -62,8 +70,11 @@ function* updateMessagesSaga(action) {
   const chatId = yield call(getChatId, action);
 
   if (chatId) {
-    const ref = firebase.firestore().collection('conversations').doc(chatId).collection('messages');
-    yield call([ref, ref.add], action.chat);
+    const messageRef = firebase.firestore().collection('conversations').doc(chatId).collection('messages');
+    yield call([messageRef, messageRef.add], action.chat);
+
+    const latestMessageRef = firebase.firestore().collection('conversations').doc(chatId);
+    yield call([latestMessageRef, latestMessageRef.update], { latestMessage: action.chat });
   } else {
     const ref = firebase.firestore().collection('conversations').doc();
     yield call([firebase.firestore(), firebase.firestore().runTransaction], async (transaction) => {

@@ -15,7 +15,7 @@ class Chat extends Component {
       myLatestMessage: {},
       teacherUID: this.props.navigation.state.params.chat.uid,
     };
-    this.props.getMessages(this.state.teacherUID, this.props.user.uid);
+    this.props.getMessages(this.state.teacherUID);
   }
 
   componentWillMount() {
@@ -55,7 +55,7 @@ class Chat extends Component {
     };
     const messages = [messageData, ...this.state.messages];
     this.setState({ messages, myLatestMessage: messageData });
-    this.props.updateMessages(messageData, this.state.teacherUID, this.props.user.uid);
+    this.props.updateMessages(messageData, this.state.teacherUID);
   }
 
   renderMessages = ({ item }) => {
