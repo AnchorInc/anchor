@@ -27,7 +27,7 @@ function* messageListenerSaga(action) {
 
     // if there are no messages then create a new chat
     if (messages.length === 0) {
-      yield put(createChat(action));
+      yield put(createChat(action.teacherUID));
     }
 
     // update the redux store
@@ -51,10 +51,20 @@ function* chatListenerSaga() {
   channel.close();
 }
 
-function* createChatSaga(action) {
+function createChatSaga(action) {
   const ref = firebase.firestore().collection('conversations');
 
-  yield call([ref, ref.add], { teacherId: action.id, studentId: firebase.auth().currentUser.uid });
+  firebase.firestore().collection('teachers')
+  .doc(action.teacherUID).onSnapshot((snapshot) => {
+    ref.add({
+      teacherId: action.teacherUID,
+      teacherName: snapshot.data().displayName,
+      teacherPhotoURL: snapshot.data().photoURL,
+      studentId: firebase.auth().currentUser.uid,
+      studentName: firebase.auth().currentUser.displayName,
+      studentPhotoURL: firebase.auth().currentUser.photoURL,
+    });
+  });
 }
 
 function* deleteChatSaga(action) {
