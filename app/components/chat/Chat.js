@@ -51,6 +51,7 @@ class Chat extends Component {
       senderID: this.props.user.uid,
       recipientID: this.props.navigation.state.params.chat.uid,
       recipientType: 'teachers',
+      senderImageURL: this.props.user.photoURL,
     };
     const messages = [messageData, ...this.state.messages];
     this.setState({ messages, myLatestMessage: messageData });
