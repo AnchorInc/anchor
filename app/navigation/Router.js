@@ -1,37 +1,47 @@
 import React from 'react';
-import { NavigationActions, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {
+  NavigationActions,
+  createStackNavigator,
+  createBottomTabNavigator,
+  createAppContainer,
+} from 'react-navigation';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {
   AppSetup,
   Chat,
   ChatsOverview,
-  Classes,
+  Batches,
   Login,
   Main,
-  StudentProfile,
+  Student,
   StudentProfileEditing,
   TeacherProfile,
-  Search,
   Settings,
+  BatchSettings,
+  Schedule,
+  Payment,
 } from '../components';
 
 import { colors } from '../config';
 
 const TabNavigatorConfig = {
-  navigationOptions: ({ navigation }) => ({
+  defaultNavigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused }) => {
       const { routeName } = navigation.state;
       let iconName;
       switch (routeName) {
-        case 'Classes':
+        case 'Batches':
           iconName = 'home';
           break;
-        case 'Search':
-          iconName = 'search';
+        case 'Schedule':
+          iconName = 'calendar-blank';
           break;
         case 'Settings':
           iconName = 'settings';
+          break;
+        case 'Payment':
+          iconName = 'credit-card';
           break;
         default:
           iconName = 'home';
@@ -59,8 +69,9 @@ const TabNavigatorConfig = {
 };
 
 export const Tabs = createBottomTabNavigator({
-  Classes: { screen: Classes },
-  Search: { screen: Search },
+  Batches: { screen: Batches },
+  Schedule: { screen: Schedule },
+  Payment: { screen: Payment },
   Settings: { screen: Settings },
 }, TabNavigatorConfig);
 
@@ -70,22 +81,22 @@ const StackConfig = {
   },
   headerMode: 'none',
 };
-
-export const NavStack = createStackNavigator({
-  Classes: { screen: Tabs },
-  Search: { screen: Tabs },
-  StudentProfile: { screen: StudentProfile },
+const NavStack = createStackNavigator({
+  Batches: { screen: Tabs },
   TeacherProfile: { screen: TeacherProfile },
-  StudentProfileEditing: { screen: StudentProfileEditing },
+  TeacherProfileEditing: { screen: TeacherProfileEditing },
   ChatsOverview: { screen: ChatsOverview },
   Chat: { screen: Chat },
+  BatchSettings: { screen: BatchSettings },
 }, StackConfig);
 
-export const MainStack = createStackNavigator({
+export const NavStackContainer = createAppContainer(NavStack);
+
+const MainStack = createStackNavigator({
   AppSetup: { screen: AppSetup },
   Login: { screen: Login },
   Main: { screen: Main },
-  StudentProfileEditing: { screen: StudentProfileEditing },
+  TeacherProfileEditing: { screen: TeacherProfileEditing },
   Chat: { screen: Chat },
 }, StackConfig);
 
@@ -104,3 +115,5 @@ MainStack.router.getStateForAction = (action, state) => {
 
   return defaultGetStateForAction(action, state);
 };
+
+export const MainStackContainer = createAppContainer(MainStack);
