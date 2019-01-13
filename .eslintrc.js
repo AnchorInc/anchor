@@ -34,5 +34,7 @@ module.exports = {
         "camelcase": 0,
         "no-underscore-dangle": 0,
         "jsx-a11y/href-no-hash": 0,
+        "react/destructuring-assignment": 0,
+        "prefer-destructuring": 0,
     }
 };
