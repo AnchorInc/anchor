@@ -3,7 +3,12 @@ package com.anchor;
 
 import android.content.Intent;
 
+import android.app.ActivityManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 
 import com.facebook.react.ReactActivity;
 

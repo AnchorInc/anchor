@@ -1,6 +1,8 @@
 package com.anchor;
 
+import android.os.Build;
 import android.app.Application;
+import android.support.annotation.RequiresApi;
 
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.CallbackManager;
