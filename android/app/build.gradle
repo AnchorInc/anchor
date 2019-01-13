@@ -160,6 +160,8 @@ dependencies {
 
     implementation project(":react-native-android-keyboard-adjust")
 
+    implementation project(':react-native-gesture-handler')
+
     implementation 'com.google.android.gms:play-services-auth:16.0.1' //should at least be 9.0.0
 
     // This should be here already

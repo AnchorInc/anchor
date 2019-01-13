@@ -1,14 +1,15 @@
 package com.anchor;
 
 import android.app.Application;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 
 import com.facebook.react.ReactApplication;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
+
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+
 import com.BV.LinearGradient.LinearGradientPackage;
 
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
@@ -53,6 +54,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new RNGestureHandlerPackage(),
           new LinearGradientPackage(),
 
           new RNFirebasePackage(),

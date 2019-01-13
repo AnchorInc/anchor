@@ -1,14 +1,17 @@
 package com.anchor;
 
-import android.app.ActivityManager;
+
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 
 import com.facebook.react.ReactActivity;
+
+// react navigation
+import com.facebook.react.ReactActivityDelegate;
+import com.facebook.react.ReactRootView;
+import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+
 
 import org.devio.rn.splashscreen.SplashScreen;
 
@@ -38,5 +41,15 @@ public class MainActivity extends ReactActivity {
         Bitmap Icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
         ActivityManager.TaskDescription taskDescription = new ActivityManager.TaskDescription(getResources().getString(R.string.app_name), Icon, getResources().getColor(R.color.colorPrimary));
         this.setTaskDescription(taskDescription);
+    }
+
+    @Override
+    protected ReactActivityDelegate createReactActivityDelegate() {
+      return new ReactActivityDelegate(this, getMainComponentName()) {
+        @Override
+        protected ReactRootView createRootView() {
+         return new RNGestureHandlerEnabledRootView(MainActivity.this);
+        }
+      };
     }
 }

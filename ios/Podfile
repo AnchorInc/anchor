@@ -60,4 +60,6 @@ target 'anchor' do
   pod 'GoogleMaps'
   pod 'GooglePlacePicker'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
 end
