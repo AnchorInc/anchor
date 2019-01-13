@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { StatusBar, Text, TextInput, TouchableWithoutFeedback, TouchableOpacity, View, Dimensions, UIManager, LayoutAnimation, Platform } from 'react-native';
+import {
+  StatusBar, Text, TextInput, TouchableWithoutFeedback, TouchableOpacity,
+  View, Dimensions, UIManager, LayoutAnimation, Platform,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
-import { FilterComponent } from './';
+import { FilterComponent } from '.';
 
 const { width } = Dimensions.get('window');
 class SearchBar extends Component {
-
-  state = { search: false, editingInput: false, buttonClicked: false, containerHeight: 64, renderFilterMenu: false };
+  state = {
+    search: false,
+    editingInput: false,
+  };
 
   componentDidMount() {
     if (Platform.OS === 'android') {
@@ -90,7 +95,7 @@ class SearchBar extends Component {
               onChangeText={this.onChangeText}
               returnKeyType={this.props.rkt}
               ref={(ref) => { this.searchBar = ref; }}
-              selectionColor={'white'}
+              selectionColor='white'
               autoFocus
             />
             {this.showFilterButton()}
@@ -104,14 +109,14 @@ class SearchBar extends Component {
       <View>
         <StatusBar />
         <TouchableWithoutFeedback onPress={() => this._onPressMore()}>
-        <View style={styles.searchContainerStyle} backgroundColor={colors.primary.normal}>
-          <View style={styles.searchBoxStyle} backgroundColor='#232fa8'>
-            <Text style={styles.searchTextStyle}>
-              Search
-            </Text>
+          <View style={styles.searchContainerStyle} backgroundColor={colors.primary.normal}>
+            <View style={styles.searchBoxStyle} backgroundColor='#232fa8'>
+              <Text style={styles.searchTextStyle}>
+                Search
+              </Text>
+            </View>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
       </View>
     );
   }

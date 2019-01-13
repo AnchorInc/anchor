@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, View, Dimensions, TouchableOpacity } from 'react-native';
+import {
+  Text, View, Dimensions, TouchableOpacity,
+} from 'react-native';
 
 const { width } = Dimensions.get('window');
 

@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  StatusBar,
-  Dimensions,
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Platform,
+  StatusBar, Dimensions, View, Image, Text,
+  TouchableOpacity, ScrollView, Platform,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -54,27 +48,27 @@ class StudentProfile extends Component {
         </View>
         <ScrollView>
           <ListDetail
-            title={'First Name'}
+            title="First Name"
             value={this.props.user.displayName.substr(0, this.props.user.displayName.indexOf(' '))}
           />
           <ListDetail
-            title={'Last Name'}
+            title="Last Name"
             value={this.props.user.displayName.substr(this.props.user.displayName.indexOf(' ') + 1, this.props.user.displayName.length)}
           />
           <ListDetail
-            title={'Email'}
+            title="Email"
             value={this.props.user.email}
           />
           <ListDetail
-            title={'Phone Number'}
+            title="Phone Number"
             value={`+91 ${this.props.user.phone}`}
           />
           <ListDetail
-            title={'Location'}
+            title="Location"
             value={this.props.user.location}
           />
           <ListDetail
-            title={'Age'}
+            title="Age"
             value={this.props.user.age}
           />
         </ScrollView>

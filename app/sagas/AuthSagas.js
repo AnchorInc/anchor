@@ -1,10 +1,16 @@
 import { AsyncStorage } from 'react-native';
-import { put, takeLatest, all, call } from 'redux-saga/effects';
+import {
+  put, takeLatest,
+  all, call,
+} from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin } from 'react-native-google-signin';
 
-import { showSpinner, loginSuccess, loginFail, syncUser } from '../actions';
+import {
+  showSpinner, loginSuccess,
+  loginFail, syncUser,
+} from '../actions';
 import { actionTypes, signinMethods } from '../config';
 
 

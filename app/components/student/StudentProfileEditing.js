@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import {
-  View,
-  Dimensions,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  Text,
-  StatusBar,
-  Slider,
-  Platform,
+  View, Dimensions, ScrollView, TouchableOpacity,
+  Image, Text, StatusBar, Slider, Platform,
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -308,7 +301,13 @@ class StudentProfileEditing extends Component {
             />
           </View>
           <View style={styles.pillContainerStyle}>
-            <View style={{ width: 0.95 * width, justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
+            <View style={{
+              width: 0.95 * width,
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexDirection: 'row',
+              }}
+            >
               <Text style={styles.titleTextStyle}>Age</Text>
               <Text style={styles.textStyle}>{this.state.age}</Text>
             </View>

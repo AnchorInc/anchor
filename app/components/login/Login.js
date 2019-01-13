@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StatusBar, Dimensions, Image } from 'react-native';
+import {
+ View, Text, StatusBar, Dimensions, Image,
+} from 'react-native';
 import { connect } from 'react-redux';
 import DialogBox from 'react-native-dialogbox';
 
@@ -11,7 +13,7 @@ import {
   showErrorMessage,
   resetLogin,
 } from '../../actions';
-import { LoginButton } from './';
+import { LoginButton } from '.';
 import { Spinner } from '../../lib';
 
 import logo from '../../images/logo.png';
@@ -100,4 +102,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { googleLoginRequest, fbLoginRequest, closeErrorMessage, showErrorMessage, resetLogin })(Login);
+export default connect(mapStateToProps, {
+ googleLoginRequest,
+ fbLoginRequest,
+ closeErrorMessage,
+ showErrorMessage,
+ resetLogin,
+})(Login);

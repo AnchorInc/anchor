@@ -1,5 +1,12 @@
 import React from 'react';
-import { Platform, View, Modal, Text, ActivityIndicator, Dimensions } from 'react-native';
+import {
+  Platform,
+  View,
+  Modal,
+  Text,
+  ActivityIndicator,
+  Dimensions,
+} from 'react-native';
 
 import { colors } from '../config';
 

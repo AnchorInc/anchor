@@ -4,7 +4,6 @@ import StarRating from 'react-native-star-rating';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 class FilterComponent extends Component {
-
   render() {
     return (
       <View style={{ alignSelf: 'center', alignItems: 'center' }}>

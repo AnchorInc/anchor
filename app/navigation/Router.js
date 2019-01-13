@@ -11,16 +11,14 @@ import {
   AppSetup,
   Chat,
   ChatsOverview,
-  Batches,
+  Classes,
   Login,
   Main,
-  Student,
+  StudentProfile,
   StudentProfileEditing,
-  TeacherProfile,
+  Search,
   Settings,
-  BatchSettings,
-  Schedule,
-  Payment,
+  TeacherProfile,
 } from '../components';
 
 import { colors } from '../config';
@@ -69,9 +67,8 @@ const TabNavigatorConfig = {
 };
 
 export const Tabs = createBottomTabNavigator({
-  Batches: { screen: Batches },
-  Schedule: { screen: Schedule },
-  Payment: { screen: Payment },
+  Classes: { screen: Classes },
+  Search: { screen: Search },
   Settings: { screen: Settings },
 }, TabNavigatorConfig);
 
@@ -82,12 +79,12 @@ const StackConfig = {
   headerMode: 'none',
 };
 const NavStack = createStackNavigator({
-  Batches: { screen: Tabs },
-  TeacherProfile: { screen: TeacherProfile },
-  TeacherProfileEditing: { screen: TeacherProfileEditing },
+  Classes: { screen: Tabs },
+  StudentProfile: { screen: StudentProfile },
+  StudentProfileEditing: { screen: StudentProfileEditing },
   ChatsOverview: { screen: ChatsOverview },
   Chat: { screen: Chat },
-  BatchSettings: { screen: BatchSettings },
+  TeacherProfile: { screen: TeacherProfile },
 }, StackConfig);
 
 export const NavStackContainer = createAppContainer(NavStack);
@@ -96,8 +93,7 @@ const MainStack = createStackNavigator({
   AppSetup: { screen: AppSetup },
   Login: { screen: Login },
   Main: { screen: Main },
-  TeacherProfileEditing: { screen: TeacherProfileEditing },
-  Chat: { screen: Chat },
+  StudentProfileEditing: { screen: StudentProfileEditing },
 }, StackConfig);
 
 const defaultGetStateForAction = MainStack.router.getStateForAction;
@@ -105,11 +101,11 @@ const defaultGetStateForAction = MainStack.router.getStateForAction;
 MainStack.router.getStateForAction = (action, state) => {
   // Prevent access to the 'goback' nav prop
   if (
-    state &&
-    action.type === NavigationActions.BACK &&
-    (state.routes[state.index].routeName === 'AppSetup' ||
-      state.routes[state.index].routeName === 'Login' ||
-      state.routes[state.index].routeName === 'Main'
+    state
+    && action.type === NavigationActions.BACK
+    && (state.routes[state.index].routeName === 'AppSetup'
+      || state.routes[state.index].routeName === 'Login'
+      || state.routes[state.index].routeName === 'Main'
     )
   ) { return null; }
 

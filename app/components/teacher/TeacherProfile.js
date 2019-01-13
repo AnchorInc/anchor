@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Dimensions,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  Text,
-  View,
-  StatusBar,
-  Platform,
+  Dimensions, Image, ScrollView, TouchableOpacity,
+  Text, View, StatusBar, Platform,
 } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
@@ -23,8 +17,6 @@ class TeacherProfile extends Component {
   state = {
     uid: this.props.navigation.state.params.uid,
     teacher: null,
-    batches: [],
-    messages: [],
     time: '',
     place: '',
   };
@@ -89,27 +81,27 @@ class TeacherProfile extends Component {
           </View>
           <ScrollView>
             <ListDetail
-              title={'Name'}
+              title="Name"
               value={this.state.teacher.displayName}
             />
             <ListDetail
-              title={'Subject'}
+              title="Subject"
               value={this.state.teacher.subject}
             />
             <ListDetail
-              title={'Email'}
+              title="Email"
               value={this.state.teacher.email}
             />
             <ListDetail
-              title={'Phone Number'}
+              title="Phone Number"
               value={`+91 ${this.state.teacher.phone}`}
             />
             <ListDetail
-              title={'Price'}
+              title="Price"
               value={`\u20b9 ${this.state.teacher.price} Per Class`}
             />
             <ListDetail
-              title={'Timings'}
+              title="Timings"
               value={this.state.time && this.state.place ? `From ${this.state.time} at ${this.state.place}` : 'No registered classes'}
             >
               <TouchableOpacity>

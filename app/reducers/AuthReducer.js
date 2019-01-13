@@ -9,13 +9,28 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.AUTH.LOGIN.SUCESS:
-      return { ...state, loading: false, loginFail: false, action: null };
+      return {
+        ...state,
+        loading: false,
+        loginFail: false,
+        action: null,
+      };
     case actionTypes.AUTH.LOGIN.FAIL:
-      return { ...state, loading: false, loginFail: true, message: action.message };
+      return {
+       ...state,
+       loading: false,
+       loginFail: true,
+       message: action.message,
+      };
     case actionTypes.AUTH.SHOW_SPINNER:
       return { ...state, loading: true };
     case actionTypes.AUTH.LOGIN.RESET:
-      return { ...state, loading: false, loginFail: null, action: null };
+      return {
+       ...state,
+       loading: false,
+       loginFail: null,
+       action: null,
+      };
     default:
       return state;
   }

@@ -3,7 +3,7 @@ import { Dimensions, Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { TouchableDebounce } from '../../lib/';
+import { TouchableDebounce } from '../../lib';
 
 const { width } = Dimensions.get('window');
 

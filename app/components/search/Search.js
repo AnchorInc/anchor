@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions, Platform } from 'react-native';
+import {
+  View, Text, ScrollView, Dimensions, Platform,
+} from 'react-native';
 import algoliasearch from 'algoliasearch/reactnative';
 import AndroidKeyboardAdjust from 'react-native-android-keyboard-adjust';
 
 import { algoliaConfig } from '../../config';
-import { SearchBar, SearchDetail } from './';
+import { SearchBar, SearchDetail } from '.';
 
 const { width, height } = Dimensions.get('window');
 

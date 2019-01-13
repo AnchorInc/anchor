@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+} from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
@@ -44,15 +49,41 @@ class ChatDetail extends Component {
     return (
         <TouchableDebounce onPress={this.props.onPress} onLongPress={() => this.onLongPress()}>
           {this.showDeleteChatModal()}
-          <View style={{ flexDirection: 'row', padding: 20, paddingRight: 10, alignItems: 'center' }}>
+          <View style={{
+            flexDirection: 'row',
+            padding: 20,
+            paddingRight: 10,
+            alignItems: 'center',
+          }}
+          >
             <Image style={styles.profileStyle} source={{ uri: this.props.imageURL }} />
             <View style={{ flexDirection: 'column', width: 0.8 * width }}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: 0.8 * width }}>
+              <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: 0.8 * width,
+                }}
+              >
                 <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ fontFamily: 'AvenirLTStd-Heavy', color: this.props.unread ? 'black' : '#7f7f7f', fontSize: 18, padding: 10, paddingBottom: 0 }}>
+                  <Text style={{
+                    fontFamily: 'AvenirLTStd-Heavy',
+                    color: this.props.unread ? 'black' : '#7f7f7f',
+                    fontSize: 18,
+                    padding: 10,
+                    paddingBottom: 0,
+                    }}
+                  >
                     {this.props.displayName}
                   </Text>
-                  <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: this.props.unread ? colors.secondary.blue : 'white', top: 18 }} />
+                  <View style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: 4,
+                    backgroundColor: this.props.unread ? colors.secondary.blue : 'white',
+                    top: 18,
+                    }}
+                  />
                 </View>
                 <Text style={styles.timeStyle}>
                   {moment(this.props.timeStamp).format('h:mm A')}

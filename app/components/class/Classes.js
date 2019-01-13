@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Header } from '../header';
-import { ClassList } from './';
+import { ClassList } from '.';
 
 
 class Classes extends Component {

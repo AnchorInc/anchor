@@ -9,6 +9,7 @@ class ChatBubble extends Component {
   getDirection = () => {
     return (this.props.message.senderID === this.props.user.uid) ? 'right' : 'left';
   }
+
   render() {
     return (
       <TouchableWithoutFeedback onPress={this.props.onPress}>

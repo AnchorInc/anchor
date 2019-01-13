@@ -5,7 +5,7 @@ import AndroidKeyboardAdjust from 'react-native-android-keyboard-adjust';
 
 import { Header } from '../header';
 import { updateMessages, getMessages, hideChatBadge } from '../../actions';
-import { ChatBubble, Input } from './';
+import { ChatBubble, Input } from '.';
 
 class Chat extends Component {
   constructor(props) {

@@ -5,7 +5,7 @@ import firebase from 'react-native-firebase';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { colors } from '../../config';
-import { ClassDetail } from './';
+import { ClassDetail } from '.';
 
 const { width, height } = Dimensions.get('window');
 

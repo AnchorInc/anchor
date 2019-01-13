@@ -1,13 +1,8 @@
 import firebase from 'react-native-firebase';
 import { eventChannel } from 'redux-saga';
 import {
-  put,
-  takeLatest,
-  all,
-  call,
-  cancel,
-  take,
-  takeEvery,
+  put, takeLatest, all, call,
+  cancel, take, takeEvery,
 } from 'redux-saga/effects';
 
 import { actionTypes } from '../config';

@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -16,15 +21,42 @@ const StudentRequest = () => {
             <Text style={styles.requestHeaderStyle}>Class Request</Text>
           </View>
           <Text style={styles.requestBodyStyle}>Nithin Srinivasan is interested in learning Basketball from you</Text>
-          <View style={{ paddingBottom: 10, flexDirection: 'row', alignSelf: 'center', justifyContent: 'center', width: 0.85 * width }}>
+          <View style={{
+            paddingBottom: 10,
+            flexDirection: 'row',
+            alignSelf: 'center',
+            justifyContent: 'center',
+            width: 0.85 * width,
+            }}
+          >
             <TouchableOpacity onPress={() => console.log('accept')} style={{ flex: 1 }}>
-              <LinearGradient colors={['#07D067', '#2AF598']} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} style={{ flex: 1, borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
+              <LinearGradient
+                colors={['#07D067', '#2AF598']}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 1, y: 0 }}
+                style={{
+                  flex: 1,
+                  borderRadius: 5,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
                 <Icon name='check' size={24} color='white' style={{ padding: 10 }} />
               </LinearGradient>
             </TouchableOpacity>
             <View style={{ width: 10 }} />
             <TouchableOpacity onPress={() => console.log('deny')} style={{ flex: 1 }}>
-              <LinearGradient colors={['#e53935', '#e35d5b']} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} style={{ flex: 1, borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
+              <LinearGradient
+                colors={['#e53935', '#e35d5b']}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 1, y: 0 }}
+                style={{
+                  flex: 1,
+                  borderRadius: 5,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
                 <Icon name='close' size={24} color='white' style={{ padding: 10 }} />
               </LinearGradient>
             </TouchableOpacity>

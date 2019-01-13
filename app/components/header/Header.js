@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Platform, StatusBar } from 'react-native';
+import {
+  View, Text, Dimensions, Platform, StatusBar,
+} from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { colors } from '../../config/';
-import { HeaderProfileButton } from './';
+import { colors } from '../../config';
+import { HeaderProfileButton } from '.';
 import { TouchableDebounce } from '../../lib';
 
 const { width, height } = Dimensions.get('window');
 
 class Header extends Component {
-
   handleChangeText = () => {
     this.props.handleChangeText(this.searchBar.getValue());
   }

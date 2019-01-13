@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, Image, View, Dimensions } from 'react-native';
+import {
+ Text, Image, View, Dimensions,
+} from 'react-native';
 
 import { TouchableDebounce } from '../../lib';
 

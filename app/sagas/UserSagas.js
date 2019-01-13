@@ -1,14 +1,8 @@
 import { AsyncStorage } from 'react-native';
 import { eventChannel } from 'redux-saga';
 import {
-  takeLatest,
-  all,
-  put,
-  call,
-  fork,
-  take,
-  takeEvery,
-  cancel,
+  takeLatest, all, put, call,
+  fork, take, takeEvery, cancel,
 } from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
 
