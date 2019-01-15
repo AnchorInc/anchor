@@ -91,6 +91,7 @@ const MainStack = createStackNavigator({
   Login: { screen: Login },
   Main: { screen: Main },
   StudentProfileEditing: { screen: StudentProfileEditing },
+  Chat: { screen: Chat },
 }, StackConfig);
 
 const defaultGetStateForAction = MainStack.router.getStateForAction;
