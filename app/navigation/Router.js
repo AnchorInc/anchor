@@ -29,17 +29,14 @@ const TabNavigatorConfig = {
       const { routeName } = navigation.state;
       let iconName;
       switch (routeName) {
-        case 'Batches':
+        case 'Classes':
           iconName = 'home';
           break;
-        case 'Schedule':
-          iconName = 'calendar-blank';
+        case 'Search':
+          iconName = 'magnify';
           break;
         case 'Settings':
           iconName = 'settings';
-          break;
-        case 'Payment':
-          iconName = 'credit-card';
           break;
         default:
           iconName = 'home';
