@@ -75,7 +75,8 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-        entryFile: 'index.js'
+    entryFile: 'index.js',
+    bundleCommand: 'ram-bundle'
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -152,11 +153,6 @@ dependencies {
     implementation (project(":react-native-google-signin")){
         exclude group: "com.google.android.gms", module: 'play-services-auth' // very important
     }
-    implementation(project(':react-native-google-places')) {
-        exclude group: 'com.google.android.gms', module: 'play-services-base'
-        exclude group: 'com.google.android.gms', module: 'play-services-places'
-        exclude group: 'com.google.android.gms', module: 'play-services-location'
-    }
 
     implementation project(":react-native-android-keyboard-adjust")
 
@@ -182,8 +178,6 @@ dependencies {
     implementation "com.google.firebase:firebase-messaging:17.3.4"
     implementation 'me.leolin:ShortcutBadger:1.1.21@aar' // to enable android 8 badge features
 
-    // Firebase and Google Places dependencies
-    implementation "com.google.android.gms:play-services-base:${rootProject.ext.googlePlayServicesVersion}"
+    // Firebase dependencies
     implementation "com.google.android.gms:play-services-places:${rootProject.ext.googlePlayServicesVersion}"
-    implementation "com.google.android.gms:play-services-location:${rootProject.ext.googlePlayServicesVersion}"
 }

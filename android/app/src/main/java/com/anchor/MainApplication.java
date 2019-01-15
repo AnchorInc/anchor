@@ -16,8 +16,6 @@ import com.BV.LinearGradient.LinearGradientPackage;
 
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 
-import com.arttitude360.reactnative.rngoogleplaces.RNGooglePlacesPackage;
-
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
@@ -73,8 +71,6 @@ public class MainApplication extends Application implements ReactApplication {
           new FBSDKPackage(mCallbackManager),
 
           new AndroidKeyboardAdjustPackage(),
-
-          new RNGooglePlacesPackage()
       );
     }
 
