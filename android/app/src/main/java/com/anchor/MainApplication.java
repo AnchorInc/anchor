@@ -70,7 +70,7 @@ public class MainApplication extends Application implements ReactApplication {
           new VectorIconsPackage(),
           new FBSDKPackage(mCallbackManager),
 
-          new AndroidKeyboardAdjustPackage(),
+          new AndroidKeyboardAdjustPackage()
       );
     }
 
