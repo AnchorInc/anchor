@@ -45,7 +45,10 @@ class Main extends Component {
 
   openScreen = (screen, data) => {
     console.log(data);
-    this.props.navigation.navigate('Chat', { chat: data });
+    if (data) {
+      return this.props.navigation.navigate(screen, { chat: data });
+    }
+    return this.props.navigation.navigate(screen, { chat: data });
   }
 
   render() {
