@@ -36,5 +36,6 @@ module.exports = {
         "jsx-a11y/href-no-hash": 0,
         "react/destructuring-assignment": 0,
         "prefer-destructuring": 0,
+        "react/no-access-state-in-setstate": 0,
     }
 };
