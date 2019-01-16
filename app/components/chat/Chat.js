@@ -51,7 +51,7 @@ class Chat extends Component {
       timeStamp: new Date(),
       senderName: this.props.user.displayName,
       senderID: this.props.user.uid,
-      recipientID: this.props.navigation.state.params.chat.uid,
+      recipientID: this.state.teacherUID,
       recipientType: 'teachers',
       senderImageURL: this.props.user.photoURL,
     };
