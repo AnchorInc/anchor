@@ -32,7 +32,7 @@ class ChatDetail extends Component {
             color: colors.secondary.normal,
           },
           callback: () => {
-            this.props.deleteChat(this.props.studentUID, this.props.teacherUID);
+            this.props.deleteChat(this.props.teacherUID);
           },
         },
         cancel: {
