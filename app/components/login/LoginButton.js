@@ -13,7 +13,16 @@ const LoginButton = (props) => {
   const { logoutButtonStyle, textStyle, iconStyle } = styles;
 
   return (
-    <TouchableOpacity activeOpacity={0.3} style={{ alignSelf: 'center', elevation: 10, paddingTop: 0, paddingBottom: 20 }} onPress={props.onPress}>
+    <TouchableOpacity
+      activeOpacity={0.3}
+      style={{
+        alignSelf: 'center',
+        elevation: 10,
+        paddingTop: 0,
+        paddingBottom: 20,
+        }}
+      onPress={props.onPress}
+    >
       <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={logoutButtonStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
       <View style={{ flex: 1, justifyContent: 'center' }}>
         <Icon name={props.iconName} style={iconStyle} />

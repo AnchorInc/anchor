@@ -34,7 +34,7 @@ class StudentProfile extends Component {
               Profile
             </Text>
             <TouchableDebounce style={{ padding: 15, height: 0.08 * height }} onPress={() => this.props.navigation.navigate('StudentProfileEditing')}>
-              <Icon name='account-settings-variant' size={24} color='white' />
+              <Icon name='account-settings' size={24} color='white' />
             </TouchableDebounce>
           </View>
           <View style={profileContainerStyle}>

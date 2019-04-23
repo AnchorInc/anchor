@@ -25,7 +25,7 @@ class ClassDetail extends Component {
 
   componentDidMount() {
     if (Platform.OS === 'android') {
-      UIManager.setLayoutAnimationEnabledExperimental(true);
+      UIManager.setLayoutAnimationEnabledExperimental(true); // enables experimental animation features that are required
     }
   }
 
@@ -40,25 +40,31 @@ class ClassDetail extends Component {
   }
 
   render() {
+    const teacher = this.props.batch.teacherDetails;
     if (!this.state.buttonClicked) {
       return (
         <Card style={{ flex: 1, flexDirection: 'row' }}>
           <CardSection>
             <View style={styles.textContainerStyle}>
               <Icon style={{ paddingLeft: 10 }} color='white' name='dots-vertical' size={0} />
-              <Text style={styles.nameStyle}>{this.props.batch.teacherDetails.displayName}</Text>
-              <TouchableDebounce onPress={this.props.onPressContact.bind(this, this.props.batch.teacherDetails.uid, this.props.batch.teacherDetails.displayName)}>
+              <Text style={styles.nameStyle}>{teacher.displayName}</Text>
+              <TouchableDebounce onPress={this.props.onPressContact.bind(this, teacher.uid, teacher.displayName)}>
                 <Icon name='dots-vertical' size={24} color='black' />
               </TouchableDebounce>
             </View>
             <View style={styles.headerStyle} />
-            <TouchableDebounce style={styles.containerStyle} onPress={this.props.onPress.bind(this, this.props.batch.teacherDetails.uid)}>
-              <Image style={styles.profileStyle} source={{ uri: this.props.batch.teacherDetails.photoURL }} />
+            <TouchableDebounce style={styles.containerStyle} onPress={this.props.onPress.bind(this, teacher.uid)}>
+              <Image style={styles.profileStyle} source={{ uri: teacher.photoURL }} />
             </TouchableDebounce>
             <View style={{ width: 0.93 * width, height: 0.09 * width }} />
           </CardSection>
           <TouchableOpacity activeOpacity={0.3} onPress={() => this._onPressMore()}>
-            <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={styles.detailButtonStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
+            <LinearGradient
+              colors={[colors.secondary.light, colors.secondary.normal]}
+              style={styles.detailButtonStyle}
+              start={{ x: 0, y: 1 }}
+              end={{ x: 1, y: 0 }}
+            >
               <Text style={styles.moreTextStyle}>
                 See More
               </Text>
@@ -69,12 +75,25 @@ class ClassDetail extends Component {
     } return (
       <Card style={{ flex: 1, flexDirection: 'row' }}>
         <CardSection>
-          <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={styles.seeMoreStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
-            <TouchableOpacity style={{ position: 'absolute', top: 0, left: 0, padding: 15 }} onPress={() => this._onPressBack()}>
+          <LinearGradient
+            colors={[colors.secondary.light, colors.secondary.normal]}
+            style={styles.seeMoreStyle}
+            start={{ x: 0, y: 1 }}
+            end={{ x: 1, y: 0 }}
+          >
+            <TouchableOpacity
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                padding: 15,
+                }}
+              onPress={() => this._onPressBack()}
+            >
               <Icon name='arrow-left' size={24} color='white' />
             </TouchableOpacity>
             <Text style={styles.detailsTextStyle}>
-              {this.props.batch.teacherDetails.subject}
+              {teacher.subject}
             </Text>
             <Text style={styles.detailsTextStyle}>
               {this.props.batch.time}
@@ -84,15 +103,13 @@ class ClassDetail extends Component {
             </Text>
             <StarRating
               disabled
-              halftarEnabled
+              halfStarEnabled
               iconSet='MaterialCommunityIcons'
-              emptyStar='star-outline'
-              halfStar='star-half'
-              starColor='white'
               emptyStarColor='white'
+              fullStarColor='gold'
               starSize={25}
               style={{ padding: 5 }}
-              rating={this.props.batch.teacherDetails.rating}
+              rating={teacher.rating}
             />
           </LinearGradient>
         </CardSection>

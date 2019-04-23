@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, FlatList, Platform } from 'react-native';
 import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 import AndroidKeyboardAdjust from 'react-native-android-keyboard-adjust';
 
 import { Header } from '../header';
@@ -38,6 +39,7 @@ class Chat extends Component {
       nextProps.messages.forEach((message) => {
         if (this.state.myLatestMessage) {
           if (new Date(message.timeStamp).getTime() !== new Date(this.state.myLatestMessage.timeStamp).getTime()) {
+            console.error(new Date(message.timeStamp).getTime());
             this.setState({ messages: nextProps.messages.concat(this.state.messages) });
           }
         }
@@ -48,7 +50,7 @@ class Chat extends Component {
   onSend = (message) => {
     const messageData = {
       text: message.trim(),
-      timeStamp: new Date(),
+      timeStamp: firebase.firestore.Timestamp.fromDate(new Date()),
       senderName: this.props.user.displayName,
       senderID: this.props.user.uid,
       recipientID: this.state.teacherUID,

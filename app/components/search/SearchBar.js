@@ -41,7 +41,12 @@ class SearchBar extends Component {
 
   _onPressBack = () => {
     LayoutAnimation.easeInEaseOut();
-    this.setState({ search: false, editingInput: false, containerHeight: 64, renderFilterMenu: false });
+    this.setState({
+      search: false,
+      editingInput: false,
+      containerHeight: 64,
+      renderFilterMenu: false,
+    });
     this.props.searchCallback('');
   }
 
@@ -82,7 +87,14 @@ class SearchBar extends Component {
       return (
         <View style={[styles.containerStyle, { height: this.state.containerHeight }]}>
           <StatusBar />
-          <View style={{ alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row', paddingTop: 5, paddingLeft: 2 }}>
+          <View style={{
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            flexDirection: 'row',
+            paddingTop: 5,
+            paddingLeft: 2,
+            }}
+          >
             <TouchableOpacity onPress={() => this._onPressBack()}>
               <Icon size={24} name="keyboard-backspace" color='white' style={styles.iconStyle} />
             </TouchableOpacity>

@@ -3,6 +3,7 @@ import { TouchableOpacity } from 'react-native';
 
 class TouchableDebounce extends Component {
   state = { disabled: false, interval: null };
+
   componentWillMount() {
     this.setState({ disabled: false });
   }
