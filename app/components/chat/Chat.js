@@ -38,8 +38,10 @@ class Chat extends Component {
     } else {
       nextProps.messages.forEach((message) => {
         if (this.state.myLatestMessage) {
-          if (new Date(message.timeStamp).getTime() !== new Date(this.state.myLatestMessage.timeStamp).getTime()) {
-            console.error(new Date(message.timeStamp).getTime());
+          const messageTime = message.timeStamp.toDate();
+          const latestMessageTime = this.state.myLatestMessage.timeStamp.toDate();
+          // console.log(messageTime);
+          if (messageTime !== latestMessageTime) {
             this.setState({ messages: nextProps.messages.concat(this.state.messages) });
           }
         }
@@ -50,13 +52,14 @@ class Chat extends Component {
   onSend = (message) => {
     const messageData = {
       text: message.trim(),
-      timeStamp: firebase.firestore.Timestamp.fromDate(new Date()),
+      timeStamp: firebase.firestore.Timestamp.now(),
       senderName: this.props.user.displayName,
       senderID: this.props.user.uid,
       recipientID: this.state.teacherUID,
       recipientType: 'teachers',
       senderImageURL: this.props.user.photoURL,
     };
+    console.log(messageData.timeStamp);
     const messages = [messageData, ...this.state.messages];
     this.setState({ messages, myLatestMessage: messageData });
     this.props.updateMessages(messageData, this.state.teacherUID);
