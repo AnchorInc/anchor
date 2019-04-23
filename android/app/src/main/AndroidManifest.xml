@@ -1,94 +1,95 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.anchor">
-    <!--android:versionCode="1"-->
-    <!--android:versionName="1.0">-->
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.anchor">
+  <!--android:versionCode="1"-->
+  <!--android:versionName="1.0">-->
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <uses-permission android:name="android.permission.VIBRATE" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <!--<uses-sdk-->
-        <!--android:minSdkVersion="16"-->
-        <!--android:targetSdkVersion="22" />-->
+  <!--<uses-sdk-->
+    <!--android:minSdkVersion="16"-->
+    <!--android:targetSdkVersion="22" />-->
 
-    <application
-      android:allowBackup="false"
-      android:fullBackupContent="false"
-      android:name=".MainApplication"
-      android:launchMode="singleTask"
+  <application
+    android:allowBackup="false"
+    android:fullBackupContent="false"
+    android:name=".MainApplication"
+    android:launchMode="singleTask"
+    android:label="@string/app_name"
+    android:icon="@drawable/ic_launcher"
+    android:theme="@style/AppTheme"
+    tools:replace="android:allowBackup"
+    android:usesCleartextTraffic="true">
+
+    <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService">
+      <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+      </intent-filter>
+    </service>
+    <service android:name="io.invertase.firebase.messaging.RNFirebaseInstanceIdService">
+      <intent-filter>
+        <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+      </intent-filter>
+    </service>
+
+    <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" />
+
+    <receiver android:name="io.invertase.firebase.notifications.RNFirebaseBackgroundNotificationActionReceiver" android:exported="true">
+      <intent-filter>
+          <action android:name="io.invertase.firebase.notifications.BackgroundAction"/>
+      </intent-filter>
+    </receiver>
+
+    <service android:name="io.invertase.firebase.notifications.RNFirebaseBackgroundNotificationActionsService"/>
+
+    <receiver android:name="io.invertase.firebase.notifications.RNFirebaseNotificationReceiver"/>
+    <receiver android:enabled="true" android:exported="true"  android:name="io.invertase.firebase.notifications.RNFirebaseNotificationsRebootReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+        <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </receiver>
+
+    <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+      See README(https://goo.gl/l4GJaQ) for more. -->
+    <meta-data
+      android:name="com.google.firebase.messaging.default_notification_icon"
+      android:resource="@drawable/notification" />
+    <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+          notification message. See README(https://goo.gl/6BKBk7) for more. -->
+    <meta-data
+      android:name="com.google.firebase.messaging.default_notification_color"
+      android:resource="@color/colorPrimary" />
+
+    <meta-data
+      android:name="com.google.firebase.messaging.default_notification_channel_id"
+      android:value="@string/default_notification_channel_id"/>
+
+    <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+    <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCGttWR24ng1Y87ruWfjAcGCISGLKz8jUE"/>
+
+    <activity
+      android:name=".MainActivity"
       android:label="@string/app_name"
-      android:icon="@drawable/ic_launcher"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="adjustResize"
       android:theme="@style/AppTheme"
-        tools:replace="android:allowBackup"
-        android:usesCleartextTraffic="true">
-
-      <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService">
-        <intent-filter>
-          <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
-      </service>
-      <service android:name="io.invertase.firebase.messaging.RNFirebaseInstanceIdService">
-        <intent-filter>
-          <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-        </intent-filter>
-      </service>
-
-      <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" />
-
-        <receiver android:name="io.invertase.firebase.notifications.RNFirebaseBackgroundNotificationActionReceiver" android:exported="true">
-            <intent-filter>
-                <action android:name="io.invertase.firebase.notifications.BackgroundAction"/>
-            </intent-filter>
-        </receiver>
-        <service android:name="io.invertase.firebase.notifications.RNFirebaseBackgroundNotificationActionsService"/>
-
-        <receiver android:name="io.invertase.firebase.notifications.RNFirebaseNotificationReceiver"/>
-        <receiver android:enabled="true" android:exported="true"  android:name="io.invertase.firebase.notifications.RNFirebaseNotificationsRebootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-
-      <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-       See README(https://goo.gl/l4GJaQ) for more. -->
-      <meta-data
-        android:name="com.google.firebase.messaging.default_notification_icon"
-        android:resource="@drawable/notification" />
-      <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-           notification message. See README(https://goo.gl/6BKBk7) for more. -->
-      <meta-data
-        android:name="com.google.firebase.messaging.default_notification_color"
-        android:resource="@color/colorPrimary" />
-
-      <meta-data
-        android:name="com.google.firebase.messaging.default_notification_channel_id"
-        android:value="@string/default_notification_channel_id"/>
-
-      <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-
-      <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCGttWR24ng1Y87ruWfjAcGCISGLKz8jUE"/>
-
-      <activity
-        android:name=".MainActivity"
-        android:label="@string/app_name"
-        android:screenOrientation="portrait"
-        android:windowSoftInputMode="adjustResize"
-        android:theme="@style/AppTheme"
-        android:launchMode="singleTop">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-      </activity>
-      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-    </application>
+      android:launchMode="singleTop">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+  </application>
 
 </manifest>
