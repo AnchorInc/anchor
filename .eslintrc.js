@@ -37,5 +37,6 @@ module.exports = {
         "react/destructuring-assignment": 0,
         "prefer-destructuring": 0,
         "react/no-access-state-in-setstate": 0,
+        "import/no-cycle": 0,
     }
 };
