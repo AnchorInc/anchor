@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+  import React, { Component } from 'react';
 import { View, FlatList, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
@@ -38,10 +38,8 @@ class Chat extends Component {
     } else {
       nextProps.messages.forEach((message) => {
         if (this.state.myLatestMessage) {
-          const messageTime = message.timeStamp.toDate();
-          const latestMessageTime = this.state.myLatestMessage.timeStamp.toDate();
           // console.log(messageTime);
-          if (messageTime !== latestMessageTime) {
+          if (message.timeStamp === this.state.myLatestMessage.timeStamp) {
             this.setState({ messages: nextProps.messages.concat(this.state.messages) });
           }
         }
@@ -52,7 +50,7 @@ class Chat extends Component {
   onSend = (message) => {
     const messageData = {
       text: message.trim(),
-      timeStamp: firebase.firestore.Timestamp.now(),
+      timeStamp: new Date(),
       senderName: this.props.user.displayName,
       senderID: this.props.user.uid,
       recipientID: this.state.teacherUID,
