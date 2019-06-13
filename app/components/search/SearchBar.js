@@ -13,6 +13,7 @@ class SearchBar extends Component {
   state = {
     search: false,
     editingInput: false,
+    containerHeight: 64,
   };
 
   componentDidMount() {

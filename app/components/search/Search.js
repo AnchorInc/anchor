@@ -31,7 +31,7 @@ class Search extends Component {
   requestData = (queryObj, rating, multiSliderValue) => {
     this.setState({ queryObj });
     const client = algoliasearch(algoliaConfig.adminID, algoliaConfig.apiKey);
-    const index = client.initIndex('teachers');
+    const index = client.initIndex('Teachers');
     const query = {
       query: queryObj,
       filters: `rating >= ${rating} AND (price:${multiSliderValue[0]} TO ${multiSliderValue[1]})`,

@@ -45,8 +45,8 @@ export const actionTypes = {
 
 // algoliasearch config data
 export const algoliaConfig = {
-  adminID: 'HZZZN58AJ0',
-  apiKey: 'fd2e8b88f354f7b81eced75ff5991de5',
+  adminID: 'GZD3T40G33',
+  apiKey: 'd6ebb50603ee2c890769aa37fb2b9cdc',
 };
 
 // google signin configdata
