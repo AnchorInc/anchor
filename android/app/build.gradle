@@ -154,6 +154,8 @@ dependencies {
         exclude group: "com.google.android.gms", module: 'play-services-auth' // very important
     }
 
+    implementation project(':react-native-maps')
+
     implementation project(":react-native-android-keyboard-adjust")
 
     implementation project(':react-native-gesture-handler')

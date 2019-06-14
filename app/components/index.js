@@ -7,3 +7,4 @@ export { Search } from './search';
 export { Settings } from './settings';
 export { AppSetup } from './setup';
 export { TeacherProfile } from './teacher';
+export { Batches } from './batches';

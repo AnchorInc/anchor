@@ -19,6 +19,7 @@ import {
   Search,
   Settings,
   TeacherProfile,
+  Batches,
 } from '../components';
 
 import { colors } from '../config';
@@ -82,6 +83,7 @@ const NavStack = createStackNavigator({
   ChatsOverview: { screen: ChatsOverview },
   Chat: { screen: Chat },
   TeacherProfile: { screen: TeacherProfile },
+  Batches: { screen: Batches },
 }, StackConfig);
 
 export const NavStackContainer = createAppContainer(NavStack);

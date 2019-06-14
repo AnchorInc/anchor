@@ -8,6 +8,8 @@ import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 
+import com.airbnb.android.react.maps.MapsPackage;
+
 import com.facebook.react.ReactApplication;
 
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -56,6 +58,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new RNGestureHandlerPackage(),
           new LinearGradientPackage(),
+          new MapsPackage(),
 
           new RNFirebasePackage(),
           new RNFirebaseAuthPackage(),

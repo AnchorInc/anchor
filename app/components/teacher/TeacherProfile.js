@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { colors } from '../../config';
 import { ListDetail, TouchableDebounce, Spinner } from '../../lib';
@@ -17,8 +18,6 @@ class TeacherProfile extends Component {
   state = {
     uid: this.props.navigation.state.params.uid,
     teacher: null,
-    time: '',
-    place: '',
   };
 
   componentWillMount() {
@@ -100,14 +99,13 @@ class TeacherProfile extends Component {
               title="Price"
               value={`\u20b9 ${this.state.teacher.price} Per Class`}
             />
-            <ListDetail
-              title="Timings"
-              value={this.state.time && this.state.place ? `From ${this.state.time} at ${this.state.place}` : 'No registered classes'}
-            >
-              <TouchableOpacity>
-                <Text>See More</Text>
-              </TouchableOpacity>
-            </ListDetail>
+            <TouchableOpacity activeOpacity={0.3} style={{ alignSelf: 'center', elevation: 10, padding: 10 }} onPress={() => this.props.navigation.navigate('Batches', { teacherUID: this.state.uid })}>
+              <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={styles.logoutButtonStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
+                <Text style={styles.logoutTextStyle}>
+                  See Available Batches
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
           </ScrollView>
         </View>
       );
@@ -120,6 +118,19 @@ const styles = {
   headerContainerStyle: {
     alignItems: 'center',
     marginTop: (Platform.OS === 'ios') ? height * 0.03 : 0,
+  },
+  logoutTextStyle: {
+    fontSize: 17,
+    color: 'white',
+    fontFamily: 'AvenirLTStd-Heavy',
+    paddingBottom: 5,
+  },
+  logoutButtonStyle: {
+    width: 0.8 * width,
+    height: 50,
+    borderRadius: 37.5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerStyle: {
     height: 0.3 * height,
@@ -155,7 +166,7 @@ const styles = {
     borderRadius: (width * 0.25) / 2,
   },
   nameContainerStyle: {
-    paddingTop: 0.125 * width,
+    paddingTop: 0.12 * width,
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 0.03125 * width,

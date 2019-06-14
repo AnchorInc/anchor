@@ -40,20 +40,20 @@ class ClassDetail extends Component {
   }
 
   render() {
-    const teacher = this.props.batch.teacherDetails;
+    const teacher = this.props.batch;
     if (!this.state.buttonClicked) {
       return (
         <Card style={{ flex: 1, flexDirection: 'row' }}>
           <CardSection>
             <View style={styles.textContainerStyle}>
-              <Icon style={{ paddingLeft: 10 }} color='white' name='dots-vertical' size={0} />
+              <Icon style={{ paddingLeft: 11 }} color='white' name='dots-vertical' size={0} />
               <Text style={styles.nameStyle}>{teacher.displayName}</Text>
-              <TouchableDebounce onPress={this.props.onPressContact.bind(this, teacher.uid, teacher.displayName)}>
+              <TouchableDebounce onPress={this.props.onPressContact.bind(this, teacher.teacherUID, teacher.displayName)}>
                 <Icon name='dots-vertical' size={24} color='black' />
               </TouchableDebounce>
             </View>
             <View style={styles.headerStyle} />
-            <TouchableDebounce style={styles.containerStyle} onPress={this.props.onPress.bind(this, teacher.uid)}>
+            <TouchableDebounce style={styles.containerStyle} onPress={this.props.onPress.bind(this, teacher.teacherUID)}>
               <Image style={styles.profileStyle} source={{ uri: teacher.photoURL }} />
             </TouchableDebounce>
             <View style={{ width: 0.93 * width, height: 0.09 * width }} />
@@ -96,17 +96,17 @@ class ClassDetail extends Component {
               {teacher.subject}
             </Text>
             <Text style={styles.detailsTextStyle}>
-              {this.props.batch.time}
+              {teacher.time}
             </Text>
             <Text style={styles.detailsTextStyle}>
-              {this.props.batch.place}
+              {teacher.place}
             </Text>
             <StarRating
               disabled
               halfStarEnabled
               iconSet='MaterialCommunityIcons'
               emptyStarColor='white'
-              fullStarColor='gold'
+              fullStarColor='white'
               starSize={25}
               style={{ padding: 5 }}
               rating={teacher.rating}
