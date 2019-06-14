@@ -101,16 +101,6 @@ class ClassDetail extends Component {
             <Text style={styles.detailsTextStyle}>
               {teacher.place}
             </Text>
-            <StarRating
-              disabled
-              halfStarEnabled
-              iconSet='MaterialCommunityIcons'
-              emptyStarColor='white'
-              fullStarColor='white'
-              starSize={25}
-              style={{ padding: 5 }}
-              rating={teacher.rating}
-            />
           </LinearGradient>
         </CardSection>
       </Card>
