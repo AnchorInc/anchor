@@ -51,6 +51,7 @@ class Chat extends Component {
     const messageData = {
       text: message.trim(),
       timeStamp: firebase.firestore.Timestamp.now(),
+      unread: true,
       senderName: this.props.user.displayName,
       senderID: this.props.user.uid,
       senderImageURL: this.props.user.photoURL,
