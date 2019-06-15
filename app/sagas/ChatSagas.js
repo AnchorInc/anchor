@@ -48,16 +48,22 @@ function* chatListenerSaga() {
 
 function createChatSaga(action) {
   const ref = firebase.firestore().collection('conversations');
+  let user;
+  firebase.firestore().collection('students').doc(firebase.auth().currentUser.uid).get()
+  .then((data) => {
+    user = data.data();
+  });
 
+  console.log(action.user);
   firebase.firestore().collection('teachers')
   .doc(action.teacherUID).onSnapshot((snapshot) => {
     ref.add({
       teacherId: action.teacherUID,
       teacherName: snapshot.data().displayName,
       teacherPhotoURL: snapshot.data().photoURL,
-      studentId: firebase.auth().currentUser.uid,
-      studentName: firebase.auth().currentUser.displayName,
-      studentPhotoURL: firebase.auth().currentUser.photoURL,
+      studentId: user.uid,
+      studentName: user.displayName,
+      studentPhotoURL: user.photoURL,
     });
   });
 }
