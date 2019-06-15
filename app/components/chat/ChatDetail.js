@@ -86,7 +86,7 @@ class ChatDetail extends Component {
                   />
                 </View>
                 <Text style={styles.timeStyle}>
-                  {moment(this.props.timeStamp).format('h:mm A')}
+                  {moment(this.props.timeStamp.toDate()).format('LT')}
                 </Text>
               </View>
               <Text style={styles.messageStyle} numberOfLines={1}>

@@ -50,12 +50,12 @@ class Chat extends Component {
   onSend = (message) => {
     const messageData = {
       text: message.trim(),
-      timeStamp: new Date(),
+      timeStamp: firebase.firestore.Timestamp.now(),
       senderName: this.props.user.displayName,
       senderID: this.props.user.uid,
+      senderImageURL: this.props.user.photoURL,
       recipientID: this.state.teacherUID,
       recipientType: 'teachers',
-      senderImageURL: this.props.user.photoURL,
     };
     console.log(messageData.timeStamp);
     const messages = [messageData, ...this.state.messages];
