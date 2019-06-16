@@ -54,7 +54,7 @@ class BatchList extends Component {
   }
 
   renderBatches = ({ item }) => {
-   return <BatchDetail batch={item} />;
+   return <BatchDetail batch={item} onPress={this.props.onPress} />;
   }
 
   render() {

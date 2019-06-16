@@ -99,7 +99,7 @@ class TeacherProfile extends Component {
               title="Price"
               value={`\u20b9 ${this.state.teacher.price} Per Class`}
             />
-            <TouchableOpacity activeOpacity={0.3} style={{ alignSelf: 'center', elevation: 10, padding: 10 }} onPress={() => this.props.navigation.navigate('Batches', { teacherUID: this.state.uid })}>
+            <TouchableOpacity activeOpacity={0.3} style={{ alignSelf: 'center', elevation: 10, padding: 10 }} onPress={() => this.props.navigation.navigate('Batches', { teacherName: this.state.teacher.name, teacherUID: this.state.uid })}>
               <LinearGradient colors={[colors.secondary.light, colors.secondary.normal]} style={styles.logoutButtonStyle} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }}>
                 <Text style={styles.logoutTextStyle}>
                   See Available Batches

@@ -12,8 +12,8 @@ class BatchDetail extends Component {
     renderJoinButton() {
         if (this.props.batch.status === 'OPEN') {
             return (
-                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <Icon name='plus' size={20} color={colors.primary.normal} style={{ padding: 5}} />
+                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center' }} onPress={this.props.onPress}>
+                    <Icon name='plus' size={20} color={colors.primary.normal} style={{ padding: 5 }} />
                     <Text style={{ paddingTop: 5, paddingLeft: 5, paddingBottom: 10, color: colors.primary.normal, fontFamily: 'AvenirLTStd-Heavy', fontSize: 18 }}>
                         Join
                     </Text>
