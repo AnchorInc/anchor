@@ -42,7 +42,7 @@ class ClassList extends Component {
     }
   }
 
-  renderNoBatchMessage = () => {
+  renderNoClassMessage = () => {
     if (!this.props.batchList) {
       return (
         <View style={{
@@ -77,7 +77,7 @@ class ClassList extends Component {
         data={this.state.teachers}
         renderItem={this.renderTeachers}
         keyExtractor={teacher => teacher.UID}
-        ListEmptyComponent={this.renderNoBatchMessage}
+        ListEmptyComponent={this.renderNoClassMessage}
         style={{ paddingBottom: 50 }}
         refreshControl={(
           <RefreshControl

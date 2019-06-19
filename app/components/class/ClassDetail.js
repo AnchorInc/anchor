@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import StarRating from 'react-native-star-rating';
+// import StarRating from 'react-native-star-rating';
 
 import { colors } from '../../config';
 import { Card, CardSection, TouchableDebounce } from '../../lib';
