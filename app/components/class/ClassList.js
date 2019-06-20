@@ -21,9 +21,9 @@ class ClassList extends Component {
       this.refresh(nextProps);
   }
 
-  getTeachersFromBatchList = (batchList) => {
+  getTeachersFromClassList = (classList) => {
     this.setState({ teachers: [] });
-    batchList.map((batch) => {
+    classList.map((batch) => {
       return firebase.firestore().collection('batches').doc(batch).get()
       .then((teacher) => {
         this.setState({ teachers: this.state.teachers.concat([teacher.data()]), refreshing: false });
@@ -32,18 +32,18 @@ class ClassList extends Component {
   }
 
   refresh = (props) => {
-    const list = (props) ? props.batchList : this.props.batchList;
+    const list = (props) ? props.classList : this.props.classList;
     console.log(list);
     this.setState({ refreshing: true });
     if (list) {
-      this.getTeachersFromBatchList(list);
+      this.getTeachersFromClassList(list);
     } else {
       this.setState({ refreshing: false });
     }
   }
 
-  renderNoBatchMessage = () => {
-    if (!this.props.batchList) {
+  renderNoClassMessage = () => {
+    if (!this.props.classList) {
       return (
         <View style={{
           justifyContent: 'center',
@@ -77,7 +77,7 @@ class ClassList extends Component {
         data={this.state.teachers}
         renderItem={this.renderTeachers}
         keyExtractor={teacher => teacher.UID}
-        ListEmptyComponent={this.renderNoBatchMessage}
+        ListEmptyComponent={this.renderNoClassMessage}
         style={{ paddingBottom: 50 }}
         refreshControl={(
           <RefreshControl
@@ -92,11 +92,11 @@ class ClassList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  let batchList = null;
-  if (state.user.user && state.user.user.batchList) {
-    batchList = state.user.user.batchList;
+  let classList = null;
+  if (state.user.user && state.user.user.classList) {
+    classList = state.user.user.classList;
   }
-  return { batchList };
+  return { classList };
 };
 
 export default connect(mapStateToProps)(ClassList);
