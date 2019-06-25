@@ -47,7 +47,7 @@ class BatchList extends Component {
                 fontFamily: 'AvenirLTStd-Heavy',
                 }}
             >
-                Teacher Doesn't Have Any Batches
+              {"Teacher Doesn't Have Any Batches"}
             </Text>
         </View>
       );
