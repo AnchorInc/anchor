@@ -3,6 +3,7 @@ import { eventChannel } from 'redux-saga';
 import {
   takeLatest, all, put, call,
   fork, take, takeEvery, cancel,
+  cancelled,
 } from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
 
@@ -12,7 +13,7 @@ import { actionTypes } from '../config';
 function* updateUserSaga(action) {
   // multi path update
   const batch = firebase.firestore().batch();
-
+  console.log(action.user);
   const ref = yield call(getUserRef);
   batch.update(ref, action.user);
 
@@ -31,35 +32,49 @@ function* updateUserSaga(action) {
     });
   } catch (error) {
     console.log(error);
+  } finally {
+    yield call([batch, batch.commit]);
   }
-
-  yield call([batch, batch.commit]);
 }
 
 function* userListenerSaga() {
   /* sync the user from the cloud and store it on the device
   also call the getUserSaga to update the user reducer state with the latest user data */
   const ref = yield call(getUserRef);
-  if (!ref) yield cancel();
+  if (!ref) {
+    console.log('no ref');
+    yield cancel(fcmTokenSaga);
+    yield cancel();
+  }
   // Start FCM Token Saga if ref is not null
   yield fork(fcmTokenSaga);
   // get the event channel
   const channel = yield call(userEventListener, ref);
-  // while there is a user logged in...
-  while (firebase.auth().currentUser) {
-    // get the data emitted from the channel
-    const user = yield take(channel);
 
-    try {
-      // update the cached user data with the new user daya
-      yield call([AsyncStorage, AsyncStorage.setItem], 'user_data', JSON.stringify(user));
-      // update the user reducer
-      yield put(getUser());
-    } catch (error) {
-      console.log(error);
+  try {
+    // while there is a user logged in...
+    while (true) {
+      // get the data emitted from the channel
+      const user = yield take(channel);
+        // update the cached user data with the new user daya
+        yield call([AsyncStorage, AsyncStorage.setItem], 'user_data', JSON.stringify(user));
+        // update the user reducer
+        yield put(getUser());
+
+        if (yield take(actionTypes.AUTH.LOGOUT.SUCCESS)) {
+          console.log('er');
+          yield cancel();
+          return;
+        }
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    if (yield cancelled()) {
+      console.log('erer');
+      channel.close();
     }
   }
-  channel.close();
 }
 
 function* getUserSaga() {
@@ -83,9 +98,8 @@ const userEventListener = (ref) => {
   // create a redux saga event channel to listen for changes to the user data on the cloud
   const channel = eventChannel((emitter) => {
     // call the onSnapshot listener function in firestore and emit the user data
-    ref.onSnapshot(doc => emitter(doc.data()));
-    // return the unsubscribe function
-    return () => ref.onSnapshot(() => {});
+    const unsubscribe = ref.onSnapshot(doc => emitter(doc.data()));
+    return unsubscribe;
   });
   // return the event channel
   return channel;
@@ -97,21 +111,30 @@ function* fcmTokenSaga() {
   yield call(updateUserSaga, { user: { fcmToken: token } });
 
   const channel = yield call(fcmTokenListener);
-  while (firebase.auth().currentUser) {
-    token = yield take(channel);
-    yield call(updateUserSaga, { user: { fcmToken: token } });
+  try {
+    while (true) {
+      token = yield take(channel);
+      yield call(updateUserSaga, { user: { fcmToken: token } });
+      if (yield take(actionTypes.AUTH.LOGOUT.SUCCESS)) {
+        yield cancel();
+        return;
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    if (yield cancelled()) channel.close();
   }
-  channel.close();
 }
 
 const fcmTokenListener = () => {
-  const channel = eventChannel((emitter) => {
-    return firebase.messaging().onTokenRefresh((token) => {
+  return eventChannel((emitter) => {
+    const unsub = firebase.messaging().onTokenRefresh((token) => {
       console.log(token);
       emitter(token);
     });
+    return unsub;
   });
-  return channel;
 };
 
 export function* watchUserRequests() {

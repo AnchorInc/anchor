@@ -33,7 +33,7 @@ class Main extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.donePref) {
+    if (!nextProps.donePref && !firebase.auth().currentUser) {
       this.props.navigation.navigate('StudentProfileEditing');
     }
   }

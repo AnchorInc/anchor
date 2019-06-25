@@ -13,11 +13,9 @@ import {
 } from '../actions';
 import { actionTypes, signinMethods } from '../config';
 
-
-const auth = firebase.auth();
-
 // worker Saga: will be called on GOOGLE_LOGIN_REQUESTED actions
 function* loginUserWithGoogle(action) {
+  const auth = firebase.auth();
   try {
     // get the id token from google
     const user = yield call([GoogleSignin, GoogleSignin.signIn]);
@@ -39,6 +37,7 @@ function* loginUserWithGoogle(action) {
 
 // worker Saga: will be called on FB_LOGIN_REQUESTED actions
 function* loginUserWithFB(action) {
+  const auth = firebase.auth();
   try {
     // login to fb
     const result = yield call([LoginManager, LoginManager.logInWithReadPermissions], ['public_profile', 'email']);
@@ -60,6 +59,7 @@ function* loginUserWithFB(action) {
 
 // worker Saga: will be called on LOGOUT actions
 function* logoutUser() {
+  const auth = firebase.auth();
   try {
     // get the sign in method
     const method = JSON.parse(yield call([AsyncStorage, AsyncStorage.getItem], 'signin_method'));
@@ -74,15 +74,16 @@ function* logoutUser() {
       default:
         break;
     }
-    // sign out from firebase
-    yield call([auth, auth.signOut]);
-    // clear the async storage to prevent mixup with future logins
-    yield call([AsyncStorage, AsyncStorage.clear]);
-    // clear user state to prevent mixup with future login
-    yield put(syncUser(null));
+    auth.signOut();
   } catch (error) {
     console.log(error);
+    yield put({ type: actionTypes.AUTH.LOGOUT.FAIL });
   }
+  yield put({ type: actionTypes.AUTH.LOGOUT.SUCCESS });
+  // clear the async storage to prevent mixup with future logins
+  AsyncStorage.clear();
+  // clear user state to prevent mixup with future login
+  yield put(syncUser(null));
 }
 
 function* initUser(action, userCred) {
@@ -115,8 +116,6 @@ function* initUser(action, userCred) {
   // store the user path and user data in the cache
   yield call([AsyncStorage, AsyncStorage.setItem], 'user_data', JSON.stringify(userData));
   yield call([AsyncStorage, AsyncStorage.setItem], 'signin_method', JSON.stringify(action.method));
-  console.log('ioenor');
-
   yield put(loginSuccess());
   console.log('done');
 }
