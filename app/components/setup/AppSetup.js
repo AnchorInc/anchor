@@ -10,6 +10,7 @@ class AppSetup extends Component {
   componentDidMount() {
     // splash screen is already showing
     firebase.auth().onAuthStateChanged((user) => {
+      console.log(user);
       if (!user) {
         console.log('t');
         SplashScreen.hide();

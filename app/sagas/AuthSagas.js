@@ -74,16 +74,17 @@ function* logoutUser() {
       default:
         break;
     }
+    yield put({ type: actionTypes.AUTH.LOGOUT.SUCCESS });
+    // clear the async storage to prevent mixup with future logins
+    AsyncStorage.clear();
+    // clear user state to prevent mixup with future login
+    yield put(syncUser(null));
+    // sign out from firebase
     auth.signOut();
   } catch (error) {
     console.log(error);
     yield put({ type: actionTypes.AUTH.LOGOUT.FAIL });
   }
-  yield put({ type: actionTypes.AUTH.LOGOUT.SUCCESS });
-  // clear the async storage to prevent mixup with future logins
-  AsyncStorage.clear();
-  // clear user state to prevent mixup with future login
-  yield put(syncUser(null));
 }
 
 function* initUser(action, userCred) {

@@ -33,7 +33,8 @@ class Main extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.donePref && !firebase.auth().currentUser) {
+    console.log(nextProps);
+    if (!nextProps.donePref && nextProps.user) {
       this.props.navigation.navigate('StudentProfileEditing');
     }
   }
@@ -62,12 +63,12 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
   let donePref;
-  let type;
+  let user;
   if (state.user.user) {
-    type = state.user.user.type;
+    user = state.user.user;
     donePref = state.user.user.donePref;
   }
-  return { donePref, type };
+  return { donePref, user };
 };
 
 export default connect(mapStateToProps, { showChatBadge })(Main);
