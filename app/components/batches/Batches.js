@@ -6,10 +6,7 @@ import { BatchList } from '.';
 
 class Batches extends Component {
     onPress() {
-        const signUpMessage = {
-            message: `Hello ${this.props.navigation.state.params.teacherName}, I am a ${this.props.user.grade} Grader who is interested `;
-
-        };
+        console.log('poop');
     }
 
     render() {
